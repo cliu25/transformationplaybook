@@ -441,7 +441,9 @@ function renderFlowchart() {
 
 async function renderOverviewPage() {
     const main = document.getElementById('main-content');
-    const response = await fetch('overview.html');
+    // Use relative path that works with GitHub Pages subdirectories
+    const basePath = window.location.pathname.replace(/\/[^\/]*$/, '/');
+    const response = await fetch(`${basePath}overview.html`);
     const html = await response.text();
     
     // Parse the HTML
