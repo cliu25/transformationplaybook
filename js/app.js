@@ -1,6 +1,9 @@
 // AI for Transformation Playbook - Vanilla JS Implementation
 // Replicates v4 React functionality exactly
 
+// Calculate base path for GitHub Pages
+const basePath = window.location.pathname.split('/').slice(0, -1).join('/') || '';
+
 // Global state
 let content = null;
 let artifactInventory = null;
@@ -365,7 +368,8 @@ function navigateTo(route, pushState = true) {
     
     // Update browser history
     if (pushState) {
-        window.history.pushState({ route }, '', route);
+        const fullPath = basePath + route;
+        window.history.pushState({ route }, '', fullPath);
     }
     
     // Render the appropriate page
