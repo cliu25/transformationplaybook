@@ -256,6 +256,9 @@
 
     <script src="js/analytics.js"></script>
     <script>
+        const API_ENDPOINT = 'http://localhost:5000/api';
+        const USE_BACKEND = true; // Set to false to use local storage only
+
         function formatTime(seconds) {
             if (seconds < 60) return `${seconds}s`;
             const minutes = Math.floor(seconds / 60);
@@ -278,8 +281,25 @@
             return date.toLocaleDateString();
         }
 
-        function refreshDashboard() {
-            const stats = window.analytics.getStats();
+        async function refreshDashboard() {
+            let stats;
+            
+            if (USE_BACKEND) {
+                try {
+                    const response = await fetch(`${API_ENDPOINT}/stats`);
+                    if (response.ok) {
+                        stats = await response.json();
+                    } else {
+                        console.warn('Backend unavailable, using local data');
+                        stats = window.analytics.getStats();
+                    }
+                } catch (error) {
+                    console.warn('Backend unavailable, using local data');
+                    stats = window.analytics.getStats();
+                }
+            } else {
+                stats = window.analytics.getStats();
+            }
 
             // Update stats cards
             const statsGrid = document.getElementById('stats-grid');

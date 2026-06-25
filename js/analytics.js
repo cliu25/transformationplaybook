@@ -8,6 +8,8 @@ class SimpleAnalytics {
         this.currentPageStart = Date.now();
         this.currentPage = null;
         this.sessionId = this.getOrCreateSession();
+        this.apiEndpoint = 'http://localhost:5000/api'; // Change this to your server URL
+        this.useBackend = true; // Set to false to use local storage only
         this.init();
     }
 
@@ -53,6 +55,22 @@ class SimpleAnalytics {
         localStorage.setItem(this.storageKey, JSON.stringify(data));
     }
 
+    async sendToBackend(endpoint, data) {
+        if (!this.useBackend) return;
+        
+        try {
+            await fetch(`${this.apiEndpoint}${endpoint}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            });
+        } catch (error) {
+            console.warn('Analytics backend unavailable:', error.message);
+        }
+    }
+
     trackPageView(page, title = '') {
         // Record time on previous page
         if (this.currentPage) {
@@ -82,6 +100,9 @@ class SimpleAnalytics {
 
         this.saveData(data);
         
+        // Send to backend
+        this.sendToBackend('/track/pageview', pageView);
+        
         // Update current page tracking
         this.currentPage = page;
         this.currentPageStart = Date.now();
@@ -107,6 +128,9 @@ class SimpleAnalytics {
         if (recentPageView) {
             recentPageView.timeSpent = (recentPageView.timeSpent || 0) + timeSpent;
             this.saveData(data);
+            
+            // Send updated time to backend
+            this.sendToBackend('/track/pageview', recentPageView);
         }
     }
 
@@ -116,12 +140,14 @@ class SimpleAnalytics {
         // Check if session already exists
         const existingSession = data.sessions.find(s => s.id === this.sessionId);
         
+        const sessionData = {
+            id: this.sessionId,
+            startTime: existingSession ? existingSession.startTime : new Date().toISOString(),
+            lastActivity: new Date().toISOString()
+        };
+        
         if (!existingSession) {
-            data.sessions.push({
-                id: this.sessionId,
-                startTime: new Date().toISOString(),
-                lastActivity: new Date().toISOString()
-            });
+            data.sessions.push(sessionData);
         } else {
             existingSession.lastActivity = new Date().toISOString();
         }
@@ -132,6 +158,9 @@ class SimpleAnalytics {
         }
 
         this.saveData(data);
+        
+        // Send to backend
+        this.sendToBackend('/track/session', sessionData);
     }
 
     trackEvent(category, action, label = '', value = null) {
@@ -156,6 +185,9 @@ class SimpleAnalytics {
         }
 
         this.saveData(data);
+        
+        // Send to backend
+        this.sendToBackend('/track/event', event);
     }
 
     getStats() {
