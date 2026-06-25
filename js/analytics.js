@@ -1,247 +1,245 @@
-/**
- * AIFT Playbook Analytics Tracking
- * Custom event tracking for Google Analytics 4
- * 
- * This file provides functions to track user interactions with the playbook.
- * All tracking respects user privacy and can be disabled by not configuring GA4.
- */
+// Simple Client-Side Analytics Tracker
+// Tracks page views, time on page, and user interactions
 
-// Check if gtag is available (GA4 is configured)
-const isAnalyticsEnabled = () => {
-    return typeof gtag !== 'undefined';
-};
-
-/**
- * Track phase navigation
- * @param {string} phaseName - Name of the phase being viewed
- * @param {string} phaseId - ID of the phase
- */
-const trackPhaseView = (phaseName, phaseId) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'phase_view', {
-        'event_category': 'Navigation',
-        'event_label': phaseName,
-        'phase_id': phaseId,
-        'phase_name': phaseName
-    });
-    
-    console.log('[Analytics] Phase view tracked:', phaseName);
-};
-
-/**
- * Track module/chapter interactions
- * @param {string} moduleName - Name of the module clicked
- * @param {string} moduleId - ID of the module
- * @param {string} phaseName - Parent phase name
- */
-const trackModuleClick = (moduleName, moduleId, phaseName) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'module_click', {
-        'event_category': 'Content',
-        'event_label': moduleName,
-        'module_id': moduleId,
-        'module_name': moduleName,
-        'phase_name': phaseName
-    });
-    
-    console.log('[Analytics] Module click tracked:', moduleName);
-};
-
-/**
- * Track chatbot interactions
- * @param {string} action - Type of chatbot action (open, close, send_message, clear)
- * @param {object} metadata - Additional metadata about the interaction
- */
-const trackChatbotInteraction = (action, metadata = {}) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'chatbot_interaction', {
-        'event_category': 'Chatbot',
-        'event_label': action,
-        'action': action,
-        ...metadata
-    });
-    
-    console.log('[Analytics] Chatbot interaction tracked:', action);
-};
-
-/**
- * Track search queries
- * @param {string} query - Search query text
- * @param {number} resultsCount - Number of results returned
- */
-const trackSearch = (query, resultsCount) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'search', {
-        'event_category': 'Search',
-        'search_term': query,
-        'results_count': resultsCount
-    });
-    
-    console.log('[Analytics] Search tracked:', query, 'Results:', resultsCount);
-};
-
-/**
- * Track external link clicks
- * @param {string} url - URL being clicked
- * @param {string} linkText - Text of the link
- */
-const trackExternalLink = (url, linkText) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'click', {
-        'event_category': 'External Link',
-        'event_label': linkText,
-        'link_url': url,
-        'link_text': linkText
-    });
-    
-    console.log('[Analytics] External link tracked:', url);
-};
-
-/**
- * Track time spent on a phase
- * @param {string} phaseName - Name of the phase
- * @param {number} timeSeconds - Time spent in seconds
- */
-const trackTimeOnPhase = (phaseName, timeSeconds) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'timing_complete', {
-        'event_category': 'Engagement',
-        'name': 'time_on_phase',
-        'value': timeSeconds,
-        'phase_name': phaseName
-    });
-    
-    console.log('[Analytics] Time on phase tracked:', phaseName, timeSeconds, 'seconds');
-};
-
-/**
- * Track scroll depth
- * @param {number} percentage - Scroll depth percentage (25, 50, 75, 100)
- */
-const trackScrollDepth = (percentage) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'scroll', {
-        'event_category': 'Engagement',
-        'event_label': `${percentage}%`,
-        'percent_scrolled': percentage
-    });
-    
-    console.log('[Analytics] Scroll depth tracked:', percentage + '%');
-};
-
-/**
- * Track artifact downloads
- * @param {string} artifactName - Name of the artifact
- * @param {string} artifactType - Type of artifact (template, guide, etc.)
- */
-const trackArtifactDownload = (artifactName, artifactType) => {
-    if (!isAnalyticsEnabled()) return;
-    
-    gtag('event', 'file_download', {
-        'event_category': 'Artifact',
-        'event_label': artifactName,
-        'artifact_name': artifactName,
-        'artifact_type': artifactType
-    });
-    
-    console.log('[Analytics] Artifact download tracked:', artifactName);
-};
-
-// Initialize analytics tracking when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('[Analytics] Initializing custom event tracking...');
-    
-    if (!isAnalyticsEnabled()) {
-        console.log('[Analytics] Google Analytics not configured. Tracking disabled.');
-        return;
+class SimpleAnalytics {
+    constructor() {
+        this.storageKey = 'aift_analytics_data';
+        this.sessionKey = 'aift_session_id';
+        this.currentPageStart = Date.now();
+        this.currentPage = null;
+        this.sessionId = this.getOrCreateSession();
+        this.init();
     }
-    
-    console.log('[Analytics] Google Analytics 4 is active.');
-    
-    // Track scroll depth
-    let scrollDepthTracked = {
-        25: false,
-        50: false,
-        75: false,
-        100: false
-    };
-    
-    window.addEventListener('scroll', () => {
-        const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-        
-        Object.keys(scrollDepthTracked).forEach(depth => {
-            if (scrollPercentage >= depth && !scrollDepthTracked[depth]) {
-                trackScrollDepth(parseInt(depth));
-                scrollDepthTracked[depth] = true;
+
+    init() {
+        // Track page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                this.recordTimeOnPage();
+            } else {
+                this.currentPageStart = Date.now();
             }
         });
-    });
-    
-    // Track external links
-    document.addEventListener('click', (e) => {
-        const link = e.target.closest('a');
-        if (link && link.href && (link.hostname !== window.location.hostname || link.target === '_blank')) {
-            trackExternalLink(link.href, link.textContent || link.href);
-        }
-    });
-    
-    // Track time on page/phase
-    let phaseStartTime = Date.now();
-    let currentPhase = null;
-    
-    // Create a MutationObserver to detect phase changes
-    const observer = new MutationObserver(() => {
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            const phaseTitle = mainContent.querySelector('h1, h2');
-            if (phaseTitle && phaseTitle.textContent !== currentPhase) {
-                // Track time on previous phase
-                if (currentPhase) {
-                    const timeSpent = Math.round((Date.now() - phaseStartTime) / 1000);
-                    trackTimeOnPhase(currentPhase, timeSpent);
-                }
-                
-                // Update current phase
-                currentPhase = phaseTitle.textContent;
-                phaseStartTime = Date.now();
-            }
-        }
-    });
-    
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
-    
-    // Track time on page before unload
-    window.addEventListener('beforeunload', () => {
-        if (currentPhase) {
-            const timeSpent = Math.round((Date.now() - phaseStartTime) / 1000);
-            trackTimeOnPhase(currentPhase, timeSpent);
-        }
-    });
-    
-    console.log('[Analytics] Custom event tracking initialized successfully.');
-});
 
-// Export functions for use in other scripts
-window.AIFTAnalytics = {
-    trackPhaseView,
-    trackModuleClick,
-    trackChatbotInteraction,
-    trackSearch,
-    trackExternalLink,
-    trackTimeOnPhase,
-    trackScrollDepth,
-    trackArtifactDownload,
-    isEnabled: isAnalyticsEnabled
-};
+        // Track before page unload
+        window.addEventListener('beforeunload', () => {
+            this.recordTimeOnPage();
+        });
+    }
+
+    getOrCreateSession() {
+        let sessionId = sessionStorage.getItem(this.sessionKey);
+        if (!sessionId) {
+            sessionId = this.generateId();
+            sessionStorage.setItem(this.sessionKey, sessionId);
+        }
+        return sessionId;
+    }
+
+    generateId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+    }
+
+    getData() {
+        const data = localStorage.getItem(this.storageKey);
+        return data ? JSON.parse(data) : {
+            sessions: [],
+            pageViews: [],
+            events: []
+        };
+    }
+
+    saveData(data) {
+        localStorage.setItem(this.storageKey, JSON.stringify(data));
+    }
+
+    trackPageView(page, title = '') {
+        // Record time on previous page
+        if (this.currentPage) {
+            this.recordTimeOnPage();
+        }
+
+        const data = this.getData();
+        
+        const pageView = {
+            id: this.generateId(),
+            sessionId: this.sessionId,
+            page: page,
+            title: title,
+            timestamp: new Date().toISOString(),
+            referrer: document.referrer,
+            userAgent: navigator.userAgent,
+            screenWidth: window.innerWidth,
+            screenHeight: window.innerHeight
+        };
+
+        data.pageViews.push(pageView);
+        
+        // Keep only last 1000 page views
+        if (data.pageViews.length > 1000) {
+            data.pageViews = data.pageViews.slice(-1000);
+        }
+
+        this.saveData(data);
+        
+        // Update current page tracking
+        this.currentPage = page;
+        this.currentPageStart = Date.now();
+
+        // Track session
+        this.trackSession();
+    }
+
+    recordTimeOnPage() {
+        if (!this.currentPage) return;
+
+        const timeSpent = Math.round((Date.now() - this.currentPageStart) / 1000); // seconds
+        
+        if (timeSpent < 1) return; // Ignore very short visits
+
+        const data = this.getData();
+        
+        // Find the most recent page view for this page
+        const recentPageView = [...data.pageViews]
+            .reverse()
+            .find(pv => pv.page === this.currentPage && pv.sessionId === this.sessionId);
+
+        if (recentPageView) {
+            recentPageView.timeSpent = (recentPageView.timeSpent || 0) + timeSpent;
+            this.saveData(data);
+        }
+    }
+
+    trackSession() {
+        const data = this.getData();
+        
+        // Check if session already exists
+        const existingSession = data.sessions.find(s => s.id === this.sessionId);
+        
+        if (!existingSession) {
+            data.sessions.push({
+                id: this.sessionId,
+                startTime: new Date().toISOString(),
+                lastActivity: new Date().toISOString()
+            });
+        } else {
+            existingSession.lastActivity = new Date().toISOString();
+        }
+
+        // Keep only last 500 sessions
+        if (data.sessions.length > 500) {
+            data.sessions = data.sessions.slice(-500);
+        }
+
+        this.saveData(data);
+    }
+
+    trackEvent(category, action, label = '', value = null) {
+        const data = this.getData();
+        
+        const event = {
+            id: this.generateId(),
+            sessionId: this.sessionId,
+            category: category,
+            action: action,
+            label: label,
+            value: value,
+            page: this.currentPage,
+            timestamp: new Date().toISOString()
+        };
+
+        data.events.push(event);
+        
+        // Keep only last 1000 events
+        if (data.events.length > 1000) {
+            data.events = data.events.slice(-1000);
+        }
+
+        this.saveData(data);
+    }
+
+    getStats() {
+        const data = this.getData();
+        const now = new Date();
+        const last7Days = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const last30Days = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+        // Filter data for time periods
+        const pageViews7d = data.pageViews.filter(pv => new Date(pv.timestamp) > last7Days);
+        const pageViews30d = data.pageViews.filter(pv => new Date(pv.timestamp) > last30Days);
+        const sessions7d = data.sessions.filter(s => new Date(s.startTime) > last7Days);
+        const sessions30d = data.sessions.filter(s => new Date(s.startTime) > last30Days);
+
+        // Calculate page stats
+        const pageStats = {};
+        data.pageViews.forEach(pv => {
+            if (!pageStats[pv.page]) {
+                pageStats[pv.page] = {
+                    views: 0,
+                    totalTime: 0,
+                    avgTime: 0
+                };
+            }
+            pageStats[pv.page].views++;
+            pageStats[pv.page].totalTime += (pv.timeSpent || 0);
+        });
+
+        // Calculate average time
+        Object.keys(pageStats).forEach(page => {
+            pageStats[page].avgTime = Math.round(pageStats[page].totalTime / pageStats[page].views);
+        });
+
+        // Get unique visitors (sessions)
+        const uniqueVisitors7d = new Set(pageViews7d.map(pv => pv.sessionId)).size;
+        const uniqueVisitors30d = new Set(pageViews30d.map(pv => pv.sessionId)).size;
+
+        return {
+            total: {
+                pageViews: data.pageViews.length,
+                sessions: data.sessions.length,
+                events: data.events.length
+            },
+            last7Days: {
+                pageViews: pageViews7d.length,
+                sessions: sessions7d.length,
+                uniqueVisitors: uniqueVisitors7d
+            },
+            last30Days: {
+                pageViews: pageViews30d.length,
+                sessions: sessions30d.length,
+                uniqueVisitors: uniqueVisitors30d
+            },
+            pageStats: pageStats,
+            recentPageViews: data.pageViews.slice(-20).reverse(),
+            topPages: Object.entries(pageStats)
+                .sort((a, b) => b[1].views - a[1].views)
+                .slice(0, 10)
+        };
+    }
+
+    clearData() {
+        if (confirm('Are you sure you want to clear all analytics data? This cannot be undone.')) {
+            localStorage.removeItem(this.storageKey);
+            sessionStorage.removeItem(this.sessionKey);
+            this.sessionId = this.getOrCreateSession();
+            return true;
+        }
+        return false;
+    }
+
+    exportData() {
+        const data = this.getData();
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `analytics-export-${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+}
+
+// Create global instance
+window.analytics = new SimpleAnalytics();
 
 // Made with Bob

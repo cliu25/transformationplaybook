@@ -372,6 +372,16 @@ function navigateTo(route, pushState = true) {
         window.history.pushState({ route }, '', fullPath);
     }
     
+    // Track page view
+    if (window.analytics) {
+        const pageTitle = route === '/overview' ? 'Overview' :
+                         route === '/workflow' ? 'End-to-End Workflow' :
+                         route === '/modules' ? 'Challenges & Modules' :
+                         route === '/library' ? 'Deliverables Library' :
+                         route === '/case-study' ? 'Case Study' : route;
+        window.analytics.trackPageView(route, pageTitle);
+    }
+    
     // Render the appropriate page
     if (route === '/overview') {
         renderOverviewPage();

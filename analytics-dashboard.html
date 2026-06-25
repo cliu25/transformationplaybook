@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - AIFT Playbook</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', sans-serif;
+            background: #f4f4f4;
+            color: #161616;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+            color: #0f62fe;
+        }
+
+        .subtitle {
+            color: #525252;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .actions {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            background: #0f62fe;
+            color: white;
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border-radius: 0;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: #0353e9;
+        }
+
+        .btn-secondary {
+            background: #393939;
+        }
+
+        .btn-secondary:hover {
+            background: #262626;
+        }
+
+        .btn-danger {
+            background: #da1e28;
+        }
+
+        .btn-danger:hover {
+            background: #ba1b23;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-left: 4px solid #0f62fe;
+        }
+
+        .stat-card h3 {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: #525252;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-card .value {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #161616;
+        }
+
+        .stat-card .subvalue {
+            font-size: 0.875rem;
+            color: #525252;
+            margin-top: 0.25rem;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: #161616;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: 1rem;
+            background: #f4f4f4;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #161616;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.875rem;
+        }
+
+        tr:hover {
+            background: #f4f4f4;
+        }
+
+        .page-bar {
+            height: 24px;
+            background: #0f62fe;
+            margin-right: 0.5rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .time-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: #e0e0e0;
+            font-size: 0.75rem;
+            color: #161616;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #525252;
+            font-style: italic;
+        }
+
+        .recent-activity {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 0.875rem;
+        }
+
+        .activity-item:hover {
+            background: #f4f4f4;
+        }
+
+        .activity-time {
+            color: #525252;
+            font-size: 0.75rem;
+        }
+
+        .activity-page {
+            font-weight: 500;
+            color: #0f62fe;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Analytics Dashboard</h1>
+        <p class="subtitle">Track visitor engagement and page performance</p>
+
+        <div class="actions">
+            <button class="btn" onclick="refreshDashboard()">🔄 Refresh</button>
+            <button class="btn btn-secondary" onclick="exportData()">📥 Export Data</button>
+            <button class="btn btn-danger" onclick="clearData()">🗑️ Clear All Data</button>
+            <button class="btn btn-secondary" onclick="window.location.href='index.html'">← Back to Site</button>
+        </div>
+
+        <div class="stats-grid" id="stats-grid">
+            <!-- Stats will be populated here -->
+        </div>
+
+        <div class="section">
+            <h2>Top Pages</h2>
+            <div id="top-pages">
+                <p class="no-data">No data available yet. Start browsing the site to collect analytics.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Recent Activity</h2>
+            <div class="recent-activity" id="recent-activity">
+                <p class="no-data">No recent activity.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/analytics.js"></script>
+    <script>
+        function formatTime(seconds) {
+            if (seconds < 60) return `${seconds}s`;
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}m ${secs}s`;
+        }
+
+        function formatDate(isoString) {
+            const date = new Date(isoString);
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(diff / 3600000);
+            const days = Math.floor(diff / 86400000);
+
+            if (minutes < 1) return 'Just now';
+            if (minutes < 60) return `${minutes}m ago`;
+            if (hours < 24) return `${hours}h ago`;
+            if (days < 7) return `${days}d ago`;
+            return date.toLocaleDateString();
+        }
+
+        function refreshDashboard() {
+            const stats = window.analytics.getStats();
+
+            // Update stats cards
+            const statsGrid = document.getElementById('stats-grid');
+            statsGrid.innerHTML = `
+                <div class="stat-card">
+                    <h3>Total Page Views</h3>
+                    <div class="value">${stats.total.pageViews.toLocaleString()}</div>
+                    <div class="subvalue">${stats.last7Days.pageViews} in last 7 days</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Sessions</h3>
+                    <div class="value">${stats.total.sessions.toLocaleString()}</div>
+                    <div class="subvalue">${stats.last7Days.sessions} in last 7 days</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Unique Visitors (7d)</h3>
+                    <div class="value">${stats.last7Days.uniqueVisitors}</div>
+                    <div class="subvalue">${stats.last30Days.uniqueVisitors} in last 30 days</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Events</h3>
+                    <div class="value">${stats.total.events.toLocaleString()}</div>
+                    <div class="subvalue">User interactions tracked</div>
+                </div>
+            `;
+
+            // Update top pages
+            const topPagesDiv = document.getElementById('top-pages');
+            if (stats.topPages.length === 0) {
+                topPagesDiv.innerHTML = '<p class="no-data">No page data available yet.</p>';
+            } else {
+                const maxViews = stats.topPages[0][1].views;
+                topPagesDiv.innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Page</th>
+                                <th>Views</th>
+                                <th>Avg. Time</th>
+                                <th>Popularity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${stats.topPages.map(([page, data]) => `
+                                <tr>
+                                    <td><strong>${page}</strong></td>
+                                    <td>${data.views.toLocaleString()}</td>
+                                    <td><span class="time-badge">${formatTime(data.avgTime)}</span></td>
+                                    <td>
+                                        <div class="page-bar" style="width: ${(data.views / maxViews) * 200}px"></div>
+                                        ${Math.round((data.views / maxViews) * 100)}%
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+
+            // Update recent activity
+            const recentActivityDiv = document.getElementById('recent-activity');
+            if (stats.recentPageViews.length === 0) {
+                recentActivityDiv.innerHTML = '<p class="no-data">No recent activity.</p>';
+            } else {
+                recentActivityDiv.innerHTML = stats.recentPageViews.map(pv => `
+                    <div class="activity-item">
+                        <div class="activity-page">${pv.page}</div>
+                        <div class="activity-time">
+                            ${formatDate(pv.timestamp)}
+                            ${pv.timeSpent ? ` • ${formatTime(pv.timeSpent)} on page` : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function exportData() {
+            window.analytics.exportData();
+        }
+
+        function clearData() {
+            if (window.analytics.clearData()) {
+                refreshDashboard();
+            }
+        }
+
+        // Initial load
+        refreshDashboard();
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshDashboard, 30000);
+    </script>
+</body>
+</html>
