@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Content Test</title>
+</head>
+<body>
+    <h1>Testing Content Load</h1>
+    <div id="output"></div>
+    <script>
+        async function testContent() {
+            try {
+                const response = await fetch('content_full_buildout.json');
+                const data = await response.json();
+                
+                const output = document.getElementById('output');
+                
+                // Test structure
+                output.innerHTML = '<h2>Content Structure Test:</h2>';
+                output.innerHTML += '<p>✓ JSON loaded successfully</p>';
+                
+                if (data.endToEndWorkflow) {
+                    output.innerHTML += '<p>✓ endToEndWorkflow exists</p>';
+                    
+                    if (data.endToEndWorkflow.phaseGroups) {
+                        output.innerHTML += `<p>✓ phaseGroups exists (${data.endToEndWorkflow.phaseGroups.length} groups)</p>`;
+                        
+                        let totalSteps = 0;
+                        data.endToEndWorkflow.phaseGroups.forEach(group => {
+                            if (group.steps) totalSteps += group.steps.length;
+                        });
+                        output.innerHTML += `<p>✓ Total steps: ${totalSteps}</p>`;
+                    }
+                }
+                
+                if (data.modules) {
+                    output.innerHTML += '<p>✓ modules exists</p>';
+                    if (data.modules.chapters) {
+                        output.innerHTML += `<p>✓ modules.chapters exists (${data.modules.chapters.length} modules)</p>`;
+                    }
+                }
+                
+                console.log('Full data structure:', data);
+                
+            } catch (error) {
+                document.getElementById('output').innerHTML = '<p style="color: red;">Error: ' + error.message + '</p>';
+                console.error('Error:', error);
+            }
+        }
+        
+        testContent();
+    </script>
+</body>
+</html>

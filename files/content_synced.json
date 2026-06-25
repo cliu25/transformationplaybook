@@ -1,0 +1,3605 @@
+{
+  "meta": {
+    "title": "IBM AI-First Transformation Playbook",
+    "subtitle": "Identify where you need help within the end to end workflow, dive deeper into specific pain points with the modules, and access the full library of examples and templates.",
+    "version": "Full buildout",
+    "footerText": "Created by Claire Liu and Alexandra Ko 2026",
+    "footerSubtext": "AIFT Domain Orchestration Team"
+  },
+  "styleSystem": {
+    "fontFamily": "'IBM Plex Sans','Helvetica Neue',Arial,sans-serif",
+    "colors": {
+      "interactive": "#0f62fe",
+      "background": "#ffffff",
+      "layer": "#f4f4f4",
+      "textPrimary": "#161616",
+      "textSecondary": "#525252",
+      "inverseBackground": "#161616"
+    }
+  },
+  "navigation": [
+    {
+      "id": "end-to-end-workflow",
+      "label": "End-to-End Workflow",
+      "route": "/workflow"
+    },
+    {
+      "id": "modules",
+      "label": "Modules",
+      "route": "/modules"
+    },
+    {
+      "id": "library",
+      "label": "Library",
+      "route": "/library"
+    },
+    {
+      "id": "case-study",
+      "label": "Case Study",
+      "route": "/case-study"
+    }
+  ],
+  "brand": {
+    "navIcon": "bot",
+    "title": "IBM AI-First Transformation Playbook"
+  },
+  "endToEndWorkflow": {
+    "id": "end-to-end-workflow",
+    "route": "/workflow",
+    "title": "End-to-End Workflow",
+    "description": "Open Engage, Discover, and Execute to see workflow steps, key activities, readiness checklists, deliverables, modules, and pitfalls.",
+    "flowchart": {
+      "title": "High-level transformation flow",
+      "nodes": [
+        {
+          "id": "assess",
+          "label": "Assess",
+          "subtext": "Determine domain readiness, secure sponsorship, establish team structure, and make go/no-go decision before committing to detailed workflow analysis.",
+          "phaseGroup": "Engage",
+          "color": "#0f62fe",
+          "anchor": "#assess"
+        },
+        {
+          "id": "analyze",
+          "label": "Analyze",
+          "subtext": "Deep-dive into workflows to map current state, identify bottlenecks, prioritize opportunities, and determine which specific workflows to transform.",
+          "phaseGroup": "Discover",
+          "color": "#8a3ffc",
+          "anchor": "#analyze"
+        },
+        {
+          "id": "design",
+          "label": "Design",
+          "subtext": "Design the AI-enabled solution for selected workflow(s), define MVP scope, create build-ready requirements, and prepare for build kickoff.",
+          "phaseGroup": "Discover",
+          "color": "#009d9a",
+          "anchor": "#design"
+        },
+        {
+          "id": "build",
+          "label": "Build",
+          "subtext": "Build, pilot & measure",
+          "phaseGroup": "Execute",
+          "color": "#24a148",
+          "anchor": "#build"
+        },
+        {
+          "id": "sustain",
+          "label": "Sustain",
+          "subtext": "Scale, govern & optimize",
+          "phaseGroup": "Execute",
+          "color": "#f1c21b",
+          "anchor": "#sustain"
+        }
+      ],
+      "edges": [
+        [
+          "assess",
+          "analyze"
+        ],
+        [
+          "analyze",
+          "design"
+        ],
+        [
+          "design",
+          "build"
+        ],
+        [
+          "build",
+          "sustain"
+        ]
+      ]
+    },
+    "subsections": [
+      {
+        "id": "by-phase",
+        "label": "By Phase",
+        "render": "phaseAccordions"
+      },
+      {
+        "id": "critical-moments",
+        "label": "Critical Moments",
+        "render": "criticalMomentsByPhase"
+      }
+    ],
+    "defaultSubsection": "by-phase",
+    "phaseGroups": [
+      {
+        "id": "engage",
+        "name": "Engage",
+        "description": "Confirm readiness, value sponsorship, staffing, governance, and feasibility before detailed design or build.",
+        "color": "#0f62fe",
+        "steps": [
+          {
+            "id": "assess",
+            "name": "Assess",
+            "phaseGroup": "Engage",
+            "color": "#0f62fe",
+            "anchor": "#assess",
+            "idealTimespan": "1-2 weeks",
+            "briefDescription": "Determine domain readiness, secure sponsorship, establish team structure, and make go/no-go decision before committing to detailed workflow analysis.",
+            "keyActivities": [
+              {
+                "title": "Conduct current-state assessment",
+                "subtext": "Gather people, process, technology, data, policies, roles, operating model context, and in-flight transformations.",
+                "outcomes": "Understand the domain context, constraints, and readiness baseline to determine if transformation is feasible and where to focus initial efforts."
+              },
+              {
+                "title": "Identify high-level pain points and opportunities",
+                "subtext": "Capture where work is slow, manual, costly, fragmented, risky, low quality, or difficult to scale at a domain level.",
+                "outcomes": "Build initial business case and identify candidate areas for deeper workflow analysis without diving into detailed process mapping yet."
+              },
+              {
+                "title": "Evaluate data readiness",
+                "subtext": "Confirm required data exists, is accessible, owned, trusted, and usable for AI-enabled transformation.",
+                "outcomes": "Identify data gaps early to avoid downstream delays and ensure AI solutions can be built on reliable, accessible data."
+              },
+              {
+                "title": "Gather technology architecture blueprints",
+                "subtext": "Identify systems of record, platforms, integrations, APIs, access constraints, ARB needs, and technical owners.",
+                "outcomes": "Understand technical constraints and integration complexity to scope realistic solutions and avoid architecture surprises during build."
+              },
+              {
+                "title": "Align stakeholders and executive sponsors",
+                "subtext": "Confirm sponsor air cover, domain focal, project lead, CIO/BPT/TPT involvement, Finance/EBM support, and decision rights.",
+                "outcomes": "Secure executive air cover and decision rights to unblock issues quickly and ensure the transformation has organizational support to succeed."
+              },
+              {
+                "title": "Set up initial governance and RAID",
+                "subtext": "Create governance structure, RACI, steering forum, escalation path, and RAID log before the sprint clock starts.",
+                "outcomes": "Establish clear accountability and escalation paths to resolve blockers quickly and maintain momentum throughout the transformation."
+              },
+              {
+                "title": "Make go/no-go decision",
+                "subtext": "Review readiness assessment, sponsorship commitment, team availability, data/tech feasibility, and value hypothesis to decide whether to proceed to detailed workflow analysis.",
+                "outcomes": "Ensure all prerequisites are met before investing in detailed Analyze phase work, avoiding wasted effort on unprepared domains."
+              }
+            ],
+            "deliverables": [
+              {
+                "id": "current-state-assessment",
+                "title": "Current State Assessment",
+                "description": "Captures the domain's people, process, technology, data, operating model, pain points, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/douimet_ca_ibm_com/Documents/NFIs/Echelon%20(Process%20Mining)/1%20-%20Discovery/Opportunity%20Assessment%20Echelon.docx?d=w842ef922949344c0aff2406f12a2193e&csf=1&web=1&e=joqrWT",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Transformation%20Dashboard/BCG%20Analysis/20251118%20-%20Lesseps_AI_EvalFrameworks_vS%20%20-%20%20Read-Only.pptx?d=w8f7b714382104620b8075d66b2b22ced&csf=1&web=1&e=Lb9y3F",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-case-template",
+                "title": "Business Case Template",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/03%20Global%20Logistics%20%26%20Trade%20Compliance%20Deep%20Dive/Use%20Cases/Regulatory%20Monitoring%20%26%20Reporting/FSRO%20Project%20Integrate_Business%20Case%20(2025-2026).pptx?d=w7ba05c5f9e694f0fb65c5a0299fa4e68&csf=1&web=1&e=r8pyna",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technology-and-data-readiness-checklist",
+                "title": "Technology & Data Readiness Checklist",
+                "description": "Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a go/no-go gate before committing.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "project-charter",
+                "title": "Project Charter",
+                "description": "A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can't complete it, you're not ready to start.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/Project%20Charters/Project%20Charter%20template.pptx?d=wa980fc22b6914fbcbaadc3be34ee8d77&csf=1&web=1&e=daxkWy",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Microsoft%20Copilot%20Chat%20Files/Business%20Logic.Example%20V1.pptx?d=w533fa094f76147fdb3903235dd0fd024&csf=1&web=1&e=oQljT1",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-process-map",
+                "title": "Business Process Map",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "staffing-raci-matrix",
+                "title": "Staffing/RACI Matrix",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "raid-log",
+                "title": "RAID Log",
+                "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "discover",
+        "name": "Discover",
+        "description": "Plan the AI solution for the chosen workflow: design the future-state, write build-ready requirements, scope the MVP, and set the roadmap.",
+        "color": "#8a3ffc",
+        "steps": [
+          {
+            "id": "analyze",
+            "name": "Analyze",
+            "phaseGroup": "Discover",
+            "color": "#8a3ffc",
+            "anchor": "#analyze",
+            "idealTimespan": "2-3 weeks",
+            "briefDescription": "Deep-dive into workflows to map current state, identify bottlenecks, prioritize opportunities, and determine which specific workflows to transform. This phase ends when the target workflows are selected and validated.",
+            "keyActivities": [
+              {
+                "title": "Identify opportunity areas (outside-in)",
+                "subtext": "Work with business stakeholders and end users to identify opportunity areas, capturing executive-level priorities alongside frontline user research to surface real friction points.",
+                "outcomes": "Surface genuine business problems and opportunities by combining top-down executive priorities with bottom-up user pain points."
+              },
+              {
+                "title": "External benchmarking",
+                "subtext": "Benchmark from peers or industry best practices to define target workflow performance. Outside-in orientation is key in this step.",
+                "outcomes": "Establish realistic performance targets and identify proven approaches by learning from industry leaders and best practices."
+              },
+              {
+                "title": "Map current business processes (As-Is)",
+                "subtext": "Create detailed As-Is process mapping documenting workflow steps, handoffs, user roles, systems, decisions, pain points, manual work, cycle time, volume, and quality issues.",
+                "outcomes": "Create comprehensive process maps that reveal bottlenecks, manual work, handoffs, and automation opportunities to guide solution design."
+              },
+              {
+                "title": "Document As-Is data/architecture view",
+                "subtext": "Document detailed systems, applications, data flows, and integration points in the current state.",
+                "outcomes": "Understand the technical landscape and data architecture to identify integration complexity and technical constraints early."
+              },
+              {
+                "title": "Assess EIW alignment and automation level",
+                "subtext": "Map to Enterprise Intelligent Workflow (EIW) and assess current level of automation down to level 3 processes.",
+                "outcomes": "Align transformation to enterprise architecture standards and identify automation gaps at a granular process level."
+              },
+              {
+                "title": "Define initial outcome targets",
+                "subtext": "Define high-level view of productivity improvements or growth expected from AI solution implementation with baseline metrics.",
+                "outcomes": "Establish clear, quantifiable value targets tied to productivity gains or revenue growth that can be tracked throughout the transformation."
+              },
+              {
+                "title": "Prioritize workflows for transformation",
+                "subtext": "Evaluate candidate workflows by impact, feasibility, data readiness, technical complexity, user adoption risk, and scale potential to select the transformation target.",
+                "outcomes": "Make evidence-based decision on which specific workflow(s) to transform, ensuring resources focus on highest-value opportunities."
+              },
+              {
+                "title": "Create AI Idea Brief",
+                "subtext": "Create an idea brief providing high-level view of selected workflow opportunity, expected benefits/outcomes, and gauge interest from BU Executive and SVP sponsors.",
+                "outcomes": "Secure executive sponsorship and alignment by articulating the business case and transformation vision clearly for the selected workflow."
+              },
+              {
+                "title": "Obtain executive approval",
+                "subtext": "Present selected workflow opportunity, high-level targets, and timelines for chairman/executive-level review and approval to proceed to Design phase.",
+                "outcomes": "Obtain top-level executive air cover and commitment to ensure organizational support and resource allocation for the selected workflow."
+              }
+            ],
+            "deliverables": [
+              {
+                "id": "opportunity-identification",
+                "title": "Opportunity Identification",
+                "description": "Documentation of opportunity areas identified through stakeholder interviews and user research, capturing both executive priorities and frontline friction points.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/izni6t519voll6iixipacm1kxgwxr8cr",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "external-benchmarking",
+                "title": "External Benchmarking",
+                "description": "Benchmarking analysis from peers or industry best practices to define target workflow performance. Outside-in orientation to set realistic targets.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/igf7dcf1k24atfk636s28xy32vf2eoth",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "as-is-process-map",
+                "title": "As-Is Process Map (Inputs/Outputs)",
+                "description": "Detailed current-state process mapping documenting workflow steps, handoffs, systems, decisions, pain points, manual work, cycle time, and quality issues.",
+                "fileType": "Mural",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/p0abbfft3jumintcy8aw5hewshs2y7fc",
+                "templateUrl": "https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "as-is-data-architecture",
+                "title": "As-Is Data/Architecture View",
+                "description": "Detailed systems, applications, data flows, and integration points in the current state.",
+                "fileType": "Mural",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/p0abbfft3jumintcy8aw5hewshs2y7fc",
+                "templateUrl": "https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "eiw-assessment",
+                "title": "EIW Assessment & Automation Level",
+                "description": "Enterprise Intelligent Workflow mapping and assessment of current automation level down to level 3 processes.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/p0abbfft3jumintcy8aw5hewshs2y7fc",
+                "templateUrl": "https://w3.ibm.com/w3publisher/ibm-business-architecture/copy-of-eiw-linkage-to-ebm",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "initial-outcome-view",
+                "title": "Initial Outcome View",
+                "description": "High-level view of productivity improvements or growth expected from AI solution implementation.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/x61uffa8g5xsp41v5g4f92tja1xb32z7",
+                "templateUrl": "https://www.ibm.com/downloads/documents/us-en/1443d5f5af4f532a",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "ai-idea-brief",
+                "title": "AI Idea Brief",
+                "description": "High-level brief providing overview of opportunity, expected benefits/outcomes, and stakeholder alignment. Used to gauge interest from BU Executive and SVP sponsors.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://w3.ibm.com/w3publisher/cio-unity/high-level-discovery/idea-brief",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "chairman-lesseps-deck",
+                "title": "Chairman/Lesseps Review Deck",
+                "description": "Chairman-level review deck covering idea, opportunity, and high-level target timelines for executive approval.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/884iys7wtphvqu512rm1uemcrcvwic47",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "id": "design",
+            "name": "Design",
+            "phaseGroup": "Discover",
+            "color": "#8a3ffc",
+            "anchor": "#design",
+            "idealTimespan": "2-3 weeks",
+            "briefDescription": "Design the AI-enabled solution for the selected workflow(s), define MVP scope, create build-ready requirements, establish team and governance, and prepare for build phase kickoff.",
+            "keyActivities": [
+              {
+                "title": "Develop To-Be process/experience (AI-first)",
+                "subtext": "Re-envision and standardize the future-state process for the selected workflow(s) including people, technology, and AI-enabled workflows.",
+                "outcomes": "Create a blank-slate, AI-first process design that reimagines how work gets done, not just automates the current state."
+              },
+              {
+                "title": "Conduct Buy vs. Make assessment",
+                "subtext": "Assess AI solutions available in the market versus building in-house. Consider cost, time, capabilities, and strategic fit.",
+                "outcomes": "Make informed build-vs-buy decision based on market analysis, avoiding unnecessary custom development."
+              },
+              {
+                "title": "Design 90-day MVP with hypothesis testing",
+                "subtext": "Create MVP plan including architectural assessment, scope boundaries, and metrics for validating riskiest assumptions.",
+                "outcomes": "Define a focused, testable MVP that can be delivered in 90 days with clear success criteria and hypothesis tests."
+              },
+              {
+                "title": "Identify Riskiest Assumptions (RATs)",
+                "subtext": "Define and force-rank the riskiest assumptions about your solution and MVP plan. Ensure Riskiest Assumptions Tests happen in first 30 days.",
+                "outcomes": "Surface and prioritize critical unknowns early so they can be tested and validated before significant investment."
+              },
+              {
+                "title": "Define operational and business metrics with baselines",
+                "subtext": "Business defines operational metrics for the to-be process stage, aligned with AI Idea Brief. Include 90-day MVP metrics and baselines.",
+                "outcomes": "Establish measurable targets with clear baselines that can be tracked through UAT and post-launch to prove value."
+              },
+              {
+                "title": "Document EPICs, Features, and Requirements",
+                "subtext": "Work with APPTIO EBM Team in CIO to enable automated tracking of MVP metrics through UAT. Break work into epics and features.",
+                "outcomes": "Create build-ready requirements that development teams can execute against with clear acceptance criteria."
+              },
+              {
+                "title": "Establish cross-functional team and resource plan",
+                "subtext": "Based on MVP plan, resource it using the template. Connect with CIO leaders to agree on roles and responsibilities.",
+                "outcomes": "Secure committed resources across business, CIO, and AIFT with clear RACI before build starts."
+              },
+              {
+                "title": "Plan operational cadences and governance",
+                "subtext": "Stand up workstream standups to set weekly goals, remove impediments, align on messages, and execute demos and retrospectives. Set up SteerCo cadence.",
+                "outcomes": "Establish agile operating rhythm that keeps the team aligned, unblocks issues quickly, and maintains momentum."
+              },
+              {
+                "title": "Develop change management and adoption strategy",
+                "subtext": "Plan users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "outcomes": "Prepare organization for adoption by addressing people, process, and capability gaps before launch, not after."
+              },
+              {
+                "title": "Prepare Discovery Package",
+                "subtext": "Aggregate all Discovery deliverables into a comprehensive package for stakeholder review and MVP kickoff.",
+                "outcomes": "Create complete documentation package that enables informed go/no-go decision and smooth transition to build."
+              },
+              {
+                "title": "Execute MVP Kick-Off",
+                "subtext": "Align on 30-90 day roadmap, deliverables, ownership, and management system. Launch build phase with full team alignment.",
+                "outcomes": "Launch build phase with full team alignment, clear ownership, and executive governance structure in place."
+              }
+            ],
+            "deliverables": [
+              {
+                "id": "to-be-process-design",
+                "title": "To-Be Process/Experience Design (AI-First)",
+                "description": "Re-envisioned and standardized future-state process including people, technology, and AI-enabled workflows. Blank-slate design with an eye to scale.",
+                "fileType": "Mural",
+                "priority": "High",
+                "exampleUrl": "https://app.mural.co/t/personal0493/m/personal0493/1772719412099/13eb64bfa868f2a1a4d590a9593304e1ff02fb77?sender=u4391bcb6dd04c4f86dfb4757",
+                "templateUrl": "https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984?source=template-library",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "90-day-mvp-plan",
+                "title": "90-Day MVP Plan with Hypothesis Testing Metrics",
+                "description": "Comprehensive MVP plan including architectural assessment, scope boundaries, riskiest assumptions, and metrics for validation.",
+                "fileType": "Mural",
+                "priority": "High",
+                "exampleUrl": "https://app.mural.co/t/chiefanalyticsoffice3690/m/chiefanalyticsoffice3690/1771858263324/760fad893cda15360f1ca7548003b51e030165f7",
+                "templateUrl": "https://w3.ibm.com/w3publisher/cio-unity/high-level-discovery/roadmaps-module-1",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "riskiest-assumptions",
+                "title": "Riskiest Assumptions Test (RAT) Plan",
+                "description": "Force-ranked list of riskiest assumptions with test plans to validate them in the first 30 days of MVP execution.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://modelthinkers.com/mental-model/riskiest-assumption-test",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "operational-business-metrics",
+                "title": "Operational & Business Metrics (with Baselines)",
+                "description": "Defined operational metrics for to-be process stage, aligned with AI Idea Brief, including 90-day MVP metrics and baselines.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/66k01mp14dwbukj073me2rzmjpjfbgfr",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "buy-vs-make-assessment",
+                "title": "Buy vs. Make Assessment",
+                "description": "Assessment of AI solutions available in the market versus building in-house, considering cost, time, capabilities, and strategic fit.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://aakashgupta.medium.com/the-product-leaders-guide-to-buying-vs-building-software-a67a87bfca04",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "epics-features-requirements",
+                "title": "EPICs, Features & Requirements Documentation",
+                "description": "Build-ready requirements broken into epics and features with APPTIO EBM tracking enabled for automated MVP metrics monitoring.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/307v7h8kgdvk2x34wlltbhnoy3md8r5g",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "resource-mvp-plan",
+                "title": "Cross-Functional Team & Resource MVP Plan",
+                "description": "Resourced MVP plan with roles, responsibilities, and commitments from CIO, business, and AIFT teams.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/lold29ik1yw7059nyx45gpvx1ybm4d7h",
+                "templateUrl": "https://ibm.ent.box.com/file/2133913333554?s=822akesc0djk2vn8e50e4t1ai1fuboie",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "operational-cadences",
+                "title": "Operational Cadences Plan",
+                "description": "Standup structure with workstreams to set weekly goals, remove impediments, align on messages, and execute demos and retrospectives.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://agile-academy.yourlearning.ibm.com/#/Standups#StandupsTop",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "discovery-package",
+                "title": "Discovery Package",
+                "description": "Aggregated package with all Discovery deliverables for stakeholder review and go/no-go decision.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/p0abbfft3jumintcy8aw5hewshs2y7fc",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "mvp-kickoff-deck",
+                "title": "MVP Kick-Off Deck",
+                "description": "Alignment deck covering 30-90 day roadmap, deliverables, ownership, management system, and SteerCo cadence setup.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.ent.box.com/file/2137892378269?s=25wg1ng9ysukl6d984zbro4yg5wf54nw",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "strategic-roadmap",
+                "title": "Strategic Roadmap",
+                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "change-management-plan",
+                "title": "Change Management Plan",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "steerco-charter",
+                "title": "SteerCo Charter",
+                "description": "Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "execute",
+        "name": "Execute",
+        "description": "Build and experiment to prove feasibility (Build), then scale and sustain what works (Sustain).",
+        "color": "#24a148",
+        "steps": [
+          {
+            "id": "build",
+            "name": "Build \u2014 Experimentation",
+            "phaseGroup": "Execute",
+            "color": "#24a148",
+            "anchor": "#build",
+            "idealTimespan": "12 weeks (30-day RAT + 60-90 day build)",
+            "briefDescription": "Rapidly deploy MVP with users and iterate with agile sprints. Test riskiest assumptions in first 30 days, then build and refine through 90-day cycles.",
+            "keyActivities": [
+              {
+                "title": "Execute 2-week iteration/demo/SteerCo cycle",
+                "subtext": "Progress updates in roadmap (preferably in APPTIO 'on the glass'). Demos expected weekly or bi-weekly with steering committee.",
+                "outcomes": "Maintain momentum and transparency through regular demos and progress tracking, keeping stakeholders aligned and engaged."
+              },
+              {
+                "title": "Plan and track MVP across 30-day roadmap for Riskiest Assumption Test (RAT)",
+                "subtext": "Track progress 'on the glass' with focus on validating riskiest assumptions in first 30 days of execution.",
+                "outcomes": "Validate or invalidate critical assumptions early before significant investment, enabling pivot/continue/stop decisions."
+              },
+              {
+                "title": "30-day RAT debrief to SteerCo (Pivot/Continue/Stop)",
+                "subtext": "At end of first 30 days, assess riskiest assumptions test results and findings to determine if MVP should pivot, continue, or stop.",
+                "outcomes": "Make informed go/no-go decision based on evidence, avoiding sunk cost fallacy and pivoting when data suggests a better path."
+              },
+              {
+                "title": "Implement Change Management framework",
+                "subtext": "Execute strategy to implement change at scale. Identify organizational, process, and talent gaps throughout build.",
+                "outcomes": "Prepare organization for adoption by addressing people, process, and capability gaps before launch, not after."
+              },
+              {
+                "title": "Track Metrics and Value realization",
+                "subtext": "Use structured approach to quantify, track, and maximize business outcomes against baseline and targets.",
+                "outcomes": "Provide evidence-based proof of value throughout build, enabling confident scaling decisions and ROI validation."
+              },
+              {
+                "title": "Execute UAT Strategy and Planning",
+                "subtext": "Address environments, data, approach, planning, resourcing, and tracking of user acceptance testing with real users.",
+                "outcomes": "Validate solution with actual end users in realistic scenarios, surfacing issues and refinements before production."
+              },
+              {
+                "title": "Prepare Go/No-Go decision package",
+                "subtext": "Consolidate MVP performance data against target KPIs, financial and operational metrics, user feedback, and clear go/no-go recommendation with supporting rationale for scaling investment.",
+                "outcomes": "Enable informed production decision with comprehensive evidence package covering performance, value, readiness, and transition plan."
+              }
+            ],
+            "deliverables": [
+              {
+                "id": "steerco-demo-deck",
+                "title": "2-Week Iteration/Demo/SteerCo Deck",
+                "description": "Progress update deck showing roadmap status (preferably in APPTIO 'on the glass'), demos, and steering decisions on weekly or bi-weekly basis.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/uwsn0u0x1wo2b66xbk5jmc24tzuvb9te",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "30-day-rat-tracker",
+                "title": "30-Day RAT Tracker (On the Glass)",
+                "description": "'On the glass' progress tracking focused on validating riskiest assumptions in first 30 days, using APPTIO or similar tool.",
+                "fileType": "APPTIO",
+                "priority": "High",
+                "exampleUrl": "https://usibmto.tpondemand.com/RestUI/Board.aspx#page=dashboard/4721424609026030180&appConfig=eyJhY2lkIjoiIn0=",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "30-day-rat-debrief",
+                "title": "30-Day RAT Debrief (Pivot/Continue/Stop)",
+                "description": "Assessment of riskiest assumptions test results and findings with clear recommendation to pivot, continue, or stop the MVP.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "change-management-execution",
+                "title": "Change Management Framework (Execution)",
+                "description": "Strategy implementation to drive change at scale, identifying organizational, process, and talent gaps throughout build.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/7ian9qi1tmw1ud69u9xpaxbovj344jbz",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "value-realization-tracker",
+                "title": "Metrics & Value Realization Framework",
+                "description": "Structured approach to quantify, track, and maximize business outcomes against baseline and targets throughout build.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/owzb7qctmkqicgktk44aqyqy6id6e5nd",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "uat-strategy-plan",
+                "title": "UAT Strategy & Planning",
+                "description": "Comprehensive UAT approach covering environments, data, planning, resourcing, and tracking of user acceptance testing with real users.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/4utkh3stsx5gust3qv3nos8ha4kmco0i",
+                "templateUrl": "https://ibm.box.com/s/82l97zz3cbadip60yp6rvvbgut1rymyw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "go-no-go-package",
+                "title": "Go/No-Go Decision Package",
+                "description": "Comprehensive package consolidating MVP performance against target KPIs, financial and operational metrics, user feedback, and clear go/no-go recommendation with supporting rationale for scaling investment. Includes role/responsibility transition plan and implementation roadmap.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "production-readiness-packet",
+                "title": "Production Readiness Packet",
+                "description": "Confirms requirements, UAT results, defects, limitations, support path, risks, and the go/no-go for scale.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "https://ibm.box.com/s/7lzqwyd3ekeppihx5g8kaupenjtkoexj",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "id": "sustain",
+            "name": "Sustain \u2014 Scale & Adopt",
+            "phaseGroup": "Execute",
+            "color": "#24a148",
+            "anchor": "#sustain",
+            "idealTimespan": "12+ weeks (ongoing)",
+            "briefDescription": "Implement solution into workflows, monitor adoption and value, complete graduation and ownership handoff, and manage continuous improvement.",
+            "keyActivities": [
+              {
+                "title": "Deploy production infrastructure",
+                "subtext": "Production-deploy AI solutions integrated into target workflows with proper infrastructure, security, and monitoring.",
+                "outcomes": "Ensure solution is running in production environment with enterprise-grade reliability, security, and performance."
+              },
+              {
+                "title": "Align stakeholders on transition",
+                "subtext": "Confirm all stakeholders understand their roles in the transition from AIFT/project team to business/CIO ownership.",
+                "outcomes": "Create clear accountability and prevent gaps in ownership during the critical handoff period."
+              },
+              {
+                "title": "Transition back to BU (identify people with new R&R)",
+                "subtext": "Identify specific individuals with new roles and responsibilities for business ownership, technical ownership, content/prompt maintenance, support, and value tracking.",
+                "outcomes": "Ensure named individuals are ready and committed to sustain the solution long-term, not just organizational commitments."
+              },
+              {
+                "title": "Execute handoff and connect with ongoing cadences",
+                "subtext": "Complete formal handoff with documentation, training, and connection to ongoing governance cadences (e.g., Kris Rose's team for continued support).",
+                "outcomes": "Enable smooth transition with clear escalation paths, support channels, and governance integration for long-term success."
+              }
+            ],
+            "deliverables": [
+              {
+                "id": "production-deployment-infrastructure",
+                "title": "Production Deployment Infrastructure",
+                "description": "Production-deployed AI solutions integrated into target workflows with proper infrastructure, security, monitoring, and enterprise-grade reliability.",
+                "fileType": "Technical",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "stakeholder-alignment-plan",
+                "title": "Stakeholder Alignment Plan",
+                "description": "Documentation of stakeholder roles, responsibilities, and commitments for the transition from project team to business/CIO ownership.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "transition-raci",
+                "title": "Transition RACI & Named Owners",
+                "description": "Specific individuals identified with new roles and responsibilities for business ownership, technical ownership, content/prompt maintenance, support, and value tracking.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "handoff-package",
+                "title": "Handoff Package & Ongoing Cadence Connection",
+                "description": "Complete handoff documentation, training materials, and connection to ongoing governance cadences for continued support and escalation.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "graduation-checklist",
+                "title": "Graduation Checklist",
+                "description": "Confirms MVP acceptance, named owners, support model, telemetry, value tracking, and adoption plan before declaring graduation complete.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:w:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Lesseps%20Graduations/MCC/Graduation%20Transition%20Checklist%20Template%20MCC%2020260521.docx?d=w0c6517702544490e97091da626b40191&csf=1&web=1&e=ii5huI",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "support-and-maintenance-model",
+                "title": "Support & Maintenance Model",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, technical health, and escalation paths for ongoing operations.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "criticalMomentsByPhase": [
+      {
+        "phaseGroup": "Engage",
+        "moments": [
+          {
+            "id": "before-you-start",
+            "title": "Before You Start",
+            "description": "Use this when sponsorship, staffing, value, technical feasibility, or data readiness is unclear.",
+            "goTo": [
+              "Assess"
+            ],
+            "relatedModules": [
+              "Prioritization & Roadmap",
+              "Governance & Risk",
+              "Systems Integration"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "current-state-assessment",
+                "title": "Current State Assessment",
+                "description": "Captures the domain's people, process, technology, data, operating model, pain points, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/douimet_ca_ibm_com/Documents/NFIs/Echelon%20(Process%20Mining)/1%20-%20Discovery/Opportunity%20Assessment%20Echelon.docx?d=w842ef922949344c0aff2406f12a2193e&csf=1&web=1&e=joqrWT",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Transformation%20Dashboard/BCG%20Analysis/20251118%20-%20Lesseps_AI_EvalFrameworks_vS%20%20-%20%20Read-Only.pptx?d=w8f7b714382104620b8075d66b2b22ced&csf=1&web=1&e=Lb9y3F",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "staffing-raci-matrix",
+                "title": "Staffing/RACI Matrix",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "raid-log",
+                "title": "RAID Log",
+                "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "phaseGroup": "Discover",
+        "moments": [
+          {
+            "id": "during-analysis",
+            "title": "During Analysis",
+            "description": "Use this when workflow prioritization, value measurement, process mapping, or technical dependencies are unclear.",
+            "goTo": [
+              "Analyze"
+            ],
+            "relatedModules": [
+              "Value Measurement & ROI",
+              "Systems Integration",
+              "Prioritization & Roadmap"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "business-process-map",
+                "title": "Business Process Map",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "prioritization-matrix",
+                "title": "Prioritization Matrix",
+                "description": "Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/3zpisz74ju6se7cboqoljtb1etpqc4sq",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "measurement-strategy",
+                "title": "Measurement Strategy",
+                "description": "Defines baseline, target, source, owner, cadence, and validation method for each metric.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-dependency-assessment",
+                "title": "Technical Dependency Assessment",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "id": "during-design",
+            "title": "During Design",
+            "description": "Use this when requirements, MVP scope, ARB path, adoption strategy, or reporting model are unclear.",
+            "goTo": [
+              "Design"
+            ],
+            "relatedModules": [
+              "Systems Integration",
+              "Governance & Risk",
+              "Adoption & Change"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "mvp-scope-worksheet",
+                "title": "MVP Scope Worksheet",
+                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
+                "fileType": "Word",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-requirements-intake",
+                "title": "Business Requirements Intake",
+                "description": "The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-specification",
+                "title": "Technical Specification",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "phaseGroup": "Execute",
+        "moments": [
+          {
+            "id": "during-build",
+            "title": "During Build",
+            "description": "Use this when MVP is being configured, tested, measured, blocked, or de-scoped.",
+            "goTo": [
+              "Build"
+            ],
+            "relatedModules": [
+              "Systems Integration",
+              "Value Measurement & ROI",
+              "Governance & Risk"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "sprint-cadence-plan",
+                "title": "Sprint Cadence Plan",
+                "description": "The operating cadence for build, standups, working sessions, UAT cycles, decisions, and steering reviews",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "uat-feedback-tracker",
+                "title": "UAT Feedback Tracker",
+                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "defect-tracker",
+                "title": "Defect Tracker",
+                "description": "",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "roi-analysis",
+                "title": "ROI Analysis",
+                "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/ROI%20+%20Productivity%20Metrics/Bob%20ROI/Bob%20-%20Project%20Update%20-%2001222026.pptx?d=w1812bc57b8cb451e9243a12cec26356d&csf=1&web=1&e=6xznBL",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "id": "before-graduation",
+            "title": "Before Graduation",
+            "description": "Use this when MVP works but ownership, support, adoption, value tracking, or scale path is unclear.",
+            "goTo": [
+              "Sustain"
+            ],
+            "relatedModules": [
+              "Adoption & Change",
+              "Value Measurement & ROI",
+              "Governance & Risk"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "graduation-checklist",
+                "title": "Graduation Checklist",
+                "description": "Confirms MVP acceptance, owners, support model, telemetry, value tracking, and adoption plan before declaring done.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:w:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Lesseps%20Graduations/MCC/Graduation%20Transition%20Checklist%20Template%20MCC%2020260521.docx?d=w0c6517702544490e97091da626b40191&csf=1&web=1&e=ii5huI",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "support-and-maintenance-model",
+                "title": "Support & Maintenance Model",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/nq5p1jfbqzgypqrzq6ls2dduwcmxudd5",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "value-realization-reporting",
+                "title": "Value Realization Reporting",
+                "description": "Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "scaling-recommendations",
+                "title": "Scaling Recommendations",
+                "description": "Recommendations for expanding successful patterns to more users, workflows, and domains, plus backlog and continuous improvement.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "id": "after-handoff",
+            "title": "After Handoff",
+            "description": "Use this to monitor value, improve solution, manage backlog, and identify reusable Client Zero proof points.",
+            "goTo": [
+              "Sustain"
+            ],
+            "relatedModules": [
+              "Adoption & Change",
+              "Prioritization & Roadmap",
+              "Value Measurement & ROI"
+            ],
+            "relatedDeliverables": [
+              {
+                "id": "kpi-dashboard",
+                "title": "KPI Dashboard",
+                "description": "A reference dashboard for adoption, usage, value realization, operational performance, and support health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "continuous-improvement-strategy",
+                "title": "Continuous Improvement Strategy",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "modules": {
+    "id": "modules",
+    "route": "/modules",
+    "title": "Modules",
+    "description": "Modules are pain-point deep dives organized by lifecycle step.",
+    "l2Navigation": [
+      {
+        "id": "overview",
+        "label": "Overview",
+        "route": "/modules"
+      },
+      {
+        "id": "value-measurement-roi",
+        "label": "Value Measurement & ROI",
+        "route": "/modules/value-measurement-roi"
+      },
+      {
+        "id": "prioritization-roadmap",
+        "label": "Prioritization & Roadmap",
+        "route": "/modules/prioritization-roadmap"
+      },
+      {
+        "id": "systems-integration",
+        "label": "Systems Integration",
+        "route": "/modules/systems-integration"
+      },
+      {
+        "id": "adoption-change",
+        "label": "Adoption & Change",
+        "route": "/modules/adoption-change"
+      },
+      {
+        "id": "governance-risk",
+        "label": "Governance & Risk",
+        "route": "/modules/governance-risk"
+      }
+    ],
+    "chapters": [
+      {
+        "id": "value-measurement-roi",
+        "title": "Value Measurement & ROI",
+        "definition": "AI-first transformation value must be defined before the solution is built and validated after the solution is adopted. This chapter helps domain leads move from a high-level value hypothesis to a measurable business case, then from pilot evidence to realized value reporting. The goal is not to create a complex finance model; the goal is to define a simple, credible, repeatable way to prove whether the transformation improved the workflow.",
+        "color": "#0f62fe",
+        "route": "/modules/value-measurement-roi",
+        "crossCuttingGuidance": {
+          "keyPrinciples": [
+            "Align on metrics before any build \u2014 you optimize for what you measure",
+            "Metrics must be measurable in a meaningful way: prefer instrumented platform tracking over surveys",
+            "Match the metric to the benefit type \u2014 productivity to time savings, revenue to deals won",
+            "Best case is an apples-to-apples before/after comparison inside the user's own platform",
+            "Hard line savings outweigh soft benefits; tie value to IBM's balance sheet or G&A",
+            "Track the same 3-5 leading metrics before, during, and after \u2014 baseline from day one",
+            "Finance/EBM validates the business case and the realized value, not the project team"
+          ]
+        },
+        "phaseSections": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess readiness & value",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Frame an initial value hypothesis and pick the benefit type before overbuilding any metric model.",
+            "actions": [
+              {
+                "action": "Select the value category (productivity, revenue, cost, risk) and draft a rough size of the prize.",
+                "outcome": "A directional value hypothesis that screens whether the opportunity is worth pursuing \u2014 without premature precision."
+              },
+              {
+                "action": "Identify a candidate baseline source and whether it can be measured meaningfully.",
+                "outcome": "Early warning on whether real measurement is even possible, so you avoid metrics you can't instrument later."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "business-case-template",
+                "title": "Business Case Template",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/03%20Global%20Logistics%20%26%20Trade%20Compliance%20Deep%20Dive/Use%20Cases/Regulatory%20Monitoring%20%26%20Reporting/FSRO%20Project%20Integrate_Business%20Case%20(2025-2026).pptx?d=w7ba05c5f9e694f0fb65c5a0299fa4e68&csf=1&web=1&e=r8pyna",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "measurement-strategy",
+                "title": "Measurement Strategy",
+                "description": "Defines baseline, target, source, owner, cadence, and validation method for each metric.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Building a complex metric model before the opportunity is even qualified",
+              "Picking a benefit you cannot measure in a meaningful way"
+            ],
+            "whoToContact": "Domain Finance/EBM partner for value framing"
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Analyze workflows & prioritize",
+            "phaseGroup": "Engage",
+            "relevance": "primary",
+            "description": "Lock the metrics and baselines before design \u2014 this is what the build optimizes toward.",
+            "actions": [
+              {
+                "action": "Define 3-5 leading metrics tied to the benefit type and capture the current baseline.",
+                "outcome": "A measurable target the whole team aligns on before any solution is designed, preventing scope drift."
+              },
+              {
+                "action": "Decide how each metric will be captured \u2014 instrumented platform tracking preferred; surveys only as a weak fallback.",
+                "outcome": "A measurement approach that will survive executive scrutiny because it comes from a trusted, auditable source."
+              },
+              {
+                "action": "Where a tool is being replaced, set up an apples-to-apples before/after comparison of the same step.",
+                "outcome": "Direct, credible evidence of improvement (e.g. 30 min vs 90 min for the same task)."
+              }
+            ],
+            "artifacts": [],
+            "commonPitfalls": [
+              "Relying on surveys because the platform isn't instrumented",
+              "Choosing metrics after the build, so you optimize for the wrong thing",
+              "Measuring 20 things instead of the 3-5 that matter"
+            ],
+            "whoToContact": "Finance/EBM lead to bless the baseline and targets"
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the solution",
+            "phaseGroup": "Discover",
+            "relevance": "supporting",
+            "description": "Bake measurement into the solution design so value is tracked automatically, not retrofitted.",
+            "actions": [
+              {
+                "action": "Specify the telemetry and instrumentation the MVP must capture for each metric.",
+                "outcome": "Auto-instrumentation built into the solution from day one, so value tracking doesn't depend on manual collection."
+              }
+            ],
+            "artifacts": [],
+            "commonPitfalls": [
+              "Treating instrumentation as a post-launch add-on"
+            ],
+            "whoToContact": "CIO/EBM team (e.g. Apptio) for automated metric tracking"
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "Track value against baseline throughout the build, not just at the end.",
+            "actions": [
+              {
+                "action": "Capture metric performance during testing and each sprint, comparing to baseline and target.",
+                "outcome": "Continuous evidence of value that informs pivot/continue/stop decisions and de-risks the scaling case."
+              },
+              {
+                "action": "Get users to use the imperfect MVP for real work and measure the actual time/effort difference.",
+                "outcome": "Real usage data \u2014 far stronger than projected estimates \u2014 proving the value hypothesis in practice."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "value-realization-reporting",
+                "title": "Value Realization Reporting",
+                "description": "Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "roi-analysis",
+                "title": "ROI Analysis",
+                "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/ROI%20+%20Productivity%20Metrics/Bob%20ROI/Bob%20-%20Project%20Update%20-%2001222026.pptx?d=w1812bc57b8cb451e9243a12cec26356d&csf=1&web=1&e=6xznBL",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "kpi-dashboard",
+                "title": "KPI Dashboard",
+                "description": "A reference dashboard for adoption, usage, value realization, operational performance, and support health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Waiting until the end to measure anything",
+              "Measuring test usage instead of real work"
+            ],
+            "whoToContact": "Finance/EBM for interim value validation"
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale & sustain",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "Validate realized value with Finance and report it on a cadence after launch.",
+            "actions": [
+              {
+                "action": "Compare post-launch metrics to baseline and have Finance/EBM validate the realized value.",
+                "outcome": "Finance-blessed proof of value that justifies continued investment and scaling."
+              },
+              {
+                "action": "Report value monthly into executive cadences and document lessons for reuse.",
+                "outcome": "Sustained executive confidence and a reusable value story for the next domain."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "value-realization-reporting",
+                "title": "Value Realization Reporting",
+                "description": "Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "roi-analysis",
+                "title": "ROI Analysis",
+                "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/ROI%20+%20Productivity%20Metrics/Bob%20ROI/Bob%20-%20Project%20Update%20-%2001222026.pptx?d=w1812bc57b8cb451e9243a12cec26356d&csf=1&web=1&e=6xznBL",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "kpi-dashboard",
+                "title": "KPI Dashboard",
+                "description": "A reference dashboard for adoption, usage, value realization, operational performance, and support health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Value tracking stops after the project team leaves",
+              "Anecdotal impact claims with no trusted data"
+            ],
+            "whoToContact": "Domain CFO / EBM lead for ongoing validation"
+          }
+        ]
+      },
+      {
+        "id": "prioritization-roadmap",
+        "title": "Prioritization & Roadmap",
+        "definition": "Select workflow opportunities, scope realistic MVPs, sequence delivery, and maintain a scalable roadmap. This chapter helps domain leads move from a broad set of AI possibilities to a focused, sequenced delivery plan. The goal is not to build a perfect long-term roadmap; the goal is to make smart decisions about what to build first, what to defer, and when to pivot based on learning.",
+        "color": "#8a3ffc",
+        "route": "/modules/prioritization-roadmap",
+        "crossCuttingGuidance": {
+          "keyPrinciples": [
+            "Anchor prioritization in size-of-the-prize economics, not politics",
+            "Pick the smallest useful MVP and define what's explicitly out of scope",
+            "Sequence by value AND feasibility, not value alone",
+            "De-scope is a success behavior \u2014 cut to protect the core MVP",
+            "Force-rank the riskiest assumptions and test them first",
+            "Keep solutioning groups tight: a few domain experts, an architect, and a builder"
+          ]
+        },
+        "phaseSections": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess readiness & value",
+            "phaseGroup": "Engage",
+            "relevance": "primary",
+            "description": "Frame the opportunity landscape and confirm it's worth deeper analysis.",
+            "actions": [
+              {
+                "action": "Write a one-line opportunity statement tying the workflow to a business pain and rough value.",
+                "outcome": "A shared, leadership-tested framing that screens the opportunity before investing in analysis."
+              },
+              {
+                "action": "Confirm leadership priority and the size of the prize at a domain level.",
+                "outcome": "Confidence that the candidate is worth scoring in detail, not a pet project."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "workflow-analysis-worksheet",
+                "title": "Workflow Analysis Worksheet",
+                "description": "Analyzes bottlenecks, manual work, decisions, user pain, volume, cycle time, technical dependencies, and the AI opportunity for candidate workflows.",
+                "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "prioritization-matrix",
+                "title": "Prioritization Matrix",
+                "description": "Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/3zpisz74ju6se7cboqoljtb1etpqc4sq",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-dependency-assessment",
+                "title": "Technical Dependency Assessment",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Starting from a solution ('build an agent') instead of a workflow opportunity",
+              "Chasing a use case nobody has prioritized"
+            ],
+            "whoToContact": "Domain executive sponsor for priority confirmation"
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Analyze workflows & prioritize",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Score candidate workflows and select the MVP target with a defensible rationale.",
+            "actions": [
+              {
+                "action": "Score candidates on value, feasibility, data readiness, complexity, adoption risk, and scale.",
+                "outcome": "An evidence-based ranking that directs resources to the highest-value, most-feasible workflow."
+              },
+              {
+                "action": "Select the MVP workflow and write down why it beat the alternatives.",
+                "outcome": "A decision the team can defend later and revisit if assumptions change."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "mvp-scope-worksheet",
+                "title": "MVP Scope Worksheet",
+                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
+                "fileType": "Word",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "strategic-roadmap",
+                "title": "Strategic Roadmap",
+                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Scoring on value alone and ignoring feasibility/data",
+              "Picking the exciting idea over the ready one"
+            ],
+            "whoToContact": "Workflow SMEs for feasibility input"
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the solution",
+            "phaseGroup": "Discover",
+            "relevance": "supporting",
+            "description": "Scope the MVP tightly and sequence the path from MVP to scale.",
+            "actions": [
+              {
+                "action": "Define MVP scope \u2014 explicitly in and explicitly out \u2014 and force-rank the riskiest assumptions.",
+                "outcome": "A focused, testable MVP with the critical unknowns surfaced for early testing."
+              },
+              {
+                "action": "Build the roadmap sequencing MVP, pilot, production, and scale with dependencies.",
+                "outcome": "A clear path that sets expectations and prevents scope creep."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "mvp-scope-worksheet",
+                "title": "MVP Scope Worksheet",
+                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
+                "fileType": "Word",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "strategic-roadmap",
+                "title": "Strategic Roadmap",
+                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Everything becomes 'must have'",
+              "No explicit out-of-scope list",
+              "Roadmap with no dependencies or sequencing logic"
+            ],
+            "whoToContact": "Product owner for scope; architect for feasibility"
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test",
+            "phaseGroup": "Execute",
+            "relevance": "supporting",
+            "description": "Hold scope during the build and de-scope intelligently when reality demands.",
+            "actions": [
+              {
+                "action": "Review scope each sprint against the timeline and make fast, documented de-scope calls.",
+                "outcome": "The core MVP stays protected and on-track even when capacity or dependencies slip."
+              }
+            ],
+            "artifacts": [],
+            "commonPitfalls": [
+              "Silently dropping features instead of formally de-scoping",
+              "Letting a slipping dependency sink the whole MVP"
+            ],
+            "whoToContact": "Steering committee for de-scope sign-off"
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale & sustain",
+            "phaseGroup": "Execute",
+            "relevance": "supporting",
+            "description": "Plan the next releases so the transformation keeps compounding.",
+            "actions": [
+              {
+                "action": "Build the post-launch backlog and re-prioritize de-scoped items against new evidence.",
+                "outcome": "A living roadmap that turns one MVP into sustained, compounding value."
+              }
+            ],
+            "artifacts": [],
+            "commonPitfalls": [
+              "Treating MVP as the finish line",
+              "Losing the backlog after graduation"
+            ],
+            "whoToContact": "Domain owner for backlog ownership"
+          }
+        ]
+      },
+      {
+        "id": "systems-integration",
+        "title": "Systems Integration",
+        "definition": "Translate business needs into build-ready requirements and connect AI capabilities with systems, data, architecture, and support models.",
+        "color": "#009d9a",
+        "route": "/modules/systems-integration",
+        "crossCuttingGuidance": {
+          "keyPrinciples": [
+            "Run the build as a real SDLC: planning, analysis, design, testing, integration, implementation, maintenance",
+            "Do technical discovery before the 90-day clock starts",
+            "Garbage in, garbage out \u2014 validate data quality and build the pipeline; don't assume readiness",
+            "Translate business need into build-ready requirements: name data objects, systems, owners, acceptance criteria",
+            "Prototype first to unblock vague requirements \u2014 put something tangible in front of users",
+            "Select the tech stack deliberately: options, pros/cons, and a go/no-go decision",
+            "Instrument backend logging from day one \u2014 capture result, satisfaction, and data accuracy per response",
+            "Hand off a complete technical package: code repo, test cases, architecture, secrets/keys, data lineage, owner change"
+          ]
+        },
+        "phaseSections": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess readiness & value",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Establish an honest baseline of technology and data readiness before committing.",
+            "actions": [
+              {
+                "action": "Assess data readiness, cleanliness, access, and the pipeline work required.",
+                "outcome": "Early visibility into data gaps so they don't derail the build downstream."
+              },
+              {
+                "action": "Gather the technology architecture: systems of record, integrations, APIs, access constraints, ARB needs.",
+                "outcome": "A realistic view of integration complexity that keeps solution scope grounded."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "technology-and-data-readiness-checklist",
+                "title": "Technology & Data Readiness Checklist",
+                "description": "Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a go/no-go gate before committing.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-process-map",
+                "title": "Business Process Map",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Assuming data is ready because it exists",
+              "Skipping technical discovery to 'save time'"
+            ],
+            "whoToContact": "CIO/BPT architect; domain data owner for access"
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Analyze workflows & prioritize",
+            "phaseGroup": "Engage",
+            "relevance": "primary",
+            "description": "Document the as-is technical landscape and the dependencies of the target workflow.",
+            "actions": [
+              {
+                "action": "Map current systems, applications, data flows, and integration points for the workflow.",
+                "outcome": "A clear technical baseline that exposes integration risk and constraints early."
+              },
+              {
+                "action": "Identify ARB, security, and data-pipeline needs up front.",
+                "outcome": "No late surprises \u2014 review and pipeline work is planned before the build clock starts."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "business-requirements-intake",
+                "title": "Business Requirements Intake",
+                "description": "The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-specification",
+                "title": "Technical Specification",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "solution-architecture",
+                "title": "Solution Architecture",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "workflow-redesign",
+                "title": "Workflow Redesign",
+                "description": "A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.",
+                "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Underestimating integration complexity",
+              "Finding out about ARB requirements late"
+            ],
+            "whoToContact": "Technical architect; ARB contact if required"
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the solution",
+            "phaseGroup": "Discover",
+            "relevance": "supporting-important",
+            "description": "Produce build-ready requirements and a deliberate tech-stack decision; prototype to unblock ambiguity.",
+            "actions": [
+              {
+                "action": "Write the PRD/requirements with persona, data objects, systems, acceptance criteria, and a fallback path.",
+                "outcome": "A package developers can build from directly \u2014 not 'too conceptual to build.'"
+              },
+              {
+                "action": "Select the tech stack by laying out options with pros/cons and making a go/no-go decision.",
+                "outcome": "A defensible architecture choice with the tradeoffs documented for later reference."
+              },
+              {
+                "action": "When requirements are vague, build a prototype and put it in front of users.",
+                "outcome": "Tangible reactions that unblock requirement-gathering far faster than more discussion."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "business-requirements-intake",
+                "title": "Business Requirements Intake",
+                "description": "The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-specification",
+                "title": "Technical Specification",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "solution-architecture",
+                "title": "Solution Architecture",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "workflow-redesign",
+                "title": "Workflow Redesign",
+                "description": "A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.",
+                "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Requirements 'too conceptual to build from' \u2014 the #1 cause of delay",
+              "No fallback path for low-confidence AI outputs",
+              "Endless requirement discussion instead of a prototype"
+            ],
+            "whoToContact": "Architect for tech spec; ARB for review"
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "Build against the spec as a disciplined SDLC, validate data quality, and instrument everything.",
+            "actions": [
+              {
+                "action": "Build and integrate against approved requirements, validating data quality on real sources.",
+                "outcome": "A working MVP grounded in clean, real data \u2014 not assumptions."
+              },
+              {
+                "action": "Add backend logging that captures result, satisfaction, and data accuracy per response.",
+                "outcome": "Concrete instrumentation that powers measurement and surfaces failure modes early."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "sprint-cadence-plan",
+                "title": "Sprint Cadence Plan",
+                "description": "The operating cadence for build, standups, working sessions, UAT cycles, decisions, and steering reviews",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "production-readiness-packet",
+                "title": "Production Readiness Packet",
+                "description": "Confirms requirements, UAT results, defects, limitations, support path, risks, and the go/no-go for scale.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "https://ibm.box.com/s/7lzqwyd3ekeppihx5g8kaupenjtkoexj",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "support-and-maintenance-model",
+                "title": "Support & Maintenance Model",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/nq5p1jfbqzgypqrzq6ls2dduwcmxudd5",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Data quality worse than expected, threatening accuracy",
+              "One-off integrations that can't scale",
+              "Discovering telemetry gaps after the pilot"
+            ],
+            "whoToContact": "Architect and data owner for quality issues"
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale & sustain",
+            "phaseGroup": "Execute",
+            "relevance": "supporting",
+            "description": "Hand off a complete technical package so the solution survives the transition.",
+            "actions": [
+              {
+                "action": "Transfer the code repo (documented, with test cases), architecture diagram, secrets/API keys, and data documentation.",
+                "outcome": "A technical owner who can actually run and maintain the solution \u2014 not just a named owner on paper."
+              },
+              {
+                "action": "Change the owner in the system and document limitations, next steps, and data lineage.",
+                "outcome": "Clear accountability and a roadmap for the work still needed to fully productionize."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "sprint-cadence-plan",
+                "title": "Sprint Cadence Plan",
+                "description": "The operating cadence for build, standups, working sessions, UAT cycles, decisions, and steering reviews",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "production-readiness-packet",
+                "title": "Production Readiness Packet",
+                "description": "Confirms requirements, UAT results, defects, limitations, support path, risks, and the go/no-go for scale.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "https://ibm.box.com/s/7lzqwyd3ekeppihx5g8kaupenjtkoexj",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "support-and-maintenance-model",
+                "title": "Support & Maintenance Model",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/nq5p1jfbqzgypqrzq6ls2dduwcmxudd5",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "No named technical owner after handoff",
+              "Undocumented queries/data sources that break when the source changes",
+              "Secrets and keys never formally transferred"
+            ],
+            "whoToContact": "Technical owner; CIO for ongoing infrastructure"
+          }
+        ]
+      },
+      {
+        "id": "adoption-change",
+        "title": "Adoption & Change",
+        "definition": "Drive real usage and behavior change through user involvement, UAT, communications, enablement, and adoption tracking. This chapter helps domain leads move from building a solution to ensuring it's actually used and delivers value. The goal is not to deploy technology; the goal is to change how people work and prove that the new way is better.",
+        "color": "#ff832b",
+        "route": "/modules/adoption-change",
+        "crossCuttingGuidance": {
+          "keyPrinciples": [
+            "Transformation is three things \u2014 technology, people, and process \u2014 combined but distinct",
+            "Change management runs throughout the project, with stage-specific emphasis",
+            "Start small and drive real usage of an imperfect MVP before polishing",
+            "Real end users (not managers) give feedback throughout, not just at a final gate",
+            "Sub-components: change-impact assessment, leadership alignment, communications, learning & enablement",
+            "Adoption depends on Design having re-envisioned the process \u2014 not just bolted on AI",
+            "The domain owns its own change management; build the AI-first mindset, not just the toolset"
+          ]
+        },
+        "phaseSections": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess readiness & value",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Begin change management at the start with a high-level impact read.",
+            "actions": [
+              {
+                "action": "Identify the main personas and, at a high level, whose roles change and how they may react.",
+                "outcome": "An early change-impact picture that shapes the solution and the adoption plan from day one."
+              }
+            ],
+            "artifacts": [],
+            "commonPitfalls": [
+              "Treating change management as a later, separate activity",
+              "Assuming technology alone will drive adoption"
+            ],
+            "whoToContact": "Change owner; domain sponsor for leadership alignment"
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Analyze workflows & prioritize",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Re-envision the future-state process, not just the technology, and get leaders excited.",
+            "actions": [
+              {
+                "action": "Analyze the current process deeply and re-envision the end-to-end future state (steps people take, not just the tech).",
+                "outcome": "A future-state the team can build adoption around \u2014 avoiding the late scramble of 'what will people actually do with this?'"
+              },
+              {
+                "action": "Get leaders excited about the vision and the change.",
+                "outcome": "Top-down air cover that reinforces the bottom-up change effort."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "change-management-plan",
+                "title": "Change Management Plan",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Insufficient upfront process analysis \u2014 the R2A gap",
+              "Designing the tech without redesigning the work around it"
+            ],
+            "whoToContact": "Domain sponsor for leadership alignment"
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the solution",
+            "phaseGroup": "Discover",
+            "relevance": "primary",
+            "description": "Plan adoption, UAT, communications, and enablement before the build \u2014 not at the end.",
+            "actions": [
+              {
+                "action": "Map stakeholders (champions/neutral/resistant), recruit real UAT users, and plan the communications arc.",
+                "outcome": "An adoption plan ready to execute, with the right users engaged from the first sprint."
+              },
+              {
+                "action": "Plan the learning & enablement approach and the old-process cutover.",
+                "outcome": "People know what's changing and what they need to do, and the old way is actively retired."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "change-management-plan",
+                "title": "Change Management Plan",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Leaving change management until the end",
+              "Testing with managers instead of real users",
+              "No plan to retire the old process"
+            ],
+            "whoToContact": "Change & adoption lead; domain sponsor"
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test",
+            "phaseGroup": "Execute",
+            "relevance": "supporting",
+            "description": "Drive trust and real usage during the build through continuous user feedback.",
+            "actions": [
+              {
+                "action": "Get a small group to use the imperfect MVP for real work \u2014 start with one area, then expand.",
+                "outcome": "A mindset shift from 'wait for polish' to real usage, which compounds into voluntary adoption."
+              },
+              {
+                "action": "Manage communications and leadership alignment, demoing real progress to build excitement.",
+                "outcome": "Sustained momentum and trust as the solution matures sprint over sprint."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "uat-feedback-tracker",
+                "title": "UAT Feedback Tracker",
+                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "usage-analytics",
+                "title": "Usage Analytics",
+                "description": "Reference analytics for active users, repeat users, workflow volume, deflection, and usage events.",
+                "fileType": "Excel",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Waiting for the solution to be perfect before anyone uses it",
+              "Stopping at testing instead of real-work usage"
+            ],
+            "whoToContact": "Change owner for UAT; sponsor for escalations"
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale & sustain",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "Hand change ownership to the domain and sustain adoption with enablement.",
+            "actions": [
+              {
+                "action": "Transition prompt/content ownership to the domain and roll out training & enablement.",
+                "outcome": "The domain can sustain and extend adoption without the central team."
+              },
+              {
+                "action": "Monitor adoption and intervene where it plateaus (office hours, champions, edge-case examples).",
+                "outcome": "Adoption climbs past the plateau instead of eroding back to old habits."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "uat-feedback-tracker",
+                "title": "UAT Feedback Tracker",
+                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "usage-analytics",
+                "title": "Usage Analytics",
+                "description": "Reference analytics for active users, repeat users, workflow volume, deflection, and usage events.",
+                "fileType": "Excel",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Adoption plateaus as users revert to old templates",
+              "No domain owner for prompts/content",
+              "Relying on the central team for ongoing change management"
+            ],
+            "whoToContact": "Domain change owner; sponsor for holdouts"
+          }
+        ]
+      },
+      {
+        "id": "governance-risk",
+        "title": "Governance & Risk",
+        "definition": "Set up sponsorship, staffing, decision rights, steering, escalation, compliance, responsible AI, and post-launch ownership.",
+        "color": "#da1e28",
+        "route": "/modules/governance-risk",
+        "crossCuttingGuidance": {
+          "keyPrinciples": [
+            "Staffing is a readiness gate, not admin overhead",
+            "The project lead orchestrates \u2014 it is not status reporting",
+            "Create air cover via a real steering committee when there's no top-down mandate",
+            "One Accountable per activity (RACI)",
+            "Run the steering committee on demos and blockers, not status theater; 'red is good'",
+            "Graduation means an owner, support model, and value tracking \u2014 not just a demo",
+            "Keep RAID live and reviewed weekly; surface risks early"
+          ]
+        },
+        "phaseSections": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess readiness & value",
+            "phaseGroup": "Engage",
+            "relevance": "primary",
+            "description": "Stand up the team, sponsorship, and governance before any build.",
+            "actions": [
+              {
+                "action": "Write the project charter, confirm the sponsor, and staff the team with a clear RACI.",
+                "outcome": "A ready team with one Accountable per activity \u2014 the precondition for a transformation that can succeed."
+              },
+              {
+                "action": "Stand up the steering committee and open the RAID log on day one.",
+                "outcome": "Clear decision rights and a live risk register before the sprint clock starts."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "project-charter",
+                "title": "Project Charter",
+                "description": "A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can't complete it, you're not ready to start.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/Project%20Charters/Project%20Charter%20template.pptx?d=wa980fc22b6914fbcbaadc3be34ee8d77&csf=1&web=1&e=daxkWy",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Microsoft%20Copilot%20Chat%20Files/Business%20Logic.Example%20V1.pptx?d=w533fa094f76147fdb3903235dd0fd024&csf=1&web=1&e=oQljT1",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "current-state-assessment",
+                "title": "Current State Assessment",
+                "description": "Captures the domain's people, process, technology, data, operating model, pain points, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/douimet_ca_ibm_com/Documents/NFIs/Echelon%20(Process%20Mining)/1%20-%20Discovery/Opportunity%20Assessment%20Echelon.docx?d=w842ef922949344c0aff2406f12a2193e&csf=1&web=1&e=joqrWT",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Transformation%20Dashboard/BCG%20Analysis/20251118%20-%20Lesseps_AI_EvalFrameworks_vS%20%20-%20%20Read-Only.pptx?d=w8f7b714382104620b8075d66b2b22ced&csf=1&web=1&e=Lb9y3F",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "staffing-raci-matrix",
+                "title": "Staffing/RACI Matrix",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "raid-log",
+                "title": "RAID Log",
+                "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Starting the build before the team is ready \u2014 incurs debt",
+              "Treating the project lead as a status reporter",
+              "Vague ownership across functions"
+            ],
+            "whoToContact": "Executive sponsor; AIFT for staffing support"
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Analyze workflows & prioritize",
+            "phaseGroup": "Engage",
+            "relevance": "supporting",
+            "description": "Keep governance live as the workflow is selected and scoped.",
+            "actions": [
+              {
+                "action": "Log assumptions, risks, and dependencies as the target workflow is chosen.",
+                "outcome": "A RAID record that travels into design and build instead of being rebuilt later."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "steerco-charter",
+                "title": "SteerCo Charter",
+                "description": "Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Risks tracked informally and lost between phases"
+            ],
+            "whoToContact": "Project lead; steering committee"
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the solution",
+            "phaseGroup": "Discover",
+            "relevance": "primary",
+            "description": "Establish the operating cadence and decision rights before build kickoff.",
+            "actions": [
+              {
+                "action": "Stand up workstream standups, SteerCo cadence, and the escalation path.",
+                "outcome": "An agile operating rhythm that keeps the team aligned and unblocks issues fast."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "steerco-charter",
+                "title": "SteerCo Charter",
+                "description": "Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "No cadence agreed before build starts",
+              "Decision rights unclear across business and CIO"
+            ],
+            "whoToContact": "Project lead; CIO partner"
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test",
+            "phaseGroup": "Execute",
+            "relevance": "supporting",
+            "description": "Run the operating rhythm that creates accountability during the build.",
+            "actions": [
+              {
+                "action": "Run the weekly steering committee on demos and blockers, and review RAID every week.",
+                "outcome": "Blockers cleared quickly and momentum maintained, with risks actioned not just logged."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "graduation-checklist",
+                "title": "Graduation Checklist",
+                "description": "Confirms MVP acceptance, owners, support model, telemetry, value tracking, and adoption plan before declaring done.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:w:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Lesseps%20Graduations/MCC/Graduation%20Transition%20Checklist%20Template%20MCC%2020260521.docx?d=w0c6517702544490e97091da626b40191&csf=1&web=1&e=ii5huI",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "post-launch-governance-model",
+                "title": "Post-Launch Governance Model",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "continuous-improvement-strategy",
+                "title": "Continuous Improvement Strategy",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "defect-tracker",
+                "title": "Defect Tracker",
+                "description": "",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "pilot-results",
+                "title": "Pilot Results",
+                "description": "A reference readout covering MVP scope, users tested, outcomes, UAT feedback, defects, adoption, and evidence.",
+                "fileType": "Word",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Lakehouse,%20Anthropic%20Discussion/Procurement%20Data%20Lakehouse%20-%20Pilot%20Approach%20(02.06.2026).pptx?d=w8f12bc894eb1457aadc7da91387e07f5&csf=1&web=1&e=fZYL31",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/Copilot%20Pilot%20Pt%20II%20(Enterprise%20Data%20x%20Copilot)/Procurement%20Intelligence%20Pilot%20with%20Copilot.pptx?d=wfa102214286545b2b06273a34e58667a&csf=1&web=1&e=Bahuie",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Steering committee becomes status theater",
+              "Risks tracked but never actioned",
+              "Blockers raised at the deadline instead of early"
+            ],
+            "whoToContact": "Steering committee chair (sponsor)"
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale & sustain",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "Graduate the solution with real ownership and sustainment, not just a demo.",
+            "actions": [
+              {
+                "action": "Complete the graduation checklist and confirm business, technical, content, and value owners by name.",
+                "outcome": "Named, committed owners and a support model \u2014 so the solution survives the handoff."
+              },
+              {
+                "action": "Hand over the RAID log and open risks to the ongoing governance cadence.",
+                "outcome": "Continuity of risk management beyond the project team."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "graduation-checklist",
+                "title": "Graduation Checklist",
+                "description": "Confirms MVP acceptance, owners, support model, telemetry, value tracking, and adoption plan before declaring done.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:w:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Lesseps%20Graduations/MCC/Graduation%20Transition%20Checklist%20Template%20MCC%2020260521.docx?d=w0c6517702544490e97091da626b40191&csf=1&web=1&e=ii5huI",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "post-launch-governance-model",
+                "title": "Post-Launch Governance Model",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "continuous-improvement-strategy",
+                "title": "Continuous Improvement Strategy",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "defect-tracker",
+                "title": "Defect Tracker",
+                "description": "",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "pilot-results",
+                "title": "Pilot Results",
+                "description": "A reference readout covering MVP scope, users tested, outcomes, UAT feedback, defects, adoption, and evidence.",
+                "fileType": "Word",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Lakehouse,%20Anthropic%20Discussion/Procurement%20Data%20Lakehouse%20-%20Pilot%20Approach%20(02.06.2026).pptx?d=w8f12bc894eb1457aadc7da91387e07f5&csf=1&web=1&e=fZYL31",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/Copilot%20Pilot%20Pt%20II%20(Enterprise%20Data%20x%20Copilot)/Procurement%20Intelligence%20Pilot%20with%20Copilot.pptx?d=wfa102214286545b2b06273a34e58667a&csf=1&web=1&e=Bahuie",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
+            "commonPitfalls": [
+              "Declaring done at the demo with no owner",
+              "Ambiguous graduation \u2014 many people still loosely involved",
+              "No support model, so the solution decays"
+            ],
+            "whoToContact": "Domain sponsor for sign-off; technical owner for support"
+          }
+        ]
+      }
+    ]
+  },
+  "library": {
+    "id": "library",
+    "route": "/library",
+    "title": "Library",
+    "description": "Comprehensive view of examples and templates organized by Engage, Discover, Execute and lifecycle deliverables.",
+    "sections": [
+      {
+        "phaseGroup": "Engage",
+        "steps": [
+          {
+            "stepId": "assess",
+            "stepName": "Assess",
+            "stepSubtext": "Assess the domain & set up the team",
+            "deliverables": [
+              {
+                "id": "current-state-assessment",
+                "title": "Current State Assessment",
+                "description": "Captures the domain's people, process, technology, data, operating model, pain points, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/douimet_ca_ibm_com/Documents/NFIs/Echelon%20(Process%20Mining)/1%20-%20Discovery/Opportunity%20Assessment%20Echelon.docx?d=w842ef922949344c0aff2406f12a2193e&csf=1&web=1&e=joqrWT",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Transformation%20Dashboard/BCG%20Analysis/20251118%20-%20Lesseps_AI_EvalFrameworks_vS%20%20-%20%20Read-Only.pptx?d=w8f7b714382104620b8075d66b2b22ced&csf=1&web=1&e=Lb9y3F",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-case-template",
+                "title": "Business Case Template",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/03%20Global%20Logistics%20%26%20Trade%20Compliance%20Deep%20Dive/Use%20Cases/Regulatory%20Monitoring%20%26%20Reporting/FSRO%20Project%20Integrate_Business%20Case%20(2025-2026).pptx?d=w7ba05c5f9e694f0fb65c5a0299fa4e68&csf=1&web=1&e=r8pyna",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technology-and-data-readiness-checklist",
+                "title": "Technology & Data Readiness Checklist",
+                "description": "Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a go/no-go gate before committing.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "project-charter",
+                "title": "Project Charter",
+                "description": "A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can't complete it, you're not ready to start.",
+                "fileType": "",
+                "priority": "",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/Project%20Charters/Project%20Charter%20template.pptx?d=wa980fc22b6914fbcbaadc3be34ee8d77&csf=1&web=1&e=daxkWy",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Microsoft%20Copilot%20Chat%20Files/Business%20Logic.Example%20V1.pptx?d=w533fa094f76147fdb3903235dd0fd024&csf=1&web=1&e=oQljT1",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-process-map",
+                "title": "Business Process Map",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "staffing-raci-matrix",
+                "title": "Staffing/RACI Matrix",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "raid-log",
+                "title": "RAID Log",
+                "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Narrow down which workflow to focus on",
+            "deliverables": [
+              {
+                "id": "workflow-analysis-worksheet",
+                "title": "Workflow Analysis Worksheet",
+                "description": "Analyzes bottlenecks, manual work, decisions, user pain, volume, cycle time, technical dependencies, and the AI opportunity for candidate workflows.",
+                "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "prioritization-matrix",
+                "title": "Prioritization Matrix",
+                "description": "Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/3zpisz74ju6se7cboqoljtb1etpqc4sq",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "measurement-strategy",
+                "title": "Measurement Strategy",
+                "description": "Defines baseline, target, source, owner, cadence, and validation method for each metric.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-dependency-assessment",
+                "title": "Technical Dependency Assessment",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "phaseGroup": "Discover",
+        "steps": [
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Design the AI solution, MVP scope & roadmap",
+            "deliverables": [
+              {
+                "id": "mvp-scope-worksheet",
+                "title": "MVP Scope Worksheet",
+                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
+                "fileType": "Word",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-requirements-intake",
+                "title": "Business Requirements Intake",
+                "description": "The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technical-specification",
+                "title": "Technical Specification",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "solution-architecture",
+                "title": "Solution Architecture",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "workflow-redesign",
+                "title": "Workflow Redesign",
+                "description": "A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.",
+                "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "strategic-roadmap",
+                "title": "Strategic Roadmap",
+                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "change-management-plan",
+                "title": "Change Management Plan",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "steerco-charter",
+                "title": "SteerCo Charter",
+                "description": "Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "phaseGroup": "Execute",
+        "steps": [
+          {
+            "stepId": "build",
+            "stepName": "Build \u2014 Experimentation",
+            "stepSubtext": "Build, experiment & test the MVP",
+            "deliverables": [
+              {
+                "id": "sprint-cadence-plan",
+                "title": "Sprint Cadence Plan",
+                "description": "The operating cadence for build, standups, working sessions, UAT cycles, decisions, and steering reviews",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "uat-feedback-tracker",
+                "title": "UAT Feedback Tracker",
+                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "defect-tracker",
+                "title": "Defect Tracker",
+                "description": "",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "pilot-results",
+                "title": "Pilot Results",
+                "description": "A reference readout covering MVP scope, users tested, outcomes, UAT feedback, defects, adoption, and evidence.",
+                "fileType": "Word",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Lakehouse,%20Anthropic%20Discussion/Procurement%20Data%20Lakehouse%20-%20Pilot%20Approach%20(02.06.2026).pptx?d=w8f12bc894eb1457aadc7da91387e07f5&csf=1&web=1&e=fZYL31",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/Copilot%20Pilot%20Pt%20II%20(Enterprise%20Data%20x%20Copilot)/Procurement%20Intelligence%20Pilot%20with%20Copilot.pptx?d=wfa102214286545b2b06273a34e58667a&csf=1&web=1&e=Bahuie",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "roi-analysis",
+                "title": "ROI Analysis",
+                "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/ROI%20+%20Productivity%20Metrics/Bob%20ROI/Bob%20-%20Project%20Update%20-%2001222026.pptx?d=w1812bc57b8cb451e9243a12cec26356d&csf=1&web=1&e=6xznBL",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "usage-analytics",
+                "title": "Usage Analytics",
+                "description": "Reference analytics for active users, repeat users, workflow volume, deflection, and usage events.",
+                "fileType": "Excel",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "production-readiness-packet",
+                "title": "Production Readiness Packet",
+                "description": "Confirms requirements, UAT results, defects, limitations, support path, risks, and the go/no-go for scale.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "https://ibm.box.com/s/7lzqwyd3ekeppihx5g8kaupenjtkoexj",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "stepId": "sustain",
+            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepSubtext": "Scale it & keep it running",
+            "deliverables": [
+              {
+                "id": "graduation-checklist",
+                "title": "Graduation Checklist",
+                "description": "Confirms MVP acceptance, owners, support model, telemetry, value tracking, and adoption plan before declaring done.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:w:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Lesseps%20Graduations/MCC/Graduation%20Transition%20Checklist%20Template%20MCC%2020260521.docx?d=w0c6517702544490e97091da626b40191&csf=1&web=1&e=ii5huI",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "support-and-maintenance-model",
+                "title": "Support & Maintenance Model",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "https://ibm.box.com/s/nq5p1jfbqzgypqrzq6ls2dduwcmxudd5",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "kpi-dashboard",
+                "title": "KPI Dashboard",
+                "description": "A reference dashboard for adoption, usage, value realization, operational performance, and support health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "value-realization-reporting",
+                "title": "Value Realization Reporting",
+                "description": "Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "scaling-recommendations",
+                "title": "Scaling Recommendations",
+                "description": "Recommendations for expanding successful patterns to more users, workflows, and domains, plus backlog and continuous improvement.",
+                "fileType": "PPT",
+                "priority": "Low",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "continuous-improvement-strategy",
+                "title": "Continuous Improvement Strategy",
+                "description": "Defines who maintains infrastructure, prompts, content, data, user support, and technical health",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "post-launch-governance-model",
+                "title": "Post-Launch Governance Model",
+                "description": "",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "caseStudy": {
+    "id": "case-study",
+    "route": "/case-study",
+    "title": "Worked Example: A University Transforms Student Enrollment",
+    "subtitle": "How a generic university applies the AIFT workflow to an enrollment and document-processing transformation \u2014 from identifying the opportunity to a scaled, sustained solution. Modeled on a widely cited higher-education AI transformation.",
+    "overview": "This worked example follows a mid-sized public university \u2014 call it State University \u2014 as it transforms its student enrollment and document-verification workflow. It is a non-software, easy-to-follow scenario: a university drowning in manual admissions paperwork and inconsistent outreach. The journey is modeled on a renowned higher-education AI transformation and reconstructed step-by-step to mirror a real IBM-style engagement. Templates referenced in each phase are blank starting points \u2014 not filled-in samples \u2014 so you can adapt them to your own domain. Friction points are included to show how a real team works through obstacles.",
+    "startingContext": "State University enrolls roughly 180,000 students across physical and online campuses. The enrollment team is overwhelmed: applications, transcripts, and required documents are processed by hand, creating bottlenecks that delay onboarding and frustrate prospective students. Outreach to prospects is scattershot \u2014 staff cannot tell which applicants are most likely to enroll, so effort is spread thin. University leadership has issued a mandate to modernize enrollment, but no specific AI use case has been chosen yet.",
+    "keyPlayers": [
+      "Executive Sponsor (VP of Enrollment)",
+      "Project Lead (Enrollment Operations)",
+      "Product Owner",
+      "Technical Architect (IT)",
+      "Value Owner (Finance/Institutional Research)",
+      "Change Owner (Enrollment Staff Lead)",
+      "Workflow SMEs (Enrollment Counselors)"
+    ],
+    "navInstruction": "Click through each phase to follow State University's transformation step by step. Move as fast as you can through the steps without skipping them.",
+    "phases": [
+      {
+        "number": 1,
+        "phaseGroup": "Engage",
+        "phaseGroupId": "engage",
+        "phaseName": "Engage / Assess",
+        "mindset": "Leadership wants us to modernize enrollment, but we don't yet know exactly what to build.",
+        "summary": "The team looks at the enrollment domain as a whole: confirms the mandate and sponsorship, stands up the team and governance, and takes an honest read on data and technology readiness before choosing a use case.",
+        "keyActions": [
+          "Confirm the executive sponsor (VP of Enrollment) and secure air cover for the work.",
+          "Name the project lead and stand up a cross-functional team (operations, IT, institutional research, enrollment staff).",
+          "Run a current-state assessment of the enrollment domain: people, process, systems, data, and pain points.",
+          "Assess data readiness \u2014 are application, transcript, and interaction records accessible, owned, and usable?",
+          "Gather the technology and architecture picture: systems of record, integrations, access constraints.",
+          "Draft an initial business case tied to a measurable benefit (faster onboarding, staff hours saved).",
+          "Open the RAID log and set up the steering committee and RACI before any build.",
+          "Make a go/no-go decision on whether to proceed to detailed analysis."
+        ],
+        "documents": [
+          {
+            "name": "Current State Assessment",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Business Case Template",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Technology & Data Readiness Checklist",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Project Charter",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Business Process Map",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Staffing/RACI Matrix",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "RAID Log",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          }
+        ],
+        "sideways": [
+          {
+            "issue": "The sponsor wants to jump straight to 'build a chatbot for applicants.'",
+            "howHandled": "The project lead reframes it: 'We're choosing the workflow opportunity first, not the tool. Let's confirm where the biggest, most feasible win is before committing to a build.' The sponsor agrees to a short Analyze phase with a decision gate."
+          }
+        ],
+        "takeaways": [
+          "Don't start a build until the sponsor, project lead, technical owner, value owner, and change owner are named.",
+          "Use data readiness as a go/no-go input, not an afterthought.",
+          "Open the RAID log and stand up governance on day one.",
+          "Resist jumping to a solution before you understand the problem space."
+        ]
+      },
+      {
+        "number": 2,
+        "phaseGroup": "Engage",
+        "phaseGroupId": "engage",
+        "phaseName": "Engage / Analyze",
+        "mindset": "Which single enrollment workflow should we transform first, and why?",
+        "summary": "The team maps the candidate enrollment workflows, validates pain directly with counselors and applicants, benchmarks against peer institutions, and commits to one MVP target with a defensible rationale.",
+        "keyActions": [
+          "Identify candidate workflows: document verification, application processing, prospect outreach, and transcript evaluation.",
+          "Interview enrollment counselors and review applicant feedback to find the real friction (outside-in).",
+          "Benchmark against peer universities to define what best-in-class enrollment performance looks like.",
+          "Map the current (as-is) process for each candidate, capturing cycle time, volume, and manual effort.",
+          "Score candidates on value, feasibility, data readiness, and adoption risk.",
+          "Select the MVP target \u2014 prospect outreach prioritization plus automated document verification \u2014 and document why it beat the alternatives.",
+          "Define baseline metrics and write an idea brief to secure executive approval to proceed."
+        ],
+        "documents": [
+          {
+            "name": "Workflow Analysis Worksheet",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Prioritization Matrix",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Measurement Strategy",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          }
+        ],
+        "sideways": [
+          {
+            "issue": "The most exciting idea \u2014 a fully conversational applicant assistant \u2014 turns out to depend on data the university doesn't cleanly hold yet.",
+            "howHandled": "Feasibility scoring surfaces the data gap early. The team moves the conversational assistant to the backlog and selects outreach prioritization + document verification, which use data that already exists. Keeping the MVP small protects the timeline."
+          }
+        ],
+        "takeaways": [
+          "Score opportunities by value AND feasibility, not excitement.",
+          "Validate pain with the frontline, not just leadership.",
+          "Pick the smallest useful MVP and write down why.",
+          "Define baseline metrics before you design anything."
+        ]
+      },
+      {
+        "number": 3,
+        "phaseGroup": "Discover",
+        "phaseGroupId": "discover",
+        "phaseName": "Discover / Design",
+        "mindset": "What exactly are we building for this workflow, and can we build it in 90 days?",
+        "summary": "The team designs the AI-enabled future-state for enrollment: re-envisions the workflow from the applicant's and counselor's perspective, writes build-ready requirements, scopes a 90-day MVP, sets the roadmap, and plans adoption from the start.",
+        "keyActions": [
+          "Re-envision the future-state workflow: how an applicant's documents get verified and how counselors are directed to high-propensity prospects.",
+          "Decide build vs. buy for the underlying capability (e.g. partner platform vs. in-house).",
+          "Write build-ready requirements with data objects, source systems, owners, and acceptance criteria.",
+          "Scope the 90-day MVP \u2014 explicitly in (document verification + an enrollment-propensity model) and explicitly out (full conversational assistant).",
+          "Force-rank the riskiest assumptions and plan to test them in the first 30 days.",
+          "Confirm metrics and baselines with the value owner so the build optimizes for the right outcome.",
+          "Stand up the operating cadence (standups, steering committee) and plan adoption, UAT users, and training.",
+          "Run the MVP kickoff to align the team on the 90-day roadmap and ownership."
+        ],
+        "documents": [
+          {
+            "name": "MVP Scope Worksheet",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Business Requirements Intake",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Workflow Redesign (Future-State)",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Strategic Roadmap",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Adoption & Change Plan",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          }
+        ],
+        "sideways": [
+          {
+            "issue": "The first requirements draft is too high-level for IT to build from \u2014 'make outreach smarter' isn't actionable.",
+            "howHandled": "The product owner and architect rework it into a build-ready package: the propensity model's inputs, the data sources, acceptance criteria, a fallback for low-confidence predictions, and the telemetry to capture. IT signs off on the second pass."
+          }
+        ],
+        "takeaways": [
+          "Design around the applicant and counselor outcome, not the existing process.",
+          "Make requirements build-ready, not conceptual.",
+          "Test the riskiest assumptions first.",
+          "Plan adoption and recruit real UAT users before the build starts."
+        ]
+      },
+      {
+        "number": 4,
+        "phaseGroup": "Execute",
+        "phaseGroupId": "execute",
+        "phaseName": "Execute / Build \u2014 Experimentation",
+        "mindset": "Does it actually work \u2014 and can we prove it before we scale?",
+        "summary": "The team builds the MVP in sprints and experiments to prove feasibility. This is where data, platform, and integrations get stress-tested. Real counselors test it, value is measured against baseline, scope is protected by de-scoping, and a data-driven go/no-go decision is made.",
+        "keyActions": [
+          "Run the first 30 days as a Riskiest Assumptions Test: can the model predict enrollment propensity accurately on real data?",
+          "Hold a 30-day debrief with the steering committee: pivot, continue, or stop.",
+          "Build the MVP in 2-week sprints with weekly demos to the steering committee.",
+          "Validate data quality on real application and interaction records \u2014 don't assume it.",
+          "Run UAT with real enrollment counselors, capturing result quality, satisfaction, and accuracy.",
+          "Track value against baseline throughout \u2014 verification time, outreach efficiency, onboarding speed.",
+          "De-scope lower-value features if needed to protect the core MVP and timeline.",
+          "Prepare the go/no-go package with performance evidence for the scaling decision."
+        ],
+        "documents": [
+          {
+            "name": "Sprint Cadence Plan",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "UAT Feedback Tracker",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "De-scope Decision Tree",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Production Readiness Packet",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Pilot Results",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "ROI Analysis",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Usage Analytics",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          }
+        ],
+        "sideways": [
+          {
+            "issue": "Early in the RAT, the enrollment-propensity model is barely better than guessing \u2014 data quality is worse than the readiness check suggested.",
+            "howHandled": "The team assigns a data owner, documents the specific quality issues, and adds a data-validation and cleaning step to the pipeline. After the fix, the model becomes roughly four times more accurate than random \u2014 strong enough to continue."
+          },
+          {
+            "issue": "Counselors are hesitant to trust the model's prospect rankings and keep working their old way.",
+            "howHandled": "The team adds explainability \u2014 why a prospect is ranked high, with the supporting signals \u2014 plus a feedback flag. Trust and usage climb in the next UAT round."
+          }
+        ],
+        "takeaways": [
+          "Test the riskiest assumption (here, data quality) before investing in the full build.",
+          "Real-user UAT and explainability drive trust \u2014 and trust drives adoption.",
+          "Measure value against baseline continuously, not just at the end.",
+          "De-scoping to protect the core MVP is a success behavior, not a failure."
+        ]
+      },
+      {
+        "number": 5,
+        "phaseGroup": "Execute",
+        "phaseGroupId": "execute",
+        "phaseName": "Execute / Sustain \u2014 Scale & Adopt",
+        "mindset": "How do we make sure this lasts and spreads after the project team leaves?",
+        "summary": "With the experiment proven, the team scales the solution and makes it durable: confirms named owners and a support model, validates realized value with finance, drives sustained adoption, and expands the pattern to more of the enrollment workflow.",
+        "keyActions": [
+          "Complete the graduation checklist \u2014 the solution is ownership-ready, not just demo-complete.",
+          "Confirm named business, technical, content, and value owners for the long term.",
+          "Stand up production infrastructure with monitoring, security, and support.",
+          "Validate realized value with finance/institutional research against the original baseline.",
+          "Roll out training and enablement so counselors adopt the new workflow, and retire the old manual process.",
+          "Monitor adoption and intervene where it plateaus (office hours, champions, edge-case examples).",
+          "Start small, then expand: apply the proven pattern to additional enrollment areas and document types.",
+          "Capture the reusable pattern so other departments (financial aid, registrar) can adopt it."
+        ],
+        "documents": [
+          {
+            "name": "Graduation Checklist",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Support & Maintenance Model",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Value Realization Reporting",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "Scaling Recommendations",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          },
+          {
+            "name": "KPI Dashboard",
+            "exampleUrl": "",
+            "templateUrl": "",
+            "hasExample": false,
+            "hasTemplate": false
+          }
+        ],
+        "sideways": [
+          {
+            "issue": "After launch, adoption plateaus \u2014 some counselors drift back to manual outreach because it's familiar.",
+            "howHandled": "The change owner routes all new prospect lists through the AI-prioritized workflow, runs office hours, names counselor champions, and shares wins. Adoption climbs and holds as staff see the time savings firsthand."
+          }
+        ],
+        "takeaways": [
+          "Graduation means a named owner, a support model, and value tracking \u2014 not just a working demo.",
+          "Validate realized value with finance so investment continues.",
+          "Start small and expand the proven pattern rather than boiling the ocean.",
+          "Capture the reusable pattern so the next department moves faster."
+        ]
+      }
+    ],
+    "operatingReference": {
+      "title": "Operating Model Reference",
+      "note": "The scaffolding the team used throughout. Reference as needed.",
+      "workstreams": [
+        {
+          "id": "data-flow-api",
+          "name": "Data Flow / API",
+          "description": "Data access, quality, integration, and API dependencies"
+        },
+        {
+          "id": "agent-ai-build",
+          "name": "Agent / AI Build",
+          "description": "AI model, prompts, recommendation logic, and content generation"
+        },
+        {
+          "id": "metrics",
+          "name": "Metrics",
+          "description": "Usage tracking, cycle time, quality metrics, and pilot evidence"
+        },
+        {
+          "id": "value-realization",
+          "name": "Value Realization",
+          "description": "ROI tracking, value hypothesis validation, and business case updates"
+        },
+        {
+          "id": "change-management",
+          "name": "Change Management",
+          "description": "UAT, training, adoption barriers, champions, and communication"
+        }
+      ],
+      "managementPlan": [
+        {
+          "id": "scope",
+          "name": "Scope",
+          "description": "What's in, what's out, definition of done, de-scope triggers"
+        },
+        {
+          "id": "resource",
+          "name": "Resource",
+          "description": "Team members, workstream leads, RACI, capacity"
+        },
+        {
+          "id": "schedule",
+          "name": "Schedule",
+          "description": "30-day feasibility, 2-week sprints, decision gates, production date"
+        },
+        {
+          "id": "communication",
+          "name": "Communication",
+          "description": "Standup, workstream checkpoints, steerco, UAT board, status updates"
+        },
+        {
+          "id": "stakeholders",
+          "name": "Stakeholders",
+          "description": "Sponsor, domain focal, steering committee, UAT users, end users"
+        },
+        {
+          "id": "risk-raid",
+          "name": "Risk / RAID",
+          "description": "Risks, assumptions, issues, dependencies, escalation path"
+        },
+        {
+          "id": "quality-uat",
+          "name": "Quality / UAT",
+          "description": "UAT plan, feedback tracker, defect triage, acceptance criteria"
+        },
+        {
+          "id": "change",
+          "name": "Change",
+          "description": "Adoption plan, training, champions, barriers, office hours"
+        }
+      ],
+      "raid": {
+        "title": "RAID Definitions",
+        "items": [
+          {
+            "term": "Risks",
+            "definition": "Might happen"
+          },
+          {
+            "term": "Assumptions",
+            "definition": "Believed true"
+          },
+          {
+            "term": "Issues",
+            "definition": "Happening now"
+          },
+          {
+            "term": "Dependencies",
+            "definition": "Needed from elsewhere"
+          }
+        ]
+      }
+    },
+    "keyPlayersDetailed": [
+      {
+        "role": "Executive Sponsor",
+        "who": "VP of Enrollment",
+        "responsibility": "Owns outcomes, provides air cover, chairs the steering committee."
+      },
+      {
+        "role": "Project Lead",
+        "who": "Enrollment Operations manager",
+        "responsibility": "Orchestrates the engagement day to day."
+      },
+      {
+        "role": "Product Owner",
+        "who": "Enrollment systems lead",
+        "responsibility": "Owns MVP scope, requirements, and prioritization."
+      },
+      {
+        "role": "Technical Architect",
+        "who": "University IT / data platform",
+        "responsibility": "Owns the technical spec, data pipeline, and feasibility."
+      },
+      {
+        "role": "Value Owner",
+        "who": "Institutional Research / Finance",
+        "responsibility": "Owns the baseline, metrics, and value validation."
+      },
+      {
+        "role": "Change Owner",
+        "who": "Enrollment staff lead",
+        "responsibility": "Owns adoption, training, and the staff transition."
+      },
+      {
+        "role": "Workflow SMEs",
+        "who": "Enrollment counselors",
+        "responsibility": "Frontline experts who know the real workflow and pain."
+      }
+    ]
+  },
+  "footer": {
+    "text": "Created by Claire Liu and Alexandra Ko 2026",
+    "subtext": "AIFT Domain Orchestration Team"
+  }
+}

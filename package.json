@@ -1,0 +1,22 @@
+{
+  "name": "aift-playbook-site",
+  "version": "1.0.0",
+  "description": "AIFT Playbook website with AI chatbot powered by IBM watsonx.ai",
+  "main": "proxy-server.js",
+  "scripts": {
+    "start": "node proxy-server.js",
+    "dev": "node proxy-server.js"
+  },
+  "keywords": [
+    "ai",
+    "chatbot",
+    "ibm",
+    "watsonx"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,243 @@
+Value Realization Tracker
+
+Project Name,[FILL IN]
+Domain/Business Unit,[FILL IN]
+Tracking Period,[FILL IN] to [FILL IN]
+Last Updated,[FILL IN]
+Document Owner,[FILL IN]
+
+PROJECT OVERVIEW
+
+Field,Details
+Launch Date,[FILL IN]
+Business Case Annual Value,[FILL IN]
+Target Payback Period,[FILL IN months]
+Current Status,[FILL IN: Pilot/Scaling/Production]
+Total Investment to Date,[FILL IN]
+
+MONTHLY TRACKING - MONTH 1
+
+Month,[FILL IN: Month Year]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN: Green/Yellow/Red]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 1 Notes,[FILL IN]
+
+MONTHLY TRACKING - MONTH 2
+
+Month,[FILL IN]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 2 Notes,[FILL IN]
+
+MONTHLY TRACKING - MONTH 3
+
+Month,[FILL IN]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 3 Notes,[FILL IN]
+
+MONTHLY TRACKING - MONTH 4
+
+Month,[FILL IN]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 4 Notes,[FILL IN]
+
+MONTHLY TRACKING - MONTH 5
+
+Month,[FILL IN]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 5 Notes,[FILL IN]
+
+MONTHLY TRACKING - MONTH 6
+
+Month,[FILL IN]
+Category,Metric,Target,Actual,% of Target,Status
+Adoption,Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Adoption,Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 1,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 2,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Business Metric 3,[FILL IN: Metric name],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Monthly Value Realized,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value,Cumulative Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Month 6 Notes,[FILL IN]
+
+CUMULATIVE PERFORMANCE - ADOPTION TRENDS
+
+Metric,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Current,Trend
+Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN: Up/Down/Stable]
+Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+User Satisfaction,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+CUMULATIVE PERFORMANCE - BUSINESS METRICS TRENDS
+
+Metric,Baseline,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Current,% Improvement
+[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+CUMULATIVE PERFORMANCE - VALUE REALIZATION TRENDS
+
+Month,Monthly Value,Cumulative Value,Target (Cumulative),Variance,% of Annual Target
+Month 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 5,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 6,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Current,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+VALUE BREAKDOWN - HARD SAVINGS (CUMULATIVE)
+
+Category,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Current,Annual Target
+[FILL IN: Category 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Category 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Category 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total Hard Savings,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+VALUE BREAKDOWN - SOFT BENEFITS (CUMULATIVE)
+
+Category,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Current,Annual Target
+[FILL IN: Category 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Category 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total Soft Benefits,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+VALUE BREAKDOWN - COST AVOIDANCE (CUMULATIVE)
+
+Category,Month 1,Month 2,Month 3,Month 4,Month 5,Month 6,Current,Annual Target
+[FILL IN: Category 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total Cost Avoidance,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+ROI ANALYSIS - INVESTMENT VS VALUE
+
+Period,Investment (Cumulative),Value Realized (Cumulative),Net Value,ROI %
+Month 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 5,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 6,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Current,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+ROI ANALYSIS - PAYBACK ANALYSIS
+
+Target Payback Period,[FILL IN months]
+Actual Payback Period,[FILL IN months or Not yet achieved]
+Payback Status,[FILL IN: Achieved/On Track/Delayed]
+Payback Date,[FILL IN or Projected: FILL IN]
+
+KEY INSIGHTS & OBSERVATIONS
+
+What's Working Well
+1,[FILL IN]
+2,[FILL IN]
+3,[FILL IN]
+
+Areas of Concern
+1,[FILL IN]
+2,[FILL IN]
+3,[FILL IN]
+
+Trend Analysis
+Adoption Trend,[FILL IN: Accelerating/Steady/Slowing]
+Value Trend,[FILL IN: Ahead of Plan/On Track/Behind Plan]
+User Satisfaction Trend,[FILL IN: Improving/Stable/Declining]
+
+FORECAST & PROJECTIONS - NEXT 3 MONTHS
+
+Month,Projected Active Users,Projected Usage,Projected Monthly Value,Projected Cumulative Value
+[FILL IN: Next month],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Month +2],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Month +3],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+FORECAST & PROJECTIONS - YEAR-END PROJECTION
+
+Projected Annual Value,[FILL IN]
+Business Case Target,[FILL IN]
+Projected Achievement,[FILL IN %]
+Confidence Level,[FILL IN: High/Medium/Low]
+
+Key Assumptions
+1,[FILL IN]
+2,[FILL IN]
+3,[FILL IN]
+
+ACTION ITEMS
+
+Priority,Action,Owner,Due Date
+High,[FILL IN],[FILL IN],[FILL IN]
+High,[FILL IN],[FILL IN],[FILL IN]
+High,[FILL IN],[FILL IN],[FILL IN]
+Medium,[FILL IN],[FILL IN],[FILL IN]
+Medium,[FILL IN],[FILL IN],[FILL IN]
+
+FINANCE VALIDATION
+
+Period,Value Claimed,Finance Validated,Variance,Validation Date,Validated By
+Month 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 5,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Month 6,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Finance Partner,[FILL IN]
+Last Validation Date,[FILL IN]
+Next Validation Date,[FILL IN]
+
+APPENDIX - DATA SOURCES
+
+Data Source,Description
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+
+APPENDIX - CALCULATION METHODOLOGIES
+
+Methodology,Description
+Value Calculation,[FILL IN]
+Adoption Metrics,[FILL IN]
+
+APPENDIX - LINKS TO DETAILED REPORTS
+
+Report,Link
+Monthly Value Reports,[FILL IN]
+Adoption Dashboards,[FILL IN]
+Business Metrics Dashboards,[FILL IN]

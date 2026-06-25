@@ -1,0 +1,19 @@
+---
+applications:
+- name: aift-playbook
+  memory: 512M
+  instances: 1
+  buildpack: nodejs_buildpack
+  command: node proxy-server.js
+  health-check-type: http
+  health-check-http-endpoint: /
+  timeout: 180
+  env:
+    NODE_ENV: production
+    IBM_API_KEY: ((IBM_API_KEY))
+    IBM_PROJECT_ID: ((IBM_PROJECT_ID))
+    IBM_REGION: ((IBM_REGION))
+  routes:
+  - route: aift-playbook.cirrus.ibm.com
+
+# Made with Bob

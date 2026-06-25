@@ -1,0 +1,211 @@
+Monthly Value Report
+
+Project Name,[FILL IN]
+Domain/Business Unit,[FILL IN]
+Reporting Period,[FILL IN: Month Year]
+Report Date,[FILL IN]
+Prepared By,[FILL IN]
+
+EXECUTIVE SUMMARY
+
+Executive Summary,[FILL IN: 3-5 sentence summary]
+
+MONTHLY HIGHLIGHTS
+
+Metric,This Month,Last Month,Change,Status
+Active Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN: Green/Yellow/Red]
+Usage Volume,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Value Realized (MTD),[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+User Satisfaction,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+ADOPTION METRICS - USER ADOPTION
+
+Metric,Target,Actual,% of Target,Trend,Status
+Total Registered Users,[FILL IN],[FILL IN],[FILL IN],[FILL IN: Up/Down/Stable],[FILL IN]
+Active Users (MAU),[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+New Users This Month,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+User Retention Rate,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Power Users (>10 uses/month),[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+ADOPTION METRICS - USAGE FREQUENCY
+
+User Segment,# of Users,Avg Uses/Month,Total Usage,% of Total
+Daily Users (20+ uses),[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Weekly Users (5-19 uses),[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Monthly Users (1-4 uses),[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Inactive Users (0 uses),[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total,[FILL IN],[FILL IN],[FILL IN],100%
+
+ADOPTION METRICS - FEATURE ADOPTION
+
+Feature,Users This Month,% of Active Users,Trend,Notes
+[FILL IN: Feature 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Feature 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Feature 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Feature 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Adoption Insights,[FILL IN]
+
+BUSINESS OUTCOME METRICS - KEY PERFORMANCE INDICATORS
+
+Metric,Baseline,Target,Actual,% of Target,Variance,Status
+[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 5],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Metrics Exceeding Target,[FILL IN]
+Metrics At Risk,[FILL IN]
+Metrics Below Target,[FILL IN]
+
+VALUE REALIZED - MONTHLY VALUE SUMMARY
+
+Value Category,This Month,Cumulative (YTD),Annual Target,% of Target
+Hard Savings,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Soft Benefits,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Cost Avoidance,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total Value,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+VALUE REALIZED - VALUE BREAKDOWN
+
+Category,Amount,Explanation
+Hard Savings - [FILL IN: Category 1],[FILL IN],[FILL IN]
+Hard Savings - [FILL IN: Category 2],[FILL IN],[FILL IN]
+Soft Benefits - [FILL IN: Category 1],[FILL IN],[FILL IN]
+Soft Benefits - [FILL IN: Category 2],[FILL IN],[FILL IN]
+Cost Avoidance - [FILL IN: Category 1],[FILL IN],[FILL IN]
+
+VALUE REALIZED - VALUE REALIZATION TREND
+
+Month,Monthly Value,Cumulative Value,Target (Cumulative),Variance
+[FILL IN: Month 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Month 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Month 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Current Month],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Value Realization Status,[FILL IN: On Track/At Risk/Behind Target]
+
+USER SATISFACTION & FEEDBACK - SATISFACTION METRICS
+
+Metric,Target,Actual,Status
+Overall Satisfaction (1-5),[FILL IN],[FILL IN],[FILL IN]
+Net Promoter Score (NPS),[FILL IN],[FILL IN],[FILL IN]
+Would Recommend (%),[FILL IN],[FILL IN],[FILL IN]
+Survey Response Rate,[FILL IN],[FILL IN],[FILL IN]
+
+USER SATISFACTION & FEEDBACK - TOP FEEDBACK THEMES
+
+Theme Type,Theme,# of Mentions
+Positive Feedback,[FILL IN: Theme 1],[FILL IN]
+Positive Feedback,[FILL IN: Theme 2],[FILL IN]
+Positive Feedback,[FILL IN: Theme 3],[FILL IN]
+Areas for Improvement,[FILL IN: Theme 1],[FILL IN]
+Areas for Improvement,[FILL IN: Theme 2],[FILL IN]
+Areas for Improvement,[FILL IN: Theme 3],[FILL IN]
+
+USER SATISFACTION & FEEDBACK - FEATURE REQUESTS
+
+Request,# of Requests,Priority,Status,Target Date
+[FILL IN],[FILL IN],[FILL IN: H/M/L],[FILL IN: Planned/In Progress/Completed],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+TECHNICAL PERFORMANCE - SYSTEM RELIABILITY
+
+Metric,Target,Actual,Status
+Uptime %,[FILL IN],[FILL IN],[FILL IN]
+Avg Response Time,[FILL IN],[FILL IN],[FILL IN]
+Error Rate,[FILL IN],[FILL IN],[FILL IN]
+P95 Response Time,[FILL IN],[FILL IN],[FILL IN]
+
+TECHNICAL PERFORMANCE - INCIDENTS & ISSUES
+
+Incident,Date,Severity,Impact,Resolution,Status
+[FILL IN],[FILL IN],[FILL IN: H/M/L],[FILL IN],[FILL IN],[FILL IN: Resolved/Open]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Total Incidents This Month,[FILL IN]
+Average Time to Resolution,[FILL IN]
+
+ADOPTION BARRIERS IDENTIFIED
+
+Barrier,Impact,Affected Users,Root Cause,Mitigation Plan,Owner,Status
+[FILL IN],[FILL IN: H/M/L],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Barriers Resolved This Month,[FILL IN]
+Barriers In Progress,[FILL IN]
+
+OPTIMIZATION OPPORTUNITIES
+
+Opportunity,Potential Impact,Effort Required,Priority,Owner,Target Date
+[FILL IN],[FILL IN],[FILL IN: H/M/L],[FILL IN: H/M/L],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Quick Wins Implemented,[FILL IN]
+
+SCALING PLANS - CURRENT SCALING STATUS
+
+Metric,Current,Target (Next Quarter),Gap,Plan to Close Gap
+User Base,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Geographic Coverage,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Use Cases,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Departments,[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+SCALING PLANS - SCALING READINESS
+
+Readiness Area,Status,Key Factor
+Technical Readiness,[FILL IN: Ready/Needs Work/Not Ready],[FILL IN]
+Adoption Readiness,[FILL IN],[FILL IN]
+Support Readiness,[FILL IN],[FILL IN]
+Change Management Readiness,[FILL IN],[FILL IN]
+
+Next Scaling Milestone,[FILL IN]
+Timeline,[FILL IN]
+Prerequisites,[FILL IN]
+
+NEXT MONTH PRIORITIES
+
+Priority #,Priority,Objective,Key Actions,Owner,Success Criteria
+1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+KEY MILESTONES NEXT MONTH
+
+Milestone,Target Date,Owner,Status
+[FILL IN],[FILL IN],[FILL IN],[FILL IN: On Track/At Risk/Delayed]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+RISKS & ISSUES - ACTIVE RISKS
+
+Risk,Likelihood,Impact,Mitigation Plan,Owner,Status
+[FILL IN],[FILL IN: H/M/L],[FILL IN: H/M/L],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+RISKS & ISSUES - OPEN ISSUES
+
+Issue,Severity,Impact,Owner,Target Resolution,Status
+[FILL IN],[FILL IN: H/M/L],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+APPENDIX - LINKS
+
+Resource,URL/Location
+Adoption Dashboard,[FILL IN]
+Value Dashboard,[FILL IN]
+Technical Performance Dashboard,[FILL IN]
+Survey Results,[FILL IN]
+Feedback Database,[FILL IN]
+
+DISTRIBUTION LIST
+
+Name,Role
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]

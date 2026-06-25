@@ -1,0 +1,145 @@
+Pilot Metrics Dashboard
+
+Project Name,[FILL IN]
+Domain/Business Unit,[FILL IN]
+Pilot Period,[FILL IN] to [FILL IN]
+Dashboard Owner,[FILL IN]
+Last Updated,[FILL IN]
+
+PILOT OVERVIEW
+
+Field,Details
+Pilot Start Date,[FILL IN]
+Pilot End Date,[FILL IN]
+Pilot Duration,[FILL IN weeks]
+# of Pilot Users,[FILL IN]
+User Groups,[FILL IN]
+Go/No-Go Decision Date,[FILL IN]
+
+WEEKLY METRICS TRACKING - WEEK 1
+
+Week,Date Range,Metric,Baseline,Target,Actual,Variance,Trend,Status,Notes/Blockers
+1,[FILL IN],[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN: Up/Down/Stable],[FILL IN: Green/Yellow/Red],[FILL IN]
+1,[FILL IN],[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+1,[FILL IN],[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+1,[FILL IN],[FILL IN: Metric 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+1,[FILL IN],[FILL IN: Metric 5],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Week 1 Overall Status,[FILL IN: On Track/At Risk/Off Track]
+Week 1 Key Highlights,[FILL IN]
+Week 1 Action Items,[FILL IN]
+
+WEEKLY METRICS TRACKING - WEEK 2
+
+Week,Date Range,Metric,Baseline,Target,Actual,Variance,Trend,Status,Notes/Blockers
+2,[FILL IN],[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN: Metric 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN: Metric 5],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Week 2 Overall Status,[FILL IN]
+Week 2 Key Highlights,[FILL IN]
+Week 2 Action Items,[FILL IN]
+
+WEEKLY METRICS TRACKING - WEEK 3
+
+Week,Date Range,Metric,Baseline,Target,Actual,Variance,Trend,Status,Notes/Blockers
+3,[FILL IN],[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN: Metric 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN: Metric 5],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Week 3 Overall Status,[FILL IN]
+Week 3 Key Highlights,[FILL IN]
+Week 3 Action Items,[FILL IN]
+
+WEEKLY METRICS TRACKING - WEEK 4
+
+Week,Date Range,Metric,Baseline,Target,Actual,Variance,Trend,Status,Notes/Blockers
+4,[FILL IN],[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+4,[FILL IN],[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+4,[FILL IN],[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+4,[FILL IN],[FILL IN: Metric 4],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+4,[FILL IN],[FILL IN: Metric 5],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Week 4 Overall Status,[FILL IN]
+Week 4 Key Highlights,[FILL IN]
+Week 4 Action Items,[FILL IN]
+
+ADOPTION METRICS - USER ENGAGEMENT
+
+Week,Active Users,% of Pilot Users,Daily Usage (avg),Weekly Usage (avg),Notes
+Week 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Target,[FILL IN]
+Status,[FILL IN: Green/Yellow/Red]
+
+ADOPTION METRICS - USER SATISFACTION
+
+Week,Survey Responses,Avg Rating (1-5),NPS,Top Feedback Theme,Status
+Week 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Target,[FILL IN]
+Status,[FILL IN]
+
+TECHNICAL PERFORMANCE - SYSTEM RELIABILITY
+
+Week,Uptime %,Avg Response Time (ms),Error Rate %,Incidents,Status
+Week 1,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Week 4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+Target,[FILL IN]
+Status,[FILL IN]
+
+CUMULATIVE VALUE TRACKING
+
+Metric,Baseline,Target (Pilot End),Current Actual,% of Target Achieved,Projected Annual Value
+[FILL IN: Metric 1],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 2],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN: Metric 3],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+Total Value,,,,[FILL IN]
+
+Value Realization Status,[FILL IN: On Track/At Risk/Below Target]
+
+RISK & ISSUE LOG
+
+ID,Risk/Issue,Severity,Impact,Status,Owner,Mitigation/Resolution,Date Raised,Date Resolved
+1,[FILL IN],[FILL IN: H/M/L],[FILL IN],[FILL IN: Open/Closed],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+WEEKLY REVIEW CHECKLIST
+
+Task,Completed (Yes/No)
+All metrics updated with latest data,[FILL IN]
+Variance calculations verified,[FILL IN]
+Trends analyzed and documented,[FILL IN]
+Status colors updated,[FILL IN]
+Action items reviewed and updated,[FILL IN]
+New risks/issues logged,[FILL IN]
+Key highlights documented,[FILL IN]
+Stakeholders notified of any red/yellow status,[FILL IN]
+Dashboard shared with pilot team,[FILL IN]
+Next week's priorities identified,[FILL IN]
+
+STAKEHOLDER COMMUNICATION
+
+Weekly Update Recipients,Role
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+
+Escalation Path
+Yellow Status - Notify,[FILL IN]
+Red Status - Escalate to,[FILL IN]
+Critical Issues - Immediate escalation to,[FILL IN]

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM AI-First Transformation Playbook</title>
+    
+    <!-- Google Analytics 4 -->
+    <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C149TPQQS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Configure GA4 with your measurement ID
+        gtag('config', 'G-3C149TPQQS', {
+            'send_page_view': true,
+            'anonymize_ip': true  // Privacy: anonymize IP addresses
+        });
+    </script>
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/chatbot.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="site-shell">
+        <!-- Top Navigation -->
+        <header class="top-nav">
+            <div class="brand-lockup">
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor">
+                    <path d="M26 20h2v6h-2zM4 20h2v6H4zM16 4a4 4 0 1 1-4 4 4 4 0 0 1 4-4m0-2a6 6 0 1 0 6 6 6 6 0 0 0-6-6zM24 30H8a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zM8 16v12h16V16z"/>
+                    <circle cx="12" cy="22" r="2"/>
+                    <circle cx="20" cy="22" r="2"/>
+                </svg>
+                <span class="brand-title" id="brand-title">IBM AI-First Transformation Playbook</span>
+            </div>
+            <nav class="nav-links" id="nav-links">
+                <!-- Navigation will be dynamically generated -->
+            </nav>
+            <div class="search-container">
+                <input type="text" id="search-input" class="search-input" placeholder="Search playbook...">
+                <div id="search-results" class="search-results"></div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main id="main-content">
+            <!-- Content will be dynamically generated -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p id="footer-text">Created by Claire Liu and Alexandra Ko 2026</p>
+            <p class="subtext" id="footer-subtext">AIFT Domain Orchestration Team</p>
+        </footer>
+    </div>
+
+    <!-- AI Chatbot Assistant -->
+    <div class="chatbot-container">
+        <!-- Floating Chat Button -->
+        <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" aria-label="Open AI Assistant">
+            🤖
+        </button>
+
+        <!-- Chat Window -->
+        <div id="chatbot-window" class="chatbot-window">
+            <!-- Chat Header -->
+            <div class="chatbot-header">
+                <div class="chatbot-header-content">
+                    <div class="chatbot-avatar">🤖</div>
+                    <div>
+                        <h3 class="chatbot-title">AIFT Assistant</h3>
+                        <p class="chatbot-status">Online</p>
+                    </div>
+                </div>
+                <div class="chatbot-header-actions">
+                    <button id="chatbot-clear-btn" class="chatbot-header-btn" aria-label="Clear conversation" title="Clear conversation">
+                        🗑️
+                    </button>
+                    <button id="chatbot-close-btn" class="chatbot-header-btn" aria-label="Close chat" title="Close chat">
+                        ✕
+                    </button>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div id="chatbot-messages" class="chatbot-messages">
+                <!-- Messages will be dynamically added here -->
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chatbot-input-area">
+                <div class="chatbot-input-wrapper">
+                    <textarea
+                        id="chatbot-input"
+                        class="chatbot-input"
+                        placeholder="Ask me about AI transformation..."
+                        rows="1"
+                        aria-label="Message input"
+                    ></textarea>
+                    <button id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message">
+                        ➤
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js?v=20260622233500"></script>
+    <script src="config.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/analytics.js"></script>
+</body>
+</html>

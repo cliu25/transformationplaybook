@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Case Study Test</title>
+    <script>
+        // Test that case study data loads and has timeline
+        fetch('content_synced.json')
+            .then(r => r.json())
+            .then(data => {
+                console.log('=== CASE STUDY TEST ===');
+                console.log('Case Study Title:', data.caseStudy.title);
+                console.log('Number of Phases:', data.caseStudy.phases.length);
+                
+                data.caseStudy.phases.forEach((phase, i) => {
+                    console.log(`\nPhase ${i + 1}: ${phase.phaseName}`);
+                    console.log('  Has timeline:', !!phase.timeline);
+                    if (phase.timeline && phase.timeline.weeks) {
+                        console.log('  Number of weeks:', phase.timeline.weeks.length);
+                        phase.timeline.weeks.forEach(week => {
+                            console.log(`    Week ${week.num}: ${week.label}`);
+                            console.log(`      Actions: ${week.did ? week.did.length : 0}`);
+                            console.log(`      Docs: ${week.docs ? week.docs.length : 0}`);
+                            console.log(`      Has blocker: ${!!week.blocker}`);
+                        });
+                    }
+                });
+                
+                console.log('\n=== TEST COMPLETE ===');
+                document.body.innerHTML = '<h1>Check Console for Results</h1><p>Open browser console to see case study structure.</p>';
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                document.body.innerHTML = '<h1>Error</h1><p>' + err + '</p>';
+            });
+    </script>
+</head>
+<body>
+    <h1>Loading...</h1>
+</body>
+</html>

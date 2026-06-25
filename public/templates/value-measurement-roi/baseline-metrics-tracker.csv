@@ -1,0 +1,72 @@
+Baseline Metrics Tracker
+
+Project Name,[FILL IN]
+Domain/Business Unit,[FILL IN]
+Baseline Period,[FILL IN]
+Document Owner,[FILL IN]
+Last Updated,[FILL IN]
+
+METRIC INVENTORY
+
+Metric #,Metric Name,Metric Definition,Category,Current Baseline Value,Baseline Sample Size,Target Value,Target % Improvement,Source System,Data Collection Method,Measurement Frequency,Metric Owner,Finance/EBM Validation Status,Validated By,Validation Date,Notes/Assumptions
+1,[FILL IN],[FILL IN],[FILL IN: Efficiency/Quality/Cost/Customer Experience/Employee Experience],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN: Daily/Weekly/Monthly/Quarterly],[FILL IN],[FILL IN: Validated/Pending/Not Validated],[FILL IN],[FILL IN],[FILL IN]
+2,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+3,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+4,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+5,[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+SUMMARY DASHBOARD
+
+Metric Name,Baseline,Target,% Improvement,Validation Status
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+[FILL IN],[FILL IN],[FILL IN],[FILL IN],[FILL IN]
+
+DATA QUALITY ASSESSMENT
+
+Data Availability Checklist
+All required data sources are accessible,[FILL IN: Yes/No]
+Historical data is available for baseline period,[FILL IN: Yes/No]
+Data extraction process is documented,[FILL IN: Yes/No]
+Data refresh frequency is defined,[FILL IN: Yes/No]
+
+Data Reliability Checklist
+Data definitions are clear and consistent,[FILL IN: Yes/No]
+Data quality issues have been identified and documented,[FILL IN: Yes/No]
+Sample sizes are statistically significant,[FILL IN: Yes/No]
+Outliers have been reviewed and explained,[FILL IN: Yes/No]
+
+Data Governance Checklist
+Metric owners have been assigned,[FILL IN: Yes/No]
+Finance/EBM has validated baseline values,[FILL IN: Yes/No]
+Data access permissions are in place,[FILL IN: Yes/No]
+Privacy/compliance requirements are met,[FILL IN: Yes/No]
+
+VALIDATION SIGN-OFFS
+
+Role,Name,Date
+Domain Lead,[FILL IN],[FILL IN]
+Finance Partner,[FILL IN],[FILL IN]
+EBM Lead,[FILL IN],[FILL IN]
+Data Owner,[FILL IN],[FILL IN]
+
+APPENDIX - DATA SOURCES
+
+Metric Name,Data Source/Query
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+
+APPENDIX - BASELINE DATA FILES
+
+File Name,Location/Link
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
+
+APPENDIX - BENCHMARK RESEARCH
+
+Benchmark Source,Finding
+[FILL IN],[FILL IN]
+[FILL IN],[FILL IN]
