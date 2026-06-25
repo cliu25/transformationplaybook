@@ -147,14 +147,8 @@ a:hover {
   font-size: clamp(2.25rem, 5vw, 4rem);
   line-height: 1.08;
   font-weight: 300;
-  white-space: nowrap;
-  overflow: visible;
-}
-
-@media (max-width: 1200px) {
-  .hero h1 {
-    white-space: normal;
-  }
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 .hero p {
