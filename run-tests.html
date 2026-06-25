@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIFT Playbook v11 - Integration Tests</title>
+    <style>
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #161616;
+            margin-top: 0;
+        }
+        .test-frame {
+            width: 100%;
+            height: 600px;
+            border: 2px solid #e0e0e0;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .button-group {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            background: #0f62fe;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        button:hover {
+            background: #0353e9;
+        }
+        button.secondary {
+            background: #393939;
+        }
+        button.secondary:hover {
+            background: #262626;
+        }
+        .instructions {
+            background: #e5f6ff;
+            border-left: 4px solid #0f62fe;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .instructions h3 {
+            margin-top: 0;
+            color: #0353e9;
+        }
+        .instructions ol {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin: 8px 0;
+        }
+        #console-output {
+            background: #262626;
+            color: #f4f4f4;
+            padding: 20px;
+            border-radius: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            max-height: 400px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 20px 0;
+        }
+        .status {
+            padding: 10px 16px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-weight: 500;
+        }
+        .status.success {
+            background: #defbe6;
+            color: #0e6027;
+            border-left: 4px solid #24a148;
+        }
+        .status.warning {
+            background: #fff1f1;
+            color: #750e13;
+            border-left: 4px solid #da1e28;
+        }
+        .status.info {
+            background: #e5f6ff;
+            color: #001d6c;
+            border-left: 4px solid #0f62fe;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 AIFT Playbook v11 - Integration Testing</h1>
+        
+        <div class="instructions">
+            <h3>Testing Instructions</h3>
+            <ol>
+                <li><strong>Open Browser Console:</strong> Press F12 or Cmd+Option+I (Mac) to open Developer Tools</li>
+                <li><strong>Run Automated Tests:</strong> Click "Run Automated Tests" below</li>
+                <li><strong>Manual Testing:</strong> Use the iframe below to manually test features</li>
+                <li><strong>Check Results:</strong> Review test results in the console and below</li>
+            </ol>
+        </div>
+
+        <div class="button-group">
+            <button onclick="runAutomatedTests()">🚀 Run Automated Tests</button>
+            <button class="secondary" onclick="openInNewTab()">🔗 Open Site in New Tab</button>
+            <button class="secondary" onclick="clearConsole()">🗑️ Clear Console</button>
+            <button class="secondary" onclick="exportResults()">📥 Export Results</button>
+        </div>
+
+        <div id="status-message"></div>
+
+        <h2>Site Preview</h2>
+        <iframe id="test-frame" class="test-frame" src="index.html"></iframe>
+
+        <h2>Console Output</h2>
+        <div id="console-output">Waiting for tests to run...</div>
+    </div>
+
+    <script>
+        let testFrame = null;
+        let consoleOutput = document.getElementById('console-output');
+        let statusMessage = document.getElementById('status-message');
+
+        function showStatus(message, type = 'info') {
+            statusMessage.innerHTML = `<div class="status ${type}">${message}</div>`;
+        }
+
+        function clearConsole() {
+            consoleOutput.textContent = 'Console cleared. Ready for new tests.';
+            statusMessage.innerHTML = '';
+        }
+
+        function openInNewTab() {
+            window.open('index.html', '_blank');
+            showStatus('Site opened in new tab. Check browser console for test results.', 'info');
+        }
+
+        async function runAutomatedTests() {
+            showStatus('🔄 Running automated tests... Please wait.', 'info');
+            consoleOutput.textContent = 'Initializing tests...\n';
+            
+            testFrame = document.getElementById('test-frame');
+            
+            // Wait for iframe to load
+            await new Promise(resolve => {
+                if (testFrame.contentWindow.document.readyState === 'complete') {
+                    resolve();
+                } else {
+                    testFrame.onload = resolve;
+                }
+            });
+
+            // Inject test script into iframe
+            const script = testFrame.contentWindow.document.createElement('script');
+            script.src = 'test-integration.js';
+            testFrame.contentWindow.document.body.appendChild(script);
+
+            // Capture console output from iframe
+            const originalLog = testFrame.contentWindow.console.log;
+            const originalError = testFrame.contentWindow.console.error;
+            const originalWarn = testFrame.contentWindow.console.warn;
+
+            testFrame.contentWindow.console.log = function(...args) {
+                consoleOutput.textContent += args.join(' ') + '\n';
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                originalLog.apply(testFrame.contentWindow.console, args);
+            };
+
+            testFrame.contentWindow.console.error = function(...args) {
+                consoleOutput.textContent += '❌ ERROR: ' + args.join(' ') + '\n';
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                originalError.apply(testFrame.contentWindow.console, args);
+            };
+
+            testFrame.contentWindow.console.warn = function(...args) {
+                consoleOutput.textContent += '⚠️  WARN: ' + args.join(' ') + '\n';
+                consoleOutput.scrollTop = consoleOutput.scrollHeight;
+                originalWarn.apply(testFrame.contentWindow.console, args);
+            };
+
+            // Wait for tests to complete
+            setTimeout(() => {
+                const results = testFrame.contentWindow.testResults;
+                if (results) {
+                    const successRate = ((results.passed / results.tests.length) * 100).toFixed(1);
+                    if (results.failed === 0) {
+                        showStatus(`✅ All tests passed! Success rate: ${successRate}%`, 'success');
+                    } else {
+                        showStatus(`⚠️  ${results.failed} test(s) failed. Success rate: ${successRate}%`, 'warning');
+                    }
+                } else {
+                    showStatus('⚠️  Tests completed but results not available', 'warning');
+                }
+            }, 5000);
+        }
+
+        function exportResults() {
+            testFrame = document.getElementById('test-frame');
+            const results = testFrame?.contentWindow?.testResults;
+            
+            if (!results) {
+                alert('No test results available. Please run tests first.');
+                return;
+            }
+
+            const report = {
+                timestamp: new Date().toISOString(),
+                summary: {
+                    total: results.tests.length,
+                    passed: results.passed,
+                    failed: results.failed,
+                    warnings: results.warnings,
+                    successRate: ((results.passed / results.tests.length) * 100).toFixed(1) + '%'
+                },
+                tests: results.tests
+            };
+
+            const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `test-results-${Date.now()}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showStatus('📥 Test results exported successfully', 'success');
+        }
+
+        // Auto-run tests on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                showStatus('Ready to run tests. Click "Run Automated Tests" to begin.', 'info');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

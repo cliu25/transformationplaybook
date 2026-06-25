@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IBM AI-First Transformation Playbook — Overview</title>
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3C149TPQQS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3C149TPQQS');
+  </script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-60: #0f62fe;
+      --blue-10: #edf5ff;
+      --purple-60: #8a3ffc;
+      --purple-10: #f6f2ff;
+      --green-40: #24a148;
+      --green-10: #defbe6;
+      --text-primary: #161616;
+      --text-secondary: #525252;
+      --border-subtle: #e0e0e0;
+      --layer: #f4f4f4;
+      --inverse-bg: #161616;
+      --inverse-text: #ffffff;
+      --engage-color: #0f62fe;
+      --discover-color: #8a3ffc;
+      --execute-color: #24a148;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      color: var(--text-primary);
+      background: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .top-nav {
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      background: var(--inverse-bg);
+      color: var(--inverse-text);
+      border-bottom: 1px solid #393939;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .brand-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0 1rem;
+      min-width: 22rem;
+    }
+    .brand-title { font-size: 0.875rem; font-weight: 600; }
+    .nav-links { display: flex; height: 100%; }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 0 1rem;
+      color: #c6c6c6;
+      border-left: 1px solid #393939;
+      font-size: 0.875rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-link.active, .nav-link:hover {
+      background: #262626;
+      color: #fff;
+    }
+    .nav-link.active { color: #fff; border-bottom: 2px solid var(--blue-60); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 4rem 2rem 3rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #fff;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue-60);
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.08;
+      max-width: 52rem;
+      color: var(--text-primary);
+    }
+
+    .hero-desc {
+      margin-top: 1.5rem;
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 44rem;
+    }
+    .hero-meta {
+      margin-top: 2rem;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .hero-meta-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    .hero-meta-value {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    /* ── FRAMEWORK DIAGRAM ── */
+    .framework-section {
+      padding: 3rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--layer);
+    }
+    .framework-section > * {
+      max-width: 1800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .framework-section .framework-grid {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-size: 1.75rem;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+
+    /* Framework grid — mirrors the 3×2 playbook visual */
+    .framework-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border-subtle);
+      border-radius: 0;
+      background: #fff;
+      overflow: hidden;
+    }
+    .framework-phase-row {
+      display: grid;
+      grid-template-columns: 11rem 1fr 1fr;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .framework-phase-row:last-child { border-bottom: none; }
+
+    .phase-label-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+      border-right: 1px solid var(--border-subtle);
+      gap: 0.75rem;
+      background: #fff;
+    }
+    .phase-icon {
+      width: 3rem;
+      height: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phase-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-align: center;
+    }
+    .phase-name.engage  { color: var(--engage-color); }
+    .phase-name.discover { color: var(--discover-color); }
+    .phase-name.execute  { color: var(--execute-color); }
+
+    .step-cell {
+      padding: 1.75rem 1.5rem;
+      border-right: 1px solid var(--border-subtle);
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .step-cell:last-child { border-right: none; }
+    .step-cell:hover { background: var(--layer); }
+
+    .step-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.4rem;
+    }
+    .step-cell.engage  .step-number { color: var(--engage-color); }
+    .step-cell.discover .step-number { color: var(--discover-color); }
+    .step-cell.execute  .step-number { color: var(--execute-color); }
+
+    .step-name {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+    }
+    .step-timing {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.2rem 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border-radius: 999px;
+    }
+    .step-cell.engage  .step-timing { background: var(--blue-10); color: var(--engage-color); }
+    .step-cell.discover .step-timing { background: var(--purple-10); color: var(--discover-color); }
+    .step-cell.execute  .step-timing { background: var(--green-10); color: var(--execute-color); }
+
+    .repeatable-note {
+      margin-top: 1.25rem;
+      font-size: 0.875rem;
+      font-style: italic;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-left: 1rem;
+      border-left: 2px solid var(--border-subtle);
+    }
+
+    /* ── HOW IT FLOWS ── */
+    .flow-section {
+      padding: 3rem 2rem;
+      border-bottom: 1px solid var(--border-subtle);
+      background: #fff;
+    }
+    .flow-section > * {
+      max-width: 1800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .flow-diagram {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      margin-top: 2rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+    .flow-step {
+      flex: 1;
+      min-width: 9rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+    .flow-step-badge {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      z-index: 1;
+      position: relative;
+    }
+    .flow-connector {
+      flex: 0 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 1.25rem;
+    }
+    .flow-connector svg { color: var(--border-subtle); }
+    .flow-step-label {
+      margin-top: 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.3;
+      max-width: 8rem;
+    }
+    .flow-step-sub {
+      margin-top: 0.3rem;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.35;
+      max-width: 8rem;
+    }
+    .flow-step-line {
+      position: absolute;
+      top: 1.25rem;
+      left: 50%;
+      right: -50%;
+      height: 2px;
+      z-index: 0;
+    }
+
+    /* ── SIX STEPS NARRATIVE ── */
+    .steps-section {
+      padding: 0 0 3rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .steps-section-header {
+      padding: 3rem 2rem 2rem;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+
+    .step-narrative {
+      display: grid;
+      grid-template-columns: 16rem 1fr;
+      border-top: 1px solid var(--border-subtle);
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+    .step-narrative-sidebar {
+      padding: 2.5rem 1.5rem 2.5rem 2rem;
+      border-right: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 3rem;
+      align-self: start;
+    }
+    .step-narrative-number {
+      font-size: 3.5rem;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .step-narrative.engage  .step-narrative-number { color: var(--engage-color); }
+    .step-narrative.discover .step-narrative-number { color: var(--discover-color); }
+    .step-narrative.execute  .step-narrative-number { color: var(--execute-color); }
+    .step-narrative-phase-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.25rem;
+    }
+    .step-narrative.engage  .step-narrative-phase-tag { color: var(--engage-color); }
+    .step-narrative.discover .step-narrative-phase-tag { color: var(--discover-color); }
+    .step-narrative.execute  .step-narrative-phase-tag { color: var(--execute-color); }
+    .step-narrative-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+    .step-timing-sidebar {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1rem;
+    }
+    .step-timing-sidebar strong {
+      display: block;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .step-narrative-body {
+      padding: 2.5rem 2rem 2.5rem 2.5rem;
+      max-width: 1200px;
+    }
+    .step-narrative-body p {
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 1rem;
+      max-width: 100%;
+    }
+    .step-narrative-body p:last-child { margin-bottom: 0; }
+    .step-narrative-body strong { color: var(--text-primary); font-weight: 600; }
+
+    .handoff-block {
+      margin-top: 1.75rem;
+      padding: 1.25rem 1.5rem;
+      border-left: 3px solid var(--border-subtle);
+      background: var(--layer);
+      max-width: 52rem;
+    }
+    .handoff-block-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      margin-bottom: 0.6rem;
+    }
+    .handoff-block-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .handoff-item {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      line-height: 1.4;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .handoff-item::before {
+      content: '→';
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+    .step-narrative.engage  .handoff-block { border-left-color: var(--engage-color); }
+    .step-narrative.discover .handoff-block { border-left-color: var(--discover-color); }
+    .step-narrative.execute  .handoff-block { border-left-color: var(--execute-color); }
+
+    /* ── CTA BAND ── */
+    .cta-band {
+      padding: 3rem 2rem;
+      background: var(--inverse-bg);
+      color: var(--inverse-text);
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+      max-width: 1800px;
+      margin: 0 auto;
+    }
+    .cta-band-text { flex: 1; min-width: 18rem; }
+    .cta-band-text h2 {
+      font-size: 1.75rem;
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 0.75rem;
+    }
+    .cta-band-text p {
+      font-size: 1rem;
+      color: #c6c6c6;
+      line-height: 1.5;
+      max-width: 36rem;
+    }
+    .cta-band-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      border-radius: 0;
+      transition: background 0.15s, color 0.15s;
+    }
+    .cta-btn.primary { background: var(--blue-60); color: #fff; }
+    .cta-btn.primary:hover { background: #0353e9; }
+    .cta-btn.secondary { background: transparent; color: #fff; border: 1px solid #6f6f6f; }
+    .cta-btn.secondary:hover { background: #262626; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* ── UTILITIES ── */
+    @media (min-width: 1920px) {
+      .hero { padding: 5rem 4rem 4rem; }
+      .framework-section { padding: 4rem 4rem; }
+      .flow-section { padding: 4rem 4rem; }
+      .steps-section-header { padding: 4rem 4rem 3rem; }
+      .step-narrative-sidebar { padding: 3rem 2rem 3rem 4rem; }
+      .step-narrative-body { padding: 3rem 4rem 3rem 3rem; }
+      .cta-band { padding: 4rem 4rem; }
+    }
+    
+    @media (max-width: 768px) {
+      .framework-grid { overflow-x: auto; }
+      .framework-phase-row { grid-template-columns: 7rem 1fr 1fr; min-width: 36rem; }
+      .step-narrative { grid-template-columns: 1fr; }
+      .step-narrative-sidebar { position: static; border-right: none; border-bottom: 1px solid var(--border-subtle); padding: 1.5rem 1.25rem; }
+      .step-narrative-body { padding: 1.5rem 1.25rem; }
+      .cta-band { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<header class="top-nav">
+  <div class="brand-lockup">
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="white">
+      <path d="M26 20h2v6h-2zM4 20h2v6H4zM16 4a4 4 0 1 1-4 4 4 4 0 0 1 4-4m0-2a6 6 0 1 0 6 6 6 6 0 0 0-6-6zM24 30H8a2 2 0 0 1-2-2V16a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zM8 16v12h16V16z"/>
+      <circle cx="12" cy="22" r="2"/><circle cx="20" cy="22" r="2"/>
+    </svg>
+    <span class="brand-title">IBM AI-First Transformation Playbook</span>
+  </div>
+  <nav class="nav-links">
+    <a class="nav-link active" href="#">Overview</a>
+    <a class="nav-link" href="#">End-to-End Workflow</a>
+    <a class="nav-link" href="#">Key Challenges</a>
+    <a class="nav-link" href="#">Case Study</a>
+    <a class="nav-link" href="#">Library</a>
+  </nav>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1a6 6 0 1 1 0 12A6 6 0 0 1 8 2zm-.5 4.5h1v5h-1zm0-2h1v1h-1z"/></svg>
+    IBM AI-First Transformation
+  </div>
+  <h1>IBM AI-First Transformation Playbook</h1>
+  <p class="hero-desc">You've been asked to transform a workflow with AI. Everything you need to do it is here.</p>
+  <p class="hero-desc" style="margin-top:1rem;">Follow the <strong>End-to-End Workflow</strong> as your step-by-step guide from start to finish. Use the <strong>Key Challenges</strong> for focused how-to guidance on the five hardest parts — proving value, choosing what to build, integrating systems, driving adoption, and governance. See the <strong>Case Study</strong> for the whole journey on a real example, and pull ready-to-use templates from the <strong>Library</strong>.</p>
+</section>
+
+<!-- ── FRAMEWORK OVERVIEW ── -->
+<section class="framework-section">
+  <p class="section-label">The Framework</p>
+  <h2 class="section-title">Three phases. Six steps. One repeatable method.</h2>
+  <p class="section-desc">The transformation unfolds in three phases — Engage, Discover, Execute — each containing two steps. The approach is explicitly repeatable: apply it workflow by workflow, domain by domain, until AI-first operations become the default.</p>
+
+  <div class="framework-grid">
+
+    <!-- ENGAGE ROW -->
+    <div class="framework-phase-row">
+      <div class="phase-label-cell">
+        <!-- Engage icon: people -->
+        <div class="phase-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="18" cy="16" r="6" stroke="#0f62fe" stroke-width="2" fill="none"/>
+            <circle cx="32" cy="16" r="6" stroke="#0f62fe" stroke-width="2" fill="none"/>
+            <path d="M6 38c0-6.627 5.373-12 12-12h12c6.627 0 12 5.373 12 12" stroke="#0f62fe" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="phase-name engage">Engage</span>
+      </div>
+      <div class="step-cell engage">
+        <div class="step-number">Step 1</div>
+        <div class="step-name">Technology &amp; Data Foundations Assessment</div>
+        <p class="step-desc">Establish a baseline of technology and data AI-readiness across the domain. Confirm sponsorship, team structure, and go/no-go before committing to workflow analysis.</p>
+        <span class="step-timing">Upfront</span>
+      </div>
+      <div class="step-cell engage">
+        <div class="step-number">Step 2</div>
+        <div class="step-name">Business Process Mapping</div>
+        <p class="step-desc">Define business processes and associated value to determine where to focus. Identify candidate workflows and build the business case for transformation.</p>
+        <span class="step-timing">Upfront</span>
+      </div>
+    </div>
+
+    <!-- DISCOVER ROW -->
+    <div class="framework-phase-row">
+      <div class="phase-label-cell">
+        <!-- Discover icon: lightbulb -->
+        <div class="phase-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 8C17.373 8 12 13.373 12 20c0 4.418 2.39 8.27 5.938 10.414V34h12.124v-3.586C33.61 28.27 36 24.418 36 20c0-6.627-5.373-12-12-12z" stroke="#8a3ffc" stroke-width="2" fill="none"/>
+            <path d="M18 38h12M20 42h8" stroke="#8a3ffc" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="phase-name discover">Discover</span>
+      </div>
+      <div class="step-cell discover">
+        <div class="step-number">Step 3</div>
+        <div class="step-name">Workflow Analysis</div>
+        <p class="step-desc">Analyze domain-specific workflows to identify the highest-impact opportunities. Score and prioritize candidates, select the MVP target, and lock metrics and baselines.</p>
+        <span class="step-timing">2 weeks / workflow</span>
+      </div>
+      <div class="step-cell discover">
+        <div class="step-number">Step 4</div>
+        <div class="step-name">Solution Design</div>
+        <p class="step-desc">Align on the problem statement and design a blank-slate AI solution with an eye to scale. Define MVP scope, create build-ready requirements, and prepare for build kickoff.</p>
+        <span class="step-timing">2 weeks / workflow</span>
+      </div>
+    </div>
+
+    <!-- EXECUTE ROW -->
+    <div class="framework-phase-row">
+      <div class="phase-label-cell">
+        <!-- Execute icon: bar chart / rocket -->
+        <div class="phase-icon">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="28" width="8" height="14" stroke="#24a148" stroke-width="2" fill="none"/>
+            <rect x="20" y="20" width="8" height="22" stroke="#24a148" stroke-width="2" fill="none"/>
+            <rect x="32" y="10" width="8" height="32" stroke="#24a148" stroke-width="2" fill="none"/>
+            <path d="M8 24L24 10l16-4" stroke="#24a148" stroke-width="2" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <span class="phase-name execute">Execute</span>
+      </div>
+      <div class="step-cell execute">
+        <div class="step-number">Step 5</div>
+        <div class="step-name">Experimentation</div>
+        <p class="step-desc">Rapidly deploy an MVP, iterate in 2-week sprint cycles, and measure impact against baselines. Track value throughout the build — not just at the end.</p>
+        <span class="step-timing">90 days</span>
+      </div>
+      <div class="step-cell execute">
+        <div class="step-number">Step 6</div>
+        <div class="step-name">Scale &amp; Adopt</div>
+        <p class="step-desc">Implement the solution into live workflows, monitor for improvement, and drive the AI-first mindset across the domain. Hand off ownership and plan the next workflow.</p>
+        <span class="step-timing">Beyond</span>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="repeatable-note" style="margin-top:1.5rem;">The approach is explicitly repeatable — designed to be applied workflow by workflow, domain by domain, until AI-first operations become the organizational default rather than the exception.</p>
+</section>
+
+
+<!-- ── FLOW DIAGRAM ── -->
+<section class="flow-section">
+  <p class="section-label">How It Flows</p>
+  <h2 class="section-title">Each step builds on the last.</h2>
+  <p class="section-desc">Nothing is thrown over the wall. Each step inherits a clear set of inputs from the step before and hands off a concrete package to the next. The arrows below show what travels between steps.</p>
+
+  <div style="overflow-x:auto; padding-bottom:0.5rem; margin-top:2rem;">
+    <svg viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" style="min-width:900px; width:100%; max-width:1400px; display:block;">
+      <!-- phase backgrounds -->
+      <rect x="0" y="0" width="300" height="220" fill="#edf5ff" rx="0"/>
+      <rect x="300" y="0" width="300" height="220" fill="#f6f2ff" rx="0"/>
+      <rect x="600" y="0" width="300" height="220" fill="#defbe6" rx="0"/>
+
+      <!-- phase labels -->
+      <text x="150" y="20" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="700" fill="#0f62fe" letter-spacing="1.5">ENGAGE</text>
+      <text x="450" y="20" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="700" fill="#8a3ffc" letter-spacing="1.5">DISCOVER</text>
+      <text x="750" y="20" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="10" font-weight="700" fill="#24a148" letter-spacing="1.5">EXECUTE</text>
+
+      <!-- vertical dividers -->
+      <line x1="300" y1="0" x2="300" y2="220" stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="600" y1="0" x2="600" y2="220" stroke="#e0e0e0" stroke-width="1"/>
+
+      <!-- step circles -->
+      <!-- S1 -->
+      <circle cx="75" cy="100" r="32" fill="#0f62fe"/>
+      <text x="75" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 1</text>
+      <text x="75" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Tech &amp; Data</text>
+      <text x="75" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Assessment</text>
+
+      <!-- S2 -->
+      <circle cx="225" cy="100" r="32" fill="#0f62fe"/>
+      <text x="225" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 2</text>
+      <text x="225" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Business</text>
+      <text x="225" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Process Mapping</text>
+
+      <!-- S3 -->
+      <circle cx="375" cy="100" r="32" fill="#8a3ffc"/>
+      <text x="375" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 3</text>
+      <text x="375" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Workflow</text>
+      <text x="375" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Analysis</text>
+
+      <!-- S4 -->
+      <circle cx="525" cy="100" r="32" fill="#8a3ffc"/>
+      <text x="525" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 4</text>
+      <text x="525" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Solution</text>
+      <text x="525" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Design</text>
+
+      <!-- S5 -->
+      <circle cx="675" cy="100" r="32" fill="#24a148"/>
+      <text x="675" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 5</text>
+      <text x="675" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Experi-</text>
+      <text x="675" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">mentation</text>
+
+      <!-- S6 -->
+      <circle cx="825" cy="100" r="32" fill="#24a148"/>
+      <text x="825" y="94" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="white" font-weight="700">STEP 6</text>
+      <text x="825" y="106" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Scale &amp;</text>
+      <text x="825" y="116" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="white">Adopt</text>
+
+      <!-- arrows between steps -->
+      <!-- S1→S2 -->
+      <line x1="107" y1="100" x2="193" y2="100" stroke="#0f62fe" stroke-width="1.5" marker-end="url(#arrowBlue)"/>
+      <!-- S2→S3 -->
+      <line x1="257" y1="100" x2="343" y2="100" stroke="#6f6f6f" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
+      <!-- S3→S4 -->
+      <line x1="407" y1="100" x2="493" y2="100" stroke="#8a3ffc" stroke-width="1.5" marker-end="url(#arrowPurple)"/>
+      <!-- S4→S5 -->
+      <line x1="557" y1="100" x2="643" y2="100" stroke="#6f6f6f" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
+      <!-- S5→S6 -->
+      <line x1="707" y1="100" x2="793" y2="100" stroke="#24a148" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
+
+      <!-- handoff labels on arrows -->
+      <text x="150" y="89" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#0f62fe" font-weight="600">Readiness</text>
+      <text x="150" y="98" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#0f62fe" font-weight="600">scorecard</text>
+      <text x="300" y="89" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#6f6f6f">Prioritized</text>
+      <text x="300" y="98" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#6f6f6f">workflow list</text>
+      <text x="450" y="89" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#8a3ffc" font-weight="600">MVP workflow</text>
+      <text x="450" y="98" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#8a3ffc" font-weight="600">+ metrics baseline</text>
+      <text x="600" y="89" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#6f6f6f">Build-ready</text>
+      <text x="600" y="98" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#6f6f6f">requirements</text>
+      <text x="750" y="89" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#24a148" font-weight="600">Validated MVP</text>
+      <text x="750" y="98" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="7.5" fill="#24a148" font-weight="600">+ value proof</text>
+
+      <!-- marker defs -->
+      <defs>
+        <marker id="arrowBlue" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#0f62fe"/>
+        </marker>
+        <marker id="arrowPurple" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#8a3ffc"/>
+        </marker>
+        <marker id="arrowGreen" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#24a148"/>
+        </marker>
+        <marker id="arrowGrey" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#6f6f6f"/>
+        </marker>
+      </defs>
+
+      <!-- repeat arrow at end -->
+      <path d="M857 100 Q880 60 857 40 Q600 10 375 40 Q350 50 375 68" stroke="#6f6f6f" stroke-width="1.2" fill="none" stroke-dasharray="4 3" marker-end="url(#arrowGrey)"/>
+      <text x="630" y="18" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#6f6f6f" font-style="italic">repeat for next workflow</text>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ── SIX STEPS NARRATIVE ── -->
+<section class="steps-section">
+  <div class="steps-section-header">
+    <p class="section-label">The Six Steps</p>
+    <h2 class="section-title">What happens at each step.</h2>
+    <p class="section-desc">For each step: what you're walking in with, what you're doing, and what you're handing to the next team. Detailed activities, artifacts, and templates live in the End-to-End Workflow.</p>
+  </div>
+
+  <!-- Step 1 -->
+  <div class="step-narrative engage">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">01</div>
+      <div class="step-narrative-phase-tag">Engage</div>
+      <div class="step-narrative-name">Technology &amp; Data Foundations Assessment</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        Upfront — before committing to any workflow
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>Before a single workflow is analyzed, you need to know whether the domain is actually ready to build. This step is the foundation of everything: you're establishing whether the technology, data, and people needed for AI transformation exist in a usable form.</p>
+      <p>You'll assess the current state of <strong>data quality and accessibility</strong>, confirm what enterprise AI tools and platforms are available, identify integration constraints early (ARB requirements, data governance, IT dependencies), and form the project team with the right roles confirmed and committed — not just named.</p>
+      <p>Skipping or rushing this step is the single most common source of delays downstream. Teams that treat readiness as a formality often discover mid-build that their data isn't structured, their architect isn't available, or their tech stack doesn't support the approach they designed.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What you hand to Step 2</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Confirmed executive sponsor and project lead</div>
+          <div class="handoff-item">Technology &amp; data readiness scorecard</div>
+          <div class="handoff-item">Identified team roles (architect, product owner, change owner, value owner)</div>
+          <div class="handoff-item">Known integration constraints and platform access</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 2 -->
+  <div class="step-narrative engage">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">02</div>
+      <div class="step-narrative-phase-tag">Engage</div>
+      <div class="step-narrative-name">Business Process Mapping</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        Upfront — runs in parallel with Step 1
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>With a confirmed team and a sense of technical readiness, you turn to the business. This step maps the domain's processes end-to-end — not to document the status quo, but to find where AI would create the most impact.</p>
+      <p>You'll conduct <strong>workflow interviews with domain SMEs</strong>, build a map of key processes and their interdependencies, and begin quantifying the value associated with each. The output is a long list of candidate workflows, sized by effort and potential value, with an initial hypothesis about where to focus.</p>
+      <p>This is also where stakeholder alignment begins in earnest. You're not just mapping processes — you're building shared understanding of what transformation means for this domain, and starting to get executives invested in the outcome before major commitments are made.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What you hand to Step 3</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Mapped business processes with associated value estimates</div>
+          <div class="handoff-item">Long list of candidate workflows, prioritized by impact and feasibility</div>
+          <div class="handoff-item">Initial business case with sponsor buy-in</div>
+          <div class="handoff-item">Aligned stakeholders and a steering committee structure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3 -->
+  <div class="step-narrative discover">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">03</div>
+      <div class="step-narrative-phase-tag">Discover</div>
+      <div class="step-narrative-name">Workflow Analysis</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        ~2 weeks per workflow analyzed
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>You walk into this step with a list of candidates. You leave with a single, committed MVP workflow and the evidence to defend that choice to anyone who asks.</p>
+      <p>For each candidate workflow, you'll go deep: <strong>map the current state step-by-step</strong>, identify where AI specifically intervenes, quantify the before/after impact, assess the data and technical feasibility, and score it against a consistent rubric. This isn't theoretical — you're talking to the people who actually do the work today.</p>
+      <p>Critically, this is also where value metrics are born. The baseline measurement that will define success at launch has to be established now, when the current-state process still exists. Waiting until after the build means you have no baseline to compare against.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What you hand to Step 4</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Selected MVP workflow with scoring rationale</div>
+          <div class="handoff-item">Current-state process map (as-is workflow in detail)</div>
+          <div class="handoff-item">Confirmed value metrics and baseline measurements</div>
+          <div class="handoff-item">Data and integration feasibility confirmed with architect</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4 -->
+  <div class="step-narrative discover">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">04</div>
+      <div class="step-narrative-phase-tag">Discover</div>
+      <div class="step-narrative-name">Solution Design</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        ~2 weeks per workflow
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>You know the workflow. Now you design the solution. This step bridges business understanding and technical build — and it's where projects most commonly stumble. Requirements that look clear to a business analyst often turn out to be unbuildable.</p>
+      <p>The key output is <strong>build-ready requirements</strong>: specific enough that a developer can start without scheduling a clarification call. That means user personas, workflow redesign (the to-be state), data objects, system integrations, API contracts, error handling, and UAT criteria — all defined before a line of code is written.</p>
+      <p>MVP scope is also locked here. You're defining what's in 90 days and what goes on the post-launch backlog. A clear scope boundary, agreed by the executive sponsor, is what makes the 90-day sprint achievable and protects the team from scope creep.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What you hand to Step 5</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Build-ready requirements package (personas, to-be workflow, data objects, integrations)</div>
+          <div class="handoff-item">MVP scope definition with explicit out-of-scope list</div>
+          <div class="handoff-item">Technical architecture confirmed through ARB</div>
+          <div class="handoff-item">UAT criteria and change management plan started</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 5 -->
+  <div class="step-narrative execute">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">05</div>
+      <div class="step-narrative-phase-tag">Execute</div>
+      <div class="step-narrative-name">Experimentation</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        90-day sprint
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>The build begins. Working in 2-week sprint cycles, the team develops, tests, and iterates on the MVP solution. The steering committee meets weekly — not to receive status updates, but to surface blockers, make decisions, and keep the build on track.</p>
+      <p>Value tracking starts immediately. You're comparing actual outputs against the baseline you set in Step 3, adjusting where needed, and capturing early proof points that will support the scale decision. <strong>"Red on a chart is good"</strong> — the goal of the steering committee is transparency, not theater.</p>
+      <p>De-scoping decisions will happen here. That's not failure — it's the mechanism that makes 90-day delivery possible. A well-communicated de-scope, with a clear rationale and a post-MVP roadmap for what was cut, keeps executive confidence intact.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What you hand to Step 6</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Working MVP, tested and UAT-approved</div>
+          <div class="handoff-item">Value proof points vs. baseline (quantified)</div>
+          <div class="handoff-item">Technical handoff package: code repo, architecture, data documentation</div>
+          <div class="handoff-item">Post-MVP backlog and scale roadmap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 6 -->
+  <div class="step-narrative execute">
+    <div class="step-narrative-sidebar">
+      <div class="step-narrative-number">06</div>
+      <div class="step-narrative-phase-tag">Execute</div>
+      <div class="step-narrative-name">Scale &amp; Adopt</div>
+      <div class="step-timing-sidebar">
+        <strong>Timing</strong>
+        Beyond the 90-day sprint
+      </div>
+    </div>
+    <div class="step-narrative-body">
+      <p>Getting to MVP is not the end — it's the beginning of a new operating model. This step is about making the AI solution stick: deploying it into the live workflow, driving real adoption among the people who use it every day, and establishing who owns it after the project team steps back.</p>
+      <p>Ownership is the critical transition. You'll define <strong>business ownership</strong> (who manages prompts, content, and user support), <strong>technical ownership</strong> (who maintains infrastructure, models, and data pipelines), and a support model for when things break. An AI solution with no clear owner will degrade and be abandoned.</p>
+      <p>With one workflow transformed, you return to Step 3 — or even Step 2 — to select the next. The repeatable nature of this framework is what drives domain-wide transformation, not any single deployment.</p>
+      <div class="handoff-block">
+        <div class="handoff-block-title">What graduation looks like</div>
+        <div class="handoff-block-items">
+          <div class="handoff-item">Solution live in production with real users</div>
+          <div class="handoff-item">Business and technical ownership formally transferred</div>
+          <div class="handoff-item">Value tracking running in EBM / reporting system</div>
+          <div class="handoff-item">Next workflow on the roadmap</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── CTA BAND ── -->
+<section class="cta-band">
+  <div class="cta-band-text">
+    <h2>Ready to start your transformation?</h2>
+    <p>The End-to-End Workflow walks through every step in detail — activities, artifacts, readiness checklists, and pitfalls. Open it when you're ready to go deep on any step.</p>
+  </div>
+  <div class="cta-band-links">
+    <a class="cta-btn primary" href="/workflow">End-to-End Workflow →</a>
+    <a class="cta-btn secondary" href="/modules">Key Challenges</a>
+  </div>
+</section>
+
+<footer>
+  <p>Created by Claire Liu and Alexandra Ko 2026 &nbsp;·&nbsp; AIFT Domain Orchestration Team</p>
+</footer>
+
+</body>
+</html>

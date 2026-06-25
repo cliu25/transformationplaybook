@@ -4,7 +4,7 @@
 // Global state
 let content = null;
 let artifactInventory = null;
-let currentRoute = '/workflow';
+let currentRoute = '/overview';
 let openAccordions = {};
 let activeWorkflowTab = 'engage';
 let selectedModule = 'overview';
@@ -59,14 +59,18 @@ function initializeApp() {
     
     // Handle initial route
     const path = window.location.pathname;
-    if (path.includes('/modules')) {
+    if (path.includes('/overview')) {
+        navigateTo('/overview');
+    } else if (path.includes('/modules')) {
         navigateTo('/modules');
     } else if (path.includes('/library')) {
         navigateTo('/library');
     } else if (path.includes('/case-study')) {
         navigateTo('/case-study');
-    } else {
+    } else if (path.includes('/workflow')) {
         navigateTo('/workflow');
+    } else {
+        navigateTo('/overview');
     }
     
     // Handle browser back/forward
@@ -334,9 +338,10 @@ function handleSearchResultClick(index) {
 // Render navigation
 function renderNavigation() {
     const navLinks = document.getElementById('nav-links');
+    const homeIcon = `<svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" style="margin-right: 0.25rem; vertical-align: text-bottom;"><path d="M8 1L1 8h2v7h4V9h2v6h4V8h2L8 1z"/></svg>`;
     navLinks.innerHTML = content.navigation.map(item => `
         <a href="${item.route}" class="nav-link ${currentRoute === item.route ? 'active' : ''}" data-route="${item.route}">
-            ${item.label}
+            ${item.id === 'overview' ? homeIcon : ''}${item.label}
         </a>
     `).join('');
     
@@ -355,7 +360,7 @@ function navigateTo(route, pushState = true) {
     
     // Update navigation active state
     document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.toggle('active', link.dataset.route === route || (route === '/' && link.dataset.route === '/workflow'));
+        link.classList.toggle('active', link.dataset.route === route || (route === '/' && link.dataset.route === '/overview'));
     });
     
     // Update browser history
@@ -364,7 +369,9 @@ function navigateTo(route, pushState = true) {
     }
     
     // Render the appropriate page
-    if (route === '/' || route === '/workflow') {
+    if (route === '/overview') {
+        renderOverviewPage();
+    } else if (route === '/' || route === '/workflow') {
         renderWorkflowPage();
     } else if (route === '/modules') {
         renderModulesPage();
@@ -432,24 +439,56 @@ function renderFlowchart() {
     `;
 }
 
+async function renderOverviewPage() {
+    const main = document.getElementById('main-content');
+    const response = await fetch('overview.html');
+    const html = await response.text();
+    
+    // Parse the HTML
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    
+    // Extract and inject the inline styles from overview.html if not already present
+    const styleTag = doc.querySelector('style');
+    if (styleTag && !document.getElementById('overview-styles')) {
+        const newStyle = document.createElement('style');
+        newStyle.id = 'overview-styles';
+        newStyle.textContent = styleTag.textContent;
+        document.head.appendChild(newStyle);
+    }
+    
+    // Get all sections except header and footer
+    const sections = Array.from(doc.body.children).filter(el =>
+        el.tagName !== 'HEADER' && el.tagName !== 'FOOTER'
+    );
+    
+    // Build content from sections
+    const bodyContent = sections.map(el => el.outerHTML).join('\n');
+    main.innerHTML = bodyContent;
+    
+    // Wire all internal navigation links to the site router
+    main.querySelectorAll('a[href^="/"]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === '/workflow' || href === '/modules' || href === '/case-study' || href === '/library') {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigateTo(href);
+            });
+        }
+    });
+}
+
 function renderWorkflowPage() {
     const main = document.getElementById('main-content');
     
     main.innerHTML = `
-        <!-- Hero -->
         <section class="hero">
-            <h1>${content.meta.title}</h1>
-            <p style="line-height: 1.6; margin: 1.5rem 0 0 0; font-size: 1.125rem; word-wrap: break-word; overflow-wrap: break-word;">
-                You've been asked to transform a workflow with AI — everything you need is here.
-                Follow the <strong>End-to-End Workflow</strong> as your step-by-step guide from start to finish.
-                Use the <strong>Key Challenges</strong> for focused how-to guidance on the five hardest parts — proving value, choosing what to build, integrating systems, driving adoption, and governance.
-                See the <strong>Case Study</strong> for the whole journey on a real example, and pull ready-to-use templates from the <strong>Library</strong>.
-            </p>
+            <h1>${content.endToEndWorkflow.title}</h1>
+            <p>${content.endToEndWorkflow.description}</p>
         </section>
 
         <!-- Flowchart -->
         <section class="flow-panel">
-            <h2 class="flow-title">${content.endToEndWorkflow.flowchart.title}</h2>
             <div class="flow-row" id="flowchart-nodes">
                 ${renderFlowchart()}
             </div>
@@ -1170,11 +1209,12 @@ function renderCaseStudyPage() {
     const fileIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
     
     main.innerHTML = `
+        <section class="hero">
+            <h1>${caseStudy.title}</h1>
+            <p>${caseStudy.subtitle}</p>
+        </section>
+
         <div class="wrap">
-            <div class="eyebrow">Case Study · Worked Example</div>
-            <h1 class="case-title">${caseStudy.title}</h1>
-            <p class="case-sub">${caseStudy.subtitle}</p>
-            
             <div class="intro-grid">
                 <div class="panel">
                     <h3>Overview</h3>
