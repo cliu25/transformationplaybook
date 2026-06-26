@@ -1039,9 +1039,14 @@ function renderModuleDetail(module) {
                                                             if (typeof action === 'string') {
                                                                 actionText = action;
                                                                 description = '';
+                                                            } else if (action.title && action.description) {
+                                                                // New format: title goes in left column, description in right
+                                                                actionText = action.title;
+                                                                description = action.description;
                                                             } else {
+                                                                // Old format: description goes in left column
                                                                 actionText = action.description || action.title || '';
-                                                                description = action.description || '';
+                                                                description = '';
                                                             }
                                                             
                                                             return `
