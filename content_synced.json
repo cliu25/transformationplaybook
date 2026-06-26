@@ -106,11 +106,26 @@
         }
       ],
       "edges": [
-        ["step1", "step2"],
-        ["step2", "step3"],
-        ["step3", "step4"],
-        ["step4", "step5"],
-        ["step5", "step6"]
+        [
+          "step1",
+          "step2"
+        ],
+        [
+          "step2",
+          "step3"
+        ],
+        [
+          "step3",
+          "step4"
+        ],
+        [
+          "step4",
+          "step5"
+        ],
+        [
+          "step5",
+          "step6"
+        ]
       ]
     },
     "subsections": [
@@ -240,7 +255,7 @@
               {
                 "id": "staffing-raci-matrix",
                 "title": "Staffing/RACI Matrix",
-                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner — one Accountable per activity.",
                 "fileType": "Excel",
                 "priority": "Medium",
                 "exampleUrl": "",
@@ -453,7 +468,7 @@
               },
               {
                 "title": "Develop change management and adoption strategy",
-                "description": "Plan users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end. Prepare organization for adoption by addressing people, process, and capability gaps before launch, not after."
+                "description": "Plan users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end. Prepare organization for adoption by addressing people, process, and capability gaps before launch, not after."
               },
               {
                 "title": "Execute MVP Kick-Off",
@@ -596,7 +611,7 @@
               {
                 "id": "change-management-plan",
                 "title": "Change Management Plan",
-                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end.",
                 "fileType": "PPT",
                 "priority": "High",
                 "exampleUrl": "",
@@ -629,7 +644,7 @@
         "steps": [
           {
             "id": "build",
-            "name": "Build \u2014 Experimentation",
+            "name": "Build — Experimentation",
             "phaseGroup": "Execute",
             "color": "#24a148",
             "anchor": "#build",
@@ -639,7 +654,7 @@
             "keyActivities": [
               {
                 "title": "Execute 2-week iteration/demo/SteerCo cycle",
-                "description": "A standing weekly or bi-weekly meeting with the executive sponsor and cross-functional leaders. Progress updates in roadmap (preferably in APPTIO 'on the glass'). A live demo of progress (working output, not status slides), metrics against baseline, top blockers needing executive help, key decisions to make, and a RAID/risk review \u2014 run with a 'red is good' norm so problems surface early. Maintain momentum and transparency through regular demos and progress tracking, keeping stakeholders aligned and engaged."
+                "description": "A standing weekly or bi-weekly meeting with the executive sponsor and cross-functional leaders. Progress updates in roadmap (preferably in APPTIO 'on the glass'). A live demo of progress (working output, not status slides), metrics against baseline, top blockers needing executive help, key decisions to make, and a RAID/risk review — run with a 'red is good' norm so problems surface early. Maintain momentum and transparency through regular demos and progress tracking, keeping stakeholders aligned and engaged."
               },
               {
                 "title": "Plan and track MVP",
@@ -655,15 +670,15 @@
               },
               {
                 "title": "Verify requirements",
-                "description": "Go through the 90-day roadmap, MVP scope, and acceptance criteria and confirm every committed item is built, tested (UAT passed), and either done or formally de-scoped \u2014 nothing half-finished is being carried into production. A clear, evidence-backed confirmation that the MVP is genuinely finished against what was promised, so the scaling decision rests on a complete solution, not a partial one."
+                "description": "Go through the 90-day roadmap, MVP scope, and acceptance criteria and confirm every committed item is built, tested (UAT passed), and either done or formally de-scoped — nothing half-finished is being carried into production. A clear, evidence-backed confirmation that the MVP is genuinely finished against what was promised, so the scaling decision rests on a complete solution, not a partial one."
               },
               {
                 "title": "Confirm the metrics met their goals",
-                "description": "Compare the operational and business metrics against the baselines and targets set in Design. Confirm the solution actually moved the numbers it was supposed to \u2014 and where it fell short, document by how much and why. An honest read on whether the solution performed to target, giving leadership the hard evidence (not enthusiasm) needed to decide whether to scale, adjust, or stop."
+                "description": "Compare the operational and business metrics against the baselines and targets set in Design. Confirm the solution actually moved the numbers it was supposed to — and where it fell short, document by how much and why. An honest read on whether the solution performed to target, giving leadership the hard evidence (not enthusiasm) needed to decide whether to scale, adjust, or stop."
               },
               {
                 "title": "Validate that value was created",
-                "description": "With finance/EBM, confirm the realized value against the original business case \u2014 real time saved, cost removed, or revenue gained from actual usage \u2014 and check it against the payback threshold set up front. A finance-confirmed go/no-go to scale, grounded in proven value against the payback bar, which is what justifies further investment."
+                "description": "With finance/EBM, confirm the realized value against the original business case — real time saved, cost removed, or revenue gained from actual usage — and check it against the payback threshold set up front. A finance-confirmed go/no-go to scale, grounded in proven value against the payback bar, which is what justifies further investment."
               },
               {
                 "title": "Prepare Go/No-Go decision",
@@ -771,7 +786,7 @@
           },
           {
             "id": "sustain",
-            "name": "Sustain \u2014 Scale & Adopt",
+            "name": "Sustain — Scale & Adopt",
             "phaseGroup": "Execute",
             "color": "#24a148",
             "anchor": "#sustain",
@@ -910,7 +925,7 @@
               {
                 "id": "staffing-raci-matrix",
                 "title": "Staffing/RACI Matrix",
-                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner — one Accountable per activity.",
                 "fileType": "Excel",
                 "priority": "Medium",
                 "exampleUrl": "",
@@ -1280,7 +1295,7 @@
             "description": "Frame an initial value hypothesis and pick the benefit type before overbuilding any metric model.",
             "actions": [
               {
-                "description": "Select the value category (productivity, revenue, cost, risk) and draft a rough size of the prize. A directional value hypothesis that screens whether the opportunity is worth pursuing \u2014 without premature precision."
+                "description": "Select the value category (productivity, revenue, cost, risk) and draft a rough size of the prize. A directional value hypothesis that screens whether the opportunity is worth pursuing — without premature precision."
               },
               {
                 "description": "Identify a candidate baseline source and whether it can be measured meaningfully. Early warning on whether real measurement is even possible, so you avoid metrics you can't instrument later."
@@ -1331,25 +1346,25 @@
             "stepSubtext": "Analyze workflows & prioritize",
             "phaseGroup": "Discover",
             "relevance": "primary",
-            "description": "Lock the metrics and baselines before design \u2014 this is what the build optimizes toward.",
+            "description": "Lock the metrics and baselines before design — this is what the build optimizes toward.",
             "actions": [
               {
                 "description": "Define 3-5 leading metrics tied to the benefit type and capture the current baseline from source systems (not estimates). A measurable target the whole team aligns on before any solution is designed, preventing scope drift."
               },
               {
-                "description": "Decide how each metric will be captured \u2014 instrumented platform tracking preferred; surveys only as a weak fallback. A measurement approach that will survive executive scrutiny because it comes from a trusted, auditable source."
+                "description": "Decide how each metric will be captured — instrumented platform tracking preferred; surveys only as a weak fallback. A measurement approach that will survive executive scrutiny because it comes from a trusted, auditable source."
               },
               {
                 "description": "Where a tool is being replaced, set up an apples-to-apples before/after comparison of the same step inside the platform. Direct, credible evidence (e.g. \"30 min in the new tool vs 90 min in the old one\")."
               },
               {
-                "description": "Pick a metric that matches what your project is actually meant to improve \u2014 time, money earned, or money saved. If the goal is saving time, you measure how much faster a task gets done (e.g. 90 minutes down to 30). If it's earning money, you measure real results like more sales closed or more customers signed up. If it's cutting costs, you measure money you no longer spend. This keeps you honest \u2014 you're proving real value, not just \"people liked it.\""
+                "description": "Pick a metric that matches what your project is actually meant to improve — time, money earned, or money saved. If the goal is saving time, you measure how much faster a task gets done (e.g. 90 minutes down to 30). If it's earning money, you measure real results like more sales closed or more customers signed up. If it's cutting costs, you measure money you no longer spend. This keeps you honest — you're proving real value, not just \"people liked it.\""
               },
               {
-                "description": "Before building, agree how quickly the project needs to \"pay for itself\" \u2014 meaning the time, money, or savings it produces add up to more than it cost to build. Payback Threshold - A clear, objective bar for deciding later whether it's worth scaling. The common standard is that a solution should be on track to cover its own cost within about 12 months. Setting this up front means the scaling decision is based on numbers, not on whether the result \"feels\" successful."
+                "description": "Before building, agree how quickly the project needs to \"pay for itself\" — meaning the time, money, or savings it produces add up to more than it cost to build. Payback Threshold - A clear, objective bar for deciding later whether it's worth scaling. The common standard is that a solution should be on track to cover its own cost within about 12 months. Setting this up front means the scaling decision is based on numbers, not on whether the result \"feels\" successful."
               },
               {
-                "description": "Draft a lightweight business case that ties the project's savings to a real, hard number on the company's books \u2014 actual budget or overhead reduction, not a vague \"efficiency\" claim. A finance-approved business case that justifies the investment, because it's grounded in money the business can see on its balance sheet or in its operating costs."
+                "description": "Draft a lightweight business case that ties the project's savings to a real, hard number on the company's books — actual budget or overhead reduction, not a vague \"efficiency\" claim. A finance-approved business case that justifies the investment, because it's grounded in money the business can see on its balance sheet or in its operating costs."
               },
               {
                 "description": "Specify for each metric: name, baseline value, target value, source system, owner, and measurement cadence. Complete measurement strategy ready for implementation and tracking."
@@ -1382,7 +1397,7 @@
               "contact": "[Need to find transformation lead contact info]"
             },
             "whoToContact": "Finance/EBM lead to bless the baseline and targets; value owner",
-            "readyToAdvance": "You're ready to advance when 3\u20135 metrics, their baselines, their capture method, and a payback threshold are all agreed and signed off by finance."
+            "readyToAdvance": "You're ready to advance when 3–5 metrics, their baselines, their capture method, and a payback threshold are all agreed and signed off by finance."
           },
           {
             "stepId": "design",
@@ -1414,7 +1429,7 @@
           },
           {
             "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
+            "stepName": "Build — Experimentation",
             "stepSubtext": "Track value against baseline throughout the build, not just at the end.",
             "phaseGroup": "Execute",
             "relevance": "primary",
@@ -1430,13 +1445,13 @@
                 "description": "Adjust targets if baseline assumptions were wrong. Credible, realistic targets that maintain stakeholder confidence."
               },
               {
-                "description": "Don't wait for the tool to be polished \u2014 have real people use the early, rough version on their actual day-to-day work, and track how much time or effort it genuinely saves them. Real proof from real use, which is far more convincing than a projection or a guess. You can show \"this actually saved 40 minutes per task in practice,\" not \"we think it might help.\""
+                "description": "Don't wait for the tool to be polished — have real people use the early, rough version on their actual day-to-day work, and track how much time or effort it genuinely saves them. Real proof from real use, which is far more convincing than a projection or a guess. You can show \"this actually saved 40 minutes per task in practice,\" not \"we think it might help.\""
               },
               {
                 "description": "Document what's working and what's not for steering committee. Transparent value trajectory that enables informed decisions."
               },
               {
-                "description": "At the end of the trial period (about 90 days), make a clear recommendation \u2014 scale it up, change course, or stop \u2014 based on whether the results hit the payback target you set earlier. A keep-going-or-stop decision backed by real numbers instead of excitement. This discipline \u2014 only scaling what actually proved its value \u2014 is what separates the small minority of companies that get real returns from AI from the rest."
+                "description": "At the end of the trial period (about 90 days), make a clear recommendation — scale it up, change course, or stop — based on whether the results hit the payback target you set earlier. A keep-going-or-stop decision backed by real numbers instead of excitement. This discipline — only scaling what actually proved its value — is what separates the small minority of companies that get real returns from AI from the rest."
               }
             ],
             "checklist": [
@@ -1506,7 +1521,7 @@
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepName": "Sustain — Scale & Adopt",
             "stepSubtext": "Scale & sustain",
             "phaseGroup": "Execute",
             "relevance": "primary",
@@ -1516,7 +1531,7 @@
                 "description": "Monitor post-launch metrics through EBM dashboards or value tracking system. Continuous visibility into realized value and adoption progress."
               },
               {
-                "description": "After launch, compare the real results against the starting numbers you recorded, and have finance check and confirm those results are accurate. Finance-confirmed proof that the project delivered the savings or value it promised \u2014 which is what justifies continued investment and scaling it further."
+                "description": "After launch, compare the real results against the starting numbers you recorded, and have finance check and confirm those results are accurate. Finance-confirmed proof that the project delivered the savings or value it promised — which is what justifies continued investment and scaling it further."
               },
               {
                 "description": "Report actual vs. target metrics monthly to finance/EBM and into executive cadences. Sustained executive confidence and a reusable value story for the next domain."
@@ -1601,58 +1616,172 @@
       {
         "id": "prioritization-roadmap",
         "title": "Prioritization & Roadmap",
-        "definition": "Select workflow opportunities, scope realistic MVPs, sequence delivery, and maintain a scalable roadmap. This chapter helps domain leads move from a broad set of AI possibilities to a focused, sequenced delivery plan. The goal is not to build a perfect long-term roadmap; the goal is to make smart decisions about what to build first, what to defer, and when to pivot based on learning.",
+        "definition": "Domain leads who have a mandate and a rough idea but no clear path to their first workflow. This chapter walks from 'too many ideas' to a single, scoped, approved bet — and then from that bet through a 90-day roadmap that the build team can execute.",
         "color": "#8a3ffc",
         "route": "/modules/prioritization-roadmap",
         "phaseSections": [
           {
             "stepId": "assess",
             "stepName": "Assess",
-            "stepSubtext": "Assess readiness & value",
+            "stepSubtext": "Start with the inputs",
             "phaseGroup": "Engage",
             "relevance": "primary",
-            "description": "Frame the opportunity landscape and confirm it's worth deeper analysis.",
+            "description": "Before you can prioritize, you need two things that come out of the Engage phase: the tech & data readiness picture (which tells you where things can be built) and the business process map (which tells you where value should be built). Prioritization without both is either politically driven or technically naive — and usually both.",
+            "visualHtml": "<!-- Placeholder for Prioritization Scoring Matrix SVG -->",
             "actions": [
               {
-                "description": "Write one sentence describing the workflow's problem and roughly how much fixing it is worth. A clear, shareable framing that lets leadership sanity-check the opportunity before you spend time analyzing it. The rougher cost-of-the-problem number keeps you focused on workflows that are actually worth real money."
+                "title": "What you're doing",
+                "description": "Turn the outputs of Engage into a scored, comparable list of workflow candidates using a consistent prioritization framework. Apply objective criteria: value potential (cost base, impact on outputs), feasibility (data readiness, integration complexity, technical risk), and strategic fit (leadership priority, external benchmarks). Also surface things like unrealistic timelines and scope expectations early — this is when you correct them, not after the build has started."
               },
               {
-                "description": "Collect candidate ideas through one organized intake, not scattered vendor pitches or pet projects. A clean list of real candidates tied to business goals, instead of a pile of \"shiny AI\" ideas that don't move the needle."
-              },
-              {
-                "description": "For each candidate, check whether a leader actually cares about it and will back it. Early confidence that a candidate is real \u2014 if no senior person will sponsor it, that's a sign to drop it now."
+                "title": "The pain point",
+                "description": "Prioritization fails in predictable ways: teams gather impressions instead of data, then present recommendations that look like opinions to leaders who override them. Or they take on 'band-aid' projects that fix symptoms without addressing root causes. Or they scope something that couldn't realistically ship in 90 days and then miss the date."
               }
             ],
             "artifacts": [
               {
-                "id": "workflow-analysis-worksheet",
-                "title": "Workflow Analysis Worksheet",
-                "description": "Analyzes bottlenecks, manual work, decisions, user pain, volume, cycle time, technical dependencies, and the AI opportunity for candidate workflows.",
-                "fileType": "Visio",
-                "priority": "Medium",
-                "exampleUrl": "",
-                "templateUrl": "",
-                "hasExample": false,
-                "hasTemplate": false,
-                "opensInNewWindow": true
-              },
-              {
-                "id": "prioritization-matrix",
-                "title": "Prioritization Matrix",
-                "description": "Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.",
+                "id": "prioritization-framework",
+                "title": "Prioritization Framework",
+                "description": "Scoring rubric and benchmark comparison, completed for each candidate workflow.",
                 "fileType": "PPT",
-                "priority": "Medium",
+                "priority": "High",
                 "exampleUrl": "",
                 "templateUrl": "https://ibm.box.com/s/3zpisz74ju6se7cboqoljtb1etpqc4sq",
                 "hasExample": false,
                 "hasTemplate": true,
                 "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "stepId": "analyze",
+            "stepName": "Analyze",
+            "stepSubtext": "Workflow Analysis",
+            "phaseGroup": "Discover",
+            "relevance": "primary",
+            "description": "You've chosen a candidate. Now you go deep on it before designing anything. This is the step where you find out whether the opportunity is real or imagined — and whether the data, systems, and user behavior actually support the hypothesis you used to prioritize it.",
+            "visualHtml": "<!-- Placeholder for Go/No-Go Decision Gate SVG -->",
+            "actions": [
+              {
+                "title": "Gather",
+                "description": "Spend profile, skills inventory, KPI baseline, as-is process map, root causes of failure, external benchmarks from peer organizations. Talk directly to the people who do the work. The outside-in view (what does best-in-class look like?) prevents you from optimizing a broken process."
               },
               {
-                "id": "technical-dependency-assessment",
-                "title": "Technical Dependency Assessment",
-                "description": "",
+                "title": "The pain point",
+                "description": "The go/no-go decision is hard because everyone fears failure and no one wants to call a stop. Make it easier: be explicit with your SteerCo from day one that Workflow Analysis is a time-boxed exercise whose purpose is to validate or invalidate the opportunity. Book the go/no-go meeting before the analysis starts. Arrive at it with a clear recommendation and the evidence to back it up."
+              },
+              {
+                "title": "If no-go",
+                "description": "Document why, move to the next prioritized process. This is success, not failure."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "workflow-analysis-report",
+                "title": "Workflow Analysis Report",
+                "description": "Spend, skills, KPIs, as-is map, root causes, benchmarks.",
                 "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "workflow-analysis-outcome",
+                "title": "Workflow Analysis Outcome",
+                "description": "Go/no-go recommendation with reasoning.",
+                "fileType": "Word",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "stepId": "design",
+            "stepName": "Design",
+            "stepSubtext": "Solution Design",
+            "phaseGroup": "Discover",
+            "relevance": "primary",
+            "description": "With a validated opportunity and executive approval, define the north-star vision and scope the MVP. The north star is what the fully transformed workflow looks like — unconstrained, blank slate. The MVP is the smallest thing you can build in 90 days that meaningfully tests the core hypothesis.",
+            "actions": [
+              {
+                "title": "The pain point",
+                "description": "Poorly defined north star or requirements at this stage guarantee project failure downstream. Vague requirements produce vague software. The solution design output has to be specific enough that a developer can start without a clarification call. If it isn't, you're not done."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "high-level-requirements",
+                "title": "High-Level Requirements Document",
+                "description": "North star vision, MVP scope definition with explicit in/out list, build-vs-buy recommendation, target KPIs.",
+                "fileType": "Word",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ]
+          },
+          {
+            "stepId": "build",
+            "stepName": "Build — Experimentation",
+            "stepSubtext": "90-day sprint",
+            "phaseGroup": "Execute",
+            "relevance": "primary",
+            "description": "The team inherits the north star and requirements from Solution Design. Their first job — before writing a line of code — is to confirm they can deliver something to real users in 90 days that sufficiently tests the experimental hypothesis. They may need to spend time with the original designers to fully understand intent.",
+            "visualHtml": "<!-- Placeholder for 90-Day Sprint Timeline SVG -->",
+            "actions": [
+              {
+                "title": "The 90-day roadmap",
+                "description": "The 90-day roadmap is built from this scoping: bucket requirements into prioritized releases, confirm what the go/no-go operational metrics are, and get building. User engagement and feedback is not optional — plan for it from the start."
+              },
+              {
+                "title": "De-scope decisions",
+                "description": "De-scope decisions will happen. That's the mechanism that makes 90-day delivery possible, not a sign of failure. A well-communicated de-scope with a post-MVP backlog keeps executive confidence intact."
+              },
+              {
+                "title": "Go/no-go decision",
+                "description": "At the end of 90 days, the data either supports scaling or it doesn't. The decision should be made on the metrics defined before the build started, not on enthusiasm or organizational momentum. Document the reasoning either way."
+              }
+            ],
+            "artifacts": [
+              {
+                "id": "90-day-roadmap",
+                "title": "90-Day Sprint Roadmap",
+                "description": "Prioritized release plan with sprint cycles and deliverables.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "go-no-go-recommendation",
+                "title": "Go/No-Go Recommendation",
+                "description": "Decision with supporting metrics.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "post-mvp-backlog",
+                "title": "Post-MVP Backlog",
+                "description": "De-scoped items and future enhancements.",
+                "fileType": "Excel",
                 "priority": "Medium",
                 "exampleUrl": "",
                 "templateUrl": "",
@@ -1660,167 +1789,30 @@
                 "hasTemplate": false,
                 "opensInNewWindow": true
               }
-            ],
-            "commonPitfalls": [
-              "Starting from a solution (\"let's build a chatbot\") instead of a problem worth solving",
-              "Chasing an idea no leader has prioritized",
-              "Saying yes to too many projects at once"
-            ],
-            "whoToContact": "Domain executive sponsor for priority confirmation",
-            "readyToAdvance": "You're ready to advance when you have a short, screened list of candidate workflows \u2014 each with a clear problem, a rough sense of its value, and a real sponsor."
-          },
-          {
-            "stepId": "analyze",
-            "stepName": "Analyze",
-            "stepSubtext": "Analyze workflows & prioritize",
-            "phaseGroup": "Discover",
-            "relevance": "primary",
-            "description": "Compare the candidate workflows the same way, pick the one to build first, and write down why.",
-            "actions": [
-              {
-                "description": "Rate every candidate the same way \u2014 a simple 1\u20135 score on how much value it creates, how doable it is, whether the data exists, how risky it is, how strong its sponsor is, and how easily you can measure it. A side-by-side ranking everyone can see and agree on \u2014 clear enough to defend to a finance leader or auditor. Scoring them all the same way stops the loudest voice from winning."
-              },
-              {
-                "description": "Set a few hard requirements (for example: the data exists, someone owns it, the risk is acceptable) and drop or rework any candidate that fails one, instead of scoring it anyway. A shortlist with no doomed projects in it \u2014 the ones missing essentials are filtered out before they waste budget."
-              },
-              {
-                "description": "Back up the top scores with real evidence \u2014 actual data samples, system records, process maps \u2014 not just opinions. Scores grounded in reality, which surfaces shaky assumptions and unclear ownership early, while they're cheap to fix."
-              },
-              {
-                "description": "Pick the one workflow to build first and write down why it beat the others. A decision you can stand behind later \u2014 and revisit if circumstances change."
-              }
-            ],
-            "artifacts": [
-              {
-                "id": "mvp-scope-worksheet",
-                "title": "MVP Scope Worksheet",
-                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
-                "fileType": "Word",
-                "priority": "Low",
-                "exampleUrl": "",
-                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
-                "hasExample": false,
-                "hasTemplate": true,
-                "opensInNewWindow": true
-              },
-              {
-                "id": "strategic-roadmap",
-                "title": "Strategic Roadmap",
-                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
-                "fileType": "PPT",
-                "priority": "High",
-                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
-                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
-                "hasExample": true,
-                "hasTemplate": true,
-                "opensInNewWindow": true
-              }
-            ],
-            "commonPitfalls": [
-              "Judging only on value and ignoring whether it's actually doable",
-              "Keeping a candidate that's missing essentials instead of cutting it",
-              "Picking the exciting idea over the one that's ready to go"
-            ],
-            "whoToContact": "Workflow SMEs for feasibility input; cross-functional scoring group",
-            "readyToAdvance": "You're ready to advance when one workflow is chosen to build first, with a written reason it won, and the rest are parked or dropped."
-          },
-          {
-            "stepId": "design",
-            "stepName": "Design",
-            "stepSubtext": "Design the solution",
-            "phaseGroup": "Discover",
-            "relevance": "primary",
-            "description": "Keep the first version small and focused, and map out the path from there to full scale.",
-            "actions": [
-              {
-                "description": "Spell out exactly what the first version will and won't do, and keep it as small as possible while still being useful. A focused, testable first version that protects your timeline."
-              },
-              {
-                "description": "List the assumptions that would sink the project if they're wrong, rank them, and plan to test the scariest ones first. The biggest unknowns get checked early \u2014 while there's still time and budget to react \u2014 instead of blowing up late."
-              },
-              {
-                "description": "Lay out a rough 12\u201318 week plan: easy wins first, harder bets later, noting what depends on what. A sequence that builds the team's confidence and credibility with quick wins before tackling the hard, risky work."
-              },
-              {
-                "description": "Favor building pieces you can reuse later \u2014 shared connections, components, and design patterns. Compounding value: build something once and reuse it across the next workflows, instead of starting from scratch each time."
-              }
-            ],
-            "artifacts": [
-              {
-                "id": "mvp-scope-worksheet",
-                "title": "MVP Scope Worksheet",
-                "description": "Defines MVP boundaries: in-scope features, out-of-scope items, acceptance criteria, and assumptions.",
-                "fileType": "Word",
-                "priority": "Low",
-                "exampleUrl": "",
-                "templateUrl": "https://ibm-my.sharepoint.com/:w:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/01%20AI%20Fabric%20Workstreams/Data%20Foundations%20-%20Execution%20Team/PRD_MVP_S2P_Data_Supplier%20Brief_VT.docx?d=wd25afb83a6db4c028c344e5aad4907ac&csf=1&web=1&e=EuMrTR",
-                "hasExample": false,
-                "hasTemplate": true,
-                "opensInNewWindow": true
-              },
-              {
-                "id": "strategic-roadmap",
-                "title": "Strategic Roadmap",
-                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases.",
-                "fileType": "PPT",
-                "priority": "High",
-                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
-                "templateUrl": "https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Draft%20Seller%20Prod%20Project%20Roadmap.pptx?d=w9b667be3196544ce866af7b00fbc90bf&csf=1&web=1&e=f7cBZw",
-                "hasExample": true,
-                "hasTemplate": true,
-                "opensInNewWindow": true
-              }
-            ],
-            "commonPitfalls": [
-              "Everything becomes \"must have\"",
-              "No clear list of what's left out",
-              "A plan that ignores what depends on what",
-              "Building from scratch when a proven option already exists"
-            ],
-            "whoToContact": "Product owner for scope; architect for feasibility",
-            "example": {
-              "title": "\ud83d\udccb Example \u2014 Marketing (MCC): cutting scope was the right call",
-              "description": "A marketing domain team set out to transform a campaign workflow and initially scoped an ambitious AI agent to handle a large, complex piece of it. As they moved from the business vision into actual build requirements, the technical team kept hitting the same wall: the requirements were too conceptual to build from, and the target kept shifting as the business clarified what it wanted. Rather than push an under-defined, high-risk feature into the 90-day build and watch it slip, the team made a deliberate call to cut that agent from the first version and ship a smaller, well-defined scope they were confident they could deliver and measure.\n\nThe instructive part: leadership applauded the de-scope rather than treating it as a failure. It protected the timeline, kept the team focused on what was provably buildable, and left the ambitious piece on the backlog to revisit once the requirements were properly defined. The lesson for a domain leader: a smaller scope you can actually deliver beats a bigger one you can't \u2014 and naming that early, out loud, is a sign of a healthy transformation, not a weak one."
-            },
-            "readyToAdvance": "You're ready to advance when the first version is clearly scoped, the riskiest assumptions are ranked for testing, and you have a rough phased plan."
-          },
-          {
-            "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
-            "stepSubtext": "Build, experiment & test",
-            "phaseGroup": "Execute",
-            "relevance": "supporting",
-            "description": "Hold scope during the build and de-scope intelligently when reality demands.",
-            "actions": [
-              {
-                "description": "Review scope each sprint against the timeline and make fast, documented de-scope calls. The core MVP stays protected and on-track even when capacity or dependencies slip."
-              }
-            ],
-            "artifacts": [],
-            "commonPitfalls": [
-              "Silently dropping features instead of formally de-scoping",
-              "Letting a slipping dependency sink the whole MVP"
-            ],
-            "whoToContact": "Steering committee for de-scope sign-off"
+            ]
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
-            "stepSubtext": "Scale & sustain",
+            "stepName": "Sustain — Scale & Adopt",
+            "stepSubtext": "Post go/no-go",
             "phaseGroup": "Execute",
             "relevance": "supporting",
-            "description": "Plan the next releases so the transformation keeps compounding.",
-            "actions": [
+            "description": "Change management goes into high gear after go/no-go. Change management should have started earlier (impact assessment, comms planning, UAT users identified). After go/no-go, the plan accelerates: training, rollout, old-process retirement, adoption monitoring with continuous KPI assessment.",
+            "actions": [],
+            "artifacts": [
               {
-                "description": "Build the post-launch backlog and re-prioritize de-scoped items against new evidence. A living roadmap that turns one MVP into sustained, compounding value."
+                "id": "change-management-plan",
+                "title": "Change Management & Adoption Plan",
+                "description": "Training, rollout, monitoring, and KPI tracking.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
               }
-            ],
-            "artifacts": [],
-            "commonPitfalls": [
-              "Treating MVP as the finish line",
-              "Losing the backlog after graduation"
-            ],
-            "whoToContact": "Domain owner for backlog ownership"
+            ]
           }
         ]
       },
@@ -1890,7 +1882,7 @@
                 "description": "Map current systems, applications, data flows, and integration points for the workflow. A clear technical baseline that exposes integration risk and constraints early."
               },
               {
-                "description": "Identify ARB, security, and data-pipeline needs up front. No late surprises \u2014 review and pipeline work is planned before the build clock starts."
+                "description": "Identify ARB, security, and data-pipeline needs up front. No late surprises — review and pipeline work is planned before the build clock starts."
               },
               {
                 "description": "Profile data quality and define the validation/cleaning the pipeline will need. A pipeline plan grounded in the data's real condition, not its assumed condition."
@@ -1962,7 +1954,7 @@
             "description": "Produce build-ready requirements and a deliberate tech-stack decision; prototype to unblock ambiguity.",
             "actions": [
               {
-                "description": "Write the PRD/requirements with persona, data objects, systems, acceptance criteria, and a fallback path. A package developers can build from directly \u2014 not 'too conceptual to build.'"
+                "description": "Write the PRD/requirements with persona, data objects, systems, acceptance criteria, and a fallback path. A package developers can build from directly — not 'too conceptual to build.'"
               },
               {
                 "description": "Select the tech stack by laying out options with pros/cons and making a go/no-go decision. A defensible architecture choice with the tradeoffs documented for later reference."
@@ -2022,7 +2014,7 @@
               }
             ],
             "commonPitfalls": [
-              "Requirements 'too conceptual to build from' \u2014 the #1 cause of delay",
+              "Requirements 'too conceptual to build from' — the #1 cause of delay",
               "Endless requirement discussion instead of a prototype",
               "Over-tuning models for an unclear use case"
             ],
@@ -2031,14 +2023,14 @@
           },
           {
             "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
+            "stepName": "Build — Experimentation",
             "stepSubtext": "Build, experiment & test",
             "phaseGroup": "Execute",
             "relevance": "primary",
             "description": "Build against the spec as a disciplined SDLC, validate data quality, and instrument everything.",
             "actions": [
               {
-                "description": "Build and integrate against approved requirements, validating data quality on real sources. A working MVP grounded in clean, real data \u2014 not assumptions."
+                "description": "Build and integrate against approved requirements, validating data quality on real sources. A working MVP grounded in clean, real data — not assumptions."
               },
               {
                 "description": "Add backend logging that captures result, satisfaction, and data accuracy per response. Concrete instrumentation that powers measurement and surfaces failure modes early."
@@ -2092,14 +2084,14 @@
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepName": "Sustain — Scale & Adopt",
             "stepSubtext": "Scale & sustain",
             "phaseGroup": "Execute",
             "relevance": "supporting",
             "description": "Hand off a complete technical package so the solution survives the transition.",
             "actions": [
               {
-                "description": "Transfer the code repo (documented, with test cases), architecture diagram, secrets/API keys, and data documentation. A technical owner who can actually run and maintain the solution \u2014 not just a named owner on paper."
+                "description": "Transfer the code repo (documented, with test cases), architecture diagram, secrets/API keys, and data documentation. A technical owner who can actually run and maintain the solution — not just a named owner on paper."
               },
               {
                 "description": "Change the owner in the system and document limitations, next steps, and data lineage. Clear accountability and a roadmap for the work still needed to fully productionize."
@@ -2159,13 +2151,13 @@
         "color": "#ff832b",
         "route": "/modules/adoption-change",
         "teamGuidance": {
-          "title": "\u2691 The Team You Need (for non-technical domain leaders)",
+          "title": "⚑ The Team You Need (for non-technical domain leaders)",
           "description": "The hardest part of starting is assembling the team, because a marketing or finance leader doesn't have these roles on staff. Who to pull in, and from where:",
           "roles": [
             {
               "role": "Executive Sponsor",
               "whatTheyDo": "Owns outcomes, provides air cover, chairs the steering committee.",
-              "whereToSource": "You, or your boss \u2014 confirm before kickoff."
+              "whereToSource": "You, or your boss — confirm before kickoff."
             },
             {
               "role": "Project Lead / Domain Focal",
@@ -2175,12 +2167,12 @@
             {
               "role": "Product Owner",
               "whatTheyDo": "Owns MVP scope, requirements, prioritization.",
-              "whereToSource": "Your domain \u2014 someone who knows the workflow deeply."
+              "whereToSource": "Your domain — someone who knows the workflow deeply."
             },
             {
               "role": "Technical Architect",
               "whatTheyDo": "Owns the tech spec, data pipeline, feasibility.",
-              "whereToSource": "Borrow from **IT / CIO org** \u2014 request early."
+              "whereToSource": "Borrow from **IT / CIO org** — request early."
             },
             {
               "role": "Value Owner",
@@ -2190,12 +2182,12 @@
             {
               "role": "Change Owner",
               "whatTheyDo": "Owns adoption, training, the staff transition.",
-              "whereToSource": "Your domain \u2014 a respected peer leader."
+              "whereToSource": "Your domain — a respected peer leader."
             },
             {
               "role": "Workflow SMEs",
               "whatTheyDo": "Frontline experts who know the real workflow and pain.",
-              "whereToSource": "Your domain \u2014 the people doing the work today."
+              "whereToSource": "Your domain — the people doing the work today."
             }
           ],
           "upwardPitch": "The upward pitch (to secure your sponsor): \"We're transforming [one workflow] to [measurable outcome] in ~90 days. I need [named borrowed roles] and a weekly 45-minute steering slot to clear blockers. The ask is small; the proof point is a Client-Zero example we can scale.\" Keep it to one paragraph."
@@ -2230,7 +2222,7 @@
             "description": "Re-envision the future-state process, not just the technology, and get leaders excited.",
             "actions": [
               {
-                "description": "Analyze the current process deeply and re-envision the end-to-end future state (steps people take, not just the tech). A future-state the team can build adoption around \u2014 avoiding the late scramble of 'what will people actually do with this?'"
+                "description": "Analyze the current process deeply and re-envision the end-to-end future state (steps people take, not just the tech). A future-state the team can build adoption around — avoiding the late scramble of 'what will people actually do with this?'"
               },
               {
                 "description": "Get leaders excited about the vision and the change. Top-down air cover that reinforces the bottom-up change effort."
@@ -2240,7 +2232,7 @@
               {
                 "id": "change-management-plan",
                 "title": "Change Management Plan",
-                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end.",
                 "fileType": "PPT",
                 "priority": "High",
                 "exampleUrl": "",
@@ -2251,7 +2243,7 @@
               }
             ],
             "commonPitfalls": [
-              "Insufficient upfront process analysis \u2014 the R2A gap",
+              "Insufficient upfront process analysis — the R2A gap",
               "Designing the tech without redesigning the work around it"
             ],
             "whoToContact": "Domain sponsor for leadership alignment",
@@ -2263,7 +2255,7 @@
             "stepSubtext": "Design the solution",
             "phaseGroup": "Discover",
             "relevance": "primary",
-            "description": "Plan adoption, UAT, communications, and enablement before the build \u2014 not at the end.",
+            "description": "Plan adoption, UAT, communications, and enablement before the build — not at the end.",
             "actions": [
               {
                 "description": "Map stakeholders (champions/neutral/resistant), recruit real UAT users, and plan the communications arc. An adoption plan ready to execute, with the right users engaged from the first sprint."
@@ -2276,7 +2268,7 @@
               {
                 "id": "change-management-plan",
                 "title": "Change Management Plan",
-                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end.",
                 "fileType": "PPT",
                 "priority": "High",
                 "exampleUrl": "",
@@ -2296,14 +2288,14 @@
           },
           {
             "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
+            "stepName": "Build — Experimentation",
             "stepSubtext": "Build, experiment & test",
             "phaseGroup": "Execute",
             "relevance": "primary",
             "description": "Drive trust and real usage during the build through continuous user feedback.",
             "actions": [
               {
-                "description": "Get a small group to use the imperfect MVP for real work \u2014 start with one area, then expand. A mindset shift from 'wait for polish' to real usage, which compounds into voluntary adoption."
+                "description": "Get a small group to use the imperfect MVP for real work — start with one area, then expand. A mindset shift from 'wait for polish' to real usage, which compounds into voluntary adoption."
               },
               {
                 "description": "Manage communications and leadership alignment, demoing real progress to build excitement. Sustained momentum and trust as the solution matures sprint over sprint."
@@ -2344,7 +2336,7 @@
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepName": "Sustain — Scale & Adopt",
             "stepSubtext": "Scale & sustain",
             "phaseGroup": "Execute",
             "relevance": "primary",
@@ -2409,7 +2401,7 @@
             "description": "Stand up the team, sponsorship, and governance before any build.",
             "actions": [
               {
-                "description": "Write the project charter, confirm the sponsor, and staff the team with a clear RACI. A ready team with one Accountable per activity \u2014 the precondition for a transformation that can succeed."
+                "description": "Write the project charter, confirm the sponsor, and staff the team with a clear RACI. A ready team with one Accountable per activity — the precondition for a transformation that can succeed."
               },
               {
                 "description": "Stand up the steering committee and open the RAID log on day one. Clear decision rights and a live risk register before the sprint clock starts."
@@ -2443,7 +2435,7 @@
               {
                 "id": "staffing-raci-matrix",
                 "title": "Staffing/RACI Matrix",
-                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner — one Accountable per activity.",
                 "fileType": "Excel",
                 "priority": "Medium",
                 "exampleUrl": "",
@@ -2466,7 +2458,7 @@
               }
             ],
             "commonPitfalls": [
-              "Starting the build before the team is ready \u2014 incurs debt",
+              "Starting the build before the team is ready — incurs debt",
               "Treating the project lead as a status reporter",
               "Vague ownership across functions"
             ],
@@ -2540,7 +2532,7 @@
           },
           {
             "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
+            "stepName": "Build — Experimentation",
             "stepSubtext": "Build, experiment & test",
             "phaseGroup": "Execute",
             "relevance": "supporting",
@@ -2622,14 +2614,14 @@
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepName": "Sustain — Scale & Adopt",
             "stepSubtext": "Scale & sustain",
             "phaseGroup": "Execute",
             "relevance": "primary",
             "description": "Graduate the solution with real ownership and sustainment, not just a demo.",
             "actions": [
               {
-                "description": "Complete the graduation checklist and confirm business, technical, content, and value owners by name. Named, committed owners and a support model \u2014 so the solution survives the handoff."
+                "description": "Complete the graduation checklist and confirm business, technical, content, and value owners by name. Named, committed owners and a support model — so the solution survives the handoff."
               },
               {
                 "description": "Hand over the RAID log and open risks to the ongoing governance cadence. Continuity of risk management beyond the project team."
@@ -2699,7 +2691,7 @@
             ],
             "commonPitfalls": [
               "Declaring done at the demo with no owner",
-              "Ambiguous graduation \u2014 many people still loosely involved",
+              "Ambiguous graduation — many people still loosely involved",
               "No support model, so the solution decays"
             ],
             "whoToContact": "Domain sponsor for sign-off; technical owner for support",
@@ -2786,7 +2778,7 @@
               {
                 "id": "staffing-raci-matrix",
                 "title": "Staffing/RACI Matrix",
-                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner \u2014 one Accountable per activity.",
+                "description": "Clarifies who does what across sponsor, domain focal, PM, product owner, architect, developers, change owner, and value owner — one Accountable per activity.",
                 "fileType": "Excel",
                 "priority": "Medium",
                 "exampleUrl": "",
@@ -2949,7 +2941,7 @@
               {
                 "id": "change-management-plan",
                 "title": "Change Management Plan",
-                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling \u2014 started early, not at the end.",
+                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end.",
                 "fileType": "PPT",
                 "priority": "High",
                 "exampleUrl": "",
@@ -2979,7 +2971,7 @@
         "steps": [
           {
             "stepId": "build",
-            "stepName": "Build \u2014 Experimentation",
+            "stepName": "Build — Experimentation",
             "stepSubtext": "Build, experiment & test the MVP",
             "deliverables": [
               {
@@ -3070,7 +3062,7 @@
           },
           {
             "stepId": "sustain",
-            "stepName": "Sustain \u2014 Scale & Adopt",
+            "stepName": "Sustain — Scale & Adopt",
             "stepSubtext": "Scale it & keep it running",
             "deliverables": [
               {
@@ -3167,9 +3159,9 @@
     "id": "case-study",
     "route": "/case-study",
     "title": "Happy path example: A University Transforms Student Enrollment",
-    "subtitle": "How a generic university applies the AIFT workflow to an enrollment and document-processing transformation \u2014 from identifying the opportunity to a scaled, sustained solution. Modeled on a widely cited higher-education AI transformation.",
-    "overview": "This worked example follows a mid-sized public university \u2014 call it State University \u2014 as it transforms its student enrollment and document-verification workflow. It is a non-software, easy-to-follow scenario: a university drowning in manual admissions paperwork and inconsistent outreach. The journey is modeled on a renowned higher-education AI transformation and reconstructed step-by-step to mirror a real IBM-style engagement. Templates referenced in each phase are blank starting points \u2014 not filled-in samples \u2014 so you can adapt them to your own domain. Friction points are included to show how a real team works through obstacles.",
-    "startingContext": "State University enrolls roughly 180,000 students across physical and online campuses. The enrollment team is overwhelmed: applications, transcripts, and required documents are processed by hand, creating bottlenecks that delay onboarding and frustrate prospective students. Outreach to prospects is scattershot \u2014 staff cannot tell which applicants are most likely to enroll, so effort is spread thin. University leadership has issued a mandate to modernize enrollment, but no specific AI use case has been chosen yet.",
+    "subtitle": "How a generic university applies the AIFT workflow to an enrollment and document-processing transformation — from identifying the opportunity to a scaled, sustained solution. Modeled on a widely cited higher-education AI transformation.",
+    "overview": "This worked example follows a mid-sized public university — call it State University — as it transforms its student enrollment and document-verification workflow. It is a non-software, easy-to-follow scenario: a university drowning in manual admissions paperwork and inconsistent outreach. The journey is modeled on a renowned higher-education AI transformation and reconstructed step-by-step to mirror a real IBM-style engagement. Templates referenced in each phase are blank starting points — not filled-in samples — so you can adapt them to your own domain. Friction points are included to show how a real team works through obstacles.",
+    "startingContext": "State University enrolls roughly 180,000 students across physical and online campuses. The enrollment team is overwhelmed: applications, transcripts, and required documents are processed by hand, creating bottlenecks that delay onboarding and frustrate prospective students. Outreach to prospects is scattershot — staff cannot tell which applicants are most likely to enroll, so effort is spread thin. University leadership has issued a mandate to modernize enrollment, but no specific AI use case has been chosen yet.",
     "keyPlayers": [
       "Executive Sponsor (VP of Enrollment)",
       "Project Lead (Enrollment Operations)",
@@ -3192,7 +3184,7 @@
           "Confirm the executive sponsor (VP of Enrollment) and secure air cover for the work.",
           "Name the project lead and stand up a cross-functional team (operations, IT, institutional research, enrollment staff).",
           "Run a current-state assessment of the enrollment domain: people, process, systems, data, and pain points.",
-          "Assess data readiness \u2014 are application, transcript, and interaction records accessible, owned, and usable?",
+          "Assess data readiness — are application, transcript, and interaction records accessible, owned, and usable?",
           "Gather the technology and architecture picture: systems of record, integrations, access constraints.",
           "Draft an initial business case tied to a measurable benefit (faster onboarding, staff hours saved).",
           "Open the RAID log and set up the steering committee and RACI before any build.",
@@ -3275,7 +3267,7 @@
           "Benchmark against peer universities to define what best-in-class enrollment performance looks like.",
           "Map the current (as-is) process for each candidate, capturing cycle time, volume, and manual effort.",
           "Score candidates on value, feasibility, data readiness, and adoption risk.",
-          "Select the MVP target \u2014 prospect outreach prioritization plus automated document verification \u2014 and document why it beat the alternatives.",
+          "Select the MVP target — prospect outreach prioritization plus automated document verification — and document why it beat the alternatives.",
           "Define baseline metrics and write an idea brief to secure executive approval to proceed."
         ],
         "documents": [
@@ -3303,7 +3295,7 @@
         ],
         "sideways": [
           {
-            "issue": "The most exciting idea \u2014 a fully conversational applicant assistant \u2014 turns out to depend on data the university doesn't cleanly hold yet.",
+            "issue": "The most exciting idea — a fully conversational applicant assistant — turns out to depend on data the university doesn't cleanly hold yet.",
             "howHandled": "Feasibility scoring surfaces the data gap early. The team moves the conversational assistant to the backlog and selects outreach prioritization + document verification, which use data that already exists. Keeping the MVP small protects the timeline."
           }
         ],
@@ -3325,7 +3317,7 @@
           "Re-envision the future-state workflow: how an applicant's documents get verified and how counselors are directed to high-propensity prospects.",
           "Decide build vs. buy for the underlying capability (e.g. partner platform vs. in-house).",
           "Write build-ready requirements with data objects, source systems, owners, and acceptance criteria.",
-          "Scope the 90-day MVP \u2014 explicitly in (document verification + an enrollment-propensity model) and explicitly out (full conversational assistant).",
+          "Scope the 90-day MVP — explicitly in (document verification + an enrollment-propensity model) and explicitly out (full conversational assistant).",
           "Force-rank the riskiest assumptions and plan to test them in the first 30 days.",
           "Confirm metrics and baselines with the value owner so the build optimizes for the right outcome.",
           "Stand up the operating cadence (standups, steering committee) and plan adoption, UAT users, and training.",
@@ -3370,7 +3362,7 @@
         ],
         "sideways": [
           {
-            "issue": "The first requirements draft is too high-level for IT to build from \u2014 'make outreach smarter' isn't actionable.",
+            "issue": "The first requirements draft is too high-level for IT to build from — 'make outreach smarter' isn't actionable.",
             "howHandled": "The product owner and architect rework it into a build-ready package: the propensity model's inputs, the data sources, acceptance criteria, a fallback for low-confidence predictions, and the telemetry to capture. IT signs off on the second pass."
           }
         ],
@@ -3386,15 +3378,15 @@
         "phaseGroup": "Execute",
         "phaseGroupId": "execute",
         "phaseName": "Build",
-        "mindset": "Does it actually work \u2014 and can we prove it before we scale?",
+        "mindset": "Does it actually work — and can we prove it before we scale?",
         "summary": "The team builds the MVP in sprints and experiments to prove feasibility. This is where data, platform, and integrations get stress-tested. Real counselors test it, value is measured against baseline, scope is protected by de-scoping, and a data-driven go/no-go decision is made.",
         "keyActions": [
           "Run the first 30 days as a Riskiest Assumptions Test: can the model predict enrollment propensity accurately on real data?",
           "Hold a 30-day debrief with the steering committee: pivot, continue, or stop.",
           "Build the MVP in 2-week sprints with weekly demos to the steering committee.",
-          "Validate data quality on real application and interaction records \u2014 don't assume it.",
+          "Validate data quality on real application and interaction records — don't assume it.",
           "Run UAT with real enrollment counselors, capturing result quality, satisfaction, and accuracy.",
-          "Track value against baseline throughout \u2014 verification time, outreach efficiency, onboarding speed.",
+          "Track value against baseline throughout — verification time, outreach efficiency, onboarding speed.",
           "De-scope lower-value features if needed to protect the core MVP and timeline.",
           "Prepare the go/no-go package with performance evidence for the scaling decision."
         ],
@@ -3451,17 +3443,17 @@
         ],
         "sideways": [
           {
-            "issue": "Early in the RAT, the enrollment-propensity model is barely better than guessing \u2014 data quality is worse than the readiness check suggested.",
-            "howHandled": "The team assigns a data owner, documents the specific quality issues, and adds a data-validation and cleaning step to the pipeline. After the fix, the model becomes roughly four times more accurate than random \u2014 strong enough to continue."
+            "issue": "Early in the RAT, the enrollment-propensity model is barely better than guessing — data quality is worse than the readiness check suggested.",
+            "howHandled": "The team assigns a data owner, documents the specific quality issues, and adds a data-validation and cleaning step to the pipeline. After the fix, the model becomes roughly four times more accurate than random — strong enough to continue."
           },
           {
             "issue": "Counselors are hesitant to trust the model's prospect rankings and keep working their old way.",
-            "howHandled": "The team adds explainability \u2014 why a prospect is ranked high, with the supporting signals \u2014 plus a feedback flag. Trust and usage climb in the next UAT round."
+            "howHandled": "The team adds explainability — why a prospect is ranked high, with the supporting signals — plus a feedback flag. Trust and usage climb in the next UAT round."
           }
         ],
         "takeaways": [
           "Test the riskiest assumption (here, data quality) before investing in the full build.",
-          "Real-user UAT and explainability drive trust \u2014 and trust drives adoption.",
+          "Real-user UAT and explainability drive trust — and trust drives adoption.",
           "Measure value against baseline continuously, not just at the end.",
           "De-scoping to protect the core MVP is a success behavior, not a failure."
         ]
@@ -3474,7 +3466,7 @@
         "mindset": "How do we make sure this lasts and spreads after the project team leaves?",
         "summary": "With the experiment proven, the team scales the solution and makes it durable: confirms named owners and a support model, validates realized value with finance, drives sustained adoption, and expands the pattern to more of the enrollment workflow.",
         "keyActions": [
-          "Complete the graduation checklist \u2014 the solution is ownership-ready, not just demo-complete.",
+          "Complete the graduation checklist — the solution is ownership-ready, not just demo-complete.",
           "Confirm named business, technical, content, and value owners for the long term.",
           "Stand up production infrastructure with monitoring, security, and support.",
           "Validate realized value with finance/institutional research against the original baseline.",
@@ -3522,12 +3514,12 @@
         ],
         "sideways": [
           {
-            "issue": "After launch, adoption plateaus \u2014 some counselors drift back to manual outreach because it's familiar.",
+            "issue": "After launch, adoption plateaus — some counselors drift back to manual outreach because it's familiar.",
             "howHandled": "The change owner routes all new prospect lists through the AI-prioritized workflow, runs office hours, names counselor champions, and shares wins. Adoption climbs and holds as staff see the time savings firsthand."
           }
         ],
         "takeaways": [
-          "Graduation means a named owner, a support model, and value tracking \u2014 not just a working demo.",
+          "Graduation means a named owner, a support model, and value tracking — not just a working demo.",
           "Validate realized value with finance so investment continues.",
           "Start small and expand the proven pattern rather than boiling the ocean.",
           "Capture the reusable pattern so the next department moves faster."

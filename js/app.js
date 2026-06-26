@@ -492,9 +492,31 @@ async function renderOverviewPage() {
         }
     });
 }
+// Blueprint SVG loader functions
+async function loadBlueprintSVG(viewNumber) {
+    const svgFiles = {
+        1: 'components/blueprints/view1-master-blueprint.svg',
+        2: 'components/blueprints/view2-roadmap.svg',
+        3: 'components/blueprints/view3-before.svg',
+        4: 'components/blueprints/view4-after.svg'
+    };
+    
+    try {
+        const response = await fetch(svgFiles[viewNumber]);
+        if (!response.ok) throw new Error(`Failed to load blueprint view ${viewNumber}`);
+        return await response.text();
+    } catch (error) {
+        console.error(`Error loading blueprint SVG view ${viewNumber}:`, error);
+        return `<p>Error loading blueprint diagram</p>`;
+    }
+}
 
-function renderWorkflowPage() {
+
+async function renderWorkflowPage() {
     const main = document.getElementById('main-content');
+    
+    // Load the master blueprint SVG
+    const blueprintSVG = await loadBlueprintSVG(1);
     
     main.innerHTML = `
         <section class="hero">
@@ -502,10 +524,10 @@ function renderWorkflowPage() {
             <p>${content.endToEndWorkflow.description}</p>
         </section>
 
-        <!-- Flowchart -->
+        <!-- Master Service Blueprint -->
         <section class="flow-panel">
-            <div class="flow-row" id="flowchart-nodes">
-                ${renderFlowchart()}
+            <div class="blueprint-container">
+                ${blueprintSVG}
             </div>
         </section>
 
@@ -798,13 +820,23 @@ function scrollToAnchor(anchor) {
 // MODULES PAGE
 // ============================================================================
 
-function renderModulesPage() {
+async function renderModulesPage() {
     const main = document.getElementById('main-content');
+    
+    // Load the transformation roadmap blueprint
+    const blueprintSVG = await loadBlueprintSVG(2);
     
     main.innerHTML = `
         <section class="hero">
             <h1>${content.modules.title}</h1>
             <p>${content.modules.description}</p>
+        </section>
+
+        <!-- Transformation Roadmap Blueprint -->
+        <section class="flow-panel">
+            <div class="blueprint-container">
+                ${blueprintSVG}
+            </div>
         </section>
 
         <!-- Module Navigation -->
@@ -862,13 +894,14 @@ function renderModuleContent() {
 function renderModuleDetail(module) {
     if (!module) return '';
 
-    // Define all workflow steps
+    // Define all workflow steps (6 steps)
     const allSteps = [
-        { id: 'assess', name: 'Assess', phaseGroup: 'Engage' },
-        { id: 'analyze', name: 'Analyze', phaseGroup: 'Discover' },
-        { id: 'design', name: 'Design', phaseGroup: 'Discover' },
-        { id: 'build', name: 'Build', phaseGroup: 'Execute' },
-        { id: 'sustain', name: 'Sustain', phaseGroup: 'Execute' }
+        { id: 'assess', name: 'Technology & Data Foundations Assessment', phaseGroup: 'Engage' },
+        { id: 'map', name: 'Business Process Mapping', phaseGroup: 'Engage' },
+        { id: 'analyze', name: 'Workflow Analysis', phaseGroup: 'Discover' },
+        { id: 'design', name: 'Solution Design', phaseGroup: 'Discover' },
+        { id: 'build', name: 'Experimentation', phaseGroup: 'Execute' },
+        { id: 'sustain', name: 'Scale & Adopt', phaseGroup: 'Execute' }
     ];
 
     // Get relevant step IDs from phaseSections (only primary and supporting-important)
@@ -983,6 +1016,12 @@ function renderModuleDetail(module) {
                                                 ${section.stepSubtext ? `<p class="step-subtext">${section.stepSubtext}</p>` : ''}
                                                 ${section.description ? `<p class="step-description">${section.description}</p>` : ''}
                                             </div>
+
+                                            ${section.visualHtml ? `
+                                                <div class="panel visual-panel">
+                                                    ${section.visualHtml}
+                                                </div>
+                                            ` : ''}
 
                                             ${section.actions && section.actions.length > 0 ? `
                                                 <div class="panel">
@@ -1297,7 +1336,7 @@ function renderCaseStudyPage() {
     }
 }
 
-function renderCaseStudyPhaseContent() {
+async function renderCaseStudyPhaseContent() {
     const container = document.getElementById('case-study-phase-content');
     const caseStudy = content.caseStudy;
     
@@ -1321,6 +1360,32 @@ function renderCaseStudyPhaseContent() {
             <div class="pp-mindset">"${phase.mindset}"</div>
             <p class="pp-summary">${phase.summary}</p>
     `;
+    
+    // Add blueprint for Analyze phase (View 3 - Before/Current State)
+    if (phase.phaseName && phase.phaseName.includes('Analyze')) {
+        const blueprintSVG = await loadBlueprintSVG(3);
+        html += `
+            <div class="block">
+                <div class="sec-label">Current State Process Map</div>
+                <div class="blueprint-container">
+                    ${blueprintSVG}
+                </div>
+            </div>
+        `;
+    }
+    
+    // Add blueprint for Design phase (View 4 - After/Future State)
+    if (phase.phaseName && phase.phaseName.includes('Design')) {
+        const blueprintSVG = await loadBlueprintSVG(4);
+        html += `
+            <div class="block">
+                <div class="sec-label">Future State Process Map (MVP)</div>
+                <div class="blueprint-container">
+                    ${blueprintSVG}
+                </div>
+            </div>
+        `;
+    }
     
     // ---- STEP-BY-STEP KEY ACTIONS ----
     if (phase.keyActions && phase.keyActions.length) {

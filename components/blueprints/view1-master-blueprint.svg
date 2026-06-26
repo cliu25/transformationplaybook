@@ -1,0 +1,176 @@
+    <svg viewBox="0 0 1120 720" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>AIFT transformation service blueprint</title>
+      <desc>Service blueprint across six steps with swimlanes for leadership, frontstage team, backstage technology, support processes, and evidence.</desc>
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- row label column -->
+      <rect x="0" y="0" width="150" height="720" fill="#f4f4f4"/>
+
+      <!-- phase header -->
+      <rect x="158" y="14" width="290" height="34" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="303" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#0043a4">ENGAGE</text>
+      <rect x="456" y="14" width="290" height="34" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="601" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#5c2eb8">DISCOVER</text>
+      <rect x="754" y="14" width="352" height="34" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="930" y="35" text-anchor="middle" font-size="14" font-weight="600" fill="#1a6b32">EXECUTE</text>
+
+      <!-- step labels -->
+      <text class="svg-text" x="232" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 1 · Assess</text>
+      <text class="svg-text" x="374" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 2 · Map</text>
+      <text class="svg-text" x="530" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 3 · Analyze</text>
+      <text class="svg-text" x="672" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 4 · Design</text>
+      <text class="svg-text" x="845" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 5 · Build</text>
+      <text class="svg-text" x="1015" y="64" text-anchor="middle" font-size="12" fill="#525252">Step 6 · Scale</text>
+      <line x1="158" y1="74" x2="1106" y2="74" stroke="#e0e0e0" stroke-width="0.5"/>
+
+      <!-- ── LEADERSHIP ROW ── -->
+      <text class="svg-text" x="75" y="112" text-anchor="middle" font-size="12" fill="#525252">Leadership</text>
+      <text class="svg-text" x="75" y="128" text-anchor="middle" font-size="12" fill="#525252">&amp; sponsor</text>
+      <rect x="158" y="84" width="148" height="64" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="232" y="110" text-anchor="middle" font-size="12" fill="#0043a4">Confirm mandate</text>
+      <text class="svg-text" x="232" y="126" text-anchor="middle" font-size="12" fill="#0043a4">&amp; secure sponsor</text>
+      <rect x="598" y="84" width="148" height="64" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="672" y="110" text-anchor="middle" font-size="12" fill="#5c2eb8">Approve MVP</text>
+      <text class="svg-text" x="672" y="126" text-anchor="middle" font-size="12" fill="#5c2eb8">scope &amp; budget</text>
+      <rect x="940" y="84" width="166" height="64" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="1023" y="110" text-anchor="middle" font-size="12" fill="#1a6b32">Go/no-go decision</text>
+      <text class="svg-text" x="1023" y="126" text-anchor="middle" font-size="12" fill="#1a6b32">on scaling</text>
+
+      <!-- line of interaction -->
+      <line x1="158" y1="166" x2="1106" y2="166" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
+      <text class="svg-text" x="150" y="166" text-anchor="end" font-size="11" fill="#6f6f6f">line of interaction</text>
+
+      <!-- ── FRONTSTAGE TEAM ── -->
+      <text class="svg-text" x="75" y="208" text-anchor="middle" font-size="12" fill="#525252">Frontstage</text>
+      <text class="svg-text" x="75" y="224" text-anchor="middle" font-size="12" fill="#525252">team</text>
+      <rect x="158" y="180" width="148" height="68" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="232" y="204" text-anchor="middle" font-size="12" fill="#0043a4">Stand up team</text>
+      <text class="svg-text" x="232" y="220" text-anchor="middle" font-size="12" fill="#0043a4">&amp; governance,</text>
+      <text class="svg-text" x="232" y="236" text-anchor="middle" font-size="12" fill="#0043a4">run interviews</text>
+      <rect x="314" y="180" width="134" height="68" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="381" y="204" text-anchor="middle" font-size="12" fill="#0043a4">Map processes,</text>
+      <text class="svg-text" x="381" y="220" text-anchor="middle" font-size="12" fill="#0043a4">score &amp; pick</text>
+      <text class="svg-text" x="381" y="236" text-anchor="middle" font-size="12" fill="#0043a4">priority workflow</text>
+      <rect x="456" y="180" width="134" height="68" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="523" y="204" text-anchor="middle" font-size="12" fill="#5c2eb8">Interview users,</text>
+      <text class="svg-text" x="523" y="220" text-anchor="middle" font-size="12" fill="#5c2eb8">map as-is,</text>
+      <text class="svg-text" x="523" y="236" text-anchor="middle" font-size="12" fill="#5c2eb8">benchmark</text>
+      <rect x="598" y="180" width="148" height="68" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="672" y="204" text-anchor="middle" font-size="12" fill="#5c2eb8">Design to-be,</text>
+      <text class="svg-text" x="672" y="220" text-anchor="middle" font-size="12" fill="#5c2eb8">scope MVP,</text>
+      <text class="svg-text" x="672" y="236" text-anchor="middle" font-size="12" fill="#5c2eb8">write reqs</text>
+      <rect x="754" y="180" width="166" height="68" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="837" y="204" text-anchor="middle" font-size="12" fill="#1a6b32">Run 2-wk sprints,</text>
+      <text class="svg-text" x="837" y="220" text-anchor="middle" font-size="12" fill="#1a6b32">demo &amp; measure</text>
+      <text class="svg-text" x="837" y="236" text-anchor="middle" font-size="12" fill="#1a6b32">vs. baseline</text>
+      <rect x="928" y="180" width="178" height="68" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="1017" y="204" text-anchor="middle" font-size="12" fill="#1a6b32">Roll out, train,</text>
+      <text class="svg-text" x="1017" y="220" text-anchor="middle" font-size="12" fill="#1a6b32">drive adoption</text>
+      <text class="svg-text" x="1017" y="236" text-anchor="middle" font-size="12" fill="#1a6b32">&amp; hand off</text>
+
+      <!-- frontstage flow arrows -->
+      <line x1="306" y1="214" x2="314" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="448" y1="214" x2="456" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="590" y1="214" x2="598" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="746" y1="214" x2="754" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+      <line x1="920" y1="214" x2="928" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+
+      <!-- line of visibility -->
+      <line x1="158" y1="266" x2="1106" y2="266" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
+      <text class="svg-text" x="150" y="266" text-anchor="end" font-size="11" fill="#6f6f6f">line of visibility</text>
+
+      <!-- ── BACKSTAGE TECH ── -->
+      <text class="svg-text" x="75" y="308" text-anchor="middle" font-size="12" fill="#525252">Backstage</text>
+      <text class="svg-text" x="75" y="324" text-anchor="middle" font-size="12" fill="#525252">tech &amp; data</text>
+      <rect x="158" y="280" width="148" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="232" y="306" text-anchor="middle" font-size="12" fill="#444441">Assess data &amp;</text>
+      <text class="svg-text" x="232" y="322" text-anchor="middle" font-size="12" fill="#444441">platform readiness</text>
+      <rect x="314" y="280" width="134" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="381" y="306" text-anchor="middle" font-size="12" fill="#444441">Tag data &amp;</text>
+      <text class="svg-text" x="381" y="322" text-anchor="middle" font-size="12" fill="#444441">flag complexity</text>
+      <rect x="456" y="280" width="134" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="523" y="306" text-anchor="middle" font-size="12" fill="#444441">Confirm data</text>
+      <text class="svg-text" x="523" y="322" text-anchor="middle" font-size="12" fill="#444441">access &amp; paths</text>
+      <rect x="598" y="280" width="148" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="672" y="306" text-anchor="middle" font-size="12" fill="#444441">Build-vs-buy,</text>
+      <text class="svg-text" x="672" y="322" text-anchor="middle" font-size="12" fill="#444441">ARB review</text>
+      <rect x="754" y="280" width="166" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="837" y="306" text-anchor="middle" font-size="12" fill="#444441">Develop, test,</text>
+      <text class="svg-text" x="837" y="322" text-anchor="middle" font-size="12" fill="#444441">UAT &amp; iterate</text>
+      <rect x="928" y="280" width="178" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="1017" y="306" text-anchor="middle" font-size="12" fill="#444441">Productionize,</text>
+      <text class="svg-text" x="1017" y="322" text-anchor="middle" font-size="12" fill="#444441">monitor &amp; support</text>
+
+      <!-- line of internal interaction -->
+      <line x1="158" y1="362" x2="1106" y2="362" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
+      <text class="svg-text" x="150" y="362" text-anchor="end" font-size="11" fill="#6f6f6f">line of internal interaction</text>
+
+      <!-- ── SUPPORT PROCESSES ── -->
+      <text class="svg-text" x="75" y="404" text-anchor="middle" font-size="12" fill="#525252">Support</text>
+      <text class="svg-text" x="75" y="420" text-anchor="middle" font-size="12" fill="#525252">processes</text>
+      <rect x="158" y="376" width="442" height="36" rx="5" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text class="svg-text" x="379" y="397" text-anchor="middle" font-size="12" fill="#525252">Steering committee · RAID log · weekly cadence · change management</text>
+      <rect x="608" y="376" width="498" height="36" rx="5" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text class="svg-text" x="857" y="397" text-anchor="middle" font-size="12" fill="#525252">AIFT governance · EBM value tracking · data &amp; model governance · watsonx / agent factory</text>
+
+      <!-- ── EVIDENCE ── -->
+      <line x1="158" y1="430" x2="1106" y2="430" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text class="svg-text" x="75" y="510" text-anchor="middle" font-size="12" fill="#525252">Evidence</text>
+      <text class="svg-text" x="75" y="526" text-anchor="middle" font-size="12" fill="#525252">/ artifacts</text>
+
+      <rect x="158" y="442" width="148" height="120" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="232" y="468" text-anchor="middle" font-size="12" fill="#0043a4">Readiness scorecard</text>
+      <text class="svg-text" x="232" y="490" text-anchor="middle" font-size="12" fill="#0043a4">Project charter / RACI</text>
+      <text class="svg-text" x="232" y="512" text-anchor="middle" font-size="12" fill="#0043a4">Business case</text>
+      <text class="svg-text" x="232" y="534" text-anchor="middle" font-size="12" fill="#0043a4">RAID log</text>
+
+      <rect x="314" y="442" width="134" height="120" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="381" y="468" text-anchor="middle" font-size="12" fill="#0043a4">Process inventory</text>
+      <text class="svg-text" x="381" y="490" text-anchor="middle" font-size="12" fill="#0043a4">Opportunity</text>
+      <text class="svg-text" x="381" y="506" text-anchor="middle" font-size="12" fill="#0043a4">sizing matrix</text>
+      <text class="svg-text" x="381" y="528" text-anchor="middle" font-size="12" fill="#0043a4">Prioritized WF list</text>
+
+      <rect x="456" y="442" width="134" height="120" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="523" y="468" text-anchor="middle" font-size="12" fill="#5c2eb8">As-is workflow map</text>
+      <text class="svg-text" x="523" y="490" text-anchor="middle" font-size="12" fill="#5c2eb8">Research findings</text>
+      <text class="svg-text" x="523" y="512" text-anchor="middle" font-size="12" fill="#5c2eb8">Value assessment</text>
+      <text class="svg-text" x="523" y="534" text-anchor="middle" font-size="12" fill="#5c2eb8">Baseline KPIs</text>
+
+      <rect x="598" y="442" width="148" height="120" rx="5" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="672" y="468" text-anchor="middle" font-size="12" fill="#5c2eb8">MVP design brief</text>
+      <text class="svg-text" x="672" y="490" text-anchor="middle" font-size="12" fill="#5c2eb8">End-state vision</text>
+      <text class="svg-text" x="672" y="512" text-anchor="middle" font-size="12" fill="#5c2eb8">Build-ready reqs</text>
+      <text class="svg-text" x="672" y="534" text-anchor="middle" font-size="12" fill="#5c2eb8">Change impact</text>
+
+      <rect x="754" y="442" width="166" height="120" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="837" y="468" text-anchor="middle" font-size="12" fill="#1a6b32">Deployed MVP</text>
+      <text class="svg-text" x="837" y="490" text-anchor="middle" font-size="12" fill="#1a6b32">KPI data vs. baseline</text>
+      <text class="svg-text" x="837" y="512" text-anchor="middle" font-size="12" fill="#1a6b32">Scaling</text>
+      <text class="svg-text" x="837" y="528" text-anchor="middle" font-size="12" fill="#1a6b32">recommendation</text>
+
+      <rect x="928" y="442" width="178" height="120" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="1017" y="468" text-anchor="middle" font-size="12" fill="#1a6b32">Production solution</text>
+      <text class="svg-text" x="1017" y="490" text-anchor="middle" font-size="12" fill="#1a6b32">ROI tracking infra</text>
+      <text class="svg-text" x="1017" y="512" text-anchor="middle" font-size="12" fill="#1a6b32">Training &amp; comms</text>
+      <text class="svg-text" x="1017" y="534" text-anchor="middle" font-size="12" fill="#1a6b32">Support model</text>
+
+      <!-- repeat loop -->
+      <line x1="1017" y1="562" x2="1017" y2="586" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
+      <path d="M1017 586 Q1017 612 523 612 Q523 612 523 564" fill="none" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#ar)"/>
+      <text class="svg-text" x="770" y="628" text-anchor="middle" font-size="12" fill="#6f6f6f" font-style="italic">Steps 3–6 repeat per workflow · Steps 1–2 are one-time foundations</text>
+
+      <!-- legend -->
+      <line x1="158" y1="654" x2="1106" y2="654" stroke="#e0e0e0" stroke-width="0.5"/>
+      <rect x="158" y="672" width="14" height="14" rx="3" fill="#e6f1fb" stroke="#0f62fe" stroke-width="0.5"/>
+      <text class="svg-text" x="178" y="683" font-size="12" fill="#525252">Engage</text>
+      <rect x="248" y="672" width="14" height="14" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text class="svg-text" x="268" y="683" font-size="12" fill="#525252">Discover</text>
+      <rect x="344" y="672" width="14" height="14" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text class="svg-text" x="364" y="683" font-size="12" fill="#525252">Execute</text>
+      <rect x="436" y="672" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="456" y="683" font-size="12" fill="#525252">Backstage / support</text>
+    </svg>

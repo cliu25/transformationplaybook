@@ -1,0 +1,85 @@
+    <svg viewBox="0 0 1120 560" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>State University enrollment current state process map</title>
+      <desc>As-is enrollment workflow with applicant, counselor, and IT systems swimlanes. Pain points marked in red.</desc>
+      <defs>
+        <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="150" height="500" fill="#f4f4f4"/>
+      <line x1="150" y1="180" x2="1106" y2="180" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="150" y1="340" x2="1106" y2="340" stroke="#e0e0e0" stroke-width="0.5"/>
+
+      <text class="svg-text" x="75" y="100" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+      <text class="svg-text" x="75" y="262" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+      <text class="svg-text" x="75" y="422" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">IT / systems</text>
+
+      <!-- applicant lane -->
+      <rect x="166" y="60" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="251" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text>
+      <text class="svg-text" x="251" y="100" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+      <line x1="336" y1="88" x2="360" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="362" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="452" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text>
+      <text class="svg-text" x="452" y="100" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+      <line x1="542" y1="88" x2="566" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="568" y="60" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="658" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Wait for review</text>
+      <text class="svg-text" x="658" y="100" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ 2–4 weeks typical</text>
+      <line x1="748" y1="88" x2="772" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="774" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="864" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text>
+      <text class="svg-text" x="864" y="100" text-anchor="middle" font-size="12" fill="#525252">Accept / decline / wait</text>
+
+      <!-- resubmit loop -->
+      <path d="M658 116 Q658 150 452 150 Q300 150 251 120" fill="none" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+      <text class="svg-text" x="455" y="165" text-anchor="middle" font-size="12" fill="#6f6f6f">Missing docs → manual email → resubmit</text>
+
+      <!-- counselor lane -->
+      <rect x="166" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="256" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Receive application</text>
+      <text class="svg-text" x="256" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Email / spreadsheet</text>
+      <line x1="346" y1="244" x2="370" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="372" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="462" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Verify documents</text>
+      <text class="svg-text" x="462" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Manual, one-by-one</text>
+      <line x1="552" y1="244" x2="576" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="578" y="216" width="190" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="673" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prioritize outreach</text>
+      <text class="svg-text" x="673" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Gut feel, no data</text>
+      <line x1="768" y1="244" x2="792" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+      <rect x="794" y="216" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="879" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text>
+      <text class="svg-text" x="879" y="256" text-anchor="middle" font-size="12" fill="#525252">Phone / email</text>
+
+      <!-- IT lane -->
+      <rect x="166" y="372" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="251" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Admissions CRM</text>
+      <text class="svg-text" x="251" y="412" text-anchor="middle" font-size="12" fill="#525252">Salesforce</text>
+      <rect x="362" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="452" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Document store</text>
+      <text class="svg-text" x="452" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Box / email, siloed</text>
+      <rect x="568" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="658" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prospect data</text>
+      <text class="svg-text" x="658" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Incomplete, stale</text>
+      <rect x="774" y="372" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="864" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text>
+      <text class="svg-text" x="864" y="412" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+
+      <!-- cross-lane connectors -->
+      <line x1="251" y1="116" x2="256" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+      <line x1="452" y1="116" x2="462" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+      <line x1="256" y1="272" x2="251" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+      <line x1="462" y1="272" x2="452" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+
+      <!-- legend + metrics -->
+      <rect x="166" y="450" width="14" height="14" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/>
+      <text class="svg-text" x="186" y="461" font-size="12" fill="#525252">Pain point / bottleneck</text>
+      <rect x="350" y="450" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="370" y="461" font-size="12" fill="#525252">Existing step</text>
+
+      <rect x="166" y="478" width="940" height="56" rx="5" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text class="svg-text" x="636" y="500" text-anchor="middle" font-size="12" fill="#525252">Baseline: avg document review 14 days · counselor capacity ~120 apps/mo · outreach conversion 8% · staff time on manual tasks 60%</text>
+      <text class="svg-text" x="636" y="520" text-anchor="middle" font-size="12" fill="#525252">~180,000 students · 4 candidate workflows: document verification · outreach · transcript evaluation · application processing</text>
+    </svg>

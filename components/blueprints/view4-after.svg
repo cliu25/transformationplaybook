@@ -1,0 +1,88 @@
+    <svg viewBox="0 0 1120 540" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>State University enrollment future state process map</title>
+      <desc>To-be enrollment workflow with AI document verification and propensity model interventions shown in teal, plus target metrics.</desc>
+      <defs>
+        <marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <rect x="0" y="0" width="150" height="480" fill="#f4f4f4"/>
+      <line x1="150" y1="170" x2="1106" y2="170" stroke="#e0e0e0" stroke-width="0.5"/>
+      <line x1="150" y1="320" x2="1106" y2="320" stroke="#e0e0e0" stroke-width="0.5"/>
+
+      <text class="svg-text" x="75" y="95" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+      <text class="svg-text" x="75" y="248" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+      <text class="svg-text" x="75" y="402" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">AI / systems</text>
+
+      <!-- applicant lane -->
+      <rect x="166" y="56" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="246" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text>
+      <text class="svg-text" x="246" y="96" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+      <line x1="326" y1="84" x2="350" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="352" y="56" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="437" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text>
+      <text class="svg-text" x="437" y="96" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+      <line x1="522" y1="84" x2="546" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="548" y="56" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/>
+      <text class="svg-text" x="643" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Auto-verification</text>
+      <text class="svg-text" x="643" y="96" text-anchor="middle" font-size="12" fill="#0f6e56">AI checks docs &lt; 2 hrs</text>
+      <line x1="738" y1="84" x2="762" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="764" y="56" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="854" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text>
+      <text class="svg-text" x="854" y="96" text-anchor="middle" font-size="12" fill="#525252">Faster, clearer status</text>
+
+      <!-- auto notification loop -->
+      <path d="M643 112 Q643 144 437 144 Q300 144 246 116" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+      <text class="svg-text" x="445" y="159" text-anchor="middle" font-size="12" fill="#0f6e56">Missing docs → auto-notification (same day)</text>
+
+      <!-- counselor lane -->
+      <rect x="166" y="206" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="251" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Review AI flags</text>
+      <text class="svg-text" x="251" y="246" text-anchor="middle" font-size="12" fill="#525252">Exceptions only</text>
+      <line x1="336" y1="234" x2="360" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="362" y="206" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/>
+      <text class="svg-text" x="457" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">AI prospect ranking</text>
+      <text class="svg-text" x="457" y="246" text-anchor="middle" font-size="12" fill="#0f6e56">Propensity + reasoning</text>
+      <line x1="552" y1="234" x2="576" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="578" y="206" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="668" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Prioritized outreach</text>
+      <text class="svg-text" x="668" y="246" text-anchor="middle" font-size="12" fill="#525252">High-value first</text>
+      <line x1="758" y1="234" x2="782" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+      <rect x="784" y="206" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="864" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text>
+      <text class="svg-text" x="864" y="246" text-anchor="middle" font-size="12" fill="#525252">Data-driven</text>
+
+      <!-- feedback loop -->
+      <path d="M668 262 Q668 296 457 296 Q360 296 457 264" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+      <text class="svg-text" x="520" y="311" text-anchor="middle" font-size="12" fill="#0f6e56">Counselor feedback → model improves</text>
+
+      <!-- AI/systems lane -->
+      <rect x="166" y="356" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/>
+      <text class="svg-text" x="261" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Doc verification AI</text>
+      <text class="svg-text" x="261" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">watsonx OCR + rules</text>
+      <rect x="382" y="356" width="200" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/>
+      <text class="svg-text" x="482" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Propensity model</text>
+      <text class="svg-text" x="482" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">ML on CRM + SIS data</text>
+      <rect x="608" y="356" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="693" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Salesforce CRM</text>
+      <text class="svg-text" x="693" y="396" text-anchor="middle" font-size="12" fill="#525252">Unified data source</text>
+      <rect x="804" y="356" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="884" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text>
+      <text class="svg-text" x="884" y="396" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+
+      <!-- cross-lane -->
+      <line x1="643" y1="112" x2="261" y2="356" stroke="#1d9e75" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+      <line x1="457" y1="262" x2="482" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+      <line x1="693" y1="262" x2="693" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+
+      <!-- legend + targets -->
+      <rect x="166" y="430" width="14" height="14" rx="3" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/>
+      <text class="svg-text" x="186" y="441" font-size="12" fill="#525252">AI-enabled step (new)</text>
+      <rect x="370" y="430" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
+      <text class="svg-text" x="390" y="441" font-size="12" fill="#525252">Existing step (unchanged)</text>
+
+      <rect x="166" y="458" width="940" height="56" rx="5" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text class="svg-text" x="636" y="480" text-anchor="middle" font-size="12" fill="#525252">Targets: document review &lt; 2 hrs (vs. 14 days) · counselor capacity +40% · outreach conversion 8% → 14% · manual task time 60% → 20%</text>
+      <text class="svg-text" x="636" y="500" text-anchor="middle" font-size="12" fill="#525252">MVP scope: document verification + outreach prioritization · Out of scope: full conversational assistant (backlogged)</text>
+    </svg>
