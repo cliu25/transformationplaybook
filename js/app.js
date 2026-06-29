@@ -878,8 +878,8 @@ async function renderModuleContent() {
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
     
     if (module) {
-        // Check if this is the Prioritization & Roadmap module or other narrative modules
-        if (module.id === 'prioritization-roadmap' || module.renderType === 'narrative') {
+        // Check if this is the Prioritization & Roadmap or Value Measurement & ROI module or other narrative modules
+        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.renderType === 'narrative') {
             await renderModuleDetail(module);
         } else {
             container.innerHTML = await renderModuleDetail(module);
@@ -1009,11 +1009,15 @@ async function renderNarrativeModule(module) {
 async function renderModuleDetail(module) {
     if (!module) return '';
 
-    // Check if this is the Prioritization & Roadmap module - load standalone HTML
-    if (module.id === 'prioritization-roadmap') {
+    // Check if this is the Prioritization & Roadmap or Value Measurement & ROI module - load standalone HTML
+    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi') {
         const container = document.getElementById('module-content');
         try {
-            const response = await fetch('prioritization_narrative (3).html');
+            // Determine which HTML file to load
+            const htmlFile = module.id === 'prioritization-roadmap'
+                ? 'prioritization_narrative (3).html'
+                : 'value-measurement-roi-narrative.html';
+            const response = await fetch(htmlFile);
             const html = await response.text();
             // Parse the HTML
             const parser = new DOMParser();
@@ -1054,7 +1058,7 @@ async function renderModuleDetail(module) {
             container.innerHTML = bodyContent;
             return;
         } catch (error) {
-            console.error('Error loading Prioritization & Roadmap HTML:', error);
+            console.error(`Error loading ${module.name} HTML:`, error);
             // Fall through to JSON rendering if file not found
         }
     }
