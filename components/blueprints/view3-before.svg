@@ -1,4 +1,4 @@
-    <svg viewBox="0 0 1120 560" role="img" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 1120 610" role="img" xmlns="http://www.w3.org/2000/svg">
       <title>State University enrollment current state process map</title>
       <desc>As-is enrollment workflow with applicant, counselor, and IT systems swimlanes. Pain points marked in red.</desc>
       <defs>
@@ -79,7 +79,16 @@
       <rect x="350" y="450" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
       <text class="svg-text" x="370" y="461" font-size="12" fill="#525252">Existing step</text>
 
-      <rect x="166" y="478" width="940" height="56" rx="5" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>
-      <text class="svg-text" x="636" y="500" text-anchor="middle" font-size="12" fill="#525252">Baseline: avg document review 14 days · counselor capacity ~120 apps/mo · outreach conversion 8% · staff time on manual tasks 60%</text>
-      <text class="svg-text" x="636" y="520" text-anchor="middle" font-size="12" fill="#525252">~180,000 students · 4 candidate workflows: document verification · outreach · transcript evaluation · application processing</text>
+      <!-- Baseline Metrics -->
+      <text class="svg-text" x="166" y="490" font-size="12" font-weight="600" fill="#161616">Baseline Metrics:</text>
+      <text class="svg-text" x="166" y="508" font-size="12" fill="#525252">• Avg document review: 14 days</text>
+      <text class="svg-text" x="166" y="524" font-size="12" fill="#525252">• Counselor capacity: ~120 apps/month</text>
+      <text class="svg-text" x="420" y="508" font-size="12" fill="#525252">• Outreach conversion: 8%</text>
+      <text class="svg-text" x="420" y="524" font-size="12" fill="#525252">• Staff time on manual tasks: 60%</text>
+      <text class="svg-text" x="700" y="508" font-size="12" fill="#525252">• Student population: ~180,000</text>
+      
+      <!-- Candidate Workflows Box -->
+      <rect x="166" y="540" width="940" height="56" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="1.5"/>
+      <text class="svg-text" x="636" y="560" text-anchor="middle" font-size="12" font-weight="600" fill="#0043a4">4 Candidate Workflows for AI Transformation:</text>
+      <text class="svg-text" x="636" y="580" text-anchor="middle" font-size="12" fill="#0043a4">Document Verification  •  Outreach Prioritization  •  Transcript Evaluation  •  Application Processing</text>
     </svg>

@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prioritization & Roadmap — Narrative Format</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
+  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
+  --amber:#ba7517; --amber-fill:#fdf4e3; --amber-dk:#633806;
+  --red:#da1e28; --red-fill:#fff1f1; --red-dk:#a32d2d;
+  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
+  --border:#e0e0e0; --layer:#f4f4f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;font-size:16px;}
+.page{max-width:780px;margin:0 auto;padding:0 1.5rem 6rem;}
+
+/* HEADER */
+.module-header{padding:3rem 0 2.5rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+.module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--purple);padding-left:1.25rem;}
+
+/* PHASE STRIP */
+.where-strip{display:flex;align-items:center;gap:.5rem;padding:1rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2.5rem;flex-wrap:wrap;}
+.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
+.step-pip{padding:.25rem .625rem;border-radius:2rem;font-size:.75rem;font-weight:500;border:1px solid var(--border);color:var(--text-3);background:#fff;}
+.step-pip.active-pip{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);font-weight:600;}
+.pip-sep{color:var(--border);font-size:.75rem;}
+
+/* PHASE + SUB-PHASE */
+.phase-section{padding:3rem 0;border-top:1px solid var(--border);}
+.phase-label{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;}
+.phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
+.tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
+.tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
+.tag-execute{background:var(--green-fill);color:var(--green-dk);}
+.phase-step-context{font-size:.8rem;color:var(--text-3);font-style:italic;}
+
+.sub-phase{margin:2.5rem 0 0;}
+.sub-phase-label{display:flex;align-items:center;gap:.625rem;margin-bottom:1.125rem;}
+.sub-phase-number{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);background:var(--layer);border:1px solid var(--border);padding:.2rem .5rem;border-radius:2px;}
+.sub-phase h3{font-size:1.125rem;font-weight:600;color:var(--text);margin:0;}
+
+/* PROSE */
+.phase-section h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:1.25rem;}
+.prose{font-size:1rem;line-height:1.8;color:var(--text-2);margin-bottom:1.25rem;}
+.prose strong{color:var(--text);font-weight:600;}
+
+/* PAIN POINT */
+.painpoint{margin:1.75rem 0;padding:1.125rem 1.375rem;border-left:3px solid var(--amber);background:var(--amber-fill);border-radius:0 4px 4px 0;}
+.painpoint-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
+
+/* ARTIFACT CHIPS */
+.artifact-chip-row{margin:1.5rem 0;display:flex;flex-wrap:wrap;gap:.375rem;align-items:center;}
+.chip-label{font-size:.75rem;color:var(--text-3);margin-right:.125rem;flex-shrink:0;}
+.artifact-chip{display:inline-flex;align-items:center;gap:.375rem;padding:.3rem .75rem .3rem .5rem;background:#fff;border:1px solid var(--border);border-radius:3px;font-size:.8rem;font-weight:500;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s;}
+.artifact-chip:hover{border-color:var(--purple);background:var(--purple-fill);}
+.chip-icon{font-size:.85rem;}
+.chip-arrow{font-size:.7rem;color:var(--text-3);margin-left:.125rem;}
+
+/* VISUAL */
+.visual-wrap{margin:1.75rem 0;background:var(--layer);border-radius:6px;padding:1.375rem 1.5rem;overflow-x:auto;}
+.visual-wrap svg{display:block;width:100%;height:auto;}
+.visual-caption{font-size:.8rem;color:var(--text-3);margin-top:.75rem;line-height:1.45;}
+
+/* STEPS SUMMARY */
+.steps-summary{margin:1.75rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.step-row{display:grid;grid-template-columns:2.25rem 1fr;border-bottom:1px solid var(--border);}
+.step-row:last-child{border-bottom:none;}
+.step-num{display:flex;align-items:flex-start;justify-content:center;font-size:.75rem;font-weight:700;color:var(--purple);background:var(--purple-fill);padding:.875rem .25rem 0;}
+.step-text{padding:.875rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.step-text strong{color:var(--text);font-weight:600;}
+
+/* CASE STUDY */
+.case-study{margin:2rem 0;padding:1.375rem 1.5rem;background:var(--purple-fill);border-radius:6px;border:1px solid #d4c8ff;}
+.cs-eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;}
+.cs-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--purple);color:#fff;padding:.2rem .5rem;border-radius:2px;}
+.cs-context{font-size:.8rem;font-weight:600;color:var(--purple-dk);}
+.cs-prose{font-size:.9rem;line-height:1.7;color:var(--text-2);margin-bottom:.875rem;}
+.cs-prose:last-child{margin-bottom:0;}
+.cs-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:.875rem;}
+.cs-table th{text-align:left;padding:.45rem .75rem;background:#ede8ff;border-bottom:1px solid #d4c8ff;font-weight:600;color:var(--purple-dk);}
+.cs-table td{padding:.45rem .75rem;border-bottom:1px solid #ede8ff;color:var(--text-2);}
+.cs-table tr:nth-child(even) td{background:#f5f2ff;}
+.go{color:var(--green-dk);font-weight:600;}
+.wave2{color:var(--purple-dk);}
+.park{color:var(--text-3);}
+
+/* READY BANNER */
+.ready{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--green-fill);border-left:4px solid var(--green);border-radius:0 4px 4px 0;margin-top:2.5rem;}
+.ready-icon{color:var(--green);flex-shrink:0;font-size:1.1rem;}
+.ready-body h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.3rem;}
+.ready-body p{font-size:.875rem;line-height:1.55;color:var(--text-2);}
+
+/* DIVIDER */
+.sub-divider{height:1px;background:var(--border);margin:2.5rem 0;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HEADER -->
+<div class="module-header">
+  <div class="eyebrow">Key Challenge</div>
+  <h1>Prioritization &amp; Roadmap</h1>
+  <p class="def">Most teams don't fail because they chose the wrong technology. They fail because they chose the wrong problem, tried to do too many things at once, or never made a clear decision to stop when the evidence said to. This chapter walks through how to pick the right workflows, validate them quickly, and build a delivery plan that compounds over time.</p>
+</div>
+
+<!-- PHASE STRIP -->
+<div class="where-strip">
+  <span class="where-label">Active across</span>
+  <span class="step-pip active-pip">Engage</span>
+  <span class="pip-sep">→</span>
+  <span class="step-pip active-pip">Discover</span>
+  <span class="pip-sep">→</span>
+  <span class="step-pip active-pip">Execute</span>
+</div>
+
+
+<!-- ═══════════════════ ENGAGE ═══════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-engage">Engage</span>
+    <span class="phase-step-context">Tech &amp; Data Assessment · Business Process Mapping</span>
+  </div>
+
+  <h2>Use what you already know. Pick what you can actually win.</h2>
+
+  <p class="prose">By the time you're ready to prioritize, Engage has given you two assets: a picture of your tech and data readiness — which tells you <strong>where AI can realistically be built</strong> — and a map of your business processes — which tells you <strong>where fixing something is actually worth money</strong>. Good prioritization matches those two pictures. Without both, you're either picking the exciting idea or the feasible one. Rarely the right one.</p>
+
+  <p class="prose">The goal is a short, scored list of real candidates. For each one, you're answering four questions: How much is this worth if we fix it? Can we build it with what we have today? Does a senior leader care enough to commit to it? And is there a real path to shipping something within 90 days?</p>
+
+  <!-- Prioritization matrix -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 580 288" xmlns="http://www.w3.org/2000/svg" style="min-width:340px;">
+      <!-- axes -->
+      <line x1="80" y1="258" x2="544" y2="258" stroke="#c6c6c6" stroke-width="1.5"/>
+      <line x1="80" y1="258" x2="80" y2="28" stroke="#c6c6c6" stroke-width="1.5"/>
+      <text x="312" y="280" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Feasibility →</text>
+      <text x="40" y="143" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252" transform="rotate(-90,40,143)">Value →</text>
+      <!-- quadrants -->
+      <rect x="80" y="28" width="228" height="115" fill="#fff1f1" opacity="0.65"/>
+      <rect x="308" y="28" width="236" height="115" fill="#defbe6" opacity="0.65"/>
+      <rect x="80" y="143" width="228" height="115" fill="#f4f4f4"/>
+      <rect x="308" y="143" width="236" height="115" fill="#fdf4e3" opacity="0.8"/>
+      <line x1="308" y1="28" x2="308" y2="258" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="80" y1="143" x2="544" y2="143" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
+      <!-- labels -->
+      <text x="194" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#a32d2d">Invest to unblock</text>
+      <text x="194" y="86" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#a32d2d">High value, hard to build today</text>
+      <text x="426" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#1a6b32">Build first ★</text>
+      <text x="426" y="86" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#1a6b32">High value, buildable now</text>
+      <text x="194" y="193" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Park or drop</text>
+      <text x="194" y="209" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#525252">Low value, hard</text>
+      <text x="426" y="193" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#633806">Quick win, lower return</text>
+      <text x="426" y="209" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#633806">Low value, easy</text>
+      <text x="85" y="270" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">Low</text>
+      <text x="526" y="270" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">High</text>
+      <text x="90" y="252" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">Low</text>
+      <text x="90" y="36" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">High</text>
+    </svg>
+    <div class="visual-caption">Score every candidate on value potential, data readiness, technical feasibility, and strategic fit. The scoring is the deliverable — it's what makes your recommendation defensible when a leader pushes back.</div>
+  </div>
+
+  <div class="painpoint">
+    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-title">Picking based on opinions, not evidence</div>
+    <div class="painpoint-body">The most common failure here is running a workshop, discussing what "feels" most impactful, and producing a ranking that reflects political momentum more than real opportunity. When that list goes to leadership, it gets overridden — and the team has no data to push back with. The fix requires discipline: use a consistent scoring rubric for every candidate, show the math, and let the numbers drive the conversation. Your recommendation is only as strong as the evidence behind it.</div>
+  </div>
+
+  <p class="prose">Also look outside your organization: what are comparable companies doing with similar processes? Benchmarks tell you what's actually achievable — so you're aiming at a real target rather than an improvement to a broken baseline — and they give leadership a concrete frame for why this investment makes sense.</p>
+
+  <div class="painpoint">
+    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-title">Choosing the easy fix instead of the real problem</div>
+    <div class="painpoint-body">When time is short, teams gravitate toward workflows that are easy to improve rather than ones that matter. The result is a technically successful build that nobody cares about scaling. Look for root causes when you score candidates — if a workflow's real problem is bad data or a process that shouldn't exist, those issues should show up in the feasibility score, not get papered over.</div>
+  </div>
+
+  <p class="prose">Before finalizing the list, check one more thing: confirm that a senior leader will actually commit to each top candidate. Not verbally support it — actually show up to weekly steering meetings, clear blockers, and make hard scope calls when needed. If no one at that level is willing to do that, the project will stall the moment it hits its first obstacle. Drop those candidates now.</p>
+
+  <div class="steps-summary">
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Score all candidates</strong> using the prioritization template — value, feasibility, data readiness, strategic fit. Show the math.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Pull external benchmarks</strong> for each top candidate. What does a leading organization's version of this process look like?</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Confirm a sponsor</strong> for the top candidates before finalizing. No sponsor = drop it.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Sanity-check timelines</strong> against developer capacity. Scope that can't ship in 90 days needs to be flagged now.</div></div>
+  </div>
+
+  <div class="artifact-chip-row">
+    <span class="chip-label">Artifacts</span>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📊</span>Prioritization Matrix<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Business Process Map<span class="chip-arrow">↗ template</span></a>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Scoring four candidate workflows</span></div>
+    <p class="cs-prose">The enrollment team ended Engage with four workflows from their process map: document verification, counselor outreach, transcript evaluation, and application processing. Running each through the scoring framework, document verification came out clearly on top — 60% of counselor time spent on it, clean data already in their document system, a confirmed VP of Enrollment sponsor, and a technically simple AI intervention. Outreach ranked second on value but was limited by incomplete CRM data. Transcript evaluation and application processing were parked: low feasibility, no committed sponsor.</p>
+    <table class="cs-table">
+      <thead><tr><th>Workflow</th><th>Value</th><th>Feasibility</th><th>Data ready</th><th>Sponsor</th><th>Decision</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Doc verification</strong></td><td>●●●●●</td><td>●●●●○</td><td>●●●●○</td><td>✓ VP Enrollment</td><td class="go">Build first ★</td></tr>
+        <tr><td>Outreach prioritization</td><td>●●●●○</td><td>●●●○○</td><td>●●○○○</td><td>✓ VP Enrollment</td><td class="wave2">Wave 2</td></tr>
+        <tr><td>Transcript evaluation</td><td>●●●○○</td><td>●●○○○</td><td>●○○○○</td><td>—</td><td class="park">Parked</td></tr>
+        <tr><td>App processing</td><td>●●○○○</td><td>●●○○○</td><td>●○○○○</td><td>—</td><td class="park">Parked</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="ready">
+    <span class="ready-icon">✓</span>
+    <div class="ready-body">
+      <h4>Ready to move to Discover</h4>
+      <p>You have a scored list with one clear winner, a written rationale, a named sponsor, and everything else explicitly parked or dropped. You're moving forward on evidence, not enthusiasm.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ DISCOVER ═══════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-discover">Discover</span>
+    <span class="phase-step-context">Workflow Analysis · Solution Design</span>
+  </div>
+
+  <h2>Prove the opportunity is real. Then define exactly what you're building.</h2>
+
+  <p class="prose">Discover has two jobs. First, you validate that the workflow you chose is actually worth transforming — not because it scored well on paper, but because the evidence holds up when you look closely. Second, if it does, you define precisely what you're going to build. Both are distinct. Don't skip the first because you're confident; don't rush the second because you're excited.</p>
+
+
+  <!-- SUB-PHASE 1: WORKFLOW ANALYSIS -->
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Workflow Analysis — Validate the opportunity</h3>
+    </div>
+  </div>
+
+  <p class="prose">The Workflow Analysis is a time-boxed investigation — typically two weeks — into the workflow you selected. You're gathering: how much it costs to run today, what skills it requires, what the key performance indicators are, what a good version of it looks like at a peer organization, and most importantly, what's actually causing it to perform poorly right now. Your output is a recommendation: go deeper into design, or move on to the next workflow.</p>
+
+  <p class="prose">The most useful interviews are with the people who do the work, not the managers who oversee it. Documented processes and actual practice diverge constantly. Frontline users know where the friction is, what workarounds exist, and what would genuinely make their job easier — and that knowledge is what makes your analysis real rather than theoretical.</p>
+
+  <div class="painpoint">
+    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-title">The go/no-go decision that never gets made</div>
+    <div class="painpoint-body">The hardest moment in this phase isn't the analysis — it's having an honest conversation about whether to proceed. Teams naturally want to move forward. Sponsors have staked credibility on their workflow selection. The mechanism to protect against this is simple: book the go/no-go meeting with the steering committee <em>before the analysis starts</em>, and brief the sponsor that they may hear a recommendation to stop. A no-go isn't a failure — it means the investigation worked. Without a hard date and explicit setup, the meeting drifts, the decision softens, and a marginal workflow goes into design and becomes a failed build months later.</div>
+  </div>
+
+  <!-- Workflow analysis decision pathway -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 620 400" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Column headers — DECIDE pushed right so it clears the go bubble -->
+      <text x="100" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#888" letter-spacing="0.5">COLLECT</text>
+      <text x="300" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#888" letter-spacing="0.5">ASSESS</text>
+      <text x="510" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#888" letter-spacing="0.5">DECIDE</text>
+      <line x1="0" y1="24" x2="620" y2="24" stroke="#e0e0e0" stroke-width="0.5"/>
+
+      <!-- ROW 1: Spend + volume -->
+      <rect x="16" y="40" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="100" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Spend &amp; volume</text>
+      <text x="100" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Cost, headcount, cycle time</text>
+      <line x1="184" y1="62" x2="214" y2="62" stroke="#8a3ffc" stroke-width="1" marker-end="url(#ar)"/>
+      <rect x="216" y="40" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="300" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Size the opportunity</text>
+      <text x="300" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Quantify cost of current state</text>
+
+      <!-- ROW 2: User interviews -->
+      <rect x="16" y="104" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="100" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">User interviews</text>
+      <text x="100" y="138" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Frontline + process owners</text>
+      <line x1="184" y1="126" x2="214" y2="126" stroke="#8a3ffc" stroke-width="1" marker-end="url(#ar)"/>
+      <rect x="216" y="104" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="300" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Map as-is process</text>
+      <text x="300" y="138" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Pain points, workarounds, gaps</text>
+
+      <!-- ROW 3: Benchmarks -->
+      <rect x="16" y="168" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="100" y="186" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">External benchmarks</text>
+      <text x="100" y="202" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Peer orgs, industry research</text>
+      <line x1="184" y1="190" x2="214" y2="190" stroke="#8a3ffc" stroke-width="1" marker-end="url(#ar)"/>
+      <rect x="216" y="168" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="300" y="186" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Best-in-class target</text>
+      <text x="300" y="202" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">What good looks like</text>
+
+      <!-- ROW 4: Root causes -->
+      <rect x="16" y="232" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="100" y="250" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Root cause analysis</text>
+      <text x="100" y="266" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Why does it fail today?</text>
+      <line x1="184" y1="254" x2="214" y2="254" stroke="#8a3ffc" stroke-width="1" marker-end="url(#ar)"/>
+      <rect x="216" y="232" width="168" height="44" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="300" y="250" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="500" fill="#5c2eb8">Confirm AI can address it</text>
+      <text x="300" y="266" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Not every problem is AI-solvable</text>
+
+      <!-- Vertical dotted connectors between collect rows -->
+      <line x1="100" y1="84" x2="100" y2="104" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="100" y1="148" x2="100" y2="168" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="100" y1="212" x2="100" y2="232" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="300" y1="84" x2="300" y2="104" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="300" y1="148" x2="300" y2="168" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="300" y1="212" x2="300" y2="232" stroke="#e0e0e0" stroke-width="0.75" stroke-dasharray="3 3"/>
+
+      <!-- Funnel: Assess rows converge to horizontal midpoint line → diamond -->
+      <line x1="384" y1="62"  x2="414" y2="62"  stroke="#8a3ffc" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="384" y1="126" x2="414" y2="126" stroke="#8a3ffc" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="384" y1="190" x2="414" y2="190" stroke="#8a3ffc" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="384" y1="254" x2="414" y2="254" stroke="#8a3ffc" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="414" y1="62" x2="414" y2="254" stroke="#8a3ffc" stroke-width="0.75" stroke-dasharray="3 3"/>
+      <line x1="414" y1="158" x2="450" y2="158" stroke="#8a3ffc" stroke-width="1.5" marker-end="url(#ar)"/>
+
+      <!-- Decision diamond — centred at x=510 y=158, half-width=52, half-height=44 -->
+      <!-- Top=114, Right=562, Bottom=202, Left=458 -->
+      <polygon points="510,114 562,158 510,202 458,158" fill="none" stroke="#8a3ffc" stroke-width="1.5"/>
+      <!-- Text perfectly centred inside diamond (3 lines, line-height ~14px) -->
+      <text x="510" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">Is the</text>
+      <text x="510" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">opportunity</text>
+      <text x="510" y="174" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">real?</text>
+
+      <!-- YES branch — up from diamond top (510,114) to green box -->
+      <!-- Green box sits at y=50..84, well clear of DECIDE header at y=18 -->
+      <line x1="510" y1="114" x2="510" y2="84" stroke="#24a148" stroke-width="1.5" marker-end="url(#ar)"/>
+      <!-- "Yes" label to the right of the line, no arrow -->
+      <text x="522" y="101" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Yes</text>
+      <rect x="428" y="50" width="164" height="34" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1"/>
+      <text x="510" y="71" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#1a6b32">Move to Solution Design</text>
+
+      <!-- NO branch — down from diamond bottom (510,202) -->
+      <line x1="510" y1="202" x2="510" y2="244" stroke="#da1e28" stroke-width="1.5" marker-end="url(#ar)"/>
+      <!-- "No" label to the right of the line, no arrow -->
+      <text x="522" y="226" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#a32d2d">No</text>
+      <!-- Document & move on — centred on x=510 -->
+      <rect x="428" y="246" width="164" height="34" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="1"/>
+      <text x="510" y="267" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#a32d2d">Document &amp; move on</text>
+      <!-- Arrow to last bubble -->
+      <line x1="510" y1="280" x2="510" y2="318" stroke="#da1e28" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+      <!-- Last bubble — updated text, no subtext line -->
+      <rect x="428" y="320" width="164" height="34" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="510" y="341" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#a32d2d">Select next prioritized workflow</text>
+    </svg>
+    <div class="visual-caption">The Workflow Analysis follows four investigative tracks — spend, user research, benchmarks, and root cause — then converges on a single go/no-go question. Both outcomes are valid. Document either one and move accordingly.</div>
+  </div>
+
+  <div class="artifact-chip-row">
+    <span class="chip-label">Artifacts</span>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Workflow Analysis Template<span class="chip-arrow">↗ document</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Go/No-Go Decision Record<span class="chip-arrow">↗ template</span></a>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — How the go/no-go worked</span></div>
+    <p class="cs-prose">Before starting the analysis, the project lead booked a go/no-go meeting with the VP of Enrollment and technical architect for week four. The analysis found: 14-day average document review time, 60% of counselor hours spent on manual verification, no standardized checklist, and peer universities achieving same-day verification using AI document processing. The team arrived at the meeting with a clear recommendation to proceed — and the VP approved staffing within 48 hours.</p>
+  </div>
+
+  <div class="sub-divider"></div>
+
+  <!-- SUB-PHASE 2: SOLUTION DESIGN -->
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 4</span>
+      <h3>Solution Design — Define exactly what you're building</h3>
+    </div>
+  </div>
+
+  <p class="prose">With a confirmed opportunity and approval to proceed, Solution Design answers two questions: what does the ideal end state look like, and what's the smallest version of it that we can ship in 90 days to test whether the approach is right?</p>
+
+  <p class="prose">The ideal end state — the "future state vision" — should be described without reference to how things work today. Don't design around your current systems or inherited constraints. Describe what would happen if you were designing this workflow from scratch with today's technology. That picture becomes the reference point for every scope decision you make after this.</p>
+
+  <div class="painpoint">
+    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-title">Handing over requirements no one can build from</div>
+    <div class="painpoint-body">This is the most common handoff failure in the entire process. Business teams write requirements that make sense internally but are too conceptual for a development team to act on. The test is simple: give a developer the requirements document and ask if they can write a user story from it without asking you a single question. If they can't, it's not ready. This isn't about making the document longer — it's about being specific: who does what, in what system, with what data, and what does done look like.</div>
+  </div>
+
+  <p class="prose">MVP scope — what ships in 90 days — should be decided by the team together and signed off by the executive sponsor. Just as important as the in-scope list is the explicit out-of-scope list. Every feature that isn't named as out-of-scope is implicitly in scope, and that's what causes delivery delays. Write both lists. Get them approved. The out-of-scope list automatically becomes the post-MVP backlog.</p>
+
+  <!-- Generic 90-day roadmap -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" style="min-width:440px;">
+
+      <!-- Title -->
+      <text x="330" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">90-day MVP roadmap — five parallel workstreams</text>
+
+      <!-- Sprint headers — 6 sprints, each 80px wide, starting at x=138, ending at x=618 -->
+      <rect x="138" y="28" width="80" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="178" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 1</text>
+      <rect x="220" y="28" width="80" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="260" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 2</text>
+      <rect x="302" y="28" width="80" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="342" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 3</text>
+      <rect x="384" y="28" width="80" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="424" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 4</text>
+      <rect x="466" y="28" width="80" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="506" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 5</text>
+      <rect x="548" y="28" width="70" height="20" rx="2" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.5"/>
+      <text x="583" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Sprint 6</text>
+
+      <!-- Week markers -->
+      <text x="178" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 1–2</text>
+      <text x="260" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 3–4</text>
+      <text x="342" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 5–6</text>
+      <text x="424" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 7–8</text>
+      <text x="506" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 9–10</text>
+      <text x="583" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#aaa">Wk 11–12</text>
+
+      <!-- Sprint dividers -->
+      <line x1="220" y1="28" x2="220" y2="256" stroke="#e0e0e0" stroke-width="0.5" stroke-dasharray="2 3"/>
+      <line x1="302" y1="28" x2="302" y2="256" stroke="#e0e0e0" stroke-width="0.5" stroke-dasharray="2 3"/>
+      <line x1="384" y1="28" x2="384" y2="256" stroke="#e0e0e0" stroke-width="0.5" stroke-dasharray="2 3"/>
+      <line x1="466" y1="28" x2="466" y2="256" stroke="#e0e0e0" stroke-width="0.5" stroke-dasharray="2 3"/>
+      <line x1="548" y1="28" x2="548" y2="256" stroke="#e0e0e0" stroke-width="0.5" stroke-dasharray="2 3"/>
+
+      <!-- Row 1: Setup & Discovery — all blocks end at x=618, gate at x=638 -->
+      <text x="8" y="82" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">Setup &amp;</text>
+      <text x="8" y="95" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">discovery</text>
+      <!-- Single block spanning sprints 1–2, label simplified without ARB -->
+      <rect x="140" y="70" width="236" height="26" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+      <text x="258" y="87" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">Requirements review + environment setup</text>
+
+      <!-- Row 2: Build -->
+      <text x="8" y="118" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Build</text>
+      <rect x="140" y="106" width="158" height="26" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="219" y="123" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Test riskiest assumption</text>
+      <rect x="302" y="106" width="316" height="26" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="460" y="123" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Core MVP features — prioritized releases</text>
+
+      <!-- Row 3: Testing & UAT -->
+      <text x="8" y="154" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#5c2eb8">Testing</text>
+      <text x="8" y="167" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">&amp; UAT</text>
+      <rect x="384" y="142" width="80" height="26" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="424" y="159" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Internal QA</text>
+      <rect x="468" y="142" width="150" height="26" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="543" y="159" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">UAT with real end users</text>
+
+      <!-- Row 4: Change management -->
+      <text x="8" y="190" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">Change</text>
+      <text x="8" y="203" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#633806">management</text>
+      <rect x="140" y="178" width="238" height="26" rx="3" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+      <text x="259" y="195" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#633806">Impact assessment + comms planning</text>
+      <rect x="382" y="178" width="236" height="26" rx="3" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+      <text x="500" y="195" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#633806">Training + rollout preparation</text>
+
+      <!-- Row 5: Value tracking -->
+      <text x="8" y="226" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#444441">Value</text>
+      <text x="8" y="239" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#444441">tracking</text>
+      <rect x="140" y="214" width="316" height="26" rx="3" fill="#f4f4f4" stroke="#888780" stroke-width="0.75"/>
+      <text x="298" y="231" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#444441">Baseline measurement + KPI reporting setup</text>
+      <rect x="460" y="214" width="158" height="26" rx="3" fill="#f4f4f4" stroke="#888780" stroke-width="0.75"/>
+      <text x="539" y="231" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#444441">Live tracking vs. baseline</text>
+
+      <!-- Go/no-go gate — x=630, 12px gap from last block at x=618, label starts 8px right of line -->
+      <line x1="630" y1="28" x2="630" y2="256" stroke="#8a3ffc" stroke-width="2" stroke-dasharray="5 3"/>
+      <text x="642" y="145" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8" transform="rotate(90,642,145)">Day 90 · Go / no-go</text>
+
+      <!-- Legend -->
+      <line x1="140" y1="268" x2="618" y2="268" stroke="#e0e0e0" stroke-width="0.5"/>
+      <rect x="140" y="278" width="12" height="10" rx="2" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.5"/>
+      <text x="157" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Setup</text>
+      <rect x="200" y="278" width="12" height="10" rx="2" fill="#defbe6" stroke="#24a148" stroke-width="0.5"/>
+      <text x="217" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Build</text>
+      <rect x="252" y="278" width="12" height="10" rx="2" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.5"/>
+      <text x="269" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Test / UAT</text>
+      <rect x="330" y="278" width="12" height="10" rx="2" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.5"/>
+      <text x="347" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Change mgmt</text>
+      <rect x="430" y="278" width="12" height="10" rx="2" fill="#f4f4f4" stroke="#888780" stroke-width="0.5"/>
+      <text x="447" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Value tracking</text>
+      <line x1="528" y1="283" x2="544" y2="283" stroke="#8a3ffc" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <text x="549" y="287" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#5c2eb8">Decision gate</text>
+    </svg>
+    <div class="visual-caption">All five workstreams run in parallel from Day 1 — not sequentially. Change management and value tracking start before any code is written. The go/no-go decision at Day 90 is made against the KPI baseline set before the sprint began.</div>
+  </div>
+
+  <div class="steps-summary">
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Book the go/no-go meeting</strong> before the analysis starts. Date on the calendar, sponsor briefed that either answer is acceptable.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Run the Workflow Analysis</strong> across four tracks: spend and volume, user interviews, external benchmarks, root cause. Typically two weeks.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Make the go/no-go call</strong> at the steering committee. Document it either way — a no-go sends you back to the next workflow on the list.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Define the future state vision</strong> — the ideal end state, unconstrained by today's systems. This becomes the reference for all scope decisions.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Scope the MVP</strong>: in-scope list and explicit out-of-scope list, both signed off by the sponsor. The out-of-scope list is the post-MVP backlog.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Write build-ready requirements.</strong> Test: can a developer write a user story from each line without asking you anything? If not, keep going.</div></div>
+  </div>
+
+  <div class="artifact-chip-row">
+    <span class="chip-label">Artifacts</span>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Future State Vision<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>High-Level Requirements<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>MVP Scope Worksheet<span class="chip-arrow">↗ template</span></a>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Scope decisions in Solution Design</span></div>
+    <p class="cs-prose">The future state vision was: AI verifies documents in under two hours, automatically notifies applicants about missing items, and surfaces only exceptions to counselors — eliminating the manual review step entirely. MVP scope: document verification and the counselor exception queue. Out of scope for the 90-day build: outreach propensity model, conversational applicant interface, transcript evaluation. All three went onto the post-MVP backlog. Outreach was scheduled for Wave 2, pending CRM data quality improvements.</p>
+  </div>
+
+  <div class="ready">
+    <span class="ready-icon">✓</span>
+    <div class="ready-body">
+      <h4>Ready to move to Execute</h4>
+      <p>Go/no-go is documented. Future state vision is defined. Requirements are build-ready. Both the in-scope and out-of-scope lists exist and have sponsor sign-off. The build team can start without a clarification meeting.</p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════ EXECUTE ═══════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-execute">Execute</span>
+    <span class="phase-step-context">Experimentation · Scale &amp; Adopt</span>
+  </div>
+
+  <h2>Build with a 90-day clock. Decide on data. Set up the next bet.</h2>
+
+  <!-- SUB-PHASE: EXPERIMENTATION -->
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation — 90-day build and go/no-go</h3>
+    </div>
+  </div>
+
+  <p class="prose">The build team's first task — before any code — is to read the requirements and confirm the scope is achievable in 90 days. If it isn't, that conversation needs to happen immediately. A scope problem caught on day two costs nothing. The same problem discovered in week six of a sprint costs the delivery date and executive confidence.</p>
+
+  <p class="prose">Run the build in two-week sprint cycles. What you test first matters: put the riskiest assumption — the thing most likely to invalidate the whole approach — in Sprint 1, while there's still room to pivot. The steering committee's job is to clear blockers and surface problems, not to receive good news. As Sandy put it from the Source-to-Pay transformation: <strong>"Red on a chart is good."</strong> A build that shows only green is either measuring the wrong things or reporting selectively.</p>
+
+  <div class="painpoint">
+    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-title">Success metrics set after the build</div>
+    <div class="painpoint-body">If you haven't locked the go/no-go criteria before Day 1, they'll be defined after the build — which means they'll be defined to pass. The Day 90 decision needs to answer a pre-agreed question: did this build demonstrate enough value, at enough reliability, to justify scaling? Write that question down. Agree on the data source. Get sponsor sign-off before development starts. A metric with no pre-agreed threshold is decoration, not a decision rule.</div>
+  </div>
+
+  <p class="prose">Scope reductions during the build are not failures — they're the mechanism that makes 90-day delivery work. The MCC Marketing transformation de-scoped an agent mid-build when it became too large for the timeline, and leadership recognized it as the right call. What determines whether a de-scope preserves or destroys confidence is how it's communicated: show what was cut, why, when it comes back, and what the team is protecting by cutting it.</p>
+
+  <!-- SUB-PHASE: SCALE & ADOPT -->
+  <div class="sub-phase" style="margin-top:2rem;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 6</span>
+      <h3>Scale &amp; Adopt — After the decision</h3>
+    </div>
+  </div>
+
+  <p class="prose">The go/no-go decision at Day 90 is not the end of the roadmap — it's the start of the next one. If it's a go, the post-MVP backlog activates and change management goes into full execution: training, communications, retiring the old process, and monitoring whether people are actually using the new one. If it's a no-go, the documentation of what you learned is the input to the next workflow analysis.</p>
+
+  <p class="prose">Before the transformation team steps back, three ownership questions need explicit answers: who manages the business content and processes around the tool? Who maintains the technical infrastructure and keeps the system running? Who handles user questions and day-to-day support? When those three roles are unnamed, the solution degrades quietly and eventually gets abandoned.</p>
+
+  <div class="steps-summary">
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Re-validate scope with the build team</strong> before Day 1. If anything isn't achievable, surface it immediately.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Lock go/no-go metrics and data source</strong> before any code is written. The Day 90 decision needs a pre-agreed question and answer standard.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test the riskiest assumption first.</strong> Whatever would most likely invalidate the whole approach goes into Sprint 1.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Communicate scope reductions clearly</strong> — what moved, why, and when it returns. Activate the post-MVP backlog with owners.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Name three owners before handoff:</strong> business content, technical infrastructure, user support. Unnamed ownership means the solution drifts.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Return to the prioritized list</strong> with what you learned. The next workflow analysis should be faster than the first.</div></div>
+  </div>
+
+  <div class="artifact-chip-row">
+    <span class="chip-label">Artifacts</span>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📅</span>90-Day Sprint Roadmap<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Post-MVP Backlog<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Scaling Recommendation<span class="chip-arrow">↗ template</span></a>
+    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Ownership Transfer Record<span class="chip-arrow">↗ template</span></a>
+  </div>
+
+  <div class="ready">
+    <span class="ready-icon">✓</span>
+    <div class="ready-body">
+      <h4>Ready to move to the next workflow</h4>
+      <p>Go/no-go decision documented with supporting data. Three owners named and confirmed. Post-MVP backlog has owners. Return to Workflow Analysis for the next workflow on the prioritized list — and use what you learned to make that analysis sharper.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

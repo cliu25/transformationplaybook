@@ -40,10 +40,6 @@
       <text class="svg-text" x="1023" y="110" text-anchor="middle" font-size="12" fill="#1a6b32">Go/no-go decision</text>
       <text class="svg-text" x="1023" y="126" text-anchor="middle" font-size="12" fill="#1a6b32">on scaling</text>
 
-      <!-- line of interaction -->
-      <line x1="158" y1="166" x2="1106" y2="166" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
-      <text class="svg-text" x="150" y="166" text-anchor="end" font-size="11" fill="#6f6f6f">line of interaction</text>
-
       <!-- ── FRONTSTAGE TEAM ── -->
       <text class="svg-text" x="75" y="208" text-anchor="middle" font-size="12" fill="#525252">Frontstage</text>
       <text class="svg-text" x="75" y="224" text-anchor="middle" font-size="12" fill="#525252">team</text>
@@ -79,10 +75,6 @@
       <line x1="746" y1="214" x2="754" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
       <line x1="920" y1="214" x2="928" y2="214" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
 
-      <!-- line of visibility -->
-      <line x1="158" y1="266" x2="1106" y2="266" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
-      <text class="svg-text" x="150" y="266" text-anchor="end" font-size="11" fill="#6f6f6f">line of visibility</text>
-
       <!-- ── BACKSTAGE TECH ── -->
       <text class="svg-text" x="75" y="308" text-anchor="middle" font-size="12" fill="#525252">Backstage</text>
       <text class="svg-text" x="75" y="324" text-anchor="middle" font-size="12" fill="#525252">tech &amp; data</text>
@@ -104,10 +96,6 @@
       <rect x="928" y="280" width="178" height="64" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/>
       <text class="svg-text" x="1017" y="306" text-anchor="middle" font-size="12" fill="#444441">Productionize,</text>
       <text class="svg-text" x="1017" y="322" text-anchor="middle" font-size="12" fill="#444441">monitor &amp; support</text>
-
-      <!-- line of internal interaction -->
-      <line x1="158" y1="362" x2="1106" y2="362" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="7 4"/>
-      <text class="svg-text" x="150" y="362" text-anchor="end" font-size="11" fill="#6f6f6f">line of internal interaction</text>
 
       <!-- ── SUPPORT PROCESSES ── -->
       <text class="svg-text" x="75" y="404" text-anchor="middle" font-size="12" fill="#525252">Support</text>
@@ -161,7 +149,6 @@
       <!-- repeat loop -->
       <line x1="1017" y1="562" x2="1017" y2="586" stroke="#c6c6c6" stroke-width="1" marker-end="url(#ar)"/>
       <path d="M1017 586 Q1017 612 523 612 Q523 612 523 564" fill="none" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#ar)"/>
-      <text class="svg-text" x="770" y="628" text-anchor="middle" font-size="12" fill="#6f6f6f" font-style="italic">Steps 3–6 repeat per workflow · Steps 1–2 are one-time foundations</text>
 
       <!-- legend -->
       <line x1="158" y1="654" x2="1106" y2="654" stroke="#e0e0e0" stroke-width="0.5"/>

@@ -873,12 +873,17 @@ async function renderModulesPage() {
     renderModuleContent();
 }
 
-function renderModuleContent() {
+async function renderModuleContent() {
     const container = document.getElementById('module-content');
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
     
     if (module) {
-        container.innerHTML = renderModuleDetail(module);
+        // Check if this is the Prioritization & Roadmap module or other narrative modules
+        if (module.id === 'prioritization-roadmap' || module.renderType === 'narrative') {
+            await renderModuleDetail(module);
+        } else {
+            container.innerHTML = await renderModuleDetail(module);
+        }
         
         // Add accordion click handlers
         container.querySelectorAll('.accordion-header').forEach(header => {
@@ -890,9 +895,175 @@ function renderModuleContent() {
         });
     }
 }
+async function renderNarrativeModule(module) {
 
-function renderModuleDetail(module) {
+    // Original JSON-based rendering for other narrative modules
+    let html = `
+        <div class="module-detail">
+            <div class="module-header">
+                <h2>${module.title}</h2>
+                <p class="module-definition">${module.definition}</p>
+            </div>
+    `;
+
+    // Render each section
+    module.sections.forEach(section => {
+        html += `
+            <div class="narrative-section">
+                <div class="phase-header">
+                    <span class="phase-label">${section.phaseGroup}</span>
+                    <h3>${section.phaseTitle}</h3>
+                </div>
+        `;
+
+        // Add visual if present
+        if (section.visualHtml) {
+            html += `<div class="visual-container panel">${section.visualHtml}</div>`;
+        }
+
+        // Handle parts (for Discover phase split)
+        if (section.parts && section.parts.length > 0) {
+            section.parts.forEach(part => {
+                html += `<div class="narrative-part"><h4>${part.partTitle}</h4>`;
+                
+                // Add visual for part if present
+                if (part.visualHtml) {
+                    html += `<div class="visual-container panel">${part.visualHtml}</div>`;
+                }
+                
+                part.narrativeSections.forEach(narSection => {
+                    html += `
+                        <div class="narrative-subsection">
+                            <h5>${narSection.heading}</h5>
+                            <div class="narrative-content">${narSection.content}</div>
+                    `;
+                    
+                    // Render artifacts if present in this narrative section
+                    if (narSection.artifacts && narSection.artifacts.length > 0) {
+                        html += `
+                            <div class="deliverable-grid" style="margin-top: 1rem;">
+                                ${narSection.artifacts.map(artifact => renderDeliverableCard(artifact)).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    html += `</div>`; // Close narrative-subsection
+                });
+
+                html += `</div>`; // Close narrative-part
+            });
+        } else {
+            // Regular narrative sections (no parts)
+            section.narrativeSections.forEach(narSection => {
+                html += `
+                    <div class="narrative-subsection">
+                        <h5>${narSection.heading}</h5>
+                        <div class="narrative-content">${narSection.content}</div>
+                `;
+                
+                // Render artifacts if present in this narrative section
+                if (narSection.artifacts && narSection.artifacts.length > 0) {
+                    html += `
+                        <div class="deliverable-grid" style="margin-top: 1rem;">
+                            ${narSection.artifacts.map(artifact => renderDeliverableCard(artifact)).join('')}
+                        </div>
+                    `;
+                }
+                
+                html += `</div>`; // Close narrative-subsection
+            });
+        }
+
+        html += `</div>`; // Close narrative-section
+    });
+
+    // Render design principles if present
+    if (module.designPrinciples && module.designPrinciples.length > 0) {
+        html += `
+            <div class="design-principles">
+                <h3>Design Principles</h3>
+                <div class="principles-grid">
+        `;
+        
+        module.designPrinciples.forEach(principle => {
+            html += `
+                <div class="principle-card">
+                    <h4>${principle.title}</h4>
+                    <p>${principle.description}</p>
+                </div>
+            `;
+        });
+
+        html += `
+                </div>
+            </div>
+        `;
+    }
+
+    html += `</div>`; // Close module-detail
+
+    return html;
+}
+
+
+async function renderModuleDetail(module) {
     if (!module) return '';
+
+    // Check if this is the Prioritization & Roadmap module - load standalone HTML
+    if (module.id === 'prioritization-roadmap') {
+        const container = document.getElementById('module-content');
+        try {
+            const response = await fetch('prioritization_narrative (3).html');
+            const html = await response.text();
+            // Parse the HTML
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            // Extract and inject the styles from the <head>
+            const styles = doc.querySelectorAll('style');
+            let styleContent = Array.from(styles).map(s => s.textContent).join('\n');
+            
+            // Add overrides to make content wider and scale SVGs appropriately
+            styleContent += `
+                /* Override for wider layout */
+                .page { max-width: 1400px !important; padding: 0 2rem 6rem !important; }
+                /* Scale SVGs to be larger but keep text proportional */
+                .visual-wrap svg {
+                    min-width: 420px !important;
+                    max-width: 800px !important;
+                    width: 100% !important;
+                }
+                /* Make arrows in phase strip more visible */
+                .pip-sep { color: #525252 !important; font-weight: 600 !important; }
+            `;
+            
+            // Create a style element and add it to the document head if not already present
+            let narrativeStyleId = 'narrative-module-styles';
+            let existingStyle = document.getElementById(narrativeStyleId);
+            if (existingStyle) {
+                existingStyle.textContent = styleContent;
+            } else {
+                const styleEl = document.createElement('style');
+                styleEl.id = narrativeStyleId;
+                styleEl.textContent = styleContent;
+                document.head.appendChild(styleEl);
+            }
+            
+            // Extract and inject the body content
+            const bodyContent = doc.body.innerHTML;
+            container.innerHTML = bodyContent;
+            return;
+        } catch (error) {
+            console.error('Error loading Prioritization & Roadmap HTML:', error);
+            // Fall through to JSON rendering if file not found
+        }
+    }
+
+    // Check if this module uses narrative rendering (for other narrative modules)
+    if (module.renderType === 'narrative') {
+        await renderNarrativeModule(module);
+        return; // renderNarrativeModule handles DOM directly for HTML files
+    }
 
     // Define all workflow steps (6 steps)
     const allSteps = [

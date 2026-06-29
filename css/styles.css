@@ -46,6 +46,108 @@
 }
 
 /* ============================================================================
+   NARRATIVE MODULE STYLES
+   ============================================================================ */
+.narrative-section {
+    margin-bottom: 3rem;
+}
+
+.narrative-section .phase-header {
+    margin-bottom: 1.5rem;
+}
+
+.narrative-section .phase-label {
+    display: inline-block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #0f62fe;
+    margin-bottom: 0.5rem;
+}
+
+.narrative-section .phase-header h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #161616;
+    margin: 0;
+}
+
+.narrative-part {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid #e0e0e0;
+}
+
+.narrative-part h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #161616;
+    margin: 0 0 1rem 0;
+}
+
+.narrative-subsection {
+    margin-bottom: 1.5rem;
+}
+
+.narrative-subsection h5 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #161616;
+    margin: 0 0 0.75rem 0;
+}
+
+.narrative-content {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #525252;
+}
+
+.narrative-content p {
+    margin: 0 0 1rem 0;
+}
+
+.design-principles {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #e0e0e0;
+}
+
+.design-principles h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #161616;
+    margin: 0 0 1.5rem 0;
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.principle-card {
+    padding: 1.5rem;
+    background-color: #f4f4f4;
+    border-left: 4px solid #0f62fe;
+}
+
+.principle-card h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #161616;
+    margin: 0 0 0.75rem 0;
+}
+
+.principle-card p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #525252;
+    margin: 0;
+}
+
+
+/* ============================================================================
    GLOBAL STYLES & VARIABLES
    ============================================================================ */
 :root {
