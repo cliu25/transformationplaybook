@@ -592,7 +592,7 @@
         </div>
         <span class="phase-name engage">Engage</span>
       </div>
-      <div class="step-cell engage" onclick="window.location.hash='#step1-narrative'" style="cursor: pointer;">
+      <div class="step-cell engage">
         <div class="step-number">Step 1</div>
         <div class="step-name">Technology &amp; Data Foundations Assessment</div>
         <p class="step-desc">Establish a baseline of technology and data AI-readiness across the domain. Confirm sponsorship, team structure, and go/no-go before committing to workflow analysis.</p>
@@ -618,18 +618,18 @@
         </div>
         <span class="phase-name discover">Discover</span>
       </div>
-      <div class="step-cell discover" onclick="window.location.hash='#step3-narrative'" style="cursor: pointer;">
+      <a href="#step3-narrative" class="step-cell discover" style="text-decoration: none; color: inherit; display: block;">
         <div class="step-number">Step 3</div>
         <div class="step-name">Workflow Analysis</div>
         <p class="step-desc">Analyze domain-specific workflows to identify the highest-impact opportunities. Score and prioritize candidates, select the MVP target, and lock metrics and baselines.</p>
         <span class="step-timing">2 weeks / workflow</span>
-      </div>
-      <div class="step-cell discover" onclick="window.location.hash='#step4-narrative'" style="cursor: pointer;">
+      </a>
+      <a href="#step4-narrative" class="step-cell discover" style="text-decoration: none; color: inherit; display: block;">
         <div class="step-number">Step 4</div>
         <div class="step-name">Solution Design</div>
         <p class="step-desc">Align on the problem statement and design a blank-slate AI solution with an eye to scale. Define MVP scope, create build-ready requirements, and prepare for build kickoff.</p>
         <span class="step-timing">2 weeks / workflow</span>
-      </div>
+      </a>
     </div>
 
     <!-- EXECUTE ROW -->
@@ -652,7 +652,7 @@
         <p class="step-desc">Rapidly deploy an MVP, iterate in 2-week sprint cycles, and measure impact against baselines. Track value throughout the build — not just at the end.</p>
         <span class="step-timing">90 days</span>
       </div>
-      <div class="step-cell execute" onclick="window.location.hash='#step6-narrative'" style="cursor: pointer;">
+      <div class="step-cell execute">
         <div class="step-number">Step 6</div>
         <div class="step-name">Scale &amp; Adopt</div>
         <p class="step-desc">Implement the solution into live workflows, monitor for improvement, and drive the AI-first mindset across the domain. Hand off ownership and plan the next workflow.</p>
