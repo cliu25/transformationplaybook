@@ -1326,10 +1326,34 @@
                 "description": "Defines baseline, target, source, owner, cadence, and validation method for each metric.",
                 "fileType": "PPT",
                 "priority": "Medium",
+                "exampleUrl": "Business Logic.Example V1.pptx",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "current-state-processes",
+                "title": "Current State Processes",
+                "description": "Captures the domain's people (personas) #, process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
                 "exampleUrl": "",
                 "templateUrl": "",
                 "hasExample": false,
                 "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "opportunity-sizing",
+                "title": "Opportunity sizing",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "20251118 - Lesseps_AI_EvalFrameworks_vS - Read-Only.pptx",
+                "hasExample": false,
+                "hasTemplate": true,
                 "opensInNewWindow": true
               }
             ],
@@ -1420,7 +1444,20 @@
               "Reporting model drafted and validated",
               "Auto-capture mechanisms designed into solution architecture"
             ],
-            "artifacts": [],
+            "artifacts": [
+              {
+                "id": "business-case-template",
+                "title": "Business Case Template",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. buy vs make",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              }
+            ],
             "commonPitfalls": [
               "Treating instrumentation as a post-launch add-on",
               "Changing MVP scope without updating metrics"
@@ -1482,9 +1519,9 @@
                 "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
                 "fileType": "Excel",
                 "priority": "Medium",
-                "exampleUrl": "",
+                "exampleUrl": "Bob - Project Update - 01222026.pptx",
                 "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/01%20Value%20Creation%20%26%20Portfolio%20Management/ROI%20+%20Productivity%20Metrics/Bob%20ROI/Bob%20-%20Project%20Update%20-%2001222026.pptx?d=w1812bc57b8cb451e9243a12cec26356d&csf=1&web=1&e=6xznBL",
-                "hasExample": false,
+                "hasExample": true,
                 "hasTemplate": true,
                 "opensInNewWindow": true
               },
@@ -1650,6 +1687,66 @@
                 "hasExample": false,
                 "hasTemplate": true,
                 "opensInNewWindow": true
+              },
+              {
+                "id": "current-state-processes",
+                "title": "Current State Processes",
+                "description": "Captures the domain's people (personas) #, process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest \"where we are today\" snapshot.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "opportunity-sizing",
+                "title": "Opportunity sizing",
+                "description": "Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "20251118 - Lesseps_AI_EvalFrameworks_vS - Read-Only.pptx",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-process-maps",
+                "title": "Business Process Map(s)",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "Visio (maybe), PPT or Mural (primary)",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "project-plan",
+                "title": "Project Plan",
+                "description": "A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can't complete it, you're not ready to start.",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "prioritization-matrix",
+                "title": "Prioritization Matrix",
+                "description": "Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/7j0jwsm1lzqvcg47if8gdcza9145kad3",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
               }
             ]
           },
@@ -1727,6 +1824,30 @@
                 "hasExample": false,
                 "hasTemplate": true,
                 "opensInNewWindow": true
+              },
+              {
+                "id": "business-requirements-log",
+                "title": "Business Requirements Log",
+                "description": "The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.",
+                "fileType": "Excel",
+                "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "strategic-roadmap",
+                "title": "Strategic Roadmap",
+                "description": "The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases. UAT strategy and planning",
+                "fileType": "PPT",
+                "priority": "High",
+                "exampleUrl": "https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8",
+                "templateUrl": "https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej",
+                "hasExample": true,
+                "hasTemplate": true,
+                "opensInNewWindow": true
               }
             ]
           },
@@ -1788,6 +1909,18 @@
                 "hasExample": false,
                 "hasTemplate": false,
                 "opensInNewWindow": true
+              },
+              {
+                "id": "roi-analysis",
+                "title": "ROI Analysis",
+                "description": "A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.",
+                "fileType": "Excel",
+                "priority": "Medium",
+                "exampleUrl": "Bob - Project Update - 01222026.pptx",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
               }
             ]
           },
@@ -1806,6 +1939,18 @@
                 "description": "Training, rollout, monitoring, and KPI tracking.",
                 "fileType": "PPT",
                 "priority": "High",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "operational-health-dashboard",
+                "title": "Operational Health Dashboard",
+                "description": "A reference dashboard for adoption, usage, value realization, operational performance, and support health.",
+                "fileType": "PPT",
+                "priority": "Medium",
                 "exampleUrl": "",
                 "templateUrl": "",
                 "hasExample": false,
@@ -1861,6 +2006,30 @@
                 "templateUrl": "",
                 "hasExample": false,
                 "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "technology-data-readiness-checklist",
+                "title": "Technology & Data Readiness Checklist",
+                "description": "Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a go/no-go gate before committing.",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "business-process-maps",
+                "title": "Business Process Map(s)",
+                "description": "Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.",
+                "fileType": "Visio (maybe), PPT or Mural (primary)",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk",
+                "hasExample": false,
+                "hasTemplate": true,
                 "opensInNewWindow": true
               }
             ],
@@ -2005,6 +2174,18 @@
                 "title": "Workflow Redesign",
                 "description": "A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.",
                 "fileType": "Visio",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "",
+                "hasExample": false,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "build-vs-buy",
+                "title": "Build vs Buy",
+                "description": "Evaluates build versus buy options for AI capabilities, considering cost, time, customization needs, and strategic fit.",
+                "fileType": "PPT",
                 "priority": "Medium",
                 "exampleUrl": "",
                 "templateUrl": "",
@@ -2205,7 +2386,32 @@
                 "description": "Identify the main personas and, at a high level, whose roles change and how they may react. An early change-impact picture that shapes the solution and the adoption plan from day one."
               }
             ],
-            "artifacts": [],
+            "artifacts": [
+              {
+                "id": "raci-matrix",
+                "title": "RACI Matrix",
+                "description": "Aligns who owns what throughout the scope of a project",
+                "fileType": "PPT",
+                "priority": "Medium",
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "hasExample": false,
+                "hasTemplate": true,
+                "opensInNewWindow": true
+              },
+              {
+                "id": "raid-log",
+                "title": "RAID Log",
+                "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
+                "fileType": "Monday",
+                "priority": "Medium",
+                "exampleUrl": "from michael",
+                "templateUrl": "",
+                "hasExample": true,
+                "hasTemplate": false,
+                "opensInNewWindow": true
+              }
+            ],
             "commonPitfalls": [
               "Treating change management as a later, separate activity",
               "Assuming technology alone will drive adoption"

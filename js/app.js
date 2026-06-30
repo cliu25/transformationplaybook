@@ -715,21 +715,28 @@ function renderDeliverableCard(deliverable) {
     const templateUrl = (deliverable.templateUrl && deliverable.templateUrl.trim())
         || (deliverable.boxUrl && deliverable.boxUrl.trim())
         || (deliverable.url && deliverable.url.trim()) || '';
+    
+    // If there's any text, treat it as a link (could be URL or filename)
     const hasExample = exampleUrl !== '';
     const hasTemplate = templateUrl !== '';
 
     // Small IBM-blue external-link icon
     const linkIcon = '<svg class="external-link-icon" width="14" height="14" viewBox="0 0 16 16" fill="#0f62fe" aria-hidden="true"><path d="M13 3v6h-1V4.707L6.854 9.854l-.708-.708L11.293 4H7V3h6zM4 5v8h8v-3h1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3v1H4z"/></svg>';
+    const disabledIcon = '<svg class="external-link-icon" width="14" height="14" viewBox="0 0 16 16" fill="#8d8d8d" aria-hidden="true"><path d="M13 3v6h-1V4.707L6.854 9.854l-.708-.708L11.293 4H7V3h6zM4 5v8h8v-3h1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3v1H4z"/></svg>';
 
-    // Build link buttons — only render the ones that exist
+    // Build link buttons — show both, with disabled state if no URL
     const links = [];
     if (hasExample) {
         links.push(`<a class="deliverable-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Example ${linkIcon}</a>`);
+    } else {
+        links.push(`<span class="deliverable-link disabled" title="Example not yet available">Example ${disabledIcon}</span>`);
     }
     if (hasTemplate) {
         links.push(`<a class="deliverable-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Template ${linkIcon}</a>`);
+    } else {
+        links.push(`<span class="deliverable-link disabled" title="Template not yet available">Template ${disabledIcon}</span>`);
     }
-    const linkRow = links.length ? `<div class="deliverable-links">${links.join('')}</div>` : '';
+    const linkRow = `<div class="deliverable-links">${links.join('')}</div>`;
 
     return `
         <div class="card deliverable-card">
@@ -873,8 +880,8 @@ async function renderModuleContent() {
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
     
     if (module) {
-        // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, or Systems Integration module or other narrative modules
-        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.renderType === 'narrative') {
+        // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, Systems Integration, or Adoption & Change module or other narrative modules
+        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change' || module.renderType === 'narrative') {
             await renderModuleDetail(module);
         } else {
             container.innerHTML = await renderModuleDetail(module);
@@ -1004,8 +1011,8 @@ async function renderNarrativeModule(module) {
 async function renderModuleDetail(module) {
     if (!module) return '';
 
-    // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, or Systems Integration module - load standalone HTML
-    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration') {
+    // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, Systems Integration, or Adoption & Change module - load standalone HTML
+    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change') {
         const container = document.getElementById('module-content');
         try {
             // Determine which HTML file to load
@@ -1013,7 +1020,9 @@ async function renderModuleDetail(module) {
                 ? 'prioritization_narrative.html'
                 : module.id === 'value-measurement-roi'
                 ? 'value-measurement-roi-narrative.html'
-                : 'systems-integration-narrative.html';
+                : module.id === 'systems-integration'
+                ? 'systems-integration-narrative.html'
+                : 'adoption-change-narrative.html';
             const response = await fetch(htmlFile);
             const html = await response.text();
             // Parse the HTML
