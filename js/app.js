@@ -519,6 +519,15 @@ async function renderWorkflowPage() {
     const blueprintSVG = await loadBlueprintSVG(1);
     
     main.innerHTML = `
+        <!-- Hero Section -->
+        <section class="panel" style="margin-bottom: 2rem;">
+            <h1 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 1rem;">End-to-End Workflow</h1>
+            <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.6; max-width: 52rem;">
+                Open Engage, Discover, and Execute to see workflow steps, key activities, readiness checklists, deliverables, modules, and pitfalls.
+                This is your step-by-step guide from program initiation through scaling and adoption.
+            </p>
+        </section>
+
         <!-- Master Service Blueprint -->
         <section class="flow-panel">
             <div class="blueprint-container">
@@ -548,40 +557,30 @@ async function renderWorkflowPage() {
             <p style="color: var(--text-secondary); margin-bottom: 2rem;">Deep dives on the five hardest parts of AI transformation. Each challenge includes phase-specific guidance, templates, and real-world examples.</p>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <a href="/modules/value-measurement-roi" style="text-decoration: none; color: inherit;">
-                    <div class="card" style="height: 100%; padding: 1.5rem; border-left: 3px solid #0f62fe; cursor: pointer; transition: transform 0.2s;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #0f62fe;">Value Measurement & ROI</h3>
-                        <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Define measurable value before you build and prove it after you launch. Lock baselines early, instrument automatically, and tie results to the balance sheet—not vague efficiency claims.</p>
-                    </div>
-                </a>
+                <div class="card" onclick="navigateTo('/modules')" style="height: 100%; padding: 1.5rem; border-left: 3px solid #0f62fe; cursor: pointer; transition: transform 0.2s;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #0f62fe;">Value Measurement & ROI</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Define measurable value before you build and prove it after you launch. Lock baselines early, instrument automatically, and tie results to the balance sheet—not vague efficiency claims.</p>
+                </div>
                 
-                <a href="/modules/prioritization-roadmap" style="text-decoration: none; color: inherit;">
-                    <div class="card" style="height: 100%; padding: 1.5rem; border-left: 3px solid #8a3ffc; cursor: pointer; transition: transform 0.2s;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #8a3ffc;">Prioritization & Roadmap</h3>
-                        <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Choose what to build based on evidence, not politics. Score every potential workflow on value, feasibility, and data readiness—then defend your recommendation with math, not intuition.</p>
-                    </div>
-                </a>
+                <div class="card" onclick="navigateTo('/modules')" style="height: 100%; padding: 1.5rem; border-left: 3px solid #8a3ffc; cursor: pointer; transition: transform 0.2s;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #8a3ffc;">Prioritization & Roadmap</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Choose what to build based on evidence, not politics. Score every potential workflow on value, feasibility, and data readiness—then defend your recommendation with math, not intuition.</p>
+                </div>
                 
-                <a href="/modules/systems-integration" style="text-decoration: none; color: inherit;">
-                    <div class="card" style="height: 100%; padding: 1.5rem; border-left: 3px solid #24a148; cursor: pointer; transition: transform 0.2s;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #24a148;">Systems Integration</h3>
-                        <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Navigate ARB, data pipelines, API contracts, and enterprise architecture without derailing your 90-day sprint. Identify integration constraints early and design around them—not through them.</p>
-                    </div>
-                </a>
+                <div class="card" onclick="navigateTo('/modules')" style="height: 100%; padding: 1.5rem; border-left: 3px solid #24a148; cursor: pointer; transition: transform 0.2s;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #24a148;">Systems Integration</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Navigate ARB, data pipelines, API contracts, and enterprise architecture without derailing your 90-day sprint. Identify integration constraints early and design around them—not through them.</p>
+                </div>
                 
-                <a href="/modules/adoption-change" style="text-decoration: none; color: inherit;">
-                    <div class="card" style="height: 100%; padding: 1.5rem; border-left: 3px solid #ff832b; cursor: pointer; transition: transform 0.2s;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #ff832b;">Adoption & Change</h3>
-                        <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Drive real usage through early user involvement, UAT, training, and feedback loops. Adoption is 70% of the outcome—start change management at the beginning, not after the build.</p>
-                    </div>
-                </a>
+                <div class="card" onclick="navigateTo('/modules')" style="height: 100%; padding: 1.5rem; border-left: 3px solid #ff832b; cursor: pointer; transition: transform 0.2s;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #ff832b;">Adoption & Change</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Drive real usage through early user involvement, UAT, training, and feedback loops. Adoption is 70% of the outcome—start change management at the beginning, not after the build.</p>
+                </div>
                 
-                <a href="/modules/governance-risk" style="text-decoration: none; color: inherit;">
-                    <div class="card" style="height: 100%; padding: 1.5rem; border-left: 3px solid #da1e28; cursor: pointer; transition: transform 0.2s;">
-                        <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #da1e28;">Governance & Risk</h3>
-                        <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Set up steering committees, RACI, RAID logs, and escalation paths before the sprint starts. Clear governance prevents blockers from becoming project-killers.</p>
-                    </div>
-                </a>
+                <div class="card" onclick="navigateTo('/modules')" style="height: 100%; padding: 1.5rem; border-left: 3px solid #da1e28; cursor: pointer; transition: transform 0.2s;">
+                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #da1e28;">Governance & Risk</h3>
+                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Set up steering committees, RACI, RAID logs, and escalation paths before the sprint starts. Clear governance prevents blockers from becoming project-killers.</p>
+                </div>
             </div>
         </section>
     `;
