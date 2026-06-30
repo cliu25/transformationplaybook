@@ -519,11 +519,6 @@ async function renderWorkflowPage() {
     const blueprintSVG = await loadBlueprintSVG(1);
     
     main.innerHTML = `
-        <section class="hero">
-            <h1>${content.endToEndWorkflow.title}</h1>
-            <p>${content.endToEndWorkflow.description}</p>
-        </section>
-
         <!-- Master Service Blueprint -->
         <section class="flow-panel">
             <div class="blueprint-container">
@@ -878,8 +873,8 @@ async function renderModuleContent() {
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
     
     if (module) {
-        // Check if this is the Prioritization & Roadmap or Value Measurement & ROI module or other narrative modules
-        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.renderType === 'narrative') {
+        // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, or Systems Integration module or other narrative modules
+        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.renderType === 'narrative') {
             await renderModuleDetail(module);
         } else {
             container.innerHTML = await renderModuleDetail(module);
@@ -1009,14 +1004,16 @@ async function renderNarrativeModule(module) {
 async function renderModuleDetail(module) {
     if (!module) return '';
 
-    // Check if this is the Prioritization & Roadmap or Value Measurement & ROI module - load standalone HTML
-    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi') {
+    // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, or Systems Integration module - load standalone HTML
+    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration') {
         const container = document.getElementById('module-content');
         try {
             // Determine which HTML file to load
             const htmlFile = module.id === 'prioritization-roadmap'
-                ? 'prioritization_narrative (3).html'
-                : 'value-measurement-roi-narrative.html';
+                ? 'prioritization_narrative.html'
+                : module.id === 'value-measurement-roi'
+                ? 'value-measurement-roi-narrative.html'
+                : 'systems-integration-narrative.html';
             const response = await fetch(htmlFile);
             const html = await response.text();
             // Parse the HTML

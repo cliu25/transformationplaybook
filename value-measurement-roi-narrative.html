@@ -19,16 +19,27 @@
 body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;font-size:16px;}
 .page{margin:0 auto;padding:0 2.5rem 6rem;max-width:1400px;width:100%;}
 .module-header{padding:3rem 0 2.5rem;}
-.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
 .module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
-.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--blue);padding-left:1.25rem;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--purple);padding-left:1.25rem;}
+
+/* PHASE STRIP */
 .where-strip{display:flex;align-items:center;gap:.5rem;padding:1rem 1.25rem;background:var(--layer);border-radius:4px;margin:0 0 2.5rem 0;flex-wrap:wrap;}
-.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
-.step-pip{padding:.25rem .625rem;border-radius:2rem;font-size:.75rem;font-weight:500;border:1px solid var(--border);color:var(--text-3);background:#fff;}
-.step-pip.active-pip{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);font-weight:600;}
-.pip-sep{color:var(--text-2);font-size:.75rem;}
+.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.phase-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-3);background:#fff;}
+.phase-pip.pip-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.phase-pip.pip-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.phase-pip.pip-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pip-sep{color:var(--border);font-size:.8rem;}
+
+/* MODULE TITLE ROW — phases + challenge name */
+.module-title-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.title-row-sep{color:var(--text-3);font-size:1rem;padding:0 .125rem;}
+.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--purple);color:var(--purple-dk);}
+
+/* PHASE + SUB-PHASE */
 .phase-section{padding:3rem 0;border-top:1px solid var(--border);}
-.phase-label{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;}
+.phase-label{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
 .phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
 .tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
 .tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
@@ -45,9 +56,17 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .painpoint-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.375rem;}
 .painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
 .painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
-.artifact-chip-row{margin:1.5rem 0;display:flex;flex-wrap:wrap;gap:.375rem;align-items:center;}
-.chip-label{font-size:.75rem;color:var(--text-3);margin-right:.125rem;flex-shrink:0;}
-.artifact-chip{display:inline-flex;align-items:center;gap:.375rem;padding:.3rem .75rem .3rem .5rem;background:#fff;border:1px solid var(--border);border-radius:3px;font-size:.8rem;font-weight:500;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s;}
+/* ARTIFACT CARDS — title, description, link (matches site's deliverable-card pattern) */
+.artifact-section{margin:1.75rem 0;}
+.artifact-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;}
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
+.artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
+.artifact-card .a-type{display:none;}
+.artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
+.artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;}
+.a-link{font-size:.78rem;color:var(--purple);text-decoration:none;font-weight:500;}
+.a-link:hover{text-decoration:underline;}
 .artifact-chip:hover{border-color:var(--blue);background:var(--blue-fill);}
 .chip-icon{font-size:.85rem;}
 .chip-arrow{font-size:.7rem;color:var(--text-3);margin-left:.125rem;}
@@ -84,17 +103,19 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 
 <div class="where-strip">
   <span class="where-label">Active across</span>
-  <span class="step-pip active-pip">Engage</span>
+  <span class="phase-pip pip-engage">Engage</span>
   <span class="pip-sep">→</span>
-  <span class="step-pip active-pip">Discover</span>
+  <span class="phase-pip pip-discover">Discover</span>
   <span class="pip-sep">→</span>
-  <span class="step-pip active-pip">Execute</span>
+  <span class="phase-pip pip-execute">Execute</span>
 </div>
 
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
-    <span class="phase-step-context">Assess · Business Process Mapping</span>
+    <span class="title-row-sep">·</span>
+    <span class="challenge-pip">Value Measurement & ROI</span>
+    <span class="phase-step-context">Step 1 · Assess · Business Process Mapping</span>
   </div>
 
   <h2>Start with a hypothesis. Pick what you can actually measure.</h2>
@@ -157,11 +178,26 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Confirm Finance/EBM partner</strong> — who will validate measurement approach and ensure metrics align with quarterly scorecard reporting?</div></div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📊</span>AIFT Scorecard Template<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Value Metric ROI Tracker<span class="chip-arrow">↗ xlsx</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📈</span>Business Case Template<span class="chip-arrow">↗ template</span></a>
+  <div class="artifact-section">
+    <div class="artifact-section-label">Key Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">Assessment · High Priority</div>
+        <div class="a-title">Current State Assessment</div>
+        <div class="a-desc">Captures the domain's people, process, technology, data, operating model, pain points, and readiness baseline. The honest "where we are today" snapshot.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Template →</a>
+        </div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">Business Case · Medium Priority</div>
+        <div class="a-title">Business Case Template</div>
+        <div class="a-desc">Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Includes buy vs make analysis.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Template →</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">
@@ -181,7 +217,9 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-discover">Discover</span>
-    <span class="phase-step-context">Workflow Analysis · Solution Design</span>
+    <span class="title-row-sep">·</span>
+    <span class="challenge-pip">Value Measurement & ROI</span>
+    <span class="phase-step-context">Step 2 · Workflow Analysis · Solution Design</span>
   </div>
 
   <h2>Lock the metrics before you design anything. This is what the build optimizes toward.</h2>
@@ -288,11 +326,27 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Confirm auto-capture mechanisms</strong> are designed into solution architecture.</div></div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📊</span>Operational &amp; Business Metrics<span class="chip-arrow">↗ with baselines</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Measurement Strategy<span class="chip-arrow">↗ finalized</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Business Case Template<span class="chip-arrow">↗ complete</span></a>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Key Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">Strategy · Medium Priority</div>
+        <div class="a-title">Measurement Strategy</div>
+        <div class="a-desc">Defines baseline, target, source, owner, cadence, and validation method for each metric.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Example →</a>
+        </div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">Matrix · Medium Priority</div>
+        <div class="a-title">Prioritization Matrix</div>
+        <div class="a-desc">Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Template →</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">
@@ -313,6 +367,8 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-execute">Execute</span>
+    <span class="title-row-sep">·</span>
+    <span class="challenge-pip">Value Measurement & ROI</span>
     <span class="phase-step-context">Experimentation · Scale &amp; Adopt</span>
   </div>
 
@@ -452,11 +508,26 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Continuously optimize</strong> based on usage data and user feedback.</div></div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📊</span>Value Realization Reporting<span class="chip-arrow">↗ monthly</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📈</span>ROI Analysis<span class="chip-arrow">↗ validated</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📉</span>KPI Dashboard<span class="chip-arrow">↗ live</span></a>
+  <div class="artifact-section">
+    <div class="artifact-section-label">Key Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">Analysis · Medium Priority</div>
+        <div class="a-title">ROI Analysis</div>
+        <div class="a-desc">A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Example →</a>
+        </div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">Dashboard · Medium Priority</div>
+        <div class="a-title">Operational Health Dashboard</div>
+        <div class="a-desc">Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.</div>
+        <div class="a-links">
+          <a href="#" class="a-link">View Template →</a>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">

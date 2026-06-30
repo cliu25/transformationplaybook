@@ -26,15 +26,22 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--purple);padding-left:1.25rem;}
 
 /* PHASE STRIP */
-.where-strip{display:flex;align-items:center;gap:.5rem;padding:1rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2.5rem;flex-wrap:wrap;}
-.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
-.step-pip{padding:.25rem .625rem;border-radius:2rem;font-size:.75rem;font-weight:500;border:1px solid var(--border);color:var(--text-3);background:#fff;}
-.step-pip.active-pip{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);font-weight:600;}
-.pip-sep{color:var(--border);font-size:.75rem;}
+.where-strip{display:flex;align-items:center;gap:.5rem;padding:1rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:1.5rem;flex-wrap:wrap;}
+.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.phase-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-3);background:#fff;}
+.phase-pip.pip-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.phase-pip.pip-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.phase-pip.pip-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pip-sep{color:var(--border);font-size:.8rem;}
+
+/* MODULE TITLE ROW — phases + challenge name */
+.module-title-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+.title-row-sep{color:var(--text-3);font-size:1rem;padding:0 .125rem;}
+.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--purple);color:var(--purple-dk);}
 
 /* PHASE + SUB-PHASE */
 .phase-section{padding:3rem 0;border-top:1px solid var(--border);}
-.phase-label{display:inline-flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;}
+.phase-label{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
 .phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
 .tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
 .tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
@@ -57,13 +64,17 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
 .painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
 
-/* ARTIFACT CHIPS */
-.artifact-chip-row{margin:1.5rem 0;display:flex;flex-wrap:wrap;gap:.375rem;align-items:center;}
-.chip-label{font-size:.75rem;color:var(--text-3);margin-right:.125rem;flex-shrink:0;}
-.artifact-chip{display:inline-flex;align-items:center;gap:.375rem;padding:.3rem .75rem .3rem .5rem;background:#fff;border:1px solid var(--border);border-radius:3px;font-size:.8rem;font-weight:500;color:var(--text);text-decoration:none;transition:border-color .15s,background .15s;}
-.artifact-chip:hover{border-color:var(--purple);background:var(--purple-fill);}
-.chip-icon{font-size:.85rem;}
-.chip-arrow{font-size:.7rem;color:var(--text-3);margin-left:.125rem;}
+/* ARTIFACT CARDS — title, description, link (matches site's deliverable-card pattern) */
+.artifact-section{margin:1.75rem 0;}
+.artifact-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;}
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
+.artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
+.artifact-card .a-type{display:none;}
+.artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
+.artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;}
+.a-link{font-size:.78rem;color:var(--purple);text-decoration:none;font-weight:500;}
+.a-link:hover{text-decoration:underline;}
 
 /* VISUAL */
 .visual-wrap{margin:1.75rem 0;background:var(--layer);border-radius:6px;padding:1.375rem 1.5rem;overflow-x:auto;}
@@ -113,14 +124,14 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <p class="def">Most teams don't fail because they chose the wrong technology. They fail because they chose the wrong problem, tried to do too many things at once, or never made a clear decision to stop when the evidence said to. This chapter walks through how to pick the right workflows, validate them quickly, and build a delivery plan that compounds over time.</p>
 </div>
 
-<!-- PHASE STRIP -->
+<!-- PHASE STRIP — 3 phases only, consistent colors -->
 <div class="where-strip">
-  <span class="where-label">Active across</span>
-  <span class="step-pip active-pip">Engage</span>
+  <span class="where-label">Active at</span>
+  <span class="phase-pip pip-engage">Engage</span>
   <span class="pip-sep">→</span>
-  <span class="step-pip active-pip">Discover</span>
+  <span class="phase-pip pip-discover">Discover</span>
   <span class="pip-sep">→</span>
-  <span class="step-pip active-pip">Execute</span>
+  <span class="phase-pip pip-execute">Execute</span>
 </div>
 
 
@@ -128,14 +139,28 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
-    <span class="phase-step-context">Tech &amp; Data Assessment · Business Process Mapping</span>
+    <span class="phase-step-context">Step 2 · Business Process Mapping</span>
+    <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
   <h2>Use what you already know. Pick what you can actually win.</h2>
 
-  <p class="prose">By the time you're ready to prioritize, Engage has given you two assets: a picture of your tech and data readiness — which tells you <strong>where AI can realistically be built</strong> — and a map of your business processes — which tells you <strong>where fixing something is actually worth money</strong>. Good prioritization matches those two pictures. Without both, you're either picking the exciting idea or the feasible one. Rarely the right one.</p>
+  <p class="prose">By the time you're ready to prioritize, Engage has given you two assets: a picture of your tech and data readiness — which tells you <strong>where AI can realistically make an impact</strong> — and a map of your business processes — which tells you <strong>where fixing something is actually worth money</strong>. Good prioritization matches those two pictures. Without both, you're either picking the exciting idea or the feasible one. Rarely the right one.</p>
 
-  <p class="prose">The goal is a short, scored list of real candidates. For each one, you're answering four questions: How much is this worth if we fix it? Can we build it with what we have today? Does a senior leader care enough to commit to it? And is there a real path to shipping something within 90 days?</p>
+  <p class="prose">The goal is a short, scored list of real candidates. For each one, you need two types of people: <strong>process SMEs</strong> who can tell you what the work actually costs and where it breaks, and <strong>tech SMEs</strong> who can tell you whether the data exists to support an AI intervention and how hard it would be to build. You can't score without both in the room.</p>
+
+  <div class="sub-phase" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">How to score</span>
+      <h3>Identifying processes, assigning value, assessing feasibility</h3>
+    </div>
+  </div>
+
+  <p class="prose"><strong>Identify all candidate processes.</strong> Work with process SMEs to list every significant workflow in the domain. Don't filter yet. For each one, document: who does it, how many hours per week it consumes, what the error or rework rate looks like, and what downstream work it blocks or enables. You're building a raw inventory, not a ranked list.</p>
+
+  <p class="prose"><strong>Assign opportunity value.</strong> For each process, estimate what it would be worth to transform it. Value comes in three forms: time saved (headcount hours freed up), cost reduced (direct budget impact, error rework eliminated), or revenue enabled (faster cycle times unlocking deals or outcomes). Your process SMEs give you the baseline numbers; your finance or EBM partner validates them. A rough estimate is fine at this stage — you're ranking candidates, not finalizing a business case.</p>
+
+  <p class="prose"><strong>Assess technical feasibility.</strong> For each high-value candidate, bring in a tech SME to pressure-test it. Three questions: Is the data that an AI would need accessible and structured enough to use? Are there integration constraints or governance requirements that would significantly increase complexity? Could we build something meaningful in 90 days, or would we still be setting up infrastructure at Day 60? The answers determine whether a high-value process is buildable now, or whether it belongs in the "invest to unblock" category first.</p>
 
   <!-- Prioritization matrix -->
   <div class="visual-wrap">
@@ -169,6 +194,18 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="visual-caption">Score every candidate on value potential, data readiness, technical feasibility, and strategic fit. The scoring is the deliverable — it's what makes your recommendation defensible when a leader pushes back.</div>
   </div>
 
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifact</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">PDF · Medium priority</div>
+        <div class="a-title">Prioritization Matrix</div>
+        <div class="a-desc">Fillable scoring template with instructions for each dimension — value, feasibility, data readiness, strategic fit. Walks you through filling it out for every candidate.</div>
+        <div class="a-links"><a class="a-link" href="Prioritization_Matrix_Template.pdf">↗ Open template</a></div>
+      </div>
+    </div>
+  </div>
+
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
     <div class="painpoint-title">Picking based on opinions, not evidence</div>
@@ -192,10 +229,16 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Sanity-check timelines</strong> against developer capacity. Scope that can't ship in 90 days needs to be flagged now.</div></div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📊</span>Prioritization Matrix<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Business Process Map<span class="chip-arrow">↗ template</span></a>
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifact</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">PPT / Mural · Medium priority</div>
+        <div class="a-title">Business Process Map(s)</div>
+        <div class="a-desc">Documents the current-state workflow — handoffs, systems, users, bottlenecks, and automation opportunities. Built from the SME interviews above.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">
@@ -226,13 +269,15 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-discover">Discover</span>
-    <span class="phase-step-context">Workflow Analysis · Solution Design</span>
+    <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
+    <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
   <h2>Prove the opportunity is real. Then define exactly what you're building.</h2>
 
   <p class="prose">Discover has two jobs. First, you validate that the workflow you chose is actually worth transforming — not because it scored well on paper, but because the evidence holds up when you look closely. Second, if it does, you define precisely what you're going to build. Both are distinct. Don't skip the first because you're confident; don't rush the second because you're excited.</p>
 
+  <p class="prose">Your executive sponsor's commitment from Engage now has a concrete meaning: they are committing to provide access to the process owners and SMEs you need across both steps. Without that access — real conversations with the people who do the work, not documentation reviews — neither the Workflow Analysis nor the requirements will be grounded in reality.</p>
 
   <!-- SUB-PHASE 1: WORKFLOW ANALYSIS -->
   <div class="sub-phase">
@@ -242,9 +287,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">The Workflow Analysis is a time-boxed investigation — typically two weeks — into the workflow you selected. You're gathering: how much it costs to run today, what skills it requires, what the key performance indicators are, what a good version of it looks like at a peer organization, and most importantly, what's actually causing it to perform poorly right now. Your output is a recommendation: go deeper into design, or move on to the next workflow.</p>
-
-  <p class="prose">The most useful interviews are with the people who do the work, not the managers who oversee it. Documented processes and actual practice diverge constantly. Frontline users know where the friction is, what workarounds exist, and what would genuinely make their job easier — and that knowledge is what makes your analysis real rather than theoretical.</p>
+  <p class="prose">The Workflow Analysis is a time-boxed investigation — typically two weeks — into the workflow you selected. You need process SMEs who know the current state in detail (not just their manager's version of it), and a tech SME who can assess data access and integration paths as you go. You're gathering: how much the workflow costs to run today, what skills it requires, what the key performance indicators are, what best-in-class looks like at peer organizations, and — most importantly — what's actually causing it to perform poorly. Your output is a recommendation: proceed to Solution Design, or return to the prioritized list.</p>
 
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
@@ -351,10 +394,16 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="visual-caption">The Workflow Analysis follows four investigative tracks — spend, user research, benchmarks, and root cause — then converges on a single go/no-go question. Both outcomes are valid. Document either one and move accordingly.</div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Workflow Analysis Template<span class="chip-arrow">↗ document</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Go/No-Go Decision Record<span class="chip-arrow">↗ template</span></a>
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifact</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">Visio · Medium priority</div>
+        <div class="a-title">EIW Assessment and Automation Level</div>
+        <div class="a-desc">Analyzes bottlenecks, manual work, decisions, user pain, volume, cycle time, technical dependencies, and the AI opportunity for the candidate workflow. The output of your investigation, and what the go/no-go recommendation is based on.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">
@@ -368,21 +417,25 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 4</span>
-      <h3>Solution Design — Define exactly what you're building</h3>
+      <h3>Solution Design — Define the vision, scope the build</h3>
     </div>
   </div>
 
-  <p class="prose">With a confirmed opportunity and approval to proceed, Solution Design answers two questions: what does the ideal end state look like, and what's the smallest version of it that we can ship in 90 days to test whether the approach is right?</p>
+  <p class="prose">Solution Design brings in the product owner alongside the process and tech SMEs already in the room. Together you answer three questions in sequence, and the sequence matters: you can't scope the MVP until you have the end-state vision, and you can't write requirements until you have the MVP scope.</p>
 
-  <p class="prose">The ideal end state — the "future state vision" — should be described without reference to how things work today. Don't design around your current systems or inherited constraints. Describe what would happen if you were designing this workflow from scratch with today's technology. That picture becomes the reference point for every scope decision you make after this.</p>
+  <p class="prose"><strong>First: define the end-state vision.</strong> Describe the fully transformed workflow — what would it look like if you redesigned it from scratch with today's AI capabilities, unconstrained by how things work today? This isn't a product spec; it's a shared picture of where you're ultimately heading. The end-state vision is what prevents the MVP from becoming the final destination. Every scope decision you make after this should be tested against it: does this move us toward that vision, or away from it?</p>
+
+  <p class="prose"><strong>Second: define the 90-day scope.</strong> The MVP is the smallest version of the solution that meaningfully tests whether the core hypothesis is right. It shouldn't try to deliver the full end-state vision — that would take longer and risk proving nothing. The goal is to build something real users can interact with, generate evidence against your baseline metrics, and support a data-driven go/no-go decision at Day 90. A well-scoped MVP also builds a reusable foundation: integrations, data pipelines, and architecture patterns that the next workflow can build on rather than rebuild from scratch. Design for modularity now.</p>
+
+  <p class="prose"><strong>Third: write the out-of-scope list.</strong> This is as important as the in-scope list. Everything that isn't explicitly parked becomes an implicit yes, which is how delivery timelines slip. The out-of-scope list is also the seed of your post-MVP backlog — it should include target dates and owners so it doesn't disappear after Day 90.</p>
 
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
     <div class="painpoint-title">Handing over requirements no one can build from</div>
-    <div class="painpoint-body">This is the most common handoff failure in the entire process. Business teams write requirements that make sense internally but are too conceptual for a development team to act on. The test is simple: give a developer the requirements document and ask if they can write a user story from it without asking you a single question. If they can't, it's not ready. This isn't about making the document longer — it's about being specific: who does what, in what system, with what data, and what does done look like.</div>
+    <div class="painpoint-body">The most common handoff failure in this entire process happens here. Business teams write requirements that make sense internally but are too conceptual for a development team to act on. The test is simple: give a developer the requirements document and ask if they can write a user story from it without asking you a single clarifying question. If they can't, it's not ready. This isn't about length — it's about specificity: who does what, in what system, with what data, and what does "done" look like.</div>
   </div>
 
-  <p class="prose">MVP scope — what ships in 90 days — should be decided by the team together and signed off by the executive sponsor. Just as important as the in-scope list is the explicit out-of-scope list. Every feature that isn't named as out-of-scope is implicitly in scope, and that's what causes delivery delays. Write both lists. Get them approved. The out-of-scope list automatically becomes the post-MVP backlog.</p>
+  <p class="prose">Get the scope — both lists — signed off by the executive sponsor before the build team takes over. That sign-off is what gives the project lead standing to hold the line when someone asks to add scope mid-sprint.</p>
 
   <!-- Generic 90-day roadmap -->
   <div class="visual-wrap">
@@ -489,11 +542,76 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Write build-ready requirements.</strong> Test: can a developer write a user story from each line without asking you anything? If not, keep going.</div></div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Future State Vision<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>High-Level Requirements<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>MVP Scope Worksheet<span class="chip-arrow">↗ template</span></a>
+  <!-- 30-day roadmap for Solution Design — pattern from IDEO-style sprint plans: setup/learn → pilot/build → validate -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
+      <text x="310" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">First 30 days of build — what each week is for</text>
+
+      <!-- Week 1 -->
+      <rect x="20" y="30" width="138" height="86" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="89" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">Week 1</text>
+      <text x="89" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Confirm scope &amp;</text>
+      <text x="89" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">team is ready</text>
+      <text x="89" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Milestone: kickoff</text>
+      <text x="89" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">+ environment ready</text>
+
+      <!-- Week 2 -->
+      <rect x="166" y="30" width="138" height="86" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="235" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">Week 2</text>
+      <text x="235" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Build the riskiest</text>
+      <text x="235" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">piece first</text>
+      <text x="235" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Milestone: core</text>
+      <text x="235" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">assumption tested</text>
+
+      <!-- Week 3 -->
+      <rect x="312" y="30" width="138" height="86" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="381" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">Week 3</text>
+      <text x="381" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">First internal demo</text>
+      <text x="381" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">to SMEs + sponsor</text>
+      <text x="381" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Milestone: early</text>
+      <text x="381" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">feedback incorporated</text>
+
+      <!-- Week 4 -->
+      <rect x="458" y="30" width="142" height="86" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="529" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">Week 4</text>
+      <text x="529" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Lock Sprint 2–3 plan</text>
+      <text x="529" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">from what you learned</text>
+      <text x="529" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">Milestone: 30-day</text>
+      <text x="529" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">checkpoint with sponsor</text>
+
+      <!-- Connectors -->
+      <line x1="158" y1="73" x2="166" y2="73" stroke="#8a3ffc" stroke-width="1.5"/>
+      <line x1="304" y1="73" x2="312" y2="73" stroke="#8a3ffc" stroke-width="1.5"/>
+      <line x1="450" y1="73" x2="458" y2="73" stroke="#8a3ffc" stroke-width="1.5"/>
+
+      <text x="310" y="138" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888" font-style="italic">Pattern: learn &amp; set up (Wk 1) → test the riskiest part (Wk 2) → get real feedback (Wk 3) → re-plan with evidence (Wk 4)</text>
+      <text x="310" y="154" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">This 30-day plan is written during Solution Design so the build team starts Sprint 1 with a clear first month, not just a backlog.</text>
+    </svg>
+    <div class="visual-caption">Each week ends with a concrete milestone, not just a list of tasks completed. This is what you hand to the build team alongside the requirements.</div>
+  </div>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">Visio · Medium priority</div>
+        <div class="a-title">Future State Workflow Process Map</div>
+        <div class="a-desc">A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop. The reference point for every scope decision that follows.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">Excel · High priority</div>
+        <div class="a-title">Business Requirements Log</div>
+        <div class="a-desc">The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, and solution architecture.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">PPT · High priority</div>
+        <div class="a-title">Strategic Roadmap</div>
+        <div class="a-desc">The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases — including the first 30 days of build.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+    </div>
   </div>
 
   <div class="case-study">
@@ -515,7 +633,8 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-execute">Execute</span>
-    <span class="phase-step-context">Experimentation · Scale &amp; Adopt</span>
+    <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
+    <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
   <h2>Build with a 90-day clock. Decide on data. Set up the next bet.</h2>
@@ -528,17 +647,19 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">The build team's first task — before any code — is to read the requirements and confirm the scope is achievable in 90 days. If it isn't, that conversation needs to happen immediately. A scope problem caught on day two costs nothing. The same problem discovered in week six of a sprint costs the delivery date and executive confidence.</p>
+  <p class="prose">Before any code is written, the build team needs to confirm they have everything required to execute. That means reviewing not just the requirements document, but the full project picture: the end-state vision (so they understand what they're building toward), the MVP scope and what's explicitly out, who the SMEs are and how to reach them mid-sprint, the operating model (who makes decisions and at what cadence), and how the engagement model works when a requirement needs to change. If any of those are unclear, surface it in the first two days — not week six.</p>
 
-  <p class="prose">Run the build in two-week sprint cycles. What you test first matters: put the riskiest assumption — the thing most likely to invalidate the whole approach — in Sprint 1, while there's still room to pivot. The steering committee's job is to clear blockers and surface problems, not to receive good news. As Sandy put it from the Source-to-Pay transformation: <strong>"Red on a chart is good."</strong> A build that shows only green is either measuring the wrong things or reporting selectively.</p>
+  <p class="prose">Run the build in two-week sprint cycles. What you test first matters: put the riskiest assumption — the thing most likely to invalidate the whole approach — in Sprint 1, while there's still room to pivot. The steering committee's job is to clear blockers and surface problems, not to receive good news. One transformation lead put it well: <strong>"Red on a chart is good."</strong> A build showing only green is either not measuring the right things or not reporting honestly.</p>
+
+  <p class="prose">Some requirements will be defined or refined mid-sprint. That's expected — users react to working software differently than they react to wireframes. The key is having a clear pipeline from that feedback to the roadmap: new or changed requirements get logged, triaged with the product owner, and either pulled into the current sprint, queued for the next one, or added to the post-MVP backlog. Without that pipeline, the build drifts or the team makes scope decisions unilaterally.</p>
 
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">Success metrics set after the build</div>
+    <div class="painpoint-title">Go/no-go metrics set after the build</div>
     <div class="painpoint-body">If you haven't locked the go/no-go criteria before Day 1, they'll be defined after the build — which means they'll be defined to pass. The Day 90 decision needs to answer a pre-agreed question: did this build demonstrate enough value, at enough reliability, to justify scaling? Write that question down. Agree on the data source. Get sponsor sign-off before development starts. A metric with no pre-agreed threshold is decoration, not a decision rule.</div>
   </div>
 
-  <p class="prose">Scope reductions during the build are not failures — they're the mechanism that makes 90-day delivery work. The MCC Marketing transformation de-scoped an agent mid-build when it became too large for the timeline, and leadership recognized it as the right call. What determines whether a de-scope preserves or destroys confidence is how it's communicated: show what was cut, why, when it comes back, and what the team is protecting by cutting it.</p>
+  <p class="prose">Scope reductions during the build are not failures — they're the mechanism that makes 90-day delivery work. What determines whether a de-scope preserves or destroys executive confidence is how it's communicated: show what was cut, why, when it comes back, and what the team is protecting by cutting it.</p>
 
   <!-- SUB-PHASE: SCALE & ADOPT -->
   <div class="sub-phase" style="margin-top:2rem;">
@@ -548,32 +669,98 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">The go/no-go decision at Day 90 is not the end of the roadmap — it's the start of the next one. If it's a go, the post-MVP backlog activates and change management goes into full execution: training, communications, retiring the old process, and monitoring whether people are actually using the new one. If it's a no-go, the documentation of what you learned is the input to the next workflow analysis.</p>
+  <p class="prose">The go/no-go at Day 90 is not the end of the roadmap — it's the beginning of the next phase. If it's a go, the post-MVP backlog activates, change management moves into full execution, and the team shifts from building to embedding. If it's a no-go, the documentation of what was learned is the input to the next workflow analysis — and that next cycle will be faster because the reusable infrastructure from this build carries forward.</p>
 
-  <p class="prose">Before the transformation team steps back, three ownership questions need explicit answers: who manages the business content and processes around the tool? Who maintains the technical infrastructure and keeps the system running? Who handles user questions and day-to-day support? When those three roles are unnamed, the solution degrades quietly and eventually gets abandoned.</p>
+  <p class="prose">Before the transformation team steps back, two ownership roles need to be named explicitly: a <strong>business owner</strong> who is accountable for adoption, user support, and the ongoing business outcomes of the solution, and a <strong>technical lead</strong> who maintains the infrastructure, manages updates, and handles system-level issues. Ongoing user support and change management is a joint responsibility between these two — neither owns it alone. When these roles aren't named before handoff, the solution degrades quietly.</p>
 
-  <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Re-validate scope with the build team</strong> before Day 1. If anything isn't achievable, surface it immediately.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Lock go/no-go metrics and data source</strong> before any code is written. The Day 90 decision needs a pre-agreed question and answer standard.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test the riskiest assumption first.</strong> Whatever would most likely invalidate the whole approach goes into Sprint 1.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Communicate scope reductions clearly</strong> — what moved, why, and when it returns. Activate the post-MVP backlog with owners.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Name three owners before handoff:</strong> business content, technical infrastructure, user support. Unnamed ownership means the solution drifts.</div></div>
-    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Return to the prioritized list</strong> with what you learned. The next workflow analysis should be faster than the first.</div></div>
+  <p class="prose">Naming owners is necessary but not sufficient. You also need a definition of "done" that everyone agrees on before the transformation team exits. What does full adoption look like — MECE definition of the user population, target utilization rate, target KPI achievement? What does the full-featured product look like relative to the end-state vision defined in Step 4? These definitions shape the post-90-day roadmap and give the business owner something to manage toward.</p>
+
+  <!-- Post-90-day roadmap visual -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 620 230" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
+      <text x="310" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">180-day roadmap — from launch to full vision</text>
+
+      <!-- Timeline bar -->
+      <line x1="40" y1="48" x2="590" y2="48" stroke="#e0e0e0" stroke-width="1"/>
+
+      <!-- Milestone markers -->
+      <circle cx="40"  cy="48" r="5" fill="#24a148"/>
+      <circle cx="220" cy="48" r="5" fill="#24a148"/>
+      <circle cx="400" cy="48" r="5" fill="#24a148"/>
+      <circle cx="590" cy="48" r="5" fill="#8a3ffc"/>
+
+      <!-- Day labels -->
+      <text x="40"  y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Day 90</text>
+      <text x="220" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Day 120</text>
+      <text x="400" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Day 180</text>
+      <text x="590" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#5c2eb8">Full vision</text>
+
+      <!-- Phase bands below timeline -->
+      <!-- 30 day: Day 90–120 -->
+      <rect x="40"  y="60" width="180" height="52" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="130" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">30-day: Stabilize</text>
+      <text x="130" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Live in prod · Active user support</text>
+      <text x="130" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Track KPIs weekly · Fix fast</text>
+
+      <!-- 90 day: Day 120–180 -->
+      <rect x="224" y="60" width="176" height="52" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="312" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">90-day: Expand</text>
+      <text x="312" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Wave 2 features from backlog</text>
+      <text x="312" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Broaden user base · ROI validated</text>
+
+      <!-- 180+ day -->
+      <rect x="404" y="60" width="186" height="52" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+      <text x="497" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">180-day: Full vision</text>
+      <text x="497" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">All user groups · Full feature set</text>
+      <text x="497" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#5c2eb8">End-state vision reached</text>
+
+      <!-- Definition of done box -->
+      <rect x="40" y="130" width="550" height="56" rx="4" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/>
+      <text x="315" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Definition of "fully complete"</text>
+      <text x="315" y="167" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">All intended users onboarded (MECE definition) · All scoped features live · Adoption KPI target met</text>
+      <text x="315" y="180" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">Ownership formally transferred · Old process retired · Next workflow in Discover</text>
+    </svg>
+    <div class="visual-caption">The go/no-go at Day 90 starts the clock on the post-launch roadmap, not the end of the project. Define what "fully complete" means before handoff — MECE user population, full feature set relative to the end-state vision, adoption KPI achieved — so the business owner has a concrete target to manage toward.</div>
   </div>
 
-  <div class="artifact-chip-row">
-    <span class="chip-label">Artifacts</span>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📅</span>90-Day Sprint Roadmap<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📋</span>Post-MVP Backlog<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Scaling Recommendation<span class="chip-arrow">↗ template</span></a>
-    <a class="artifact-chip" href="#"><span class="chip-icon">📄</span>Ownership Transfer Record<span class="chip-arrow">↗ template</span></a>
+  <div class="steps-summary">
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Confirm project clarity before Day 1:</strong> end-state vision, MVP scope, SME contacts, operating model, and how mid-sprint requirements changes flow to the backlog.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Lock go/no-go metrics and data source</strong> before writing any code. The Day 90 decision needs a pre-agreed question and answer standard.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test the riskiest assumption first.</strong> Whatever would most likely invalidate the whole approach goes into Sprint 1.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Run weekly steering with demos and blockers,</strong> not status updates. Mid-sprint requirement changes get logged and triaged — not absorbed silently or rejected reflexively.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Name a business owner and a technical lead</strong> before handoff. Joint responsibility for user support and change management. No single owner = no accountability.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Define "fully complete"</strong> — MECE users, full feature set, adoption target — and build the 30/90/180-day post-launch roadmap before the transformation team exits.</div></div>
+  </div>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-type">PPT · High priority</div>
+        <div class="a-title">Strategic Roadmap</div>
+        <div class="a-desc">Carries forward from Solution Design — now updated with sprint results, the go/no-go outcome, and the post-launch path through 180 days.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">Excel · Medium priority</div>
+        <div class="a-title">ROI Analysis</div>
+        <div class="a-desc">Compares ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value. The data behind the go/no-go.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-type">PPT · Medium priority</div>
+        <div class="a-title">Operational Health Dashboard</div>
+        <div class="a-desc">Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Tracks whether "fully complete" has been reached.</div>
+        <div class="a-links"><a class="a-link" href="#">↗ Open template</a></div>
+      </div>
+    </div>
   </div>
 
   <div class="ready">
     <span class="ready-icon">✓</span>
     <div class="ready-body">
       <h4>Ready to move to the next workflow</h4>
-      <p>Go/no-go decision documented with supporting data. Three owners named and confirmed. Post-MVP backlog has owners. Return to Workflow Analysis for the next workflow on the prioritized list — and use what you learned to make that analysis sharper.</p>
+      <p>Go/no-go decision documented with supporting data. Business owner and technical lead named. "Fully complete" is defined. Post-launch roadmap exists with owners. Return to Workflow Analysis for the next workflow on the prioritized list.</p>
     </div>
   </div>
 </div>
