@@ -147,7 +147,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 
   <p class="prose">By the time you're ready to prioritize, Engage has given you two assets: a picture of your tech and data readiness — which tells you <strong>where AI can realistically make an impact</strong> — and a map of your business processes — which tells you <strong>where fixing something is actually worth money</strong>. Good prioritization matches those two pictures. Without both, you're either picking the exciting idea or the feasible one. Rarely the right one.</p>
 
-  <p class="prose">The goal is a short, scored list of real potentials. For each one, you need two types of people: <strong>process SMEs</strong> who can tell you what the work actually costs and where it breaks, and <strong>tech SMEs</strong> who can tell you whether the data exists to support an AI intervention and how hard it would be to build. You can't score without both in the room.</p>
+  <p class="prose">The goal is a short, scored list of real candidates. For each one, you need two types of people: <strong>process SMEs</strong> who can tell you what the work actually costs and where it breaks, and <strong>tech SMEs</strong> who can tell you whether the data exists to support an AI intervention and how hard it would be to build. You can't score without both in the room.</p>
 
   <div class="sub-phase" style="margin-top:0;">
     <div class="sub-phase-label">
@@ -156,11 +156,11 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose"><strong>Identify all potential processes.</strong> Work with process SMEs to list every significant workflow in the domain. Don't filter yet. For each one, document: who does it, how many hours per week it consumes, what the error or rework rate looks like, and what downstream work it blocks or enables. You're building a raw inventory, not a ranked list.</p>
+  <p class="prose"><strong>Identify all candidate processes.</strong> Work with process SMEs to list every significant workflow in the domain. Don't filter yet. For each one, document: who does it, how many hours per week it consumes, what the error or rework rate looks like, and what downstream work it blocks or enables. You're building a raw inventory, not a ranked list.</p>
 
-  <p class="prose"><strong>Assign opportunity value.</strong> For each process, estimate what it would be worth to transform it. Value comes in three forms: time saved (headcount hours freed up), cost reduced (direct budget impact, error rework eliminated), or revenue enabled (faster cycle times unlocking deals or outcomes). Your process SMEs give you the baseline numbers; your finance or EBM partner validates them. A rough estimate is fine at this stage — you're ranking potentials, not finalizing a business case.</p>
+  <p class="prose"><strong>Assign opportunity value.</strong> For each process, estimate what it would be worth to transform it. Value comes in three forms: time saved (headcount hours freed up), cost reduced (direct budget impact, error rework eliminated), or revenue enabled (faster cycle times unlocking deals or outcomes). Your process SMEs give you the baseline numbers; your finance or EBM partner validates them. A rough estimate is fine at this stage — you're ranking candidates, not finalizing a business case.</p>
 
-  <p class="prose"><strong>Assess technical feasibility.</strong> For each high-value potential, bring in a tech SME to pressure-test it. Three questions: Is the data that an AI would need accessible and structured enough to use? Are there integration constraints or governance requirements that would significantly increase complexity? Could we build something meaningful in 90 days, or would we still be setting up infrastructure at Day 60? The answers determine whether a high-value process is buildable now, or whether it belongs in the "invest to unblock" category first.</p>
+  <p class="prose"><strong>Assess technical feasibility.</strong> For each high-value candidate, bring in a tech SME to pressure-test it. Three questions: Is the data that an AI would need accessible and structured enough to use? Are there integration constraints or governance requirements that would significantly increase complexity? Could we build something meaningful in 90 days, or would we still be setting up infrastructure at Day 60? The answers determine whether a high-value process is buildable now, or whether it belongs in the "invest to unblock" category first.</p>
 
   <div class="artifact-section">
     <div class="artifact-section-label">Artifacts</div>
@@ -215,7 +215,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
       <text x="90" y="252" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">Low</text>
       <text x="90" y="36" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">High</text>
     </svg>
-    <div class="visual-caption">Score every potential on value potential, data readiness, technical feasibility, and strategic fit. The scoring is the deliverable — it's what makes your recommendation defensible when a leader pushes back.</div>
+    <div class="visual-caption">Score every candidate on value potential, data readiness, technical feasibility, and strategic fit. The scoring is the deliverable — it's what makes your recommendation defensible when a leader pushes back.</div>
   </div>
 
   <div class="artifact-section">
@@ -233,7 +233,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
     <div class="painpoint-title">Picking based on opinions, not evidence</div>
-    <div class="painpoint-body">The most common failure here is running a workshop, discussing what "feels" most impactful, and producing a ranking that reflects political momentum more than real opportunity. When that list goes to leadership, it gets overridden — and the team has no data to push back with. The fix requires discipline: use a consistent scoring rubric for every potential, show the math, and let the numbers drive the conversation. Your recommendation is only as strong as the evidence behind it.</div>
+    <div class="painpoint-body">The most common failure here is running a workshop, discussing what "feels" most impactful, and producing a ranking that reflects political momentum more than real opportunity. When that list goes to leadership, it gets overridden — and the team has no data to push back with. The fix requires discipline: use a consistent scoring rubric for every candidate, show the math, and let the numbers drive the conversation. Your recommendation is only as strong as the evidence behind it.</div>
   </div>
 
   <p class="prose">Also look outside your organization: what are comparable companies doing with similar processes? Benchmarks tell you what's actually achievable — so you're aiming at a real target rather than an improvement to a broken baseline — and they give leadership a concrete frame for why this investment makes sense.</p>
@@ -241,21 +241,21 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="painpoint">
     <div class="painpoint-label">⚠ Pain point</div>
     <div class="painpoint-title">Choosing the easy fix instead of the real problem</div>
-    <div class="painpoint-body">When time is short, teams gravitate toward workflows that are easy to improve rather than ones that matter. The result is a technically successful build that nobody cares about scaling. Look for root causes when you score potentials — if a workflow's real problem is bad data or a process that shouldn't exist, those issues should show up in the feasibility score, not get papered over.</div>
+    <div class="painpoint-body">When time is short, teams gravitate toward workflows that are easy to improve rather than ones that matter. The result is a technically successful build that nobody cares about scaling. Look for root causes when you score candidates — if a workflow's real problem is bad data or a process that shouldn't exist, those issues should show up in the feasibility score, not get papered over.</div>
   </div>
 
-  <p class="prose">Before finalizing the list, check one more thing: confirm that a senior leader will actually commit to each top potential. Not verbally support it — actually show up to weekly steering meetings, clear blockers, and make hard scope calls when needed. If no one at that level is willing to do that, the project will stall the moment it hits its first obstacle. Drop those potentials now.</p>
+  <p class="prose">Before finalizing the list, check one more thing: confirm that a senior leader will actually commit to each top candidate. Not verbally support it — actually show up to weekly steering meetings, clear blockers, and make hard scope calls when needed. If no one at that level is willing to do that, the project will stall the moment it hits its first obstacle. Drop those candidates now.</p>
 
   <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Score all potentials</strong> using the prioritization template — value, feasibility, data readiness, strategic fit. Show the math.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Pull external benchmarks</strong> for each top potential. What does a leading organization's version of this process look like?</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Confirm a sponsor</strong> for the top potentials before finalizing. No sponsor = drop it.</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Score all candidates</strong> using the prioritization template — value, feasibility, data readiness, strategic fit. Show the math.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Pull external benchmarks</strong> for each top candidate. What does a leading organization's version of this process look like?</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Confirm a sponsor</strong> for the top candidates before finalizing. No sponsor = drop it.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Sanity-check timelines</strong> against developer capacity. Scope that can't ship in 90 days needs to be flagged now.</div></div>
   </div>
 
 
   <div class="case-study">
-    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Scoring four potential workflows</span></div>
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Scoring four candidate workflows</span></div>
     <p class="cs-prose">The enrollment team ended Engage with four workflows from their process map: document verification, counselor outreach, transcript evaluation, and application processing. Running each through the scoring framework, document verification came out clearly on top — 60% of counselor time spent on it, clean data already in their document system, a confirmed VP of Enrollment sponsor, and a technically simple AI intervention. Outreach ranked second on value but was limited by incomplete CRM data. Transcript evaluation and application processing were parked: low feasibility, no committed sponsor.</p>
     <table class="cs-table">
       <thead><tr><th>Workflow</th><th>Value</th><th>Feasibility</th><th>Data ready</th><th>Sponsor</th><th>Decision</th></tr></thead>

@@ -782,7 +782,7 @@
   </div>
 
   <!-- Step 1 -->
-  <div id="step1-narrative" class="step-narrative engage">
+  <div class="step-narrative engage">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">01</div>
       <div class="step-narrative-phase-tag">Engage</div>
@@ -809,7 +809,7 @@
   </div>
 
   <!-- Step 2 -->
-  <div id="step2-narrative" class="step-narrative engage">
+  <div class="step-narrative engage">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">02</div>
       <div class="step-narrative-phase-tag">Engage</div>
@@ -836,7 +836,7 @@
   </div>
 
   <!-- Step 3 -->
-  <div id="step3-narrative" class="step-narrative discover">
+  <div class="step-narrative discover">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">03</div>
       <div class="step-narrative-phase-tag">Discover</div>
@@ -863,7 +863,7 @@
   </div>
 
   <!-- Step 4 -->
-  <div id="step4-narrative" class="step-narrative discover">
+  <div class="step-narrative discover">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">04</div>
       <div class="step-narrative-phase-tag">Discover</div>
@@ -890,7 +890,7 @@
   </div>
 
   <!-- Step 5 -->
-  <div id="step5-narrative" class="step-narrative execute">
+  <div class="step-narrative execute">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">05</div>
       <div class="step-narrative-phase-tag">Execute</div>
@@ -917,7 +917,7 @@
   </div>
 
   <!-- Step 6 -->
-  <div id="step6-narrative" class="step-narrative execute">
+  <div class="step-narrative execute">
     <div class="step-narrative-sidebar">
       <div class="step-narrative-number">06</div>
       <div class="step-narrative-phase-tag">Execute</div>
