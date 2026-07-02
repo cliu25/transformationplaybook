@@ -20,17 +20,12 @@
   "navigation": [
     {
       "id": "overview",
-      "label": "Home",
+      "label": "Overview",
       "route": "/overview"
     },
     {
-      "id": "end-to-end-workflow",
-      "label": "End-to-End Workflow",
-      "route": "/workflow"
-    },
-    {
       "id": "modules",
-      "label": "Key Challenges",
+      "label": "How-to Deep Dives",
       "route": "/modules"
     },
     {
@@ -1244,8 +1239,8 @@
   "modules": {
     "id": "modules",
     "route": "/modules",
-    "title": "Key Challenges",
-    "description": "Key Challenges are deep dives on pain points, organized by transformation workflow phase.",
+    "title": "How-to Deep Dives",
+    "description": "How-to Deep Dives are deep dives on pain points, organized by transformation workflow phase.",
     "l2Navigation": [
       {
         "id": "overview",
@@ -1653,7 +1648,7 @@
       {
         "id": "prioritization-roadmap",
         "title": "Prioritization & Roadmap",
-        "definition": "Domain leads who have a mandate and a rough idea but no clear path to their first workflow. This chapter walks from 'too many ideas' to a single, scoped, approved bet — and then from that bet through a 90-day roadmap that the build team can execute.",
+        "definition": "Most teams don't fail because they chose the wrong technology. They fail because they chose the wrong problem, tried to do too many things at once, or never made a clear decision to stop when the evidence said to. This chapter walks through how to pick the right workflows, validate them quickly, and build a delivery plan that compounds over time.",
         "color": "#8a3ffc",
         "route": "/modules/prioritization-roadmap",
         "phaseSections": [

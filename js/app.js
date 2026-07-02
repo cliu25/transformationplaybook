@@ -3,6 +3,16 @@
 
 // Calculate base path for GitHub Pages
 const basePath = window.location.pathname.split('/').slice(0, -1).join('/') || '';
+const hashRouteMap = {
+    '/overview': '/overview',
+    '/deepdives': '/modules',
+    '/casestudy': '/case-study',
+    '/library': '/library',
+    '/workflow': '/workflow'
+};
+const canonicalHashByRoute = Object.fromEntries(
+    Object.entries(hashRouteMap).map(([hashRoute, appRoute]) => [appRoute, hashRoute])
+);
 
 // Global state
 let content = null;
@@ -10,7 +20,7 @@ let artifactInventory = null;
 let currentRoute = '/overview';
 let openAccordions = {};
 let activeWorkflowTab = 'engage';
-let selectedModule = 'overview';
+let selectedModule = 'modules-overview';
 let selectedCaseStudyPhase = 0; // Track which phase is currently displayed
 
 // Initialize the application
@@ -60,27 +70,14 @@ function initializeApp() {
     console.log('Initializing search...');
     initializeSearch();
     
-    // Handle initial route
-    const path = window.location.pathname;
-    if (path.includes('/overview')) {
-        navigateTo('/overview');
-    } else if (path.includes('/modules')) {
-        navigateTo('/modules');
-    } else if (path.includes('/library')) {
-        navigateTo('/library');
-    } else if (path.includes('/case-study')) {
-        navigateTo('/case-study');
-    } else if (path.includes('/workflow')) {
-        navigateTo('/workflow');
-    } else {
-        navigateTo('/overview');
-    }
+    // Handle initial route from hash for GitHub Pages compatibility
+    const hashRoute = window.location.hash.replace(/^#/, '') || '/overview';
+    navigateTo(hashRouteMap[hashRoute] || '/overview', false);
     
-    // Handle browser back/forward
-    window.addEventListener('popstate', (e) => {
-        if (e.state && e.state.route) {
-            navigateTo(e.state.route, false);
-        }
+    // Handle browser back/forward and hash changes
+    window.addEventListener('hashchange', () => {
+        const nextHashRoute = window.location.hash.replace(/^#/, '') || '/overview';
+        navigateTo(hashRouteMap[nextHashRoute] || '/overview', false);
     });
 }
 
@@ -366,10 +363,11 @@ function navigateTo(route, pushState = true) {
         link.classList.toggle('active', link.dataset.route === route || (route === '/' && link.dataset.route === '/overview'));
     });
     
-    // Update browser history
+    // Update hash-based URL for GitHub Pages-safe deep linking
     if (pushState) {
-        const fullPath = basePath + route;
-        window.history.pushState({ route }, '', fullPath);
+        const canonicalHashRoute = canonicalHashByRoute[route] || '/overview';
+        window.location.hash = canonicalHashRoute;
+        return;
     }
     
     // Track page view
@@ -514,98 +512,68 @@ async function loadBlueprintSVG(viewNumber) {
 
 async function renderWorkflowPage() {
     const main = document.getElementById('main-content');
-    
-    // Load the master blueprint SVG
-    const blueprintSVG = await loadBlueprintSVG(1);
-    
-    main.innerHTML = `
-        <!-- Hero Section -->
-        <section class="panel" style="margin-bottom: 2rem;">
-            <h1 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 1rem;">End-to-End Workflow</h1>
-            <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.6; max-width: 52rem;">
-                Open Engage, Discover, and Execute to see workflow steps, key activities, readiness checklists, deliverables, modules, and pitfalls.
-                This is your step-by-step guide from program initiation through scaling and adoption.
-            </p>
-        </section>
 
-        <!-- Master Service Blueprint -->
-        <section class="flow-panel">
-            <div class="blueprint-container">
-                ${blueprintSVG}
+    try {
+        const response = await fetch('e2e_workflow_all_steps.html');
+        if (!response.ok) throw new Error('Failed to load workflow narrative');
+
+        const html = await response.text();
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+
+        const bodyChildren = Array.from(doc.body.children);
+        main.innerHTML = `
+            <section class="panel" style="margin-bottom: 2rem;">
+                <h1 style="font-size: 2.5rem; font-weight: 300; margin-bottom: 1rem;">End-to-End Workflow</h1>
+                <p style="font-size: 1.125rem; color: var(--text-secondary); line-height: 1.6; max-width: 52rem;">
+                    Six steps. Three phases. One repeatable method.
+                </p>
+            </section>
+            <div class="workflow-embed">
+                ${bodyChildren
+                    .filter(el => el.tagName !== 'SCRIPT' && el.tagName !== 'STYLE')
+                    .map(el => el.outerHTML)
+                    .join('\n')}
             </div>
-        </section>
+        `;
 
-        <!-- Tabs -->
-        <div class="section-tabs">
-            <button class="section-tab ${activeWorkflowTab === 'engage' ? 'active' : ''}" data-tab="engage">
-                Engage
-            </button>
-            <button class="section-tab ${activeWorkflowTab === 'discover' ? 'active' : ''}" data-tab="discover">
-                Discover
-            </button>
-            <button class="section-tab ${activeWorkflowTab === 'execute' ? 'active' : ''}" data-tab="execute">
-                Execute
-            </button>
-        </div>
-
-        <!-- Tab Content -->
-        <div id="workflow-tab-content"></div>
-        
-        <!-- Key Challenges Section -->
-        <section class="panel" style="margin-top: 3rem;">
-            <h2 style="font-size: 1.75rem; font-weight: 300; margin-bottom: 1.5rem;">Key Challenges</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 2rem;">Deep dives on the five hardest parts of AI transformation. Each challenge includes phase-specific guidance, templates, and real-world examples.</p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <div class="card" onclick="navigateTo('/modules')" style="width: 100%; height: 100%; padding: 1.5rem; border-left: 3px solid #0f62fe; cursor: pointer; transition: transform 0.2s; box-sizing: border-box;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #0f62fe;">Value Measurement & ROI</h3>
-                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Define measurable value before you build and prove it after you launch. Lock baselines early, instrument automatically, and tie results to the balance sheet—not vague efficiency claims.</p>
-                </div>
-                
-                <div class="card" onclick="navigateTo('/modules')" style="width: 100%; height: 100%; padding: 1.5rem; border-left: 3px solid #8a3ffc; cursor: pointer; transition: transform 0.2s; box-sizing: border-box;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #8a3ffc;">Prioritization & Roadmap</h3>
-                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Choose what to build based on evidence, not politics. Score every potential workflow on value, feasibility, and data readiness—then defend your recommendation with math, not intuition.</p>
-                </div>
-                
-                <div class="card" onclick="navigateTo('/modules')" style="width: 100%; height: 100%; padding: 1.5rem; border-left: 3px solid #24a148; cursor: pointer; transition: transform 0.2s; box-sizing: border-box;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #24a148;">Systems Integration</h3>
-                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Navigate ARB, data pipelines, API contracts, and enterprise architecture without derailing your 90-day sprint. Identify integration constraints early and design around them—not through them.</p>
-                </div>
-                
-                <div class="card" onclick="navigateTo('/modules')" style="width: 100%; height: 100%; padding: 1.5rem; border-left: 3px solid #ff832b; cursor: pointer; transition: transform 0.2s; box-sizing: border-box;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #ff832b;">Adoption & Change</h3>
-                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Drive real usage through early user involvement, UAT, training, and feedback loops. Adoption is 70% of the outcome—start change management at the beginning, not after the build.</p>
-                </div>
-                
-                <div class="card" onclick="navigateTo('/modules')" style="width: 100%; height: 100%; padding: 1.5rem; border-left: 3px solid #da1e28; cursor: pointer; transition: transform 0.2s; box-sizing: border-box;">
-                    <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.75rem; color: #da1e28;">Governance & Risk</h3>
-                    <p style="font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary);">Set up steering committees, RACI, RAID logs, and escalation paths before the sprint starts. Clear governance prevents blockers from becoming project-killers.</p>
-                </div>
-            </div>
-        </section>
-    `;
-    
-    // Add flowchart click handlers
-    document.querySelectorAll('.flow-card').forEach(card => {
-        card.addEventListener('click', () => {
-            scrollToAnchor(card.dataset.anchor);
-        });
-    });
-    
-    // Add tab click handlers
-    document.querySelectorAll('.section-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            activeWorkflowTab = tab.dataset.tab;
-            renderWorkflowTabContent();
-            // Update tab active state
-            document.querySelectorAll('.section-tab').forEach(t => {
-                t.classList.toggle('active', t.dataset.tab === activeWorkflowTab);
+        main.querySelectorAll('.acc-trigger').forEach(btn => {
+            btn.removeAttribute('onclick');
+            btn.addEventListener('click', () => {
+                const body = btn.nextElementSibling;
+                const chev = btn.querySelector('.acc-chevron');
+                if (!body) return;
+                const open = body.classList.toggle('open');
+                if (chev) chev.classList.toggle('open', open);
             });
         });
-    });
-    
-    // Render initial tab content
-    renderWorkflowTabContent();
+
+        main.querySelectorAll('a[href^="/"]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === '/workflow' || href === '/modules' || href === '/case-study' || href === '/library' || href === '/overview') {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    navigateTo(href);
+                });
+            }
+        });
+
+        const firstBody = main.querySelector('.acc-body');
+        if (firstBody && !firstBody.classList.contains('open')) {
+            firstBody.classList.add('open');
+            const firstBtn = firstBody.previousElementSibling;
+            const chev = firstBtn ? firstBtn.querySelector('.acc-chevron') : null;
+            if (chev) chev.classList.add('open');
+        }
+    } catch (error) {
+        console.error('Error rendering workflow page:', error);
+        main.innerHTML = `
+            <section class="hero">
+                <h1>${content.endToEndWorkflow.title}</h1>
+                <p>Unable to load workflow content.</p>
+            </section>
+        `;
+    }
 }
 
 function renderWorkflowTabContent() {
@@ -630,124 +598,87 @@ function renderWorkflowTabContent() {
                 </div>
             </div>
         `;
+
+        const firstBody = container.querySelector('.step-acc-body');
+        const firstBtn  = container.querySelector('.step-acc-trigger');
+        if (firstBody && firstBtn) {
+            firstBody.classList.add('open');
+            const chev = firstBtn.querySelector('.step-acc-chevron');
+            if (chev) chev.classList.add('open');
+            firstBtn.setAttribute('aria-expanded', 'true');
+        }
     }
 }
 
 function renderWorkflowStep(step) {
-    // Get team guidance from the Adoption & Change module
-    const modulesArray = content.modules && content.modules.chapters ? content.modules.chapters : [];
-    const adoptionModule = modulesArray.find(m => m.id === 'adoption-change');
-    const teamGuidance = adoptionModule && adoptionModule.teamGuidance;
-    
+    const narrativePanel = step.narrativeHtml ? `
+        <div class="panel">
+            ${step.narrativeHtml}
+        </div>
+    ` : '';
+
+    const deliverablesPanel = step.deliverables && step.deliverables.length > 0 ? `
+        <div class="panel">
+            <h4>Deliverables</h4>
+            <div class="deliverable-grid">
+                ${step.deliverables.map(d => renderDeliverableCard(d)).join('')}
+            </div>
+        </div>
+    ` : '';
+
+    const readyPanel = step.readyToMoveOnChecklist && step.readyToMoveOnChecklist.length > 0 ? `
+        <div class="panel">
+            <h4>Ready to Move On?</h4>
+            <ul class="checklist">
+                ${step.readyToMoveOnChecklist.map(item => `<li class="check-item">☐ ${item}</li>`).join('')}
+            </ul>
+        </div>
+    ` : '';
+
+    const advanceBanner = step.readyToAdvance ? `
+        <div class="ready-to-advance-banner">
+            <div class="ready-to-advance-icon">✓</div>
+            <div class="ready-to-advance-content">
+                <h4>Moving to the next phase</h4>
+                <p>${step.readyToAdvance}</p>
+            </div>
+        </div>
+    ` : '';
+
+    const phaseClass = step.phaseGroup
+        ? `step-phase-${step.phaseGroup.toLowerCase()}`
+        : 'step-phase-engage';
+
+    const accId = `step-acc-${step.id}`;
+
     return `
-        <!-- Step Heading Panel -->
-        <div class="panel">
-            <h3>${step.name}</h3>
-            ${step.idealTimespan ? `<p class="step-timespan"><strong>Ideal Timespan:</strong> ${step.idealTimespan}</p>` : ''}
-            ${step.briefDescription ? `<p class="step-description">${step.briefDescription}</p>` : ''}
-        </div>
-
-        ${step.name === 'Assess' && teamGuidance ? `
-            <!-- Team Guidance Panel -->
-            <div class="panel">
-                <h4>${teamGuidance.title}</h4>
-                <p style="color: var(--text-secondary); margin: 0 0 1.5rem 0;">${teamGuidance.description}</p>
-                
-                <table style="width: 100%; border-collapse: collapse;">
-                    <thead>
-                        <tr style="border-bottom: 2px solid var(--border-subtle);">
-                            <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600;">Role</th>
-                            <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600;">What They Do</th>
-                            <th style="text-align: left; padding: 0.75rem 1rem; font-weight: 600;">Where to Source</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${teamGuidance.roles.map(role => `
-                            <tr style="border-bottom: 1px solid var(--border-subtle);">
-                                <td style="padding: 0.75rem 1rem; font-weight: 600;">${role.role}</td>
-                                <td style="padding: 0.75rem 1rem;">${role.whatTheyDo}</td>
-                                <td style="padding: 0.75rem 1rem;">${role.whereToSource}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-
-                <p style="color: var(--text-secondary); margin: 1.5rem 0 0 0; font-style: italic;">${teamGuidance.upwardPitch}</p>
-            </div>
-        ` : ''}
-
-        <!-- Key Activities Panel -->
-        <div class="panel">
-            <h4>Key Activities & Outcomes</h4>
-            <div class="activities-table">
-                <div class="activities-header">
-                    <div class="activities-col-header">Key Activity</div>
-                    <div class="outcomes-col-header">Description</div>
+        <div class="step-acc" id="${step.anchor ? step.anchor.replace('#','') : step.id}">
+            <button class="step-acc-trigger" onclick="toggleStepAcc('${accId}', this)" aria-expanded="false">
+                <div class="step-acc-left">
+                    <span class="step-phase-tag ${phaseClass}">${step.phaseGroup || 'Engage'}</span>
+                    <span class="step-acc-name">${step.name}</span>
+                    ${step.idealTimespan ? `<span class="step-acc-timing">${step.idealTimespan}</span>` : ''}
                 </div>
-                ${step.keyActivities.map(activity => `
-                    <div class="activity-row">
-                        <div class="activity-col">
-                            <div class="activity-title">${activity.title}</div>
-                        </div>
-                        <div class="outcome-col">
-                            ${activity.description ? `<p>${activity.description}</p>` : ''}
-                        </div>
-                    </div>
-                `).join('')}
+                <span class="step-acc-chevron">▾</span>
+            </button>
+            <div class="step-acc-body" id="${accId}">
+                ${step.briefDescription ? `<p class="step-description" style="margin-bottom:1.25rem;">${step.briefDescription}</p>` : ''}
+                ${narrativePanel}
+                ${readyPanel}
+                ${deliverablesPanel}
+                ${advanceBanner}
             </div>
         </div>
-
-        ${step.readyToMoveOnChecklist && step.readyToMoveOnChecklist.length > 0 ? `
-            <!-- Ready to Move On Panel -->
-            <div class="panel">
-                <h4>Ready to Move On?</h4>
-                <ul class="checklist">
-                    ${step.readyToMoveOnChecklist.map(item => `
-                        <li class="check-item">☐ ${item}</li>
-                    `).join('')}
-                </ul>
-            </div>
-        ` : ''}
-
-        ${step.deliverables && step.deliverables.length > 0 ? `
-            <div class="panel">
-                <h4>Deliverables</h4>
-                <div class="deliverable-grid">
-                    ${step.deliverables.map(deliverable => renderDeliverableCard(deliverable)).join('')}
-                </div>
-            </div>
-        ` : ''}
-
-        ${step.commonPitfalls && step.commonPitfalls.length > 0 ? `
-            <div class="panel">
-                <h4>Common Pitfalls</h4>
-                <ul class="pitfall-grid">
-                    ${step.commonPitfalls.map(pitfall => `
-                        <li class="card">⚠️ ${pitfall}</li>
-                    `).join('')}
-                </ul>
-            </div>
-        ` : ''}
-
-        ${step.examplesAndTemplates && step.examplesAndTemplates.length > 0 ? `
-            <div class="panel">
-                <h4>Examples & Templates</h4>
-                <div class="deliverable-grid">
-                    ${step.examplesAndTemplates.map(item => renderDeliverableCard(item)).join('')}
-                </div>
-            </div>
-        ` : ''}
-
-        ${step.readyToAdvance ? `
-            <div class="ready-to-advance-banner">
-                <div class="ready-to-advance-icon">✓</div>
-                <div class="ready-to-advance-content">
-                    <h4>Moving to the next phase</h4>
-                    <p>${step.readyToAdvance}</p>
-                </div>
-            </div>
-        ` : ''}
     `;
+}
+
+function toggleStepAcc(bodyId, btn) {
+    const body = document.getElementById(bodyId);
+    if (!body) return;
+    const isOpen = body.classList.toggle('open');
+    const chev = btn.querySelector('.step-acc-chevron');
+    if (chev) chev.classList.toggle('open', isOpen);
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
 function renderDeliverableCard(deliverable) {
@@ -866,78 +797,116 @@ function scrollToAnchor(anchor) {
 
 async function renderModulesPage() {
     const main = document.getElementById('main-content');
-    
-    // Load the transformation roadmap blueprint
+    const visibleChapterIds = ['prioritization-roadmap'];
+    const hiddenChapterIds = content.modules.chapters
+        .filter(chapter => !visibleChapterIds.includes(chapter.id))
+        .map(chapter => chapter.id);
     const blueprintSVG = await loadBlueprintSVG(2);
-    
-    main.innerHTML = `
-        <section class="hero">
-            <h1>${content.modules.title}</h1>
-            <p>${content.modules.description}</p>
-        </section>
 
-        <!-- Transformation Roadmap Blueprint -->
-        <section class="flow-panel">
-            <div class="blueprint-container">
-                ${blueprintSVG}
+    const moduleSections = [
+        {
+            id: 'modules-overview',
+            navLabel: 'Overview',
+            title: 'How-to deep dives overview',
+            meta: 'Service design map · Five challenge areas',
+            description: '',
+            contentHtml: `
+                <div class="workflow-overview-panel">
+                    <div class="workflow-overview-copy">
+                        <p>The How-to Deep Dives section is where teams go when they need focused guidance on the hardest parts of AI-first transformation. Each chapter translates a recurring challenge area into practical decisions, artifacts, and execution guidance that can be used alongside the end-to-end workflow.</p>
+                        <p>The service design map shows how the challenge areas show up across Engage, Discover, and Execute. Use it to orient yourself, understand where each challenge becomes primary, and decide which deep dive to open next.</p>
+                    </div>
+                    <div class="workflow-overview-blueprint" aria-label="How-to deep dives service design map">
+                        ${blueprintSVG}
+                    </div>
+                </div>
+            `
+        },
+        ...content.modules.chapters.map(chapter => ({
+            id: chapter.id,
+            navLabel: chapter.title,
+            title: chapter.title,
+            meta: hiddenChapterIds.includes(chapter.id)
+                ? 'In progress'
+                : 'Deep Dive',
+            description: hiddenChapterIds.includes(chapter.id)
+                ? '<p class="workflow-step-description">This chapter is still being developed.</p>'
+                : chapter.definition
+                    ? `<p class="workflow-step-description">${chapter.definition}</p>`
+                    : '',
+            hidden: hiddenChapterIds.includes(chapter.id)
+        }))
+    ];
+
+    const activeSection = moduleSections.find(section => section.id === selectedModule) || moduleSections[0];
+    selectedModule = activeSection.id;
+
+    main.innerHTML = `
+        <section class="workflow-layout workflow-layout--with-top-offset" aria-label="How-to deep dives content">
+            <nav class="workflow-side-nav" aria-label="How-to deep dives chapter navigation">
+                <ul class="workflow-side-nav__list">
+                    ${moduleSections.map(section => `
+                        <li class="workflow-side-nav__item">
+                            <button
+                                class="workflow-side-nav__button${section.id === activeSection.id ? ' is-active' : ''}"
+                                data-module="${section.id}"
+                                aria-current="${section.id === activeSection.id ? 'page' : 'false'}">
+                                ${section.navLabel}
+                            </button>
+                        </li>
+                    `).join('')}
+                </ul>
+            </nav>
+            <div class="workflow-detail-panel">
+                <div class="workflow-detail-panel__header">
+                    <p class="workflow-detail-panel__meta">${activeSection.meta}</p>
+                    <h2>${activeSection.title}</h2>
+                    ${activeSection.description || ''}
+                </div>
+                <div class="workflow-detail-panel__body module-content" id="module-content">
+                    ${activeSection.id === 'modules-overview' ? activeSection.contentHtml : ''}
+                </div>
             </div>
         </section>
-
-        <!-- Module Navigation -->
-        <div class="section-tabs">
-            ${content.modules.chapters.map((chapter, index) => `
-                <button class="section-tab ${index === 0 ? 'active' : ''}" data-module="${chapter.id}">
-                    ${chapter.title}
-                </button>
-            `).join('')}
-        </div>
-
-        <!-- Module Content -->
-        <div class="module-content" id="module-content"></div>
     `;
-    
-    // Add tab click handlers
-    document.querySelectorAll('.section-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            selectedModule = tab.dataset.module;
-            renderModuleContent();
-            // Update tab active state
-            document.querySelectorAll('.section-tab').forEach(t => {
-                t.classList.toggle('active', t.dataset.module === selectedModule);
-            });
+
+    document.querySelectorAll('[data-module]').forEach(button => {
+        button.addEventListener('click', async () => {
+            selectedModule = button.dataset.module;
+            await renderModulesPage();
         });
     });
-    
-    // Set initial module to first chapter
-    if (content.modules.chapters.length > 0) {
-        selectedModule = content.modules.chapters[0].id;
+
+    if (activeSection.id !== 'modules-overview') {
+        await renderModuleContent();
     }
-    
-    // Render initial module content
-    renderModuleContent();
 }
 
 async function renderModuleContent() {
     const container = document.getElementById('module-content');
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
-    
-    if (module) {
-        // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, Systems Integration, or Adoption & Change module or other narrative modules
-        if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change' || module.renderType === 'narrative') {
-            await renderModuleDetail(module);
-        } else {
-            container.innerHTML = await renderModuleDetail(module);
-        }
-        
-        // Add accordion click handlers
-        container.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const accordionId = header.dataset.accordionId;
-                openAccordions[accordionId] = !openAccordions[accordionId];
-                renderModuleContent();
-            });
-        });
+    const visibleChapterIds = ['prioritization-roadmap'];
+
+    if (!container || !module) return;
+
+    if (!visibleChapterIds.includes(module.id)) {
+        container.innerHTML = `
+            <section class="hero" style="margin: 0; max-width: none; padding: 0;">
+                <p style="margin: 0; text-align: left;">Coming soon</p>
+            </section>
+        `;
+        return;
     }
+
+    container.innerHTML = await renderModuleDetail(module);
+
+    container.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionId = header.dataset.accordionId;
+            openAccordions[accordionId] = !openAccordions[accordionId];
+            renderModuleContent();
+        });
+    });
 }
 async function renderNarrativeModule(module) {
 
@@ -1055,7 +1024,6 @@ async function renderModuleDetail(module) {
 
     // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, Systems Integration, or Adoption & Change module - load standalone HTML
     if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change') {
-        const container = document.getElementById('module-content');
         try {
             // Determine which HTML file to load
             const htmlFile = module.id === 'prioritization-roadmap'
@@ -1066,31 +1034,35 @@ async function renderModuleDetail(module) {
                 ? 'systems-integration-narrative.html'
                 : 'adoption-change-narrative.html';
             const response = await fetch(htmlFile);
+            if (!response.ok) throw new Error(`Failed to load ${htmlFile}`);
             const html = await response.text();
-            // Parse the HTML
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
-            
-            // Extract and inject the styles from the <head>
+
             const styles = doc.querySelectorAll('style');
             let styleContent = Array.from(styles).map(s => s.textContent).join('\n');
-            
-            // Add overrides to make content wider and scale SVGs appropriately
+
             styleContent += `
-                /* Override for wider layout */
-                .page { max-width: 1400px !important; padding: 0 2rem 6rem !important; }
-                /* Scale SVGs to be larger but keep text proportional */
-                .visual-wrap svg {
+                .workflow-detail-panel__body .page {
+                    max-width: none !important;
+                    padding: 0 0 4rem !important;
+                    margin: 0 !important;
+                }
+                .workflow-detail-panel__body .hero {
+                    padding-top: 0 !important;
+                }
+                .workflow-detail-panel__body .visual-wrap svg {
                     min-width: 420px !important;
                     max-width: 800px !important;
                     width: 100% !important;
                 }
-                /* Make arrows in phase strip more visible */
-                .pip-sep { color: #525252 !important; font-weight: 600 !important; }
+                .workflow-detail-panel__body .pip-sep {
+                    color: #525252 !important;
+                    font-weight: 600 !important;
+                }
             `;
-            
-            // Create a style element and add it to the document head if not already present
-            let narrativeStyleId = 'narrative-module-styles';
+
+            const narrativeStyleId = 'narrative-module-styles';
             let existingStyle = document.getElementById(narrativeStyleId);
             if (existingStyle) {
                 existingStyle.textContent = styleContent;
@@ -1100,13 +1072,15 @@ async function renderModuleDetail(module) {
                 styleEl.textContent = styleContent;
                 document.head.appendChild(styleEl);
             }
-            
-            // Extract and inject the body content
-            const bodyContent = doc.body.innerHTML;
-            container.innerHTML = bodyContent;
-            return;
+
+            const moduleHeader = doc.querySelector('.module-header');
+            if (moduleHeader) {
+                moduleHeader.remove();
+            }
+
+            return doc.body.innerHTML;
         } catch (error) {
-            console.error(`Error loading ${module.name} HTML:`, error);
+            console.error(`Error loading ${module.title} HTML:`, error);
             // Fall through to JSON rendering if file not found
         }
     }
@@ -1436,33 +1410,8 @@ function renderLibraryPage() {
     main.innerHTML = `
         <section class="hero">
             <h1>${content.library.title}</h1>
-            <p>${content.library.description}</p>
+            <p>Coming soon</p>
         </section>
-
-        <div class="library-content">
-            ${content.library.sections.map(section => `
-                <div class="library-section">
-                    <h2 style="padding: 2rem 2rem 1rem; margin: 0; border-bottom: 1px solid var(--border-subtle); font-size: 2rem; font-weight: 400;">
-                        ${section.phaseGroup}
-                    </h2>
-                    
-                    ${section.steps.map(step => `
-                        <div class="step-section">
-                            <div class="step-heading">
-                                <h3 style="font-size: 1.25rem; font-weight: 400; margin: 0;">${step.stepName}</h3>
-                                <p class="step-subtext">${step.stepSubtext}</p>
-                            </div>
-
-                            ${step.deliverables && step.deliverables.length > 0 ? `
-                                <div class="deliverable-grid">
-                                    ${step.deliverables.map(deliverable => renderDeliverableCard(deliverable)).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `).join('')}
-                </div>
-            `).join('')}
-        </div>
     `;
 }
 
@@ -1484,84 +1433,12 @@ function renderCaseStudyPage() {
         return;
     }
     
-    // Reset to first phase when navigating to case study
-    selectedCaseStudyPhase = 0;
-    
-    const COLORS = { engage: '#0f62fe', discover: '#8a3ffc', execute: '#24a148' };
-    const fileIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
-    
     main.innerHTML = `
         <section class="hero">
             <h1>${caseStudy.title}</h1>
-            <p>${caseStudy.subtitle}</p>
+            <p>Coming soon</p>
         </section>
-
-        <div class="wrap">
-            <div class="intro-grid">
-                <div class="panel">
-                    <h3>Overview</h3>
-                    <p>${caseStudy.overview}</p>
-                </div>
-                <div class="panel">
-                    <h3>Cast of Characters</h3>
-                    <div class="cast">
-                        ${caseStudy.keyPlayers.map(name => `<span>${name}</span>`).join('')}
-                    </div>
-                </div>
-            </div>
-            
-            <div class="panel" style="background:#f0f7ff;border-color:#d6e6ff">
-                <h3 style="color:#0f62fe">Starting Context</h3>
-                <p style="color:var(--text-primary)">${caseStudy.startingContext}</p>
-            </div>
-
-            <div class="nav-instruction">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                ${caseStudy.navInstruction || 'Click through each phase below to follow the team\'s journey from mandate to scaled MVP.'}
-            </div>
-            
-            <div class="phase-nav">
-                ${caseStudy.phases.map((ph, i) => {
-                    const pc = COLORS[ph.phaseGroupId];
-                    return `<button class="phase-tab phase-${ph.phaseGroupId} ${i === selectedCaseStudyPhase ? 'active' : ''}" style="--c:${pc}" data-phase-index="${i}">
-                        <div class="pt-top">
-                            <span class="pt-num">${ph.number}</span>
-                            <span class="pt-group">${ph.phaseGroup}</span>
-                        </div>
-                        <div class="pt-name">${(ph.phaseName.split(' / ')[1] || ph.phaseName).replace(' & ', '<br>& ')}</div>
-                        <span class="pt-bar"></span>
-                    </button>`;
-                }).join('')}
-            </div>
-
-            <div id="case-study-phase-content"></div>
-        </div>
     `;
-    
-    // Add tab click handlers
-    if (caseStudy.phases && caseStudy.phases.length > 0) {
-        document.querySelectorAll('.phase-tab[data-phase-index]').forEach(tab => {
-            tab.addEventListener('click', () => {
-                selectedCaseStudyPhase = parseInt(tab.dataset.phaseIndex);
-                renderCaseStudyPhaseContent();
-                // Update tab active state
-                document.querySelectorAll('.phase-tab[data-phase-index]').forEach(t => {
-                    t.classList.toggle('active', parseInt(t.dataset.phaseIndex) === selectedCaseStudyPhase);
-                });
-                // Smooth scroll to phase panel
-                const phasePanel = document.querySelector('.phase-panel');
-                if (phasePanel) {
-                    window.scrollTo({
-                        top: document.querySelector('.phase-nav').offsetTop - 24,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Render initial phase content
-        renderCaseStudyPhaseContent();
-    }
 }
 
 async function renderCaseStudyPhaseContent() {

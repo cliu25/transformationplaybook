@@ -16,7 +16,6 @@
     <title>IBM AI-First Transformation Playbook</title>
     
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/chatbot.css">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -52,60 +51,9 @@
         </footer>
     </div>
 
-    <!-- AI Chatbot Assistant -->
-    <div class="chatbot-container">
-        <!-- Floating Chat Button -->
-        <button id="chatbot-toggle-btn" class="chatbot-toggle-btn" aria-label="Open AI Assistant">
-            🤖
-        </button>
-
-        <!-- Chat Window -->
-        <div id="chatbot-window" class="chatbot-window">
-            <!-- Chat Header -->
-            <div class="chatbot-header">
-                <div class="chatbot-header-content">
-                    <div class="chatbot-avatar">🤖</div>
-                    <div>
-                        <h3 class="chatbot-title">AIFT Assistant</h3>
-                        <p class="chatbot-status">Online</p>
-                    </div>
-                </div>
-                <div class="chatbot-header-actions">
-                    <button id="chatbot-clear-btn" class="chatbot-header-btn" aria-label="Clear conversation" title="Clear conversation">
-                        🗑️
-                    </button>
-                    <button id="chatbot-close-btn" class="chatbot-header-btn" aria-label="Close chat" title="Close chat">
-                        ✕
-                    </button>
-                </div>
-            </div>
-
-            <!-- Chat Messages -->
-            <div id="chatbot-messages" class="chatbot-messages">
-                <!-- Messages will be dynamically added here -->
-            </div>
-
-            <!-- Chat Input -->
-            <div class="chatbot-input-area">
-                <div class="chatbot-input-wrapper">
-                    <textarea
-                        id="chatbot-input"
-                        class="chatbot-input"
-                        placeholder="Ask me about AI transformation..."
-                        rows="1"
-                        aria-label="Message input"
-                    ></textarea>
-                    <button id="chatbot-send-btn" class="chatbot-send-btn" aria-label="Send message">
-                        ➤
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="js/app.js?v=20260630202055"></script>
     <script src="config.js"></script>
-    <script src="js/chatbot.js"></script>
     <script src="js/analytics.js"></script>
 </body>
 </html>

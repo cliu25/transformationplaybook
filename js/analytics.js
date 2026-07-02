@@ -9,7 +9,7 @@ class SimpleAnalytics {
         this.currentPage = null;
         this.sessionId = this.getOrCreateSession();
         this.apiEndpoint = 'http://localhost:5000/api'; // Change this to your server URL
-        this.useBackend = true; // Set to false to use local storage only
+        this.useBackend = false; // Local testing uses local storage only unless backend is explicitly enabled
         this.init();
     }
 
