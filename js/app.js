@@ -813,7 +813,7 @@ async function renderModulesPage() {
             contentHtml: `
                 <div class="workflow-overview-panel">
                     <div class="workflow-overview-copy">
-                        <p>The How-to Deep Dives section is where teams go when they need focused guidance on the hardest parts of AI-first transformation. Each chapter translates a recurring challenge area into practical decisions, artifacts, and execution guidance that can be used alongside the end-to-end workflow.</p>
+                        <p>The How-to Deep Dives section is where teams go when they need focused guidance on the hardest parts of AI-first transformation. Each chapter translates a recurring challenge area into practical decisions, artifacts, and execution guidance.</p>
                         <p>The service design map shows how the challenge areas show up across Engage, Discover, and Execute. Use it to orient yourself, understand where each challenge becomes primary, and decide which deep dive to open next.</p>
                     </div>
                     <div class="workflow-overview-blueprint" aria-label="How-to deep dives service design map">
