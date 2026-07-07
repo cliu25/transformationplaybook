@@ -797,7 +797,7 @@ function scrollToAnchor(anchor) {
 
 async function renderModulesPage() {
     const main = document.getElementById('main-content');
-    const visibleChapterIds = ['prioritization-roadmap'];
+    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration'];
     const hiddenChapterIds = content.modules.chapters
         .filter(chapter => !visibleChapterIds.includes(chapter.id))
         .map(chapter => chapter.id);
@@ -860,7 +860,7 @@ async function renderModulesPage() {
             <div class="workflow-detail-panel">
                 <div class="workflow-detail-panel__header">
                     <p class="workflow-detail-panel__meta">${activeSection.meta}</p>
-                    <h2>${activeSection.title}</h2>
+                    <h2>${activeSection.title}${activeSection.id === 'systems-integration' ? ' <span style="color: #da1e28; font-weight: 600;">(UNDER CONSTRUCTION)</span>' : ''}</h2>
                     ${activeSection.description || ''}
                 </div>
                 <div class="workflow-detail-panel__body module-content" id="module-content">
@@ -885,7 +885,7 @@ async function renderModulesPage() {
 async function renderModuleContent() {
     const container = document.getElementById('module-content');
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
-    const visibleChapterIds = ['prioritization-roadmap'];
+    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration'];
 
     if (!container || !module) return;
 

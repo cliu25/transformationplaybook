@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Systems Integration — Narrative Format</title>
+<title>Systems Integration — How-to Deep Dive</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
   --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --teal:#009d9a; --teal-dk:#005d5d; --teal-fill:#d9fbfb;
   --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
   --amber:#ba7517; --amber-fill:#fdf4e3; --amber-dk:#633806;
   --red:#da1e28; --red-fill:#fff1f1; --red-dk:#a32d2d;
@@ -16,30 +17,20 @@
   --border:#e0e0e0; --layer:#f4f4f4;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;font-size:16px;}
+body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;font-size:16px;}
 .page{max-width:780px;margin:0 auto;padding:0 1.5rem 6rem;}
-
-/* HEADER */
-.module-header{padding:3rem 0 2.5rem;}
-.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--purple);margin-bottom:.75rem;}
+.module-header{padding:3rem 0 2rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.75rem;}
 .module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
-.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--purple);padding-left:1.25rem;}
-
-/* PHASE STRIP */
-.where-strip{display:flex;align-items:center;gap:.5rem;padding:1rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:1.5rem;flex-wrap:wrap;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--teal);padding-left:1.25rem;}
+.where-strip{display:flex;align-items:center;gap:.5rem;padding:.875rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2rem;flex-wrap:wrap;}
 .where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
 .phase-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-3);background:#fff;}
 .phase-pip.pip-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
 .phase-pip.pip-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
 .phase-pip.pip-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
 .pip-sep{color:var(--border);font-size:.8rem;}
-
-/* MODULE TITLE ROW — phases + challenge name */
-.module-title-row{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
-.title-row-sep{color:var(--text-3);font-size:1rem;padding:0 .125rem;}
-.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--purple);color:var(--purple-dk);}
-
-/* PHASE + SUB-PHASE */
+.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--teal);color:var(--teal-dk);}
 .phase-section{padding:3rem 0;border-top:1px solid var(--border);}
 .phase-label{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
 .phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
@@ -47,749 +38,610 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
 .tag-execute{background:var(--green-fill);color:var(--green-dk);}
 .phase-step-context{font-size:.8rem;color:var(--text-3);font-style:italic;}
-
 .sub-phase{margin:2.5rem 0 0;}
 .sub-phase-label{display:flex;align-items:center;gap:.625rem;margin-bottom:1.125rem;}
 .sub-phase-number{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);background:var(--layer);border:1px solid var(--border);padding:.2rem .5rem;border-radius:2px;}
 .sub-phase h3{font-size:1.125rem;font-weight:600;color:var(--text);margin:0;}
-
-/* PROSE */
 .phase-section h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:1.25rem;}
 .prose{font-size:1rem;line-height:1.8;color:var(--text-2);margin-bottom:1.25rem;}
 .prose strong{color:var(--text);font-weight:600;}
-
-/* PAIN POINT */
+.who-block{padding:1rem 1.25rem;background:var(--teal-fill);border-left:4px solid var(--teal);border-radius:0 4px 4px 0;margin-bottom:1.75rem;}
+.who-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--teal-dk);margin-bottom:.5rem;}
+.who-roles{display:flex;flex-wrap:wrap;gap:.375rem;}
+.who-role{font-size:.8rem;font-weight:500;padding:.25rem .625rem;background:#fff;border:1px solid var(--teal);border-radius:3px;color:var(--teal-dk);}
 .painpoint{margin:1.75rem 0;padding:1.125rem 1.375rem;border-left:3px solid var(--amber);background:var(--amber-fill);border-radius:0 4px 4px 0;}
 .painpoint-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.375rem;}
 .painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
 .painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
-
-/* ARTIFACT CARDS — title, description, link (matches site's deliverable-card pattern) */
+.escalation-box{padding:1rem 1.25rem;background:var(--red-fill);border-left:3px solid var(--red);border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.escalation-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red-dk);margin-bottom:.5rem;}
+.escalation-body{font-size:.875rem;line-height:1.65;color:var(--red-dk);}
 .artifact-section{margin:1.75rem 0;}
 .artifact-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;}
 .artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
 .artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
-.artifact-card .a-type{display:none;}
 .artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
 .artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
 .artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;}
-.a-link{font-size:.78rem;color:var(--purple);text-decoration:none;font-weight:500;}
+.a-link{font-size:.78rem;color:var(--teal);text-decoration:none;font-weight:500;}
 .a-link:hover{text-decoration:underline;}
-
-/* VISUAL */
+.a-link.off{color:var(--text-3);opacity:.5;cursor:not-allowed;pointer-events:none;}
 .visual-wrap{margin:1.75rem 0;background:var(--layer);border-radius:6px;padding:1.375rem 1.5rem;overflow-x:auto;}
 .visual-wrap svg{display:block;width:100%;height:auto;}
 .visual-caption{font-size:.8rem;color:var(--text-3);margin-top:.75rem;line-height:1.45;}
-
-/* STEPS SUMMARY */
 .steps-summary{margin:1.75rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
 .step-row{display:grid;grid-template-columns:2.25rem 1fr;border-bottom:1px solid var(--border);}
 .step-row:last-child{border-bottom:none;}
-.step-num{display:flex;align-items:flex-start;justify-content:center;font-size:.75rem;font-weight:700;color:var(--purple);background:var(--purple-fill);padding:.875rem .25rem 0;}
+.step-row.title-row{grid-template-columns:1fr;background:var(--layer);}
+.step-row.title-row .step-title{padding:.625rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);white-space:nowrap;}
+.step-num{display:flex;align-items:flex-start;justify-content:center;font-size:.75rem;font-weight:700;color:var(--teal);background:var(--teal-fill);padding:.875rem .25rem 0;}
 .step-text{padding:.875rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
 .step-text strong{color:var(--text);font-weight:600;}
-
-/* CASE STUDY */
 .case-study{margin:2rem 0;padding:1.375rem 1.5rem;background:var(--purple-fill);border-radius:6px;border:1px solid var(--purple);}
 .cs-eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;}
 .cs-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--purple);color:#fff;padding:.2rem .5rem;border-radius:2px;}
-.cs-context{font-size:.8rem;font-weight:600;color:var(--teal-dk);}
+.cs-context{font-size:.8rem;font-weight:600;color:var(--purple-dk);}
 .cs-prose{font-size:.9rem;line-height:1.7;color:var(--text-2);margin-bottom:.875rem;}
 .cs-prose:last-child{margin-bottom:0;}
-.cs-table{width:100%;border-collapse:collapse;font-size:.8rem;margin-top:.875rem;}
-.cs-table th{text-align:left;padding:.45rem .75rem;background:#c5f0ef;border-bottom:1px solid #a8e6e4;font-weight:600;color:var(--teal-dk);}
-.cs-table td{padding:.45rem .75rem;border-bottom:1px solid #d9f5f4;color:var(--text-2);}
-.cs-table tr:nth-child(even) td{background:#e8faf9;}
-
-/* READY BANNER */
 .ready{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--green-fill);border-left:4px solid var(--green);border-radius:0 4px 4px 0;margin-top:2.5rem;}
 .ready-icon{color:var(--green);flex-shrink:0;font-size:1.1rem;}
 .ready-body h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.3rem;}
 .ready-body p{font-size:.875rem;line-height:1.55;color:var(--text-2);}
-
-/* DIVIDER */
 .sub-divider{height:1px;background:var(--border);margin:2.5rem 0;}
 </style>
 </head>
 <body>
 <div class="page">
 
-<!-- HEADER -->
 <div class="module-header">
-  <div class="eyebrow">Deep Dive</div>
+  <div class="eyebrow">How-to Deep Dive</div>
   <h1>Systems Integration</h1>
-  <p class="def">Most AI projects don't fail because the model isn't good enough. They fail because the data pipeline breaks, the integration is too brittle to scale, or no one knows how to maintain it after the build team leaves. This chapter walks through how to surface integration complexity early, write requirements developers can actually build from, and hand off a solution that survives the transition to production.</p>
+  <p class="def">Most AI projects don't fail because the model isn't good enough. They fail because the data pipeline breaks, the integration is too brittle to scale, or no one knows how to maintain it after the build team leaves. This chapter covers how to surface integration complexity early, write requirements that developers can build from, navigate the path to production at IBM, and hand off a solution that survives after the sprint ends.</p>
 </div>
 
-<!-- PHASE STRIP -->
 <div class="where-strip">
   <span class="where-label">Active across</span>
   <span class="phase-pip pip-engage">Engage</span>
-  <span class="pip-sep">→</span>
-  <span class="phase-pip pip-discover">Discover</span>
-  <span class="pip-sep">→</span>
+  <span class="pip-sep">&#8594;</span>
+  <span class="phase-pip pip-discover">Discovery</span>
+  <span class="pip-sep">&#8594;</span>
   <span class="phase-pip pip-execute">Execute</span>
 </div>
 
-
-<!-- ═══════════════════ ENGAGE ═══════════════════ -->
+<!-- &#9553;&#9553;&#9553;&#9553;&#9553; ENGAGE &#9553;&#9553;&#9553;&#9553;&#9553; -->
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
-    <span class="title-row-sep">·</span>
     <span class="challenge-pip">Systems Integration</span>
-    <span class="phase-step-context">Tech &amp; Data Assessment</span>
+    <span class="phase-step-context">Step 1 &amp; 2 &#183; Tech &amp; Data Assessment</span>
   </div>
 
   <h2>Know what you're working with before you commit.</h2>
 
-  <p class="prose">By the time you're ready to assess integration readiness, you need an honest picture of two things: what systems you have, and what condition the data is in. The Technology & Data Assessment in Engage is where you surface the constraints that will shape every decision downstream. Without it, you're designing solutions for an architecture that doesn't exist and building on data that isn't ready.</p>
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain focal</span>
+      <span class="who-role">CIO/BPT architect</span>
+      <span class="who-role">Data or platform owner</span>
+      <span class="who-role">Process SMEs</span>
+    </div>
+  </div>
 
-  <p class="prose">The goal here is not to fix anything — it's to <strong>document what's real</strong>. Map your systems of record: where does the data live, who owns it, what format is it in, and what's required to access it? For each system, confirm whether APIs exist, whether they're documented, and whether you have the permissions to use them. If the answer to any of those is no, that's not a blocker — it's information. It tells you where the integration work will be heavy and where you'll need architectural review.</p>
+  <p class="prose">The Technology and Data Assessment is where you surface the constraints that will shape every decision downstream. The goal is not to fix anything. It is to <strong>document what is real</strong>: what systems the domain runs on, where data lives, what condition it is in, and what it takes to access it. Without this picture, you design solutions for an architecture that does not exist and build on data that is not ready.</p>
 
-  <!-- Systems landscape diagram -->
+  <p class="prose">Work with the <strong>domain focal</strong> to inventory the major platforms in use, then bring in the <strong>CIO/BPT architect</strong> to validate the technical picture. For each system, confirm: Does an API exist? Is it documented? Do you have the permissions to use it? Who owns it? If the answer to any of those is no, that is information. It tells you where integration work will be heavy and where you will need architectural review before you can build anything.</p>
+
+  <p class="prose">IBM operates on modern enterprise platforms. The integration questions here are rarely about whether systems exist. They are about <strong>data freshness, access controls, and platform dependencies</strong>. A system that updates once a week instead of in real time shapes what your AI solution can do. A platform team that manages access to a Salesforce org or a ServiceNow environment controls your timeline. Surfacing those dependencies in Engage, not mid-build, is the entire point of this step.</p>
+
+  <!-- Systems landscape SVG: IBM-relevant platforms -->
   <div class="visual-wrap">
-    <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
+    <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
       <defs>
         <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
       </defs>
-
-      <!-- Title -->
-      <text x="310" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Systems landscape — what you're integrating with</text>
-
-      <!-- Source systems (left column) -->
-      <text x="100" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">SOURCE SYSTEMS</text>
-      
-      <rect x="20" y="70" width="160" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="100" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">CRM / Customer Data</text>
-      <text x="100" y="103" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Salesforce, Dynamics, custom DB</text>
-
-      <rect x="20" y="130" width="160" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="100" y="148" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">ERP / Financial Systems</text>
-      <text x="100" y="163" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">SAP, Oracle, NetSuite</text>
-
-      <rect x="20" y="190" width="160" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="100" y="208" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">Document Repositories</text>
-      <text x="100" y="223" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">SharePoint, Box, file shares</text>
-
-      <rect x="20" y="250" width="160" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="100" y="268" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">Legacy / Custom Apps</text>
-      <text x="100" y="283" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Mainframe, proprietary systems</text>
-
-      <!-- Integration layer (middle) -->
-      <text x="310" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">INTEGRATION LAYER</text>
-      
-      <rect x="220" y="135" width="180" height="84" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
-      <text x="310" y="160" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#007070">Data Pipeline</text>
-      <text x="310" y="177" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">ETL, API connectors, data validation</text>
-      <text x="310" y="192" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Quality checks, transformation logic</text>
-      <text x="310" y="207" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Error handling, monitoring</text>
-
-      <!-- AI Solution (right) -->
-      <text x="510" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">AI SOLUTION</text>
-      
-      <rect x="440" y="135" width="140" height="84" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
-      <text x="510" y="160" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">AI Application</text>
-      <text x="510" y="177" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Model inference</text>
-      <text x="510" y="192" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Business logic</text>
-      <text x="510" y="207" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">User interface</text>
-
-      <!-- Arrows from sources to integration layer -->
-      <line x1="180" y1="92" x2="220" y2="150" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
-      <line x1="180" y1="152" x2="220" y2="165" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
-      <line x1="180" y1="212" x2="220" y2="190" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
-      <line x1="180" y1="272" x2="220" y2="205" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
-
-      <!-- Arrow from integration to AI -->
-      <line x1="400" y1="177" x2="440" y2="177" stroke="#24a148" stroke-width="2" marker-end="url(#ar)"/>
-
-      <!-- Key questions below -->
-      <rect x="20" y="310" width="580" height="24" rx="3" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
-      <text x="30" y="326" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">Key questions: </text>
-      <text x="110" y="326" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">Do APIs exist? Are they documented? Do we have access? What's the data quality? Who owns each system?</text>
+      <text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Systems landscape: what you are integrating with</text>
+      <text x="100" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">SOURCE SYSTEMS</text>
+      <rect x="20" y="54" width="160" height="40" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
+      <text x="100" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">CRM</text>
+      <text x="100" y="84" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Salesforce (primary at IBM)</text>
+      <rect x="20" y="102" width="160" height="40" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
+      <text x="100" y="118" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">ERP / Finance</text>
+      <text x="100" y="132" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">SAP, Oracle, Apttus</text>
+      <rect x="20" y="150" width="160" height="40" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
+      <text x="100" y="166" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">Event / Content Platforms</text>
+      <text x="100" y="180" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Cvent, Box, SharePoint</text>
+      <rect x="20" y="198" width="160" height="40" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
+      <text x="100" y="214" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">Collaboration / ITSM</text>
+      <text x="100" y="228" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Slack, ServiceNow, Jira</text>
+      <text x="310" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">INTEGRATION LAYER</text>
+      <rect x="210" y="118" width="200" height="86" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
+      <text x="310" y="142" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#005d5d">Data Pipeline</text>
+      <text x="310" y="158" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">API connectors, ETL, watsonx.data</text>
+      <text x="310" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Data quality, transformation logic</text>
+      <text x="310" y="186" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Error handling, monitoring, alerts</text>
+      <text x="510" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">AI SOLUTION</text>
+      <rect x="430" y="118" width="160" height="86" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="510" y="148" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">watsonx</text>
+      <text x="510" y="164" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Model inference</text>
+      <text x="510" y="178" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Orchestrate / Assistants</text>
+      <text x="510" y="192" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Business logic + UI</text>
+      <line x1="180" y1="74" x2="210" y2="148" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="180" y1="122" x2="210" y2="155" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="180" y1="170" x2="210" y2="162" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="180" y1="218" x2="210" y2="170" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
+      <line x1="410" y1="161" x2="430" y2="161" stroke="#24a148" stroke-width="2" marker-end="url(#ar)"/>
     </svg>
-    <div class="visual-caption">The systems landscape shows what you're integrating with. Each source system needs to be assessed for API availability, data quality, access permissions, and ownership. The integration layer is where most of the hidden work lives.</div>
+    <div class="visual-caption">IBM runs on modern enterprise platforms. The integration risk is rarely "this system is too old." It is usually access controls, data freshness, and platform team capacity. Document the constraints early so they shape the design, not stop the build.</div>
   </div>
 
   <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-label">&#9888; Pain point</div>
     <div class="painpoint-title">Assuming data is ready because it exists</div>
-    <div class="painpoint-body">The most common mistake in this phase is treating "we have the data" as equivalent to "the data is usable." Data that exists in a system is not the same as data that's clean, accessible, documented, and in a format your pipeline can consume. Run a data quality profile on a sample: check for nulls, duplicates, format inconsistencies, and missing values. If 30% of your key fields are empty or malformed, that's not a problem you discover during the build — it's a constraint you document now and plan around.</div>
+    <div class="painpoint-body">The most common mistake here is treating "we have the data" as equivalent to "the data is usable." Data that exists in a platform is not the same as data that is clean, accessible, documented, and in a format your pipeline can consume. A Salesforce field that exists but updates once a week instead of in real time changes what your AI can do. A Box folder that requires a separate provisioning request changes your timeline. Run a data quality check on a real sample. If 30% of key fields are incomplete or stale, that is a constraint to plan around, not a surprise to discover in Sprint 3.</div>
   </div>
 
-  <p class="prose">Also confirm who owns each system and what the process is for getting access. If you need to go through an Architecture Review Board (ARB) or security review to connect to a system, that timeline needs to be visible now — not when the build team is waiting for credentials. The output of this assessment is a checklist: for each system, you know whether it's ready to integrate with, what work is required to make it ready, and who needs to approve that work.</p>
+  <p class="prose">Also confirm who owns each platform and what the approval process is for accessing it. If you need to go through the Architecture Review Board (ARB) or an IBM security review to connect to a system, that timeline needs to be visible now. ARB review can take four to six weeks. If you surface that dependency in week eight of a twelve-week build, you have already missed your date. The <strong>CIO/BPT architect</strong> can tell you which systems require ARB and how to start that process. Start it before Discovery ends.</p>
 
-  <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">Skipping technical discovery to 'save time'</div>
-    <div class="painpoint-body">When timelines are tight, teams skip the technical assessment and go straight to design. The logic is: "We'll figure out the integration details during the build." This guarantees delays. Integration complexity that surfaces mid-build stops forward progress while the team scrambles to understand systems they should have mapped weeks earlier. The assessment takes two weeks. The delay from skipping it costs two months. Do the assessment.</div>
+  <p class="prose">Three patterns come up consistently across IBM domains during this step. First, the platforms your solution depends on are often owned by teams outside the domain — CIO product teams, enterprise infrastructure groups, or platform owners with their own roadmaps and priorities. The solution is not to work around them. It is to identify named resources from each platform team early and bring them into the conversation. Second, API connectors for internal platforms are frequently undocumented or immature, especially for older systems. Before committing to an agentic architecture that depends on a specific integration, confirm with the CIO/BPT architect that the required API is stable, documented, and can support the call volume you need. Third, platform roadmaps are not always formalized or shared. A capability you are designing around may already be in development elsewhere, or may be on a deprecation path. Ask the architect what the roadmap looks like before you commit to it.</p>
+
+  <div class="escalation-box">
+    <div class="escalation-label">&#128308; When to escalate</div>
+    <div class="escalation-body"><strong>Small issues</strong> (a missing API key, an undocumented endpoint, a data format inconsistency) can be worked through with the platform team directly. <strong>Large structural blockers</strong> — a major platform migration, a multi-month security review, significant infrastructure investment — need to be escalated to the domain VP and CIO leadership before the solution design is finalized. <strong>If cross-org communication is not progressing</strong> and a platform team is unresponsive or cannot commit a named resource to your timeline, escalate to the AIFT team (Radha). Cross-org coordination at the enterprise level is part of what AIFT exists to do.</div>
   </div>
 
   <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Map all source systems</strong> — CRM, ERP, document repos, legacy apps. Document what data lives where.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Check API availability</strong> for each system. If no API exists, document the alternative access method (file export, database query, etc.).</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Profile data quality</strong> on a sample from each source. Check for nulls, duplicates, format issues, and missing values.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Identify access requirements</strong> — who owns each system, what approvals are needed, what the timeline is for getting credentials.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Flag ARB or security review needs</strong> early. If architectural approval is required, start that process now.</div></div>
+    <div class="step-row title-row"><div class="step-title">How to assess integration readiness</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Work with the domain focal</strong> to inventory all platforms in use: CRM, ERP, content repositories, collaboration tools, and any custom or proprietary systems.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Bring in the CIO/BPT architect</strong> to validate each system: Does an API exist? Is it documented? What are the access requirements? Who owns it? What does the platform roadmap look like?</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Check data quality and freshness</strong> on a real sample from each source. Nulls, stale data, and format inconsistencies are constraints to design around, not surprises to discover mid-build.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Identify named resources from each platform team</strong> who will support the transformation. Platform ownership outside your domain is the most common cause of stagnation.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Identify ARB and security review requirements</strong> with the architect and start those processes immediately. Flag any major structural blockers to domain VP and CIO leadership before finalizing the design.</div></div>
   </div>
 
-    <div class="artifact-section">
+  <div class="artifact-section">
     <div class="artifact-section-label">Artifacts</div>
     <div class="artifact-grid">
       <div class="artifact-card">
-        <div class="a-type">Template · Medium priority</div>
-        <div class="a-title">Technology & Data Readiness Checklist</div>
-        <div class="a-desc">Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a go/no-go gate before committing.</div>
-        <div class="a-links"><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Example coming soon</span><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Template coming soon</span></div>
+        <div class="a-title">Technology &amp; Data Readiness Checklist</div>
+        <div class="a-desc">Confirms systems, data sources, owners, quality, access controls, API availability, data freshness, and security constraints. The basis for the go/no-go on integration readiness.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
       <div class="artifact-card">
-        <div class="a-type">Visio · Medium priority</div>
         <div class="a-title">Business Process Map(s)</div>
-        <div class="a-desc">Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.</div>
-        <div class="a-links"><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Example coming soon</span><a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener noreferrer">↗ Open template</a></div>
-      </div>
-    </div>
-  </div>
-      <div class="artifact-card">
-        <div class="a-type">Process Map · Medium Priority</div>
-        <div class="a-title">Business Process Map</div>
-        <div class="a-desc">Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-        </div>
+        <div class="a-desc">Documents the current-state workflow: systems touched, data flows, handoffs, and automation opportunities. Produced with process SMEs and reviewed with the CIO/BPT architect for technical accuracy.</div>
+        <div class="a-links"><a class="a-link" href="https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">&#8599; Template</a></div>
       </div>
     </div>
   </div>
 
   <div class="case-study">
-    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Discovering the integration landscape</span></div>
-    <p class="cs-prose">The enrollment team's Tech & Data Assessment revealed three legacy systems with no API documentation, inconsistent data formats across systems, and a mainframe that required batch file exports. The CRM had an API but required security review for external access. The team documented all of this in week one, started the ARB process immediately, and adjusted their solution design to work with batch exports rather than real-time integration. By surfacing these constraints early, they avoided a mid-build crisis when the development team would have discovered them.</p>
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University: discovering the integration landscape</span></div>
+    <p class="cs-prose">In week one of Engage, the enrollment team worked with the university's IT architect to map every system touched by the document verification workflow. Box was the document repository, the admissions CRM held applicant records, and a third system managed enrollment decisions. Box had a well-documented API and the team already had credentials. The CRM required a separate access request through the IT governance process. The enrollment decision system had no API at all, only a weekly batch export to a shared folder.</p>
+    <p class="cs-prose">The team documented all three. They started the CRM access request immediately, which took two weeks to clear. The batch export on the enrollment system was flagged as a constraint: any AI that depended on real-time enrollment status would not work. That single finding changed the scope of the solution before a line of requirements was written.</p>
   </div>
 
   <div class="ready">
-    <span class="ready-icon">✓</span>
+    <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
-      <h4>Ready to move to Discover</h4>
-      <p>You have a documented systems landscape, data quality profiles for each source, a list of access requirements and approval timelines, and a clear view of where integration complexity will be high. You're designing with constraints visible, not discovering them later.</p>
+      <h4>Ready to move to Discovery</h4>
+      <p>You have a documented systems landscape, data quality and freshness profiles for each source, a list of access requirements and ARB timelines, and any major structural blockers escalated to leadership. You are designing with constraints visible, not discovering them later.</p>
     </div>
   </div>
 </div>
 
 
-<!-- ═══════════════════ DISCOVER ═══════════════════ -->
+<!-- &#9553;&#9553;&#9553;&#9553;&#9553; DISCOVERY &#9553;&#9553;&#9553;&#9553;&#9553; -->
 <div class="phase-section">
   <div class="phase-label">
-    <span class="phase-tag tag-discover">Discover</span>
-    <span class="title-row-sep">·</span>
+    <span class="phase-tag tag-discover">Discovery</span>
     <span class="challenge-pip">Systems Integration</span>
-    <span class="phase-step-context">Step 2 · Workflow Analysis · Solution Design</span>
+    <span class="phase-step-context">Step 3 &amp; 4 &#183; Workflow Analysis &#183; Solution Design</span>
   </div>
 
-  <h2>Map the technical landscape and make the build-vs-buy call.</h2>
+  <h2>Map the technical baseline, make the right build decisions, and write requirements developers can act on.</h2>
 
-  <p class="prose">Discover has two integration jobs. First, during Workflow Analysis, you document the as-is technical architecture for the workflow you're transforming — what systems are involved, how data flows between them, and where the bottlenecks are. Second, during Solution Design, you make the build-vs-buy decision for each integration point and write requirements that are specific enough for a developer to build from without asking clarifying questions.</p>
-
-
-  <!-- SUB-PHASE 1: WORKFLOW ANALYSIS -->
-  <div class="sub-phase">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 3</span>
-      <h3>Workflow Analysis — Document the technical baseline</h3>
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">CIO/BPT architect</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">Domain focal</span>
+      <span class="who-role">Process SMEs</span>
+      <span class="who-role">ARB reviewers (if needed)</span>
+      <span class="who-role">Security team (if needed)</span>
     </div>
   </div>
 
-  <p class="prose">The Workflow Analysis is where you map the current technical architecture in detail. For the workflow you're transforming, trace the data flow: where does it originate, what systems does it pass through, what transformations happen along the way, and where does it end up? Document every integration point, every manual handoff, and every place where data quality degrades. This map becomes the reference for understanding what you're replacing and what you need to preserve.</p>
+  <p class="prose">Discovery has two integration jobs. First, during Workflow Analysis (Step 3), you document the current-state technical architecture for the specific workflow you are transforming. Second, during Solution Design (Step 4), you make the key integration decisions and write requirements that are specific enough for a developer to build from without a clarification call.</p>
 
-  <p class="prose">Also identify the non-functional requirements that will constrain your design: ARB approval timelines, security review requirements, data residency rules, and compliance constraints. These aren't nice-to-know details — they're hard gates that will block your build if you don't plan for them. If your solution needs to pass through ARB, that review takes 4-6 weeks. If you discover that in week eight of a 12-week build, you've just missed your delivery date.</p>
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Workflow Analysis: document the technical baseline</h3>
+    </div>
+  </div>
 
-  <!-- Data flow diagram -->
+  <p class="prose">For the workflow you are transforming, trace how data actually moves: where it originates, what systems it passes through, what transformations happen along the way, and where it ends up. The process SMEs tell you how the workflow runs. The CIO/BPT architect tells you how the data moves underneath it. Both views are required.</p>
+
+  <p class="prose">Document every integration point, every manual handoff, and every place where data quality degrades or updates are delayed. Also identify the non-functional requirements that will constrain your design: ARB approval timelines, security review requirements, data residency rules, and compliance constraints. These are hard gates. If ARB review takes four to six weeks and you discover that requirement in week eight of a twelve-week build, you have missed your delivery date.</p>
+
+  <!-- Current-state and future-state data flow: enrollment case -->
   <div class="visual-wrap">
-    <svg viewBox="0 0 640 380" xmlns="http://www.w3.org/2000/svg" style="min-width:440px;">
+    <svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" style="min-width:440px;">
       <defs>
         <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
       </defs>
+      <text x="320" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Document verification: current state vs. future state</text>
 
-      <!-- Title -->
-      <text x="320" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Current-state data flow — what you're replacing</text>
+      <!-- CURRENT STATE label -->
+      <text x="30" y="38" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">CURRENT STATE</text>
 
-      <!-- Step 1: Data entry -->
-      <rect x="40" y="50" width="140" height="50" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="110" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">1. Data Entry</text>
-      <text x="110" y="84" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Manual input to CRM</text>
-      <text x="110" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#da1e28">⚠ High error rate</text>
+      <!-- Current state steps — all amber -->
+      <rect x="30" y="48" width="130" height="48" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
+      <text x="95" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">1. Application arrives</text>
+      <text x="95" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">CRM (applicant record)</text>
 
-      <!-- Arrow -->
-      <line x1="180" y1="75" x2="200" y2="75" stroke="#525252" stroke-width="1.5" marker-end="url(#ar2)"/>
+      <line x1="160" y1="72" x2="188" y2="72" stroke="#ba7517" stroke-width="1.5" marker-end="url(#ar2)"/>
 
-      <!-- Step 2: Manual validation -->
-      <rect x="200" y="50" width="160" height="50" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
-      <text x="280" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#633806">2. Manual Review</text>
-      <text x="280" y="84" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">Staff validates data</text>
-      <text x="280" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#da1e28">⚠ 60% of staff time</text>
+      <rect x="188" y="48" width="130" height="48" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
+      <text x="253" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">2. Counselor checks Box</text>
+      <text x="253" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#da1e28">&#9888; Manual, 60% of time</text>
 
-      <!-- Arrow -->
-      <line x1="360" y1="75" x2="380" y2="75" stroke="#525252" stroke-width="1.5" marker-end="url(#ar2)"/>
+      <line x1="318" y1="72" x2="346" y2="72" stroke="#ba7517" stroke-width="1.5" marker-end="url(#ar2)"/>
 
-      <!-- Step 3: Data transformation -->
-      <rect x="380" y="50" width="160" height="50" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="1"/>
-      <text x="460" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">3. Transformation</text>
-      <text x="460" y="84" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#5c2eb8">Excel macros, scripts</text>
-      <text x="460" y="96" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#da1e28">⚠ Breaks frequently</text>
+      <rect x="346" y="48" width="130" height="48" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
+      <text x="411" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">3. Status updated in CRM</text>
+      <text x="411" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#da1e28">&#9888; 14-day avg cycle</text>
 
-      <!-- Arrow down -->
-      <line x1="460" y1="100" x2="460" y2="140" stroke="#525252" stroke-width="1.5" marker-end="url(#ar2)"/>
+      <line x1="476" y1="72" x2="504" y2="72" stroke="#ba7517" stroke-width="1.5" marker-end="url(#ar2)"/>
 
-      <!-- Step 4: Load to target -->
-      <rect x="380" y="140" width="160" height="50" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="460" y="160" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">4. Load to ERP</text>
-      <text x="460" y="174" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Manual upload</text>
-      <text x="460" y="186" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#da1e28">⚠ 2-day lag</text>
+      <rect x="504" y="48" width="114" height="48" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
+      <text x="561" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">4. Applicant notified</text>
+      <text x="561" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#da1e28">&#9888; Batch email, delayed</text>
 
-      <!-- Future state (right side) -->
-      <text x="320" y="230" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Future-state data flow — what you're building</text>
+      <!-- Constraints row: red, 2 lines -->
+      <text x="30" y="116" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#a32d2d">INTEGRATION CONSTRAINTS</text>
+      <rect x="30" y="124" width="586" height="34" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="40" y="138" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">CRM: API exists, access request needed (2 wk)  &#183;  Box: API documented, credentials available</text>
+      <text x="40" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Enrollment system: batch export only, weekly cadence  &#183;  No real-time enrollment status possible</text>
 
-      <!-- Step 1: Automated ingestion -->
-      <rect x="40" y="260" width="140" height="50" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
-      <text x="110" y="280" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">1. API Ingestion</text>
-      <text x="110" y="294" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Real-time from CRM</text>
-      <text x="110" y="306" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#1a6b32">✓ Automated</text>
+      <!-- FUTURE STATE label -->
+      <text x="30" y="178" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">FUTURE STATE (MVP)</text>
 
-      <!-- Arrow -->
-      <line x1="180" y1="285" x2="200" y2="285" stroke="#24a148" stroke-width="2" marker-end="url(#ar2)"/>
+      <!-- Future state steps — all green -->
+      <rect x="30" y="188" width="130" height="48" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="95" y="208" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">1. Application arrives</text>
+      <text x="95" y="222" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">CRM API trigger (automated)</text>
 
-      <!-- Step 2: AI validation -->
-      <rect x="200" y="260" width="160" height="50" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
-      <text x="280" y="280" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#007070">2. AI Validation</text>
-      <text x="280" y="294" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">Automated checks</text>
-      <text x="280" y="306" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#1a6b32">✓ 95% automated</text>
+      <line x1="160" y1="212" x2="188" y2="212" stroke="#24a148" stroke-width="2" marker-end="url(#ar2)"/>
 
-      <!-- Arrow -->
-      <line x1="360" y1="285" x2="380" y2="285" stroke="#24a148" stroke-width="2" marker-end="url(#ar2)"/>
+      <rect x="188" y="188" width="130" height="48" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="253" y="208" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">2. watsonx checks Box</text>
+      <text x="253" y="222" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">&#10003; Automated, under 2 hrs</text>
 
-      <!-- Step 3: Automated pipeline -->
-      <rect x="380" y="260" width="160" height="50" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
-      <text x="460" y="280" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">3. Data Pipeline</text>
-      <text x="460" y="294" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Automated ETL</text>
-      <text x="460" y="306" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#1a6b32">✓ Real-time</text>
+      <line x1="318" y1="212" x2="346" y2="212" stroke="#24a148" stroke-width="2" marker-end="url(#ar2)"/>
 
-      <!-- Comparison box -->
-      <rect x="40" y="340" width="560" height="28" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="1"/>
-      <text x="50" y="358" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Impact: </text>
-      <text x="100" y="358" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">2-day lag → real-time | 60% manual effort → 5% | High error rate → validated at source</text>
+      <rect x="346" y="188" width="130" height="48" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="411" y="208" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">3. CRM status updated</text>
+      <text x="411" y="222" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">&#10003; Automatic via API</text>
+
+      <line x1="476" y1="212" x2="504" y2="212" stroke="#24a148" stroke-width="2" marker-end="url(#ar2)"/>
+
+      <rect x="504" y="188" width="114" height="48" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="561" y="208" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">4. Applicant notified</text>
+      <text x="561" y="222" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">&#10003; Real-time, triggered</text>
     </svg>
-    <div class="visual-caption">The current-state flow shows where manual work, delays, and errors occur. The future-state flow shows what you're building to replace it. Both maps are required — one tells you what you're fixing, the other tells you what success looks like.</div>
+
+    <!-- Impact: 2x2 bullet list -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.625rem;margin-top:1rem;font-size:.85rem;">
+      <div style="padding:.75rem 1rem;background:var(--green-fill);border-radius:4px;color:var(--green-dk);">
+        <div style="font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.375rem;">Cycle time</div>
+        14-day average verification &#8594; under 2 hours
+      </div>
+      <div style="padding:.75rem 1rem;background:var(--green-fill);border-radius:4px;color:var(--green-dk);">
+        <div style="font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.375rem;">Counselor time</div>
+        60% manual verification &#8594; exception-only review
+      </div>
+      <div style="padding:.75rem 1rem;background:var(--green-fill);border-radius:4px;color:var(--green-dk);">
+        <div style="font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.375rem;">Applicant notifications</div>
+        Batch email (delayed) &#8594; real-time, triggered
+      </div>
+      <div style="padding:.75rem 1rem;background:var(--amber-fill);border-radius:4px;color:var(--amber-dk);">
+        <div style="font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:.375rem;">Scoping decision</div>
+        Enrollment status check deferred to Wave 2 (batch-only system)
+      </div>
+    </div>
+    <div class="visual-caption" style="margin-top:.75rem;">Integration constraints identified in Engage directly shaped what went into the MVP and what was deferred.</div>
   </div>
 
   <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">Underestimating integration complexity</div>
-    <div class="painpoint-body">Integration work is consistently underestimated because it's invisible until you start building. A system that "has an API" might have an API that's undocumented, rate-limited, or missing the fields you need. A data source that "is accessible" might require a VPN, a service account, and three levels of approval to actually connect to. Map the integration complexity in detail during Workflow Analysis — not as an optimistic estimate, but as a realistic accounting of every step required to move data from source to solution.</div>
-  </div>
-
-    <div class="artifact-section">
-    <div class="artifact-section-label">Artifact</div>
-    <div class="artifact-grid">
-      <div class="artifact-card">
-        <div class="a-type">Template · Medium priority</div>
-        <div class="a-title">Build vs Buy</div>
-        <div class="a-desc">Template for Build vs Buy</div>
-        <div class="a-links"><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Example coming soon</span><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Template coming soon</span></div>
-      </div>
-    </div>
-  </div>
-      <div class="artifact-card">
-        <div class="a-type">Process Map · Medium Priority</div>
-        <div class="a-title">Future State Workflow Process Map</div>
-        <div class="a-desc">A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-        </div>
-      </div>
-    </div>
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Discovering integration blockers during the build</div>
+    <div class="painpoint-body">Integration complexity that surfaces mid-build stops forward progress while the team scrambles to understand systems they should have mapped weeks earlier. The Workflow Analysis exists so that this does not happen. If the current-state architecture is not fully documented before Solution Design begins, the requirements will contain assumptions that break during the build. The two weeks spent on Workflow Analysis prevents two months of mid-sprint delays.</div>
   </div>
 
   <div class="sub-divider"></div>
 
-  <!-- SUB-PHASE 2: SOLUTION DESIGN -->
   <div class="sub-phase">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 4</span>
-      <h3>Solution Design — Write build-ready requirements</h3>
+      <h3>Solution Design: integration decisions and build-ready requirements</h3>
     </div>
   </div>
 
-  <p class="prose">With the technical baseline documented, Solution Design is where you make the build-vs-buy decision for each integration point and write requirements specific enough for a developer to act on. The build-vs-buy decision is not about what's technically possible — it's about what's strategically worth building. Use a simple framework: if the integration is unique to your workflow and core to your competitive advantage, build it. If it's a commodity capability that others have solved, buy or reuse an existing connector.</p>
+  <p class="prose">With the technical baseline documented, Solution Design answers two questions: what integration approach will you use for each connection point, and what exactly needs to be built? Both need to be resolved before the build team starts. A vague answer to either question means the build team will stop and ask, and that is when your timeline slips.</p>
 
-  <!-- Build vs Buy matrix -->
+  <p class="prose"><strong>Build vs. buy considerations.</strong> At IBM, most AI solutions end up being built with internal development capacity using watsonx and existing API connectors. The real question is not usually "build or buy" in the traditional sense. It is whether any individual integration points have pre-built connectors available (watsonx Orchestrate has over 150 pre-built connections to Salesforce, SAP, ServiceNow, Slack, and others) and whether it makes sense to use them rather than building custom. When a pre-built connector covers 80% of what you need, configure and extend it. When the requirements are specific enough that a pre-built connector would require more customization work than building from scratch, build. Document the reasoning either way. You will need to defend the decision later.</p>
+
+  <!-- Build vs buy matrix: smaller, focused -->
   <div class="visual-wrap">
-    <svg viewBox="0 0 580 320" xmlns="http://www.w3.org/2000/svg" style="min-width:380px;">
-      <!-- Title -->
-      <text x="290" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Build vs. buy decision matrix</text>
-
-      <!-- Axes -->
-      <line x1="80" y1="280" x2="544" y2="280" stroke="#c6c6c6" stroke-width="1.5"/>
-      <line x1="80" y1="280" x2="80" y2="50" stroke="#c6c6c6" stroke-width="1.5"/>
-      <text x="312" y="302" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Integration Complexity →</text>
-      <text x="40" y="165" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252" transform="rotate(-90,40,165)">Strategic Value →</text>
-
-      <!-- Quadrants -->
-      <rect x="80" y="50" width="228" height="115" fill="#fff1f1" opacity="0.65"/>
-      <rect x="308" y="50" width="236" height="115" fill="#fdf4e3" opacity="0.8"/>
-      <rect x="80" y="165" width="228" height="115" fill="#defbe6" opacity="0.65"/>
-      <rect x="308" y="165" width="236" height="115" fill="#fff1f1" opacity="0.65"/>
-      <line x1="308" y1="50" x2="308" y2="280" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
-      <line x1="80" y1="165" x2="544" y2="165" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
-
-      <!-- Labels -->
-      <text x="194" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#a32d2d">Partner / Outsource</text>
-      <text x="194" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#a32d2d">High value, high complexity</text>
-      <text x="194" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Find a specialist to build it</text>
-
-      <text x="426" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#633806">Buy & Customize</text>
-      <text x="426" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#633806">High value, lower complexity</text>
-      <text x="426" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">Use existing connector, configure</text>
-
-      <text x="194" y="215" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#1a6b32">Build Custom ★</text>
-      <text x="194" y="231" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">Low complexity, strategic value</text>
-      <text x="194" y="245" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Core to your advantage — build it</text>
-
-      <text x="426" y="215" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#a32d2d">Don't Build</text>
-      <text x="426" y="231" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#a32d2d">Low value, high complexity</text>
-      <text x="426" y="245" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Not worth the investment</text>
-
-      <!-- Axis labels -->
-      <text x="85" y="292" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">Low</text>
-      <text x="526" y="292" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">High</text>
-      <text x="90" y="274" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">Low</text>
-      <text x="90" y="58" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#888">High</text>
+    <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" style="min-width:340px;">
+      <text x="240" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Integration approach: use existing connectors or build?</text>
+      <line x1="80" y1="180" x2="450" y2="180" stroke="#c6c6c6" stroke-width="1.5"/>
+      <line x1="80" y1="180" x2="80" y2="34" stroke="#c6c6c6" stroke-width="1.5"/>
+      <text x="265" y="198" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Customization needed &#8594;</text>
+      <text x="38" y="107" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252" transform="rotate(-90 38 107)">Strategic value &#8594;</text>
+      <line x1="265" y1="34" x2="265" y2="180" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
+      <line x1="80" y1="107" x2="450" y2="107" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/>
+      <rect x="80" y="34" width="185" height="73" fill="#defbe6" opacity="0.6"/>
+      <text x="172" y="65" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Use pre-built connector</text>
+      <text x="172" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">High value, low custom work</text>
+      <rect x="265" y="34" width="185" height="73" fill="#fdf4e3" opacity="0.7"/>
+      <text x="357" y="65" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#633806">Build + extend</text>
+      <text x="357" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">High value, high custom need</text>
+      <rect x="80" y="107" width="185" height="73" fill="#f4f4f4"/>
+      <text x="172" y="138" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#525252">Quick configuration</text>
+      <text x="172" y="153" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Low value, low custom work</text>
+      <rect x="265" y="107" width="185" height="73" fill="#fff1f1" opacity="0.6"/>
+      <text x="357" y="138" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#a32d2d">Defer or descope</text>
+      <text x="357" y="153" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Low value, high custom work</text>
+      <text x="84" y="192" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">Low</text>
+      <text x="442" y="192" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">High</text>
+      <text x="90" y="174" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">Low</text>
+      <text x="90" y="42" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">High</text>
     </svg>
-    <div class="visual-caption">The build-vs-buy matrix helps you decide where to invest custom development effort. Build what's strategically valuable and technically simple. Buy or partner for everything else. Document the decision and the reasoning — you'll need to defend it later.</div>
+    <div class="visual-caption">For each integration point, decide whether to use a pre-built connector, build custom, configure quickly, or defer. Document the decision and the reasoning. At IBM, most core integrations end up built, but the Orchestrate connector catalog covers many common platforms and is worth checking first.</div>
   </div>
 
-  <p class="prose">Once you've made the build-vs-buy call, write the requirements. This is where most handoffs fail: business teams write requirements that make sense internally but are too conceptual for a development team to build from. The test is simple: give a developer the requirements document and ask if they can write a user story from it without asking you a single question. If they can't, it's not ready.</p>
-
-  <p class="prose">Build-ready requirements include: the persona (who is using this), the data objects (what fields, what format, what source system), the systems involved (what APIs, what authentication, what error handling), the acceptance criteria (what does done look like), and the fallback path (what happens when the integration fails). If any of those are missing or vague, the developer will stop and ask — and that's when your timeline slips.</p>
+  <p class="prose"><strong>Write build-ready requirements.</strong> The test: give the CIO/BPT architect and the product owner the requirements document and ask whether a developer can write a user story from it without a clarification call. Build-ready requirements include the persona, the specific data objects (fields, format, source system), the systems involved (API endpoint, authentication method, rate limits), the acceptance criteria, and the fallback path when the integration fails. If any of those are missing or vague, the developer will stop and ask, and that is when your timeline slips.</p>
 
   <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">Requirements 'too conceptual to build from'</div>
-    <div class="painpoint-body">This is the most common handoff failure in the entire process. Business teams write requirements like "integrate with CRM to pull customer data" — which sounds clear but leaves a developer with twenty questions: which CRM? Which API endpoint? Which fields? What format? What happens if the API is down? What's the authentication method? Build-ready requirements answer all of those questions before the developer asks them. If your requirements document is under three pages, it's probably too conceptual. Add specificity until a developer can start building without a clarification call.</div>
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Requirements too conceptual to build from</div>
+    <div class="painpoint-body">Business teams write requirements like "integrate with the CRM to pull applicant data." That sounds complete but leaves a developer with twenty questions: which CRM object? Which fields? What authentication method? What happens if the API returns an error? What is the rate limit? Build-ready requirements answer all of those questions before the developer asks. If the product owner and the CIO/BPT architect cannot review the requirements together and confirm a developer can start without clarification, the requirements are not ready.</div>
   </div>
 
   <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Map the current-state architecture</strong> for the workflow you're transforming. Document every system, integration point, and data flow.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Identify ARB and security review requirements</strong> early. Start those processes immediately — they take 4-6 weeks.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Make the build-vs-buy decision</strong> for each integration point using the matrix. Document the reasoning.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Write build-ready requirements</strong> with persona, data objects, systems, APIs, authentication, error handling, acceptance criteria, and fallback paths.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Test the requirements</strong> by giving them to a developer. If they need to ask clarifying questions, add more specificity.</div></div>
-    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Document the tech stack decision</strong> with pros, cons, and tradeoffs. You'll need to defend it when questions arise later.</div></div>
+    <div class="step-row title-row"><div class="step-title">How to write build-ready requirements</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Map the current-state architecture</strong> for the selected workflow with the process SMEs and CIO/BPT architect. Document every system, integration point, and data flow.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Check ARB and security review requirements</strong> with the architect. Start those processes immediately if needed. They take four to six weeks.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Check the watsonx Orchestrate connector catalog</strong> for each integration point. Use a pre-built connector where it covers 80%+ of the requirement. Build where it does not.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Write build-ready requirements</strong> covering persona, data objects, source systems, API details, authentication, error handling, acceptance criteria, and fallback paths.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Test requirements with the architect and product owner.</strong> If a developer would need to ask clarifying questions, the requirements are not ready. Add specificity until they are.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Document the integration approach</strong> for each connection point with reasoning. You will need to defend it when questions arise during the build.</div></div>
   </div>
 
   <div class="artifact-section">
-    <div class="artifact-section-label">Key Artifacts</div>
+    <div class="artifact-section-label">Artifacts</div>
     <div class="artifact-grid">
       <div class="artifact-card">
-        <div class="a-type">Roadmap · High Priority</div>
-        <div class="a-title">Strategic Roadmap</div>
-        <div class="a-desc">The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-          <a href="#" class="a-link">View Example →</a>
-        </div>
+        <div class="a-title">Business Requirements Log</div>
+        <div class="a-desc">The build-ready package covering persona, workflow, actions, systems, APIs, data objects, acceptance criteria, technical specification, and solution architecture.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
       <div class="artifact-card">
-        <div class="a-type">Plan · High Priority</div>
-        <div class="a-title">Change Management Plan</div>
-        <div class="a-desc">Plans users, UAT, communications, training, feedback loops, resistance handling, support and maintenance, scaling recommendations, and governance.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-        </div>
+        <div class="a-title">Strategic Roadmap</div>
+        <div class="a-desc">MVP scope, explicit backlog, integration dependencies, cadence, and next releases. Includes the integration approach decision for each connection point.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank" rel="noopener">&#8599; Template</a></div>
       </div>
     </div>
   </div>
 
   <div class="case-study">
-    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Build-vs-buy decision</span></div>
-    <p class="cs-prose">For the document verification workflow, the team faced three integration points: CRM data pull, document storage access, and ERP update. They used the matrix: CRM integration was high-value, low-complexity (existing Salesforce connector) — buy and customize. Document storage was high-value, high-complexity (custom mainframe interface) — partner with IT to build. ERP update was low-value, high-complexity — descoped to post-MVP. The team documented each decision with reasoning, which proved critical when the CFO questioned why they weren't integrating with ERP in the first release.</p>
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University: integration decisions in Solution Design</span></div>
+    <p class="cs-prose">The Workflow Analysis confirmed three integration points: the admissions CRM (applicant records), Box (document storage), and the enrollment decision system (batch export only). For the CRM, the CIO/BPT architect confirmed a documented Salesforce API was available and the access request was already in progress. For Box, a pre-built connector in the watsonx environment covered the file access pattern they needed. For the enrollment system, the batch-only limitation ruled it out for the MVP. It was explicitly moved to Wave 2.</p>
+    <p class="cs-prose">Requirements were reviewed by the product owner and the architect together. The original requirement read "check Box for required documents." The final version specified the exact document types (transcript, government ID, personal statement), the Box folder structure, the API call pattern, the field that would be written back to the CRM on completion, and the exception path when a document failed validation. The developer started Sprint 1 without a single clarification call.</p>
   </div>
 
   <div class="ready">
-    <span class="ready-icon">✓</span>
+    <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
       <h4>Ready to move to Execute</h4>
-      <p>You have build-ready requirements that a developer can act on without clarification, a documented build-vs-buy decision for each integration point, ARB and security reviews in progress, and a tech stack decision with documented tradeoffs. The build team can start immediately.</p>
+      <p>You have build-ready requirements reviewed by the CIO/BPT architect and product owner, a documented integration approach for each connection point, ARB and security reviews in progress, and any low-value high-complexity integrations explicitly deferred. The build team can start Sprint 1 without re-explanation.</p>
     </div>
   </div>
 </div>
 
 
-<!-- ═══════════════════ EXECUTE ═══════════════════ -->
+<!-- &#9553;&#9553;&#9553;&#9553;&#9553; EXECUTE &#9553;&#9553;&#9553;&#9553;&#9553; -->
 <div class="phase-section">
   <div class="phase-label">
     <span class="phase-tag tag-execute">Execute</span>
-    <span class="title-row-sep">·</span>
     <span class="challenge-pip">Systems Integration</span>
-    <span class="phase-step-context">Experimentation · Scale &amp; Adopt</span>
+    <span class="phase-step-context">Step 5 &amp; 6 &#183; Experimentation &#183; Scale &amp; Adopt</span>
   </div>
 
   <h2>Build, integrate, instrument, and hand off cleanly.</h2>
 
-  <p class="prose">Execute is where integration theory meets reality. The requirements you wrote in Discover get tested against actual systems, actual data, and actual failure modes. The goal is not just to build something that works in a demo — it's to build something that runs reliably in production, handles errors gracefully, and can be maintained by someone other than the person who built it.</p>
-
-
-  <!-- SUB-PHASE 1: EXPERIMENTATION -->
-  <div class="sub-phase">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 5</span>
-      <h3>Experimentation — Build and validate on real data</h3>
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">CIO/BPT architect</span>
+      <span class="who-role">Developer lead</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">Platform team (for production)</span>
+      <span class="who-role">Named technical owner</span>
     </div>
   </div>
 
-  <p class="prose">The first job in Execute is to validate that the data you profiled in Engage is actually usable when you try to build with it. Connect to the real systems, pull real data, and run it through your pipeline. The quality issues you find here — missing fields, format inconsistencies, unexpected nulls — are not surprises. They're confirmation of what you documented earlier. The difference is that now you have to handle them in code.</p>
+  <p class="prose">Execute is where integration design meets reality. The requirements you wrote in Discovery get tested against actual systems, actual data, and actual failure modes. The goal is not to build something that works in a demo. It is to build something that runs reliably in production, handles errors without manual intervention, and can be maintained by someone other than the person who built it.</p>
 
-  <p class="prose">Build your integrations with error handling from day one. Every API call can fail. Every data source can return unexpected formats. Every system can go down. Your code needs to handle all of those gracefully: log the error, alert the right person, and either retry or fail safely. The integrations that break in production are the ones that were built assuming everything would work perfectly.</p>
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation: build and validate on real data</h3>
+    </div>
+  </div>
 
-  <!-- Integration testing workflow -->
+  <p class="prose">Connect to the real systems in Sprint 1 and run real data through the pipeline. The quality issues you find here are confirmations of what you documented in Engage, not surprises. The difference is that now you handle them in code. Build error handling from the first day: every API call can fail, every data source can return unexpected formats, and every system can go down. Your code needs to handle all of those gracefully, log the error, alert the right person, and either retry or fail safely.</p>
+
+  <p class="prose"><strong>Instrument everything.</strong> Set up logging and monitoring before anything goes to production. You need to know when the pipeline fails before users report it. Track API call success rates, data validation pass rates, processing times, and error frequencies. These are not just operational metrics. They are the evidence base for whether the solution is working in practice and whether it is ready to scale.</p>
+
+  <p class="prose"><strong>Test failure scenarios as deliberately as you test the happy path.</strong> API timeout, malformed data, authentication failure, rate limit hit, source system unavailable. If you have not tested a failure mode, it will happen in production.</p>
+
+  <!-- Integration testing workflow SVG -->
   <div class="visual-wrap">
-    <svg viewBox="0 0 660 280" xmlns="http://www.w3.org/2000/svg" style="min-width:460px;">
+    <svg viewBox="0 0 640 260" xmlns="http://www.w3.org/2000/svg" style="min-width:440px;">
       <defs>
         <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
           <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </marker>
       </defs>
-
-      <!-- Title -->
-      <text x="330" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Integration testing workflow — validate end-to-end</text>
-
-      <!-- Row 1: Unit tests -->
-      <rect x="40" y="50" width="120" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
-      <text x="100" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">Unit Tests</text>
-      <text x="100" y="83" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Individual components</text>
-
-      <line x1="160" y1="72" x2="190" y2="72" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar3)"/>
-
-      <!-- Row 2: Integration tests -->
-      <rect x="190" y="50" width="140" height="44" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
-      <text x="260" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#007070">Integration Tests</text>
-      <text x="260" y="83" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">System-to-system</text>
-
-      <line x1="330" y1="72" x2="360" y2="72" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar3)"/>
-
-      <!-- Row 3: End-to-end tests -->
-      <rect x="360" y="50" width="140" height="44" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
-      <text x="430" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#007070">End-to-End Tests</text>
-      <text x="430" y="83" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">Full workflow</text>
-
-      <line x1="500" y1="72" x2="530" y2="72" stroke="#24a148" stroke-width="1.5" marker-end="url(#ar3)"/>
-
-      <!-- Row 4: UAT -->
-      <rect x="530" y="50" width="90" height="44" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
-      <text x="575" y="68" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">UAT</text>
-      <text x="575" y="83" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Real users</text>
-
-      <!-- Validation checkpoints -->
-      <text x="40" y="120" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Data validation checkpoints:</text>
-
-      <rect x="40" y="135" width="580" height="32" rx="3" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/>
-      <text x="50" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Source data format matches spec</text>
-      <text x="240" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Transformation logic correct</text>
-      <text x="430" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Target system accepts data</text>
-
-      <rect x="40" y="172" width="580" height="32" rx="3" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/>
-      <text x="50" y="189" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Error handling works</text>
-      <text x="240" y="189" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Logging captures failures</text>
-      <text x="430" y="189" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">✓ Alerts fire correctly</text>
-
-      <!-- Error scenarios -->
-      <text x="40" y="230" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Test failure scenarios:</text>
-
-      <rect x="40" y="245" width="190" height="24" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
-      <text x="50" y="261" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">API timeout / unavailable</text>
-
-      <rect x="240" y="245" width="190" height="24" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
-      <text x="250" y="261" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Malformed data / missing fields</text>
-
-      <rect x="440" y="245" width="180" height="24" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
-      <text x="450" y="261" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Authentication failure</text>
+      <text x="320" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Integration testing and instrumentation</text>
+      <rect x="30" y="36" width="120" height="44" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="1"/>
+      <text x="90" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">Unit tests</text>
+      <text x="90" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Individual components</text>
+      <line x1="150" y1="58" x2="178" y2="58" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar3)"/>
+      <rect x="178" y="36" width="140" height="44" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
+      <text x="248" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#005d5d">Integration tests</text>
+      <text x="248" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">System to system</text>
+      <line x1="318" y1="58" x2="346" y2="58" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar3)"/>
+      <rect x="346" y="36" width="140" height="44" rx="4" fill="#d9f5f4" stroke="#009d9a" stroke-width="1.5"/>
+      <text x="416" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#005d5d">End-to-end tests</text>
+      <text x="416" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">Full workflow, real data</text>
+      <line x1="486" y1="58" x2="514" y2="58" stroke="#24a148" stroke-width="1.5" marker-end="url(#ar3)"/>
+      <rect x="514" y="36" width="100" height="44" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="564" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">UAT</text>
+      <text x="564" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Real users</text>
+      <text x="30" y="104" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Validation checkpoints:</text>
+      <rect x="30" y="114" width="580" height="26" rx="3" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/>
+      <text x="40" y="131" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Source data format matches spec</text>
+      <text x="240" y="131" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Transformation logic correct</text>
+      <text x="440" y="131" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Target system accepts data</text>
+      <rect x="30" y="144" width="580" height="26" rx="3" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/>
+      <text x="40" y="161" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Error handling works correctly</text>
+      <text x="240" y="161" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Logging captures all failures</text>
+      <text x="440" y="161" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">&#10003; Alerts fire to the right person</text>
+      <text x="30" y="194" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">Test these failure scenarios explicitly:</text>
+      <rect x="30" y="204" width="175" height="22" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="40" y="219" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">API timeout or unavailable</text>
+      <rect x="215" y="204" width="195" height="22" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="225" y="219" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Malformed data or missing fields</text>
+      <rect x="420" y="204" width="190" height="22" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="430" y="219" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">Authentication failure or rate limit</text>
     </svg>
-    <div class="visual-caption">Integration testing validates that data flows correctly from source to target through every transformation step. Test both the happy path and every failure mode — API timeouts, malformed data, authentication failures. If you haven't tested a failure scenario, it will happen in production.</div>
+    <div class="visual-caption">Test both the happy path and every failure mode. If you have not tested a failure scenario, it will happen in production. UAT should only begin after end-to-end integration is validated on real data, not mocked data.</div>
   </div>
 
   <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">Data quality worse than expected</div>
-    <div class="painpoint-body">The data quality profile you ran in Engage was on a sample. When you connect to the full dataset in Execute, you'll find edge cases the sample didn't catch: records with all nulls, dates in unexpected formats, IDs that don't match between systems. This is normal. The mistake is treating these as blockers rather than expected work. Build your pipeline to handle bad data gracefully: log it, flag it for review, and keep processing. A pipeline that crashes on the first bad record is not production-ready.</div>
-  </div>
-
-  <p class="prose">Also instrument everything. Add logging that captures: what data came in, what transformations were applied, what went out, and whether it succeeded or failed. When something breaks in production — and it will — you need to be able to trace exactly what happened without guessing. The integrations that are easiest to maintain are the ones where every step is logged and every error is visible.</p>
-
-  <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
-    <div class="painpoint-title">One-off integrations that can't scale</div>
-    <div class="painpoint-body">When timelines are tight, teams build integrations that work for the MVP but can't scale to production volumes. A script that works fine for 100 records per day breaks when it hits 10,000. An API call that succeeds in testing fails in production because of rate limits. Build for scale from the start: batch processing for high volumes, rate limiting for API calls, retry logic for transient failures. The integration that works in the demo but fails at scale is worse than no integration at all — because now you've committed to a timeline you can't meet.</div>
-  </div>
-
-  <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Connect to real systems and validate data quality</strong> on the full dataset, not just the sample. Document edge cases.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Build error handling into every integration</strong> — API timeouts, malformed data, authentication failures. Log everything.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test all failure scenarios</strong> — not just the happy path. If you haven't tested it, it will break in production.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Instrument the pipeline</strong> with logging that captures input, transformations, output, and errors. Make failures visible.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Build for scale from day one</strong> — batch processing, rate limiting, retry logic. Don't wait until production to discover volume issues.</div></div>
-  </div>
-
-  <div class="artifact-section">
-    <div class="artifact-section-label">Key Artifacts</div>
-    <div class="artifact-grid">
-      <div class="artifact-card">
-        <div class="a-type">Tracker · High Priority</div>
-        <div class="a-title">Defect Tracker</div>
-        <div class="a-desc">Tracks bugs, issues, and technical debt throughout the build phase. Essential for managing quality and prioritizing fixes.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Example →</a>
-        </div>
-      </div>
-      <div class="artifact-card">
-        <div class="a-type">Dashboard · High Priority</div>
-        <div class="a-title">KPI Dashboard</div>
-        <div class="a-desc">Reference dashboard for adoption, usage, operational performance, and support health. Should be created during MVP.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-        </div>
-      </div>
-    </div>
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Navigating delivery pressure vs. building something robust</div>
+    <div class="painpoint-body">If your team feels pressure to deliver quickly, the temptation is to skip error handling, use mocked data for testing, or defer monitoring to "after launch." Each of those shortcuts creates a production system that fails quietly and takes weeks to diagnose. The path to production at IBM runs through the CIO/BPT platform team, and they will not accept a solution without error handling and monitoring in place. Building those things correctly in Sprint 1 is faster than retrofitting them during the ARB review that will block your launch.</div>
   </div>
 
   <div class="sub-divider"></div>
 
-  <!-- SUB-PHASE 2: SCALE & ADOPT -->
   <div class="sub-phase">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 6</span>
-      <h3>Scale &amp; Adopt — Hand off a maintainable solution</h3>
+      <span class="sub-phase-number">Navigating path to production at IBM</span>
     </div>
   </div>
 
-  <p class="prose">The handoff to production is where most integrations fail. Not because the code doesn't work — but because no one knows how to maintain it after the build team leaves. A successful handoff requires three things: complete technical documentation, a named owner who can actually run and maintain the solution, and a clear escalation path when something breaks.</p>
+  <p class="prose">One of the most common points of confusion in IBM AI transformations is the path to production. The CIO/BPT organization plays two roles: they provide development resources through their architect and build capacity, and they own the platform teams that control the production environment. Your architect is a partner in building. The platform team controls whether you can deploy. These are separate conversations with separate timelines.</p>
 
-  <p class="prose">The technical documentation includes: the code repository with README and test cases, the architecture diagram showing all integration points, the secrets and API keys with instructions for rotation, the data lineage documentation showing where each field comes from, and the runbook for common failure scenarios. If any of those are missing, the solution will degrade quietly until it stops working entirely.</p>
+  <p class="prose">The key to moving through the path to production is to <strong>enable your architects to solve the right problems and the big problems</strong> rather than being pulled into delivery work that keeps them from seeing the broader picture. When architects are focused on the right problems, they can help you navigate platform requirements, anticipate ARB feedback before the formal review, and connect you to the right platform team contacts. When they are heads-down in day-to-day delivery, those strategic connections do not happen.</p>
 
-  <!-- Technical handoff checklist -->
-  <div class="visual-wrap">
-    <svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
-      <!-- Title -->
-      <text x="310" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Technical handoff checklist — what must be transferred</text>
+  <p class="prose">Practically: start the ARB process in Step 3 (Workflow Analysis), not after requirements are complete. Bring the architect to the initial steering committee meeting so the CIO organization understands the solution from the start. When you hit a platform requirement that looks like a blocker, the architect is the person who knows whether it is a real blocker or a standard process with a known path through it.</p>
 
-      <!-- Column 1: Code & Config -->
-      <text x="155" y="45" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">CODE & CONFIG</text>
-      
-      <rect x="40" y="60" width="230" height="36" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
-      <text x="50" y="78" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">✓ Code repository with README</text>
-      <text x="50" y="90" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Documented, with test cases and setup instructions</text>
+  <div class="sub-divider"></div>
 
-      <rect x="40" y="102" width="230" height="36" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
-      <text x="50" y="120" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">✓ Secrets & API keys</text>
-      <text x="50" y="132" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">With rotation instructions and access procedures</text>
-
-      <rect x="40" y="144" width="230" height="36" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
-      <text x="50" y="162" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">✓ Environment configuration</text>
-      <text x="50" y="174" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Dev, test, prod settings and deployment process</text>
-
-      <!-- Column 2: Architecture & Data -->
-      <text x="465" y="45" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">ARCHITECTURE & DATA</text>
-      
-      <rect x="350" y="60" width="230" height="36" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
-      <text x="360" y="78" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#007070">✓ Architecture diagram</text>
-      <text x="360" y="90" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">All systems, integration points, data flows</text>
-
-      <rect x="350" y="102" width="230" height="36" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
-      <text x="360" y="120" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#007070">✓ Data lineage documentation</text>
-      <text x="360" y="132" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Where each field comes from and how it's transformed</text>
-
-      <rect x="350" y="144" width="230" height="36" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
-      <text x="360" y="162" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#007070">✓ API documentation</text>
-      <text x="360" y="174" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Endpoints, authentication, rate limits, error codes</text>
-
-      <!-- Column 3: Operations -->
-      <text x="310" y="205" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">OPERATIONS & SUPPORT</text>
-      
-      <rect x="40" y="220" width="250" height="36" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
-      <text x="50" y="238" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">✓ Runbook for common failures</text>
-      <text x="50" y="250" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">What to do when API fails, data is bad, system is down</text>
-
-      <rect x="310" y="220" width="260" height="36" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
-      <text x="320" y="238" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">✓ Monitoring & alerting setup</text>
-      <text x="320" y="250" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Dashboards, alerts, escalation procedures</text>
-
-      <rect x="40" y="262" width="250" height="36" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
-      <text x="50" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">✓ Named technical owner</text>
-      <text x="50" y="292" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Person who can run, maintain, and troubleshoot</text>
-
-      <rect x="310" y="262" width="260" height="36" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
-      <text x="320" y="280" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">✓ Escalation path</text>
-      <text x="320" y="292" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Who to contact when owner can't resolve issue</text>
-
-      <!-- Bottom warning -->
-      <rect x="40" y="310" width="540" height="24" rx="3" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
-      <text x="50" y="326" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#633806">⚠ If any item is missing, the solution will degrade after handoff. Complete the checklist before the build team leaves.</text>
-    </svg>
-    <div class="visual-caption">The technical handoff checklist ensures the solution can be maintained after the build team leaves. Every item is required — not optional. A solution with incomplete documentation or no named owner will fail quietly over time.</div>
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 6</span>
+      <h3>Scale &amp; Adopt: hand off cleanly and maintain what was built</h3>
+    </div>
   </div>
 
-  <p class="prose">The named owner is not just a name on paper — it's a person who has been trained on the solution, understands how it works, can troubleshoot common issues, and knows who to escalate to when they can't. If the owner can't answer basic questions about how the integration works, the handoff isn't complete. Spend time with them. Walk through the code. Run through failure scenarios. Make sure they can actually maintain what you're handing off.</p>
+  <p class="prose">A clean technical handoff means one specific person, not a team, takes ownership of the integration. Before the build team steps back, complete a technical handoff checklist and confirm the named owner can actually maintain what they are taking over.</p>
+
+  <!-- Technical handoff checklist SVG -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 580 270" xmlns="http://www.w3.org/2000/svg" style="min-width:400px;">
+      <text x="290" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Technical handoff checklist</text>
+      <text x="40" y="40" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">CODE &amp; ACCESS</text>
+      <rect x="30" y="50" width="240" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="40" y="64" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; Code repository access transferred</text>
+      <text x="40" y="76" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Owner has push access, CI/CD pipeline documented</text>
+      <rect x="30" y="86" width="240" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="40" y="100" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; API keys and credentials rotated</text>
+      <text x="40" y="112" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">New owner holds credentials, rotation procedure documented</text>
+      <rect x="30" y="122" width="240" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="40" y="136" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; Platform access confirmed</text>
+      <text x="40" y="148" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Owner has access to all connected systems</text>
+      <text x="310" y="40" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">ARCHITECTURE &amp; OPERATIONS</text>
+      <rect x="300" y="50" width="250" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="310" y="64" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; Architecture diagram current</text>
+      <text x="310" y="76" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">All systems, integration points, data flows documented</text>
+      <rect x="300" y="86" width="250" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="310" y="100" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; Runbook for common failures</text>
+      <text x="310" y="112" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">API failure, bad data, system down: what to do</text>
+      <rect x="300" y="122" width="250" height="30" rx="3" fill="#d9f5f4" stroke="#009d9a" stroke-width="0.75"/>
+      <text x="310" y="136" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#007070">&#10003; Monitoring and alerting live</text>
+      <text x="310" y="148" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Dashboards active, alerts going to the named owner</text>
+      <text x="40" y="174" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#525252">OWNER CONFIRMED</text>
+      <rect x="30" y="184" width="520" height="30" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="40" y="198" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">&#10003; Named technical owner: one person, not a team. Has shadowed the build team, run through failure scenarios, can troubleshoot independently.</text>
+      <text x="40" y="210" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#525252">Owner name documented in every piece of handoff documentation. Escalation path confirmed.</text>
+      <rect x="30" y="228" width="520" height="22" rx="3" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+      <text x="40" y="243" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#633806">&#9888; If any item above is missing, the solution will degrade after the build team leaves. Complete this before stepping back.</text>
+    </svg>
+    <div class="visual-caption">The named technical owner is not just a name on paper. They need to have been trained on the solution, run through failure scenarios with the build team, and confirmed they can troubleshoot independently. If the owner cannot answer basic questions about how the integration works, the handoff is not complete.</div>
+  </div>
 
   <div class="painpoint">
-    <div class="painpoint-label">⚠ Pain point</div>
+    <div class="painpoint-label">&#9888; Pain point</div>
     <div class="painpoint-title">No named technical owner after handoff</div>
-    <div class="painpoint-body">The most common handoff failure is transferring the solution to "the IT team" or "the platform team" without a specific person who owns it. When something breaks, no one knows who's responsible for fixing it. The issue gets escalated, bounced between teams, and eventually the solution stops working. Avoid this by naming a specific owner before the handoff, confirming they have the skills and capacity to maintain it, and documenting their name in every piece of handoff documentation. If you can't name a person, the handoff isn't ready.</div>
+    <div class="painpoint-body">The most common handoff failure is transferring the solution to "the IT team" or "the platform team" without a specific person who owns it. When something breaks, no one knows who is responsible. The issue gets escalated, bounced between teams, and the solution stops working. Name a specific person before the handoff. Confirm they have the skills and the capacity to maintain it. Document their name in every piece of handoff documentation. If you cannot name a person, the handoff is not ready.</div>
   </div>
 
   <div class="steps-summary">
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Complete the technical handoff checklist</strong> — code, secrets, architecture, data lineage, runbook, monitoring, owner, escalation path.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Name a specific technical owner</strong> who can run, maintain, and troubleshoot the solution. Not a team — a person.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Train the owner</strong> by walking through the code, running through failure scenarios, and confirming they can troubleshoot independently.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Document limitations and next steps</strong> — what's not production-ready yet, what needs to be improved, what's on the backlog.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Set up monitoring and alerting</strong> so failures are visible immediately. Don't wait for users to report issues.</div></div>
-    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Change ownership in the system</strong> — update access controls, transfer API keys, document the handoff date and new owner.</div></div>
+    <div class="step-row title-row"><div class="step-title">How to build and hand off cleanly</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Connect to real systems in Sprint 1.</strong> Validate real data flows through the pipeline before UAT begins. Do not use mocked data to test integration.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Build error handling and logging from day one.</strong> Every API call needs a failure path. Every failure needs a log entry and an alert.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test every failure scenario explicitly:</strong> API timeout, malformed data, authentication failure, rate limit hit, source system unavailable.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Start the ARB process in Workflow Analysis</strong> and keep the CIO/BPT architect close to the build. They are the bridge to the platform team and the ARB reviewer.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Name a specific technical owner</strong> before the build team steps back. Not a team: a person. Walk them through the code, run through failure scenarios together.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Complete the technical handoff checklist</strong> before stepping back. Code access, credentials, architecture diagram, runbook, monitoring, owner name, and escalation path.</div></div>
   </div>
 
   <div class="artifact-section">
-    <div class="artifact-section-label">Key Artifacts</div>
+    <div class="artifact-section-label">Artifacts</div>
     <div class="artifact-grid">
       <div class="artifact-card">
-        <div class="a-type">Analysis · Medium Priority</div>
         <div class="a-title">ROI Analysis</div>
-        <div class="a-desc">A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Example →</a>
-        </div>
+        <div class="a-desc">Compares pre-sprint ROI assumptions against pilot evidence, usage analytics, and workflow impact. The data behind the go/no-go recommendation at Day 90.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
       <div class="artifact-card">
-        <div class="a-type">Dashboard · Medium Priority</div>
         <div class="a-title">Operational Health Dashboard</div>
-        <div class="a-desc">Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates.</div>
-        <div class="a-links">
-          <a href="#" class="a-link">View Template →</a>
-        </div>
+        <div class="a-desc">Post-launch reporting for integration health, error rates, system uptime, API performance, and value realization. Tracks whether the integration is stable and whether the solution is being used.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
     </div>
   </div>
 
   <div class="case-study">
-    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University — Clean handoff to IT</span></div>
-    <p class="cs-prose">Before the enrollment transformation team stepped back, they completed a full technical handoff to Sarah Chen, the IT integration specialist. The handoff included: documented code repository with test cases, architecture diagram showing all three system connections, API keys with rotation procedures, data lineage documentation, and a runbook for the five most common failure scenarios. Sarah shadowed the build team for two weeks, ran through each failure scenario, and confirmed she could troubleshoot independently. Six months later, when the CRM API changed and broke the integration, Sarah diagnosed and fixed it in under two hours using the runbook — without needing to escalate to the original build team.</p>
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University: clean handoff to the IT integration team</span></div>
+    <p class="cs-prose">Before the build team stepped back, they completed a full technical handoff to a named IT integration specialist. The handoff included: documented code repository with test cases, architecture diagram showing all three system connections (Salesforce CRM, Box, and the admissions decision system), API credentials with rotation procedures, data lineage documentation, and a runbook for the five most common failure scenarios. The specialist shadowed the build team for two weeks, ran through each failure scenario, and confirmed she could troubleshoot independently.</p>
+    <p class="cs-prose">Six months later, when the Salesforce API version was deprecated and broke the integration, the specialist diagnosed and fixed it in under two hours using the runbook, without contacting the original build team. That outcome is only possible when the handoff is complete before the build team leaves.</p>
   </div>
 
-  <div class="ready">
-    <span class="ready-icon">✓</span>
-    <div class="ready-body">
-      <h4>Ready to move to the next workflow</h4>
-      <p>You have a complete technical handoff package, a named owner who can maintain the solution, monitoring and alerting in place, and documented limitations and next steps. The solution will survive the transition to production and continue working after the build team leaves.</p>
-    </div>
-  </div>
+
 </div>
 
 </div>
