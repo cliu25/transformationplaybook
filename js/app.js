@@ -1072,11 +1072,22 @@ async function renderModuleDetail(module) {
                     color: #525252 !important;
                     font-weight: 600 !important;
                 }
+                #module-content {
+                    overflow: visible !important;
+                }
+                .workflow-detail-panel__body {
+                    overflow: visible !important;
+                }
                 .phase-nav {
                     position: sticky !important;
                     top: 0 !important;
-                    z-index: 100 !important;
+                    z-index: 1000 !important;
                     background: #ffffff !important;
+                    margin-left: -2rem !important;
+                    margin-right: -2rem !important;
+                    padding-left: 2rem !important;
+                    padding-right: 2rem !important;
+                    box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
                 }
             `;
 
