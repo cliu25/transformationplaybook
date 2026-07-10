@@ -1033,7 +1033,7 @@ async function renderModuleDetail(module) {
                 : module.id === 'systems-integration'
                 ? 'systems-integration-narrative.html'
                 : 'adoption-change-narrative.html';
-            const response = await fetch(htmlFile);
+            const response = await fetch(htmlFile + '?v=' + Date.now());
             if (!response.ok) throw new Error(`Failed to load ${htmlFile}`);
             const html = await response.text();
             const parser = new DOMParser();
