@@ -900,6 +900,18 @@ async function renderModuleContent() {
 
     container.innerHTML = await renderModuleDetail(module);
 
+    // Add event listeners for anchor links (navigation pills)
+    container.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = link.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
     container.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const accordionId = header.dataset.accordionId;
