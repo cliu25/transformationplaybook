@@ -1072,6 +1072,12 @@ async function renderModuleDetail(module) {
                     color: #525252 !important;
                     font-weight: 600 !important;
                 }
+                .phase-nav {
+                    position: sticky !important;
+                    top: 0 !important;
+                    z-index: 100 !important;
+                    background: #ffffff !important;
+                }
             `;
 
             const narrativeStyleId = 'narrative-module-styles';
