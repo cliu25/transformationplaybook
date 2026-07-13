@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Systems Integration: How-to Deep Dive <span style="color: red;">(under construction)</span></title>
+<title>Systems Integration (Under construction): How-to Deep Dive</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -133,8 +133,8 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
 <div class="module-header">
   <div class="eyebrow">How-to Deep Dive</div>
-  <h1>Systems Integration <span style="color: red;">(under construction)</span></h1>
-  <p class="def">Most AI projects don't fail because the model isn't good enough. They fail because the data pipeline breaks, the integration is too brittle to scale, or no one knows how to maintain it after the build team leaves. This chapter covers how to surface integration complexity early, write requirements that developers can build from, navigate the path to production at IBM, and hand off a solution that survives after the sprint ends.</p>
+  <h1>Systems Integration</h1>
+  <p class="def">Most AI projects don't fail because the model isn't good enough. They fail because the data pipeline breaks, the integration is too brittle to scale, or no one knows how to maintain it after the build team leaves. This chapter covers how to surface integration complexity early, write requirements that developers can build from, navigate Path to Production at IBM, and hand off a solution that survives after the sprint ends.</p>
 </div>
 
 <div class="where-strip">
@@ -151,14 +151,14 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
 <div class="step-glance">
   <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><strong>Tech &amp; Data Assessment.</strong> Confirm what systems exist, whether the data is usable, who owns access, and whether a pre-built connector already covers part of it. Prevents designing around systems that are not ready.</span></div>
-  <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><strong>Business Process Mapping.</strong> Document the current workflow with process SMEs: systems touched, data flows, handoffs. Reviewed by the architect for technical accuracy.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><strong>Business Process Mapping.</strong> Document the current workflow with process SMEs: systems touched, data flows, handoffs. Reviewed with system owners for technical accuracy.</span></div>
   <div class="sg-row"><span class="sg-chip sg-discover">Step 3</span><span class="sg-text"><strong>Workflow Analysis.</strong> Trace how data actually moves end to end and document the constraints. Prevents integration blockers surfacing mid-build.</span></div>
-  <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><strong>Solution Design.</strong> Decide build, buy, or hybrid for each connection point and write requirements a developer can start from without a clarification call.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><strong>Solution Design.</strong> Decide build, buy, or hybrid for each capability and write requirements a developer can start from without a clarification call.</span></div>
   <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><strong>Experimentation.</strong> Build on real data from Sprint 1, test every failure mode, and instrument everything. Prevents production systems that fail quietly.</span></div>
   <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Hand off to one named technical owner with a complete checklist. Prevents the solution decaying when the build team steps back.</span></div>
 </div>
 
-<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#step-1-2" title="Confirm what systems exist, whether the data is usable, who owns access, and whether a pre-built connector already covers part of it. Prevents designing around systems that are not ready.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#step-1-2" title="Document the current workflow with process SMEs: systems touched, data flows, handoffs. Reviewed by the architect for technical accuracy.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#si-step-3" title="Trace how data actually moves end to end and document the constraints. Prevents integration blockers surfacing mid-build.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#si-step-4" title="Decide build, buy, or hybrid for each connection point and write requirements a developer can start from without a clarification call.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#si-step-5" title="Build on real data from Sprint 1, test every failure mode, and instrument everything. Prevents production systems that fail quietly.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#si-step-6" title="Hand off to one named technical owner with a complete checklist. Prevents the solution decaying when the build team steps back.">6 - Scale &amp; Adopt</a></nav>
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#step-1-2" title="Confirm what systems exist, whether the data is usable, who owns access, and whether a pre-built connector already covers part of it. Prevents designing around systems that are not ready.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#step-1-2" title="Document the current workflow with process SMEs: systems touched, data flows, handoffs. Reviewed with system owners for technical accuracy.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#si-step-3" title="Trace how data actually moves end to end and document the constraints. Prevents integration blockers surfacing mid-build.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#si-step-4" title="Decide build, buy, or hybrid for each capability and write requirements a developer can start from without a clarification call.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#si-step-5" title="Build on real data from Sprint 1, test every failure mode, and instrument everything. Prevents production systems that fail quietly.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#si-step-6" title="Hand off to one named technical owner with a complete checklist. Prevents the solution decaying when the build team steps back.">6 - Scale &amp; Adopt</a></nav>
 
 <div class="phase-section" id="step-1-2" style="border-top:none;padding-top:0;">
   <div class="phase-label">
@@ -177,20 +177,20 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="who-block">
     <div class="who-label">Who to involve</div>
     <div class="who-roles">
-      <span class="who-role">Domain focal</span>
-      <span class="who-role">CIO/BPT architect</span>
-      <span class="who-role">Data or platform owner</span>
-      <span class="who-role">Process SMEs</span>
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Platform / system owners</span>
+      <span class="who-role">Technical &amp; data SMEs</span>
+      <span class="who-role">Business process SMEs</span>
     </div>
   </div>
 
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">How to assess integration readiness</div></div>
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Work with the domain focal</strong> to inventory all platforms in use: CRM, ERP, content repositories, collaboration tools, and any custom or proprietary systems.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Bring in the CIO/BPT architect</strong> to validate each system: Does an API exist? Is it documented? What are the access requirements? Who owns it? What does the platform roadmap look like?</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Check data quality and freshness</strong> on a real sample from each source. Nulls, stale data, and format inconsistencies are constraints to design around, not surprises to discover mid-build.</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Work with the domain transformation lead</strong> to inventory all platforms in use: CRM, ERP, content repositories, collaboration tools, and any custom or proprietary systems.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Bring in the owner of each system</strong> to validate the technical functions and begin collaboration: Does an API exist? Is it documented? What are the access requirements? What does the platform roadmap look like? How should we work together to prioritize needed changes for this project?</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Document data quality and freshness</strong> on a real sample from each source system. Nulls, stale data, and format inconsistencies are constraints to design around, not surprises to discover mid-build.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Identify named resources from each platform team</strong> who will support the transformation. Platform ownership outside your domain is the most common cause of stagnation.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Ask the architect whether ARB or security review applies</strong> to your build. It is not required for every AI project, but where it does apply, start the process immediately. Flag any major structural blockers to domain VP and CIO leadership before finalizing the design.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Work with your platform contact to identify any approval processes</strong> likely to impact your project timeline. Not every AI build has one; where one applies, start it immediately.</div></div>
   </div>
 
   <!-- Systems landscape SVG: IBM-relevant platforms -->
@@ -233,7 +233,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       <line x1="180" y1="218" x2="210" y2="170" stroke="#009d9a" stroke-width="1.5" marker-end="url(#ar)"/>
       <line x1="410" y1="161" x2="430" y2="161" stroke="#24a148" stroke-width="2" marker-end="url(#ar)"/>
     </svg>
-    <div class="visual-caption">IBM runs on modern enterprise platforms. The integration risk is rarely "this system is too old." It is usually access controls, data freshness, and platform team capacity. Document the constraints early so they shape the design, not stop the build.</div>
+    <div class="visual-caption">IBM runs on modern enterprise platforms. The integration risk is rarely "this system is too old." It is usually access controls, data freshness, and platform team capacity to customize for your need. Document the constraints early so they shape the design, not stop the build.</div>
   </div>
 
   <div class="painpoint">
@@ -258,11 +258,11 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       <tr><th>Dimension</th><th>Question to pressure test</th><th>Signal it's ready</th></tr>
     </thead>
     <tbody>
-      <tr><td class="fit-dim">Architecture</td><td class="fit-q">Does it fit into our systems and data, and is there a documented API?</td><td class="fit-signal">Standard, documented integration point</td></tr>
+      <tr><td class="fit-dim">API availability</td><td class="fit-q">Does a documented API exist for this system, and can it support your call volume?</td><td class="fit-signal">Standard, documented integration point</td></tr>
       <tr><td class="fit-dim">Access &amp; ownership</td><td class="fit-q">Who owns it, and what is the approval process to connect?</td><td class="fit-signal">Named owner, known request path</td></tr>
       <tr><td class="fit-dim">Data freshness</td><td class="fit-q">Is the data real-time, or does it update on a delay?</td><td class="fit-signal">Update cadence documented and workable for your use case</td></tr>
       <tr><td class="fit-dim">Data quality</td><td class="fit-q">Is the data clean, complete, and usable, not just present?</td><td class="fit-signal">Sample checked; nulls and format issues known</td></tr>
-      <tr><td class="fit-dim">Governance</td><td class="fit-q">Does this touch critical infrastructure or need ARB / security review?</td><td class="fit-signal">Reviewed with the CIO/BPT architect; timeline known</td></tr>
+      <tr><td class="fit-dim">Governance</td><td class="fit-q">Are there approval processes (architecture or security review) required to connect to this system?</td><td class="fit-signal">Reviewed with the platform owner; timeline known</td></tr>
     </tbody>
   </table>
 
@@ -270,9 +270,9 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
 
 
-  <p class="prose"><strong>Check what already exists before you scope custom work.</strong> watsonx Orchestrate has over 150 pre-built connectors to platforms like Salesforce, SAP, ServiceNow, and Slack. Before you assume an integration point needs to be built from scratch, check the Orchestrate connector catalog with the CIO/BPT architect. This check belongs here, in Engage, because it affects whether an integration is even worth prioritizing, not just how you build it once it is in scope. The full build-vs-buy decision for each connection point happens in Solution Design (Step 4).</p>
+  <p class="prose"><strong>The Tech &amp; Data Assessment (Step 1) covers the current process, not a tentative solution.</strong> You are not scoping new connections yet. But where an existing platform has a known pain point, it is worth checking now whether a pre-built connector already addresses it: watsonx Orchestrate has over 150 pre-built connectors to platforms like Salesforce, SAP, ServiceNow, and Slack. The full build-vs-buy evaluation happens in Solution Design (Step 4), once you know what functionality the solution needs.</p>
 
-  <p class="prose">Where ARB does apply, it has taken four to six weeks on past IBM projects. If that dependency surfaces in week eight of a twelve-week build, you have already missed your date. Ask the architect early, and start the process well before Discovery ends if it is required.</p>
+  <p class="prose">Where an approval process does apply, it has taken four to six weeks on past IBM projects. If that dependency surfaces in week eight of a twelve-week build, you have already missed your date. Ask the platform owner early, and start the process well before Discovery ends if it is required.</p>
 
   <p class="prose">One more pattern worth knowing: the platforms your solution depends on are often owned by teams outside the domain, not by anyone on your project. The fix is not to work around them. It is to identify a named contact on each platform team early and bring them into the conversation before you are blocked on them.</p>
 
@@ -290,7 +290,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       </div>
       <div class="artifact-card">
         <div class="a-title">Business Process Map(s)</div>
-        <div class="a-desc">Documents the current-state workflow: systems touched, data flows, handoffs, and automation opportunities. Produced with process SMEs and reviewed with the CIO/BPT architect for technical accuracy.</div>
+        <div class="a-desc">Documents the current-state workflow: systems touched, data flows, handoffs, and automation opportunities. Produced with process SMEs and reviewed with system owners for technical accuracy.</div>
         <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984" target="_blank" rel="noopener">&#8599; Template</a></div>
       </div>
     </div>
@@ -306,7 +306,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
       <h4>Ready to move to Discovery</h4>
-      <p>You have a documented systems landscape, data quality and freshness profiles for each source, a list of access requirements, confirmation from the architect on whether ARB applies to your build, and any major structural blockers escalated to leadership. You are designing with constraints visible, not discovering them later.</p>
+      <p>You have a documented systems landscape, data quality and freshness profiles for each source, a list of access requirements, confirmation from the platform owners of any approval processes that apply and their timelines, and any major structural blockers escalated to leadership. You are designing with constraints visible, not discovering them later.</p>
     </div>
   </div>
 </div>
@@ -323,22 +323,24 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="key-takeaway">
     <span class="kt-icon">&#128204;</span>
-    <span class="kt-text">Document how data actually moves through the current process, decide build vs. use an existing connector for each integration point, and write requirements specific enough that a developer never has to guess.</span>
+    <span class="kt-text">Step 3 (Workflow Analysis) builds the shared picture of how the current workflow actually runs. Step 4 (Solution Design) turns that picture into build decisions and requirements. Document how data moves, decide build, buy, or hybrid for each capability, and write requirements specific enough that a developer never has to guess.</span>
   </div>
 
   <div class="who-block">
     <div class="who-label">Who to involve</div>
     <div class="who-roles">
-      <span class="who-role">CIO/BPT architect</span>
+      <span class="who-role">Project architect</span>
       <span class="who-role">Product owner</span>
-      <span class="who-role">Domain focal</span>
+      <span class="who-role">Domain transformation lead</span>
       <span class="who-role">Process SMEs</span>
-      <span class="who-role">ARB reviewers (only if required)</span>
+      <span class="who-role">Approval reviewers (only if required)</span>
       <span class="who-role">Security team (if needed)</span>
     </div>
   </div>
 
   <p class="prose">Discovery has two integration jobs. First, during Workflow Analysis (Step 3), you document the current-state technical architecture for the specific workflow you are transforming. Second, during Solution Design (Step 4), you make the key integration decisions and write requirements that are specific enough for a developer to build from without a clarification call.</p>
+
+  <p class="prose">Two things to line up during Discovery, before the build starts. <strong>Path to Production:</strong> if this will be a production-level solution, IBM's <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production process</a> applies, and its requirements are easier to meet when you know them from the start. <strong>Resourcing:</strong> some domains partner with the CIO organization for build resources. If yours does, the domain transformation lead works with them on prioritization for this project. If resources come from another organization, bring that group into planning the same way.</p>
 
   <div class="sub-phase" id="si-step-3">
     <div class="sub-phase-label">
@@ -450,9 +452,9 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <summary>Why this matters: what "trace the data flow" means</summary>
     <div class="deep-dive-body">
 
-  <p class="prose">For the workflow you are transforming, trace how data actually moves: where it originates, what systems it passes through, what transformations happen along the way, and where it ends up. The process SMEs tell you how the workflow runs. The CIO/BPT architect tells you how the data moves underneath it. Both views are required.</p>
+  <p class="prose">For the workflow you are transforming, trace how data actually moves: where it originates, what systems it passes through, what transformations happen along the way, and where it ends up. The process SMEs tell you how the workflow runs. The CIO/BPT team tells you how the data moves underneath it. Both views are required.</p>
 
-  <p class="prose">Document every integration point, every manual handoff, and every place where data quality degrades or updates are delayed. Also identify the non-functional requirements that will constrain your design: whether ARB review applies (this depends on what you are connecting to and how the solution is registered, not a blanket rule), security review requirements, data residency rules, and compliance constraints. Where ARB does apply, it is a hard gate. It has taken four to six weeks on past IBM builds, and if you discover that requirement in week eight of a twelve-week build, you have missed your delivery date.</p>
+  <p class="prose">Document every integration point, every manual handoff, and every place where data quality degrades or updates are delayed. Also identify the non-functional requirements that will constrain your design: which approval processes apply, security review requirements, data residency rules, and compliance constraints. These are hard gates, so confirm them here if they were not settled in Engage.</p>
 
     </div>
   </details>
@@ -467,38 +469,37 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">For each connection point, decide whether to use a pre-built connector or build custom, then write requirements specific enough that a developer never has to stop and ask a clarifying question.</p>
+  <p class="prose">For each capability the solution needs, decide whether to build, buy, or combine, then write requirements specific enough that a developer never has to stop and ask a clarifying question.</p>
 
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">How to write build-ready requirements</div></div>
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Map the current-state architecture</strong> for the selected workflow with the process SMEs and CIO/BPT architect. Document every system, integration point, and data flow.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Ask the architect whether ARB or security review applies</strong> to this integration. Not every AI build needs it; it depends on the systems involved and how the solution is registered. Where it does apply, start the process immediately. It has taken four to six weeks on past IBM builds.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Check the watsonx Orchestrate connector catalog</strong> for each integration point. Use a pre-built connector where it covers 80%+ of the requirement. Build where it does not.</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Map the current-state architecture</strong> for the selected workflow with the process SMEs and system owners. Document every system, integration point, and data flow.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Reconfirm the approval processes identified in Engage</strong> now that the integration list is specific. Anything new starts now, not after requirements are written.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Check the watsonx Orchestrate connector catalog</strong> where a pre-built connector might cover the requirement. Use it where it covers 80%+. Build where it does not.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Write build-ready requirements</strong> covering persona, data objects, source systems, API details, authentication, error handling, acceptance criteria, and fallback paths.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Test requirements with the architect and product owner.</strong> If a developer would need to ask clarifying questions, the requirements are not ready. Add specificity until they are.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Test requirements with the project architect and product owner.</strong> If a developer would need to ask clarifying questions, the requirements are not ready. Add specificity until they are.</div></div>
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Document the integration approach</strong> for each connection point with reasoning. You will need to defend it when questions arise during the build.</div></div>
-  </div>
-
-  <div class="handoff">
-    <span class="ho-tag">Handoff</span>
-    <span>Tracking belongs in these requirements too. The metrics defined in <a href="value-measurement-roi-narrative.html#vm-engage">Value Measurement</a> specify what the solution must capture from Sprint 1.</span>
   </div>
 
   <!-- Build / Buy / Hybrid: three-box format -->
   <div class="visual-wrap">
-    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:600;color:#161616;margin-bottom:1rem;">For each connection point: build, buy, or hybrid?</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;">
+    <div style="font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:600;color:#161616;margin-bottom:1rem;">For each capability: build, buy, or hybrid?</div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem;">
       <div style="background:#7d97f4;border-radius:6px;padding:1.125rem 1rem;color:#fff;">
         <div style="font-weight:600;font-size:.9rem;margin-bottom:.625rem;">Build: use IBM's stack</div>
         <div style="font-size:.8rem;line-height:1.55;">Build with watsonx and the Orchestrate connector catalog. IBM acquisitions count as our stack.</div>
       </div>
       <div style="background:#3d5af1;border-radius:6px;padding:1.125rem 1rem;color:#fff;">
         <div style="font-weight:600;font-size:.9rem;margin-bottom:.625rem;">Buy: go external</div>
-        <div style="font-size:.8rem;line-height:1.55;">IBM does not have the right fit for this layer yet. Frontier models are the clearest example.</div>
+        <div style="font-size:.8rem;line-height:1.55;">IBM does not have the right fit yet, and mature tools exist. Many processes (Quote-to-Cash, Source-to-Pay, legal review) have purpose-built marketplace tools with AI functionality.</div>
       </div>
       <div style="background:#1a2a6b;border-radius:6px;padding:1.125rem 1rem;color:#fff;">
         <div style="font-weight:600;font-size:.9rem;margin-bottom:.625rem;">Hybrid: combine</div>
         <div style="font-size:.8rem;line-height:1.55;">IBM capabilities plus external tools for the gaps. This is also how ecosystem partnerships start.</div>
+      </div>
+      <div style="background:#4a5568;border-radius:6px;padding:1.125rem 1rem;color:#fff;">
+        <div style="font-weight:600;font-size:.9rem;margin-bottom:.625rem;">Sequence: short term, long term</div>
+        <div style="font-size:.8rem;line-height:1.55;">Run a third-party tool short term (a year, say) while building, or until an IBM product exists. Plan the transition from the start.</div>
       </div>
     </div>
     <div style="margin-top:.875rem;padding:.75rem 1rem;background:var(--blue-fill);border-radius:4px;font-size:.82rem;color:var(--blue-dk);"><strong>The trap:</strong> defaulting to buy for speed without checking lock-in, data exposure, and total cost. Buying does not mean it plugs in seamlessly. Integration work still applies.</div>
@@ -507,7 +508,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="painpoint">
     <div class="painpoint-label">&#9888; Pain point</div>
     <div class="painpoint-title">Requirements too conceptual to build from</div>
-    <div class="painpoint-body">"Integrate with the CRM to pull applicant data" sounds complete but leaves a developer with twenty questions: which object, which fields, what authentication, what happens on error? If the product owner and architect cannot confirm a developer can start without clarification, the requirements are not ready.</div>
+    <div class="painpoint-body">"Integrate with the CRM to pull applicant data" sounds complete but leaves a developer with twenty questions: which object, which fields, what authentication, what happens on error? If the product owner and project architect cannot confirm a developer can start without clarification, send it back for more specificity.</div>
   </div>
 
   <details class="deep-dive">
@@ -516,9 +517,9 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <p class="prose">With the technical baseline documented, Solution Design answers two questions: what integration approach will you use for each connection point, and what exactly needs to be built? Both need to be resolved before the build team starts. A vague answer to either question means the build team will stop and ask, and that is when your timeline slips.</p>
 
-  <p class="prose"><strong>Build vs. buy considerations.</strong> You checked the Orchestrate connector catalog in Engage to see what already exists. Now, for each specific connection point in your build-ready requirements, make the call: when a pre-built connector covers 80% of what you need, configure and extend it. When the requirements are specific enough that a pre-built connector would require more customization work than building from scratch, build. Document the reasoning either way. You will need to defend the decision later.</p>
+  <p class="prose"><strong>Build vs. buy considerations.</strong> Now, for each capability in your build-ready requirements, make the call: when a pre-built connector or existing tool covers 80% of what you need, configure and extend it. When the requirements are specific enough that a pre-built connector would require more customization work than building from scratch, build. Document the reasoning either way. You will need to defend the decision later.</p>
 
-  <p class="prose"><strong>Write build-ready requirements.</strong> The test: give the CIO/BPT architect and the product owner the requirements document and ask whether a developer can write a user story from it without a clarification call. Build-ready requirements include the persona, the specific data objects (fields, format, source system), the systems involved (API endpoint, authentication method, rate limits), the acceptance criteria, and the fallback path when the integration fails. If any of those are missing or vague, the developer will stop and ask, and that is when your timeline slips.</p>
+  <p class="prose"><strong>Write build-ready requirements.</strong> The test: give the project architect and the product owner the requirements document and ask whether a developer can write a user story from it without a clarification call. Build-ready requirements include the persona, the specific data objects (fields, format, source system), the systems involved (API endpoint, authentication method, rate limits), the acceptance criteria, and the fallback path when the integration fails. If any of those are missing or vague, the developer will stop and ask, and that is when your timeline slips.</p>
 
     </div>
   </details>
@@ -542,15 +543,15 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="case-study">
     <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">State University: integration decisions in Solution Design</span></div>
-    <p class="cs-prose">The Workflow Analysis confirmed three integration points: the admissions CRM (applicant records), Box (document storage), and the enrollment decision system (batch export only). For the CRM, the CIO/BPT architect confirmed a documented Salesforce API was available and the access request was already in progress. For Box, a pre-built connector in the watsonx environment covered the file access pattern they needed. For the enrollment system, the batch-only limitation ruled it out for the MVP. It was explicitly moved to Wave 2.</p>
-    <p class="cs-prose">Requirements were reviewed by the product owner and the architect together. The original requirement read "check Box for required documents." The final version specified the exact document types (transcript, government ID, personal statement), the Box folder structure, the API call pattern, the field that would be written back to the CRM on completion, and the exception path when a document failed validation. The developer started Sprint 1 without a single clarification call.</p>
+    <p class="cs-prose">The Workflow Analysis confirmed three integration points: the admissions CRM (applicant records), Box (document storage), and the enrollment decision system (batch export only). For the CRM, the platform owner confirmed a documented Salesforce API was available and the access request was already in progress. For Box, a pre-built connector in the watsonx environment covered the file access pattern they needed. For the enrollment system, the batch-only limitation ruled it out for the MVP. It was explicitly moved to Wave 2.</p>
+    <p class="cs-prose">Requirements were reviewed by the product owner and the project architect together. The original requirement read "check Box for required documents." The final version specified the exact document types (transcript, government ID, personal statement), the Box folder structure, the API call pattern, the field that would be written back to the CRM on completion, and the exception path when a document failed validation. The developer started Sprint 1 without a single clarification call.</p>
   </div>
 
   <div class="ready">
     <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
       <h4>Ready to move to Execute</h4>
-      <p>You have build-ready requirements reviewed by the CIO/BPT architect and product owner, a documented integration approach for each connection point, ARB and security reviews confirmed as required or not required, and any low-value high-complexity integrations explicitly deferred. The build team can start Sprint 1 without re-explanation.</p>
+      <p>You have build-ready requirements reviewed by the project architect and product owner, a documented integration approach for each connection point, approval and security reviews confirmed as required or not required, and any low-value high-complexity integrations explicitly deferred. The build team can start Sprint 1 without re-explanation.</p>
     </div>
   </div>
 </div>
@@ -573,7 +574,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="who-block">
     <div class="who-label">Who to involve</div>
     <div class="who-roles">
-      <span class="who-role">CIO/BPT architect</span>
+      <span class="who-role">Project architect</span>
       <span class="who-role">Developer lead</span>
       <span class="who-role">Product owner</span>
       <span class="who-role">Platform team (for production)</span>
@@ -586,7 +587,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Connect to real systems in Sprint 1.</strong> Validate real data flows through the pipeline before UAT begins. Do not use mocked data to test integration.</div></div>
     <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Build error handling and logging from day one.</strong> Every API call needs a failure path. Every failure needs a log entry and an alert.</div></div>
     <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Test every failure scenario explicitly:</strong> API timeout, malformed data, authentication failure, rate limit hit, source system unavailable.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Confirm with the architect whether ARB review applies</strong> to your build, and if so, keep that process moving alongside the build. The CIO/BPT architect is the bridge to the platform team and, where relevant, the ARB reviewer.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Keep any required approval reviews moving alongside the build</strong> so they do not land on your launch date.</div></div>
     <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Name a specific technical owner</strong> before the build team steps back. Not a team: a person. Walk them through the code, run through failure scenarios together.</div></div>
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Complete the technical handoff checklist</strong> before stepping back. Code access, credentials, architecture diagram, runbook, monitoring, owner name, and escalation path.</div></div>
   </div>
@@ -654,7 +655,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <summary>Why this matters: error handling, instrumentation, and testing</summary>
     <div class="deep-dive-body">
 
-  <p class="prose">Connect to the real systems in Sprint 1 and run real data through the pipeline. The quality issues you find here are confirmations of what you documented in Engage, not surprises. The difference is that now you handle them in code. Build error handling from the first day: every API call can fail, every data source can return unexpected formats, and every system can go down. Your code needs to handle all of those gracefully, log the error, alert the right person, and either retry or fail safely.</p>
+  <p class="prose">Run real data through the pipeline from the first sprint. The quality issues you find are confirmations of what you documented in Engage, not surprises. The difference is that now you handle them in code. Build error handling from the first day: every API call can fail, every data source can return unexpected formats, and every system can go down. Your code needs to handle all of those gracefully, log the error, alert the right person, and either retry or fail safely.</p>
 
   <p class="prose"><strong>Instrument everything.</strong> Set up logging and monitoring before anything goes to production. You need to know when the pipeline fails before users report it. Track API call success rates, data validation pass rates, processing times, and error frequencies. These are not just operational metrics. They are the evidence base for whether the solution is working in practice and whether it is ready to scale.</p>
 
@@ -668,24 +669,24 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="sub-phase" id="path-to-production">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Navigating path to production at IBM</span>
+      <span class="sub-phase-number">Navigating Path to Production at IBM</span>
     </div>
   </div>
 
   <div class="key-takeaway">
     <span class="kt-icon">&#128204;</span>
-    <span class="kt-text">Your CIO/BPT architect is a partner in building; the platform team decides whether you can deploy. These are two different relationships with two different timelines. ARB review is conditional, not universal. Ask the architect early whether it applies to your specific build.</span>
+    <span class="kt-text">Path to Production is a specific, documented IBM process (<a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener" style="color:inherit;">see the Build with watsonx guide</a>), not a generic phrase. Your project architect is a partner in building; the platform team decides whether you can deploy. These are two different relationships with two different timelines. Your platform contact knows which approval processes apply.</span>
   </div>
 
   <details class="deep-dive">
     <summary>Why this matters: how the CIO organization fits together</summary>
     <div class="deep-dive-body">
 
-  <p class="prose">One of the most common points of confusion in IBM AI transformations is the path to production. The CIO/BPT organization plays two roles: they provide development resources through their architect and build capacity, and they own the platform teams that control the production environment. Your architect is a partner in building. The platform team controls whether you can deploy. These are separate conversations with separate timelines.</p>
+  <p class="prose"><a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production</a> is a named IBM process, run through Build with watsonx, that production-level solutions go through. It is one of the most common points of confusion in IBM AI transformations. The CIO/BPT organization plays two roles: they provide development resources through their architect and build capacity, and they own the platform teams that control the production environment. Your architect is a partner in building. The platform team controls whether you can deploy. These are separate conversations with separate timelines.</p>
 
-  <p class="prose">The key to moving through the path to production is to <strong>enable your architects to solve the right problems and the big problems</strong> rather than being pulled into delivery work that keeps them from seeing the broader picture. When architects are focused on the right problems, they can tell you early whether ARB review applies to your build, help you navigate platform requirements, anticipate feedback before any formal review, and connect you to the right platform team contacts. When they are heads-down in day-to-day delivery, those strategic connections do not happen.</p>
+  <p class="prose">The key to moving through Path to Production is to <strong>enable your architects to solve the right problems and the big problems</strong> rather than being pulled into delivery work that keeps them from seeing the broader picture. When architects are focused on the right problems, they can flag required reviews early, help you navigate platform requirements, anticipate feedback before any formal review, and connect you to the right platform team contacts. When they are heads-down in day-to-day delivery, those strategic connections do not happen.</p>
 
-  <p class="prose">Practically: ask the architect in Step 3 (Workflow Analysis) whether your build requires ARB review. It typically applies to registered CIO agents and integrations touching critical infrastructure, not to every AI project. If it does apply, start that process immediately rather than after requirements are complete. Bring the architect to the initial steering committee meeting so the CIO organization understands the solution from the start. When you hit a platform requirement that looks like a blocker, the architect is the person who knows whether it is a real blocker or a standard process with a known path through it.</p>
+  <p class="prose">Approval processes are specific to the platforms you touch, and two are worth knowing by name. The <a href="https://ec.yourlearning.ibm.com/w3/event/10547588" target="_blank" rel="noopener">Architecture Review Board (ARB)</a> is a Transformation &amp; Operations leadership forum, run jointly by BPT and TPT, that decides architecture questions with wide-ranging impact and major platform decisions on core business platforms such as Salesforce (IBM Sales Cloud), SAP, and Adobe. The Technical Review Board (TRB) is part of Path to Production and reviews new AI systems for architecture fit, service readiness, and governance risk. They are different bodies with different scopes. In practice: surface these with your platform contact early, and start anything required immediately rather than after requirements are complete. Bring the architect to the initial steering committee meeting so the CIO organization understands the solution from the start. When you hit a platform requirement that looks like a blocker, the project architect is the person who knows whether it is a real blocker or a standard process with a known path through it.</p>
 
     </div>
   </details>
@@ -701,11 +702,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   </div>
 
   <p class="prose">A clean technical handoff means one specific person, not a team, takes ownership of the integration. Before the build team steps back, complete a technical handoff checklist and confirm the named owner can actually maintain what they are taking over.</p>
-
-  <div class="handoff">
-    <span class="ho-tag">Handoff</span>
-    <span>The technical handoff is half the job. Retiring the old process and monitoring adoption after launch is covered in <a href="adoption-change-narrative.html#ac-execute">Adoption &amp; Change, Execute</a>.</span>
-  </div>
 
   <!-- Technical handoff checklist SVG -->
   <div class="visual-wrap">
@@ -755,12 +751,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
         <div class="a-desc">Compares pre-sprint ROI assumptions against pilot evidence, usage analytics, and workflow impact. The data behind the go/no-go recommendation at Day 90.</div>
         <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
-      <div class="artifact-card">
-        <div class="a-title">Operational Health Dashboard</div>
-        <div class="a-desc">Post-launch reporting for integration health, error rates, system uptime, API performance, and value realization. Tracks whether the integration is stable and whether the solution is being used.</div>
-        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">&#8599; Example</a></div>
-      </div>
-    </div>
+          </div>
   </div>
 
   <div class="case-study">

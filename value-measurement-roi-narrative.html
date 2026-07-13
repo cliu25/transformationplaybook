@@ -1,293 +1,700 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Value Measurement & ROI</title>
-  <style>
-    :root{
-      --bg:#ffffff; --text:#161616; --muted:#525252; --line:#e0e0e0;
-      --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
-      --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
-      --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
-      --orange:#ff832b; --orange-dk:#b35a00; --orange-fill:#fff2e8;
-      --amber:#ba7517; --amber-dk:#633806; --amber-fill:#fdf4e3;
-      --red:#da1e28; --red-dk:#a32d2d; --red-fill:#fff1f1;
-      --gray:#f4f4f4; --gray-dk:#8d8d8d;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; padding:32px 24px 48px;
-      font-family:"IBM Plex Sans", Arial, sans-serif;
-      color:var(--text); background:var(--bg);
-      line-height:1.5;
-    }
-    .page{max-width:980px; margin:0 auto}
-    .phase-section{margin-bottom:40px}
-    .phase-label{
-      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-      margin-bottom:12px; color:var(--muted); font-size:14px;
-    }
-    .phase-tag{
-      display:inline-flex; align-items:center;
-      padding:4px 10px; border-radius:999px;
-      font-size:12px; font-weight:600;
-    }
-    .tag-engage{background:var(--blue-fill); color:var(--blue-dk)}
-    .tag-discover{background:var(--purple-fill); color:var(--purple-dk)}
-    .tag-execute{background:var(--green-fill); color:var(--green-dk)}
-    .challenge-pip{
-      display:inline-flex; align-items:center;
-      padding:4px 10px; border-radius:999px;
-      border:1px solid var(--orange); color:var(--orange);
-      font-size:12px; font-weight:600;
-      background:#fff;
-    }
-    .title-row-sep{color:#8d8d8d}
-    h1,h2,h3,h4{margin:0 0 12px}
-    h2{font-size:28px; line-height:1.2}
-    h3{font-size:20px}
-    .prose{font-size:16px; color:var(--text); margin:0 0 16px}
-    .sub-phase{margin:24px 0 12px}
-    .sub-phase-label{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
-    .sub-phase-number{
-      display:inline-flex; align-items:center; justify-content:center;
-      min-width:64px; padding:4px 10px; border-radius:999px;
-      background:var(--gray); color:var(--text); font-size:12px; font-weight:600;
-    }
-    .painpoint{
-      margin:20px 0; padding:16px 18px;
-      border-left:4px solid var(--red);
-      background:var(--red-fill);
-    }
-    .painpoint-label{font-size:12px; font-weight:700; color:var(--red-dk); margin-bottom:4px}
-    .painpoint-title{font-size:18px; font-weight:600; margin-bottom:6px}
-    .painpoint-body{color:var(--muted)}
-    .visual-wrap{
-      margin:20px 0 24px; padding:16px;
-      border:1px solid var(--line); border-radius:8px;
-      overflow-x:auto; background:#fff;
-    }
-    .visual-caption{
-      margin-top:12px; font-size:13px; color:var(--muted);
-    }
-    .steps-summary{margin:20px 0 28px}
-    .step-row{
-      display:flex; gap:14px; align-items:flex-start;
-      padding:10px 0; border-top:1px solid var(--line);
-    }
-    .step-row:last-child{border-bottom:1px solid var(--line)}
-    .step-num{
-      width:28px; height:28px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      flex:0 0 28px; font-size:13px; font-weight:700;
-      color:var(--orange-dk); background:var(--orange-fill);
-      border:1px solid var(--orange);
-    }
-    .step-text{font-size:15px}
-    .sub-divider{height:1px; background:var(--line); margin:28px 0}
-    .artifact-section{margin:28px 0}
-    .artifact-section-label{
-      font-size:12px; font-weight:700; letter-spacing:.04em;
-      text-transform:uppercase; color:var(--muted); margin-bottom:12px;
-    }
-    .artifact-grid{
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px;
-    }
-    .artifact-card{
-      border:1px solid var(--line); border-radius:8px; padding:16px; background:#fff;
-    }
-    .a-type{font-size:12px; color:var(--muted); margin-bottom:6px}
-    .a-title{font-size:18px; font-weight:600; margin-bottom:6px}
-    .a-desc{font-size:14px; color:var(--muted); margin-bottom:12px}
-    .a-links{display:flex; gap:10px; flex-wrap:wrap}
-    .a-link{
-      display:inline-flex; align-items:center;
-      padding:6px 10px; border-radius:999px;
-      border:1px solid var(--orange); color:var(--orange);
-      text-decoration:none; font-size:13px; font-weight:600;
-      background:#fff;
-    }
-    .case-study{
-      margin:28px 0; padding:18px;
-      border:1px solid var(--orange);
-      background:var(--orange-fill);
-      border-radius:8px;
-    }
-    .cs-eyebrow{
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      margin-bottom:10px;
-    }
-    .cs-badge{
-      display:inline-flex; align-items:center;
-      padding:4px 10px; border-radius:999px;
-      background:var(--orange); color:#fff;
-      font-size:12px; font-weight:700;
-    }
-    .cs-context{font-size:13px; color:var(--orange-dk); font-weight:600}
-    .cs-prose{margin:0; font-size:15px}
-    .ready{
-      display:flex; gap:14px; align-items:flex-start;
-      padding:18px; border-radius:8px;
-      background:var(--green-fill); border:1px solid var(--green);
-    }
-    .ready-icon{
-      width:28px; height:28px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      background:var(--green); color:#fff; font-weight:700; flex:0 0 28px;
-    }
-    .ready-body p{margin:0; color:var(--green-dk)}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Value Measurement &amp; ROI (Under construction): How-to Deep Dive</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
+  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
+  --orange:#ff832b; --orange-dk:#b35a00; --orange-fill:#fff2e8;
+  --amber:#ba7517; --amber-dk:#633806; --amber-fill:#fdf4e3;
+  --red:#da1e28; --red-dk:#a32d2d; --red-fill:#fff1f1;
+  --teal:#009d9a; --teal-dk:#005d5d; --teal-fill:#d9fbfb;
+  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
+  --border:#e0e0e0; --layer:#f4f4f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;font-size:16px;}
+.page{max-width:780px;margin:0 auto;padding:0 1.5rem 6rem;}
+.module-header{padding:3rem 0 2rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+.module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--blue);padding-left:1.25rem;}
+.where-strip{display:flex;align-items:center;gap:.5rem;padding:.875rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2rem;flex-wrap:wrap;}
+.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.phase-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-3);background:#fff;}
+.phase-pip.pip-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.phase-pip.pip-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.phase-pip.pip-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pip-sep{color:var(--border);font-size:.8rem;}
+.phase-section{padding:3rem 0;border-top:1px solid var(--border);}
+.phase-label{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
+.tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
+.tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
+.tag-execute{background:var(--green-fill);color:var(--green-dk);}
+.phase-step-context{font-size:.8rem;color:var(--text-3);font-style:italic;}
+.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--blue);color:var(--blue-dk);}
+.sub-phase{margin:2.5rem 0 0;}
+.sub-phase-label{display:flex;align-items:center;gap:.625rem;margin-bottom:1.125rem;}
+.sub-phase-number{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);background:var(--layer);border:1px solid var(--border);padding:.2rem .5rem;border-radius:2px;}
+.sub-phase h3{font-size:1.125rem;font-weight:600;color:var(--text);margin:0;}
+.phase-section h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:1.25rem;}
+.prose{font-size:1rem;line-height:1.8;color:var(--text-2);margin-bottom:1.25rem;}
+.prose-list{margin:0 0 1.25rem 1.25rem;padding:0;color:var(--text-2);font-size:.9375rem;line-height:1.7;}
+.prose-list li{margin-bottom:.5rem;}
+.prose strong{color:var(--text);font-weight:600;}
+.who-block{padding:1rem 1.25rem;background:var(--blue-fill);border-left:4px solid var(--blue);border-radius:0 4px 4px 0;margin-bottom:1.75rem;}
+.who-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-dk);margin-bottom:.5rem;}
+.who-roles{display:flex;flex-wrap:wrap;gap:.375rem;}
+.who-role{font-size:.8rem;font-weight:500;padding:.25rem .625rem;background:#fff;border:1px solid var(--blue);border-radius:3px;color:var(--blue-dk);}
+.painpoint{margin:1.75rem 0;padding:1.125rem 1.375rem;border-left:3px solid var(--amber);background:var(--amber-fill);border-radius:0 4px 4px 0;}
+.painpoint-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
+.artifact-section{margin:1.75rem 0;}
+.artifact-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;}
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
+.artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
+.artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
+.artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;}
+.a-link{font-size:.78rem;color:var(--blue);text-decoration:none;font-weight:500;}
+.a-link:hover{text-decoration:underline;}
+.a-link.off{color:var(--text-3);opacity:.5;cursor:not-allowed;pointer-events:none;}
+.visual-wrap{margin:1.75rem 0;background:var(--layer);border-radius:6px;padding:1.375rem 1.5rem;overflow-x:auto;}
+.visual-wrap svg{display:block;width:100%;height:auto;}
+.visual-caption{font-size:.8rem;color:var(--text-3);margin-top:.75rem;line-height:1.45;}
+.steps-summary{margin:1.75rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.step-row{display:grid;grid-template-columns:2.25rem 1fr;border-bottom:1px solid var(--border);}
+.step-row:last-child{border-bottom:none;}
+.step-row.title-row{grid-template-columns:1fr;background:var(--layer);}
+.step-row.title-row .step-title{padding:.625rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
+.step-num{display:flex;align-items:flex-start;justify-content:center;font-size:.75rem;font-weight:700;color:var(--blue);background:var(--blue-fill);padding:.875rem .25rem 0;}
+.step-text{padding:.875rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.step-text strong{color:var(--text);font-weight:600;}
+.case-study{margin:2rem 0;padding:1.375rem 1.5rem;background:var(--purple-fill);border-radius:6px;border:1px solid var(--purple);}
+.cs-eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;}
+.cs-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--purple);color:#fff;padding:.2rem .5rem;border-radius:2px;}
+.cs-context{font-size:.8rem;font-weight:600;color:var(--purple-dk);}
+.cs-prose{font-size:.9rem;line-height:1.7;color:var(--text-2);margin-bottom:.875rem;}
+.cs-prose:last-child{margin-bottom:0;}
+.ready{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--green-fill);border-left:4px solid var(--green);border-radius:0 4px 4px 0;margin-top:2.5rem;}
+.ready-icon{color:var(--green);flex-shrink:0;font-size:1.1rem;}
+.ready-body h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.3rem;}
+.ready-body p{font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.sub-divider{height:1px;background:var(--border);margin:2.5rem 0;}
+.phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
+.phase-nav .pnav-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:all .12s;}
+.pnav-pill:hover{border-color:var(--text-3);color:var(--text);}
+.pnav-pill.active.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.active.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.active.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill.active.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
+.step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
+.step-glance .sg-row:first-child{border-top:none;}
+.step-glance .sg-chip{flex-shrink:0;font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:2px;margin-top:.1rem;white-space:nowrap;}
+.sg-engage{color:var(--blue-dk);background:var(--blue-fill);}
+.sg-discover{color:var(--purple-dk);background:var(--purple-fill);}
+.sg-execute{color:var(--green-dk);background:var(--green-fill);}
+.step-glance .sg-text{font-size:.85rem;color:var(--text-2);line-height:1.5;}
+.step-glance .sg-text strong{color:var(--text);}
+.key-takeaway{display:flex;gap:.75rem;align-items:flex-start;padding:1rem 1.25rem;background:#fff;border:1.5px solid var(--text);border-radius:4px;margin-bottom:1.5rem;}
+.key-takeaway .kt-icon{flex-shrink:0;font-size:1rem;line-height:1.4;}
+.key-takeaway .kt-text{font-size:.95rem;line-height:1.55;color:var(--text);font-weight:500;}
+.deep-dive{margin:1.5rem 0;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.deep-dive summary{cursor:pointer;padding:.875rem 1.25rem;background:var(--layer);font-size:.85rem;font-weight:600;color:var(--text-2);list-style:none;display:flex;align-items:center;gap:.5rem;user-select:none;}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"\25B8";display:inline-block;font-size:.7rem;color:var(--text-3);transition:transform .15s;}
+.deep-dive[open] summary::before{transform:rotate(90deg);}
+.deep-dive summary:hover{color:var(--text);}
+.deep-dive-body{padding:1.5rem 1.25rem .25rem;}
+.deep-dive-body .prose:last-of-type{margin-bottom:0;}
+.handoff{display:flex;gap:.625rem;align-items:flex-start;padding:.75rem 1rem;background:var(--teal-fill);border:1px solid var(--teal);border-radius:4px;margin:1.25rem 0;font-size:.85rem;line-height:1.5;color:var(--teal-dk);}
+.handoff .ho-tag{flex-shrink:0;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--teal);color:#fff;padding:.2rem .5rem;border-radius:2px;margin-top:.1rem;}
+.handoff a{color:var(--teal-dk);font-weight:600;}
+/* Metric category cards */
+.metric-cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:.75rem;margin:1.25rem 0;}
+.metric-cat{border:1px solid var(--border);border-radius:4px;padding:.875rem;background:#fff;}
+.mc-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.375rem;}
+.mc-examples{font-size:.78rem;color:var(--text-2);line-height:1.6;}
+/* Framing box */
+.framing-box{padding:1.125rem 1.375rem;background:var(--blue-fill);border-left:3px solid var(--blue);border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.framing-box p{font-size:.9rem;line-height:1.7;color:var(--blue-dk);}
+</style>
 </head>
 <body>
 <div class="page">
 
-  <div class="phase-section">
-    <div class="phase-label">
-      <span class="phase-tag tag-discover">Discover</span>
-      <span class="title-row-sep">·</span>
-      <span class="challenge-pip">Value Measurement & ROI</span>
-      <span class="phase-step-context">Step 2 · Workflow Analysis · Solution Design</span>
+<div class="module-header">
+  <div class="eyebrow">How-to Deep Dive</div>
+  <h1>Value Measurement &amp; ROI</h1>
+  <p class="def">Good measurement is not about reporting up. It is about knowing whether what you built is working, having the evidence to prove it, and using that evidence to make the next decision. This chapter helps you define the right metrics for your workflow, track them in a way that is honest and lightweight, and build the proof needed to sustain and grow what you have built.</p>
+</div>
+
+<div class="where-strip">
+  <span class="where-label">Active across</span>
+  <span class="phase-pip pip-engage">Engage</span>
+  <span class="pip-sep">&#8594;</span>
+  <span class="phase-pip pip-discover">Discover</span>
+  <span class="pip-sep">&#8594;</span>
+  <span class="phase-pip pip-execute">Execute</span>
+</div>
+
+
+
+<!-- ===== FRAMING ===== -->
+
+<div class="step-glance">
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><strong>Tech &amp; Data Assessment.</strong> In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like, with Finance sense-checking the numbers.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><strong>Business Process Mapping.</strong> Capture what the workflow costs today (time, people, error rates) as your baselines, and name an owner for every metric.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 3</span><span class="sg-text"><strong>Workflow Analysis.</strong> Confirm baselines from source-system data, not estimates. A before-and-after comparison is only credible when both halves come from the same source.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><strong>Solution Design.</strong> Make tracking a requirement in the MVP so data flows from Sprint 1 instead of being retrofitted after launch.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><strong>Experimentation.</strong> Track sprint over sprint, report at steering, and bring measured actuals to the Day 90 go/no-go.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Sustain tracking after launch and use the evidence to defend, grow, and decide what comes next.</span></div>
+</div>
+
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#vm-engage" title="In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like, with Finance sense-checking the numbers.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#vm-engage" title="Capture what the workflow costs today (time, people, error rates) as your baselines, and name an owner for every metric.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#vm-step-3" title="Confirm baselines from source-system data, not estimates. A before-and-after comparison is only credible when both halves come from the same source.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#vm-step-4" title="Make tracking a requirement in the MVP so data flows from Sprint 1 instead of being retrofitted after launch.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#vm-step-5" title="Track sprint over sprint, report at steering, and bring measured actuals to the Day 90 go/no-go.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#vm-step-6" title="Sustain tracking after launch and use the evidence to defend, grow, and decide what comes next.">6 - Scale &amp; Adopt</a></nav>
+
+<div class="phase-section" id="vm-why" style="border-top:none;padding-top:0;">
+  <h2>Why measurement matters</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Metrics exist for your domain, not for the program. Pick the 3 to 5 workflow metrics you control and can defend. Organization-wide AI metrics are tracked at the program level and are not your job.</span>
+  </div>
+
+  <div class="framing-box">
+    <p>Across IBM domains, the most consistent friction around metrics is the fear that tracking will be used to judge rather than help. The reality is the opposite. The teams that skip measurement are the ones who cannot make the case to keep going, cannot get resources for Wave 2, and cannot prove to leadership that the investment was worth it. Good metrics exist for the domain, not for the program.</p>
+  </div>
+
+  <details class="deep-dive">
+    <summary>Why this matters: whose metrics these are and why they pay off</summary>
+    <div class="deep-dive-body">
+
+  <p class="prose">Teams that define and track their own metrics have a structural advantage when it comes to defending their work, securing continued investment, and knowing when to pivot. For example, the Q2C (Quote-to-Cash) team tracks Effort Reduction and Cycle Time sprint over sprint not because they have to. When the data showed effort reduction climbing from 8% in Sprint 1 to 37% by Sprint 5, that story sold the next phase of the program. Measurement is the evidence you are building.</p>
+
+  <p class="prose">Two types of metrics exist here. <strong>Workflow metrics</strong> are the ones you define, track, and own: effort reduction, cycle time, cost per transaction, quality scores, adoption of your specific tool. <strong>Organization-wide metrics</strong> like overall AI usage rates or AI literacy completion are tracked at the program level. This chapter focuses on the metrics that serve your team.</p>
+
     </div>
+  </details>
 
-    <h2>Lock the metrics before you design anything. This is what the build optimizes toward.</h2>
-
-    <p class="prose">Discover has two jobs for value measurement. First, during Workflow Analysis, you lock the metrics and baselines — the 3-5 leading indicators that define success, captured from source systems (not estimates). Second, during Solution Design, you bake measurement into the solution architecture so value is tracked automatically, not retrofitted.</p>
-
-    <p class="prose">The metrics you define here are what the entire build optimizes toward. If you wait until after the pilot to define them, you'll optimize for the wrong thing — or worse, you'll define metrics after the fact to make the results look good. The discipline is simple: before any code is written, agree on what you're measuring, what the baseline is, what the target is, and how you'll capture it.</p>
-
-    <div class="sub-phase">
-      <div class="sub-phase-label">
-        <span class="sub-phase-number">Step 3</span>
-        <h3>Workflow Analysis — Define Metrics and Baselines</h3>
-      </div>
+  <!-- What metrics domains actually control -->
+  <div class="metric-cat-grid">
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--blue-dk);">Productivity</div>
+      <div class="mc-examples">Time per task, steps removed, effort reduction %, hours saved per person per week on this workflow</div>
     </div>
-
-    <p class="prose">The Workflow Analysis is where you move from a directional hypothesis to specific, measurable targets. You're defining 3-5 leading metrics tied to your value category, capturing the current baseline from source systems, and deciding how each metric will be measured. You're also setting the payback threshold — the bar for deciding later whether the solution is worth scaling.</p>
-
-    <p class="prose">The most important decision here is measurement approach. <strong>Instrumented platform tracking is preferred</strong> — it's auditable, continuous, and doesn't depend on user memory. Surveys are a weak fallback, used only when instrumentation isn't possible. If you're replacing an old tool, set up an apples-to-apples comparison of the same step in both platforms. That's the evidence that survives executive scrutiny.</p>
-
-    <div class="painpoint">
-      <div class="painpoint-label">⚠ Pain point</div>
-      <div class="painpoint-title">Waiting until after the pilot to define metrics</div>
-      <div class="painpoint-body">If you haven't locked the go/no-go criteria before Day 1 of the build, they'll be defined after the build — which means they'll be defined to pass. The Day 90 decision needs to answer a pre-agreed question: did this build demonstrate enough value, at enough reliability, to justify scaling? Write that question down. Agree on the data source. Get sponsor sign-off before development starts. A metric with no pre-agreed threshold is decoration, not a decision rule.</div>
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--green-dk);">Quality</div>
+      <div class="mc-examples">Error rate, false pass/fail rate, rework volume, output accuracy, exception rate</div>
     </div>
-
-    <div class="visual-wrap">
-      <svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
-        <defs>
-          <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </marker>
-        </defs>
-        <text x="340" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="600" fill="#161616">Baseline to Target Measurement Flow</text>
-        <rect x="40" y="50" width="180" height="80" rx="4" fill="#fff2e8" stroke="#ff832b" stroke-width="1.5"/>
-        <text x="130" y="75" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#b35a00">CURRENT STATE</text>
-        <text x="130" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#b35a00">Baseline from source systems</text>
-        <text x="130" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">• Actual data, not estimates</text>
-        <text x="130" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">• Auditable source</text>
-        <line x1="220" y1="90" x2="260" y2="90" stroke="#ff832b" stroke-width="2" marker-end="url(#arrow)"/>
-        <rect x="260" y="50" width="180" height="80" rx="4" fill="#fff2e8" stroke="#ff832b" stroke-width="1.5"/>
-        <text x="350" y="75" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#b35a00">DEFINE METRICS</text>
-        <text x="350" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#b35a00">3-5 leading indicators</text>
-        <text x="350" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">• Tied to value category</text>
-        <text x="350" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">• Specific & measurable</text>
-        <line x1="440" y1="90" x2="480" y2="90" stroke="#ff832b" stroke-width="2" marker-end="url(#arrow)"/>
-        <rect x="480" y="50" width="180" height="80" rx="4" fill="#fff2e8" stroke="#ff832b" stroke-width="1.5"/>
-        <text x="570" y="75" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#b35a00">TARGET STATE</text>
-        <text x="570" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#b35a00">Specific, time-bound goals</text>
-        <text x="570" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#b35a00">• Realistic improvement</text>
-        <text x="570" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#b35a00">• Finance-validated</text>
-        <line x1="40" y1="160" x2="660" y2="160" stroke="#e0e0e0" stroke-width="1"/>
-        <text x="340" y="185" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#525252">Measurement Approach</text>
-        <rect x="60" y="200" width="160" height="70" rx="4" fill="#fff2e8" stroke="#ff832b" stroke-width="1"/>
-        <text x="140" y="220" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#b35a00">Instrumented</text>
-        <text x="140" y="236" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#b35a00">Platform telemetry</text>
-        <text x="140" y="250" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Auto-capture, auditable</text>
-        <text x="140" y="263" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="600" fill="#b35a00">✓ PREFERRED</text>
-        <rect x="260" y="200" width="160" height="70" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
-        <text x="340" y="220" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#633806">Manual Tracking</text>
-        <text x="340" y="236" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#633806">Time logs, reports</text>
-        <text x="340" y="250" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Requires discipline</text>
-        <text x="340" y="263" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#633806">Use if needed</text>
-        <rect x="460" y="200" width="160" height="70" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="1"/>
-        <text x="540" y="220" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#a32d2d">Survey</text>
-        <text x="540" y="236" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#a32d2d">User perception</text>
-        <text x="540" y="250" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Subjective, unreliable</text>
-        <text x="540" y="263" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="600" fill="#a32d2d">⚠ WEAK FALLBACK</text>
-      </svg>
-      <div class="visual-caption">Move from current state baseline to defined metrics to target state. Choose instrumented tracking whenever possible — it's the only measurement approach that survives executive scrutiny.</div>
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--amber-dk);">Cycle time</div>
+      <div class="mc-examples">End-to-end workflow duration, step-to-step latency, processing speed, time to completion</div>
     </div>
-
-    <div class="steps-summary">
-      <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Select 3-5 AIFT Scorecard metrics</strong> relevant to your workflow. Capture current baseline from source systems, not estimates.</div></div>
-      <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Decide measurement approach</strong> — instrumented platform tracking preferred (e.g., telemetry, system logs); surveys only as weak fallback.</div></div>
-      <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Set targets aligned with scorecard</strong> — reference quarterly targets (e.g., 60% adoption, 2 hrs saved/week, 40% daily usage).</div></div>
-      <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Draft lightweight business case</strong> — tie to scorecard categories (Process cost savings, People adoption, Technology penetration, Data quality).</div></div>
-      <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Specify for each metric</strong>: name, baseline, target, source system, owner, measurement cadence (quarterly for scorecard reporting).</div></div>
-      <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Get Finance/EBM validation</strong> — confirm metrics align with scorecard framework and quarterly reporting requirements.</div></div>
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--purple-dk);">Adoption</div>
+      <div class="mc-examples">% of eligible users active on your specific tool, frequency of use, retention after launch</div>
     </div>
-
-    <div class="sub-divider"></div>
-
-    <div class="sub-phase">
-      <div class="sub-phase-label">
-        <span class="sub-phase-number">Step 4</span>
-        <h3>Solution Design — Bake in Instrumentation</h3>
-      </div>
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--teal-dk);">Financial</div>
+      <div class="mc-examples">Cost per transaction, vendor spend replaced, headcount redeployment, ROI against development cost</div>
     </div>
-
-    <p class="prose">With metrics locked, Solution Design's job is to bake measurement into the solution architecture. This means specifying the telemetry and instrumentation the MVP must capture for each metric — auto-instrumentation built in from day one, so value tracking doesn't depend on manual collection.</p>
-
-    <p class="prose">If MVP scope changes during design, the metrics must be updated to match. A reporting model that doesn't align with what you're actually building is worse than no reporting model at all.</p>
-
-    <div class="painpoint">
-      <div class="painpoint-label">⚠ Pain point</div>
-      <div class="painpoint-title">Treating instrumentation as a post-launch add-on</div>
-      <div class="painpoint-body">The second most common failure is treating measurement as something to "add later." By the time you realize you need it, the solution is already built without the hooks to capture the data. The fix is simple: make telemetry and instrumentation a requirement in the MVP scope, not a nice-to-have. If the solution can't auto-capture the metrics you defined in Workflow Analysis, it's not ready to build.</div>
+    <div class="metric-cat">
+      <div class="mc-label" style="color:var(--red-dk);">Satisfaction</div>
+      <div class="mc-examples">NPS (Net Promoter Score) with your tool, OSAT (Overall Satisfaction score), user-reported time saved, qualitative feedback on this workflow</div>
     </div>
+  </div>
 
-    <div class="steps-summary">
-      <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Specify telemetry requirements</strong> for each metric in the MVP scope.</div></div>
-      <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Update metrics</strong> to reflect any scope changes during design.</div></div>
-      <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Draft reporting model</strong> — how will metrics be visualized and shared with stakeholders?</div></div>
-      <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Confirm auto-capture mechanisms</strong> are designed into solution architecture.</div></div>
+  <p class="prose">The most important thing to know is that <strong>you are not limited to a predefined list</strong>. The right metrics are the ones that tell a clear story about whether your specific workflow improved. For example, the Q2C team measures False Pass Rate and False Fail Rate because those tell them whether the AI validation agent is accurate. That metric matters for their workflow and would be irrelevant for most others. Pick the 3 to 5 metrics that would make a skeptic believe the transformation worked.</p>
+</div>
+
+<!-- ===== ENGAGE ===== -->
+<div class="phase-section" id="vm-engage">
+  <div class="phase-label">
+    <span class="phase-tag tag-engage">Engage</span>
+    <span class="challenge-pip">Value Measurement &amp; ROI</span>
+    <span class="phase-step-context">Steps 1 &amp; 2 · Assess &amp; Analyze</span>
+  </div>
+
+  <h2>Agree on what success looks like before you build anything.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">One focused metrics design session, before any solution is designed, prevents the most common failure: defining metrics after the build to make the results look good.</span>
+  </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Process SMEs</span>
+      <span class="who-role">Finance / EBM partner</span>
+      <span class="who-role">Executive sponsor</span>
     </div>
+  </div>
 
-    <div class="artifact-section">
-      <div class="artifact-section-label">Artifact</div>
-      <div class="artifact-grid">
-        <div class="artifact-card">
-          <div class="a-type">Template · Medium priority</div>
-          <div class="a-title">Business Case Template</div>
-          <div class="a-desc">Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. buy vs make</div>
-          <div class="a-links"><span class="a-link" style="color: #8d8d8d; cursor: not-allowed; border-color: #c6c6c6; background: #f4f4f4; opacity: 0.6;">↗ Example coming soon</span><a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener noreferrer">↗ Open template</a></div>
-        </div>
-        <div class="artifact-card">
-          <div class="a-type">Matrix · Medium Priority</div>
-          <div class="a-title">Prioritization Matrix</div>
-          <div class="a-desc">Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.</div>
-          <div class="a-links">
-            <a href="#" class="a-link">View Template →</a>
-          </div>
-        </div>
-      </div>
+  <p class="prose">The single most valuable measurement activity you can do happens before any solution is designed: running a short metrics design session with your process SMEs and Finance partner. In practice this is a focused conversation, not a workshop with deliverables, where you answer three questions together. What would make this transformation a clear success? What does the current process cost to run? And what is realistic to expect from an AI intervention of this scope?</p>
+
+  <p class="prose">The output is not a complex model. It is a shared definition of success that the team, the sponsor, and Finance all agree on before a line of requirements is written. This prevents the most common failure mode: defining metrics after the build to make the results look good.</p>
+
+  <div class="sub-phase" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Metrics design session</span>
+      <h3>Agree on what to measure and what good looks like</h3>
     </div>
+  </div>
 
-    <div class="case-study">
-      <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">Seller Productivity — Locking Scorecard Metrics Before Build</span></div>
-      <p class="cs-prose">The Seller Productivity team locked five AIFT Scorecard metrics during Workflow Analysis: <strong>Process</strong> — Hours Saved (baseline: 0, target: 2 hrs/seller/week), Cost Savings Productivity (target: $1B); <strong>People</strong> — Daily AI Usage Rate (baseline: 15%, target: 40%), AI Satisfaction (baseline: 3.1/5, target: 4.0/5); <strong>Technology</strong> — Use Case Penetration (baseline: 20%, target: 50%). All metrics instrumented via Salesforce telemetry and platform analytics. When MVP scope changed to prioritize proposal generation over meeting prep, they adjusted the Hours Saved breakdown but kept the 2 hrs/week target. Finance validated the scorecard alignment before build kickoff.</p>
-    </div>
+  <p class="prose">Run this as a focused conversation with 3 to 5 people: the domain transformation lead, 1 to 2 process SMEs who know the current workflow well, and your Finance or EBM (Enterprise Business Management) partner. The goal is to walk away with a shared answer to each of the following:</p>
 
-    <div class="ready">
-      <span class="ready-icon">✓</span>
-      <div class="ready-body">
-        <h4>Ready to move to Execute</h4>
-        <p>You have 3-5 metrics, their baselines, their capture method, and a payback threshold — all agreed and signed off by Finance. The solution design includes auto-instrumentation for value tracking. You're building with measurement baked in, not bolted on.</p>
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">What to agree on in the metrics design session</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>What is the primary value this transformation delivers?</strong> Pick one: productivity (time and effort), quality (accuracy and errors), cycle time (speed), or cost (spend). This shapes which metrics matter most. Most workflows have one primary and at most one secondary.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>What does the workflow cost to run today?</strong> Get specific with your process SMEs: how long does step A to step B take? How many people touch it? What is the error or rework rate? What is the cost per transaction? These are your baselines. Actual numbers from the platform are better than estimates.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>What would a meaningful improvement look like?</strong> Set a direction before the solution is designed, not after. "We expect 40% effort reduction in this step" is a hypothesis that shapes the build. Get Finance or your EBM partner (the business unit's financial measurement lead) to sense-check whether the numbers make sense and whether they tie to something on the balance sheet.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>How will you capture the data?</strong> Platform telemetry is the best option. If your tool already tracks time-in-step, use it. Manual tracking (time logs, simple spreadsheets) is acceptable. Surveys are a weak fallback because they measure perception, not performance. The data source you choose now is the one you will be held to later.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Who owns each metric?</strong> Name a person for each one. Metrics without owners do not get tracked.</div></div>
+  </div>
+
+  <p class="prose"><strong>Frame the financial value in the terms leadership uses.</strong> When your results reach a VP or a finance review, they will be compared against every other investment in the portfolio. Presenting them in the shape leadership already thinks in makes your case stronger and saves you a round of translation later. Three habits do most of the work:</p>
+
+  <ul class="prose-list">
+    <li><strong>Classify financial impact as revenue enabled, cost savings, or risk avoidance.</strong> These are the three categories finance compares investments in. Every financial metric you define should map to one of them, and if your solution improves more than one enterprise workflow (Quote-to-Cash and Source-to-Pay, say), state the value it generates in each workflow it touches. The same capability can create distinct value in each.</li>
+    <li><strong>Keep a projected figure and a realized figure, separately labeled.</strong> The projected value is your estimate at design time, grounded in the baseline and stated assumptions. The realized value is what you later confirm from actual data after deployment. Leadership treats these two numbers very differently, and blending them is how measurement credibility is lost. Record the projected value now, in the metrics design session, and plan for how the realized value will be confirmed.</li>
+    <li><strong>Anchor targets against reference points that hold up.</strong> Across IBM transformations, two useful markers: around two hours saved per person per week, and 60% or more of intended users adopting the tool within six months of launch. If your targets sit far below these, it is worth asking whether the workflow was worth transforming.</li>
+  </ul>
+
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Numbers that do not survive finance scrutiny</div>
+    <div class="painpoint-body">Three habits protect your numbers. Count people once: if the same person benefits from two initiatives, do not sum them into one impact figure. Label volume honestly: training completions are not trained people, and task counts are not users; say which one you are reporting. And where the data cannot support a precise number yet, say "data collection in progress" rather than manufacturing a percentage. A smaller, defensible number builds more trust than a bigger one that falls apart under one follow-up question.</div>
+  </div>
+
+  <p class="prose">The best baseline data comes from inside the platform people already use. If your team already has a system that tracks how long each step takes, that data is the baseline. Building your measurement approach around instrumentation that already exists is far more reliable than setting up new tracking after the fact.</p>
+
+  <!-- Metric definition template SVG -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="min-width:480px;">
+      <text x="350" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">What a metric definition looks like: document verification example</text>
+
+      <!-- Column headers -->
+      <rect x="10" y="28" width="680" height="24" rx="3" fill="#edf5ff"/>
+      <text x="83"  y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">METRIC</text>
+      <text x="245" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">REASONING</text>
+      <text x="413" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">BASELINE → TARGET</text>
+      <text x="542" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">SOURCE</text>
+      <text x="641" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">OWNER</text>
+
+      <!-- Dividers (drawn first so rows sit on top) -->
+      <line x1="156" y1="28" x2="156" y2="352" stroke="#e0e0e0" stroke-width="0.75"/>
+      <line x1="334" y1="28" x2="334" y2="352" stroke="#e0e0e0" stroke-width="0.75"/>
+      <line x1="492" y1="28" x2="492" y2="352" stroke="#e0e0e0" stroke-width="0.75"/>
+      <line x1="592" y1="28" x2="592" y2="352" stroke="#e0e0e0" stroke-width="0.75"/>
+
+      <!-- Row 1: Cycle time -->
+      <rect x="10" y="58" width="680" height="64" rx="3" fill="#fff" stroke="#e0e0e0" stroke-width="0.75"/>
+      <rect x="10" y="58" width="4" height="64" rx="2" fill="#0f62fe"/>
+      <text x="24" y="76" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#161616">Verification cycle time</text>
+      <text x="24" y="91" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Avg. hours from application</text>
+      <text x="24" y="103" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">receipt to verified status</text>
+      <text x="166" y="76" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">AI verification is faster than</text>
+      <text x="166" y="90" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">manual review, freeing counselors</text>
+      <text x="166" y="104" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">for higher-value work</text>
+      <rect x="340" y="68" width="60" height="28" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="370" y="87" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#a32d2d">14 hrs</text>
+      <text x="408" y="85" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="14" fill="#525252">→</text>
+      <rect x="426" y="68" width="60" height="28" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="456" y="87" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#1a6b32">2 hrs</text>
+      <text x="500" y="84" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">CRM system logs</text>
+      <text x="500" y="97" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">(Salesforce)</text>
+      <text x="600" y="84" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Transformation lead</text>
+      <text x="600" y="97" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">+ IT architect</text>
+
+      <!-- Row 2: Counselor effort -->
+      <rect x="10" y="128" width="680" height="64" rx="3" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="0.75"/>
+      <rect x="10" y="128" width="4" height="64" rx="2" fill="#8a3ffc"/>
+      <text x="24" y="146" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#161616">Counselor manual effort</text>
+      <text x="24" y="161" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">% of time spent on</text>
+      <text x="24" y="173" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">document checking tasks</text>
+      <text x="166" y="146" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">Routine checks are handled by</text>
+      <text x="166" y="160" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">AI, reducing repetitive work</text>
+      <text x="166" y="174" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">and cost per application</text>
+      <rect x="340" y="138" width="60" height="28" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+      <text x="370" y="157" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#a32d2d">60%</text>
+      <text x="408" y="155" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="14" fill="#525252">→</text>
+      <rect x="426" y="138" width="60" height="28" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="456" y="157" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#1a6b32">&lt;15%</text>
+      <text x="500" y="154" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Time-tracking tool</text>
+      <text x="500" y="167" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">(weekly self-log)</text>
+      <text x="600" y="154" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Enrollment</text>
+      <text x="600" y="167" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">team manager</text>
+
+      <!-- Row 3: Exception rate -->
+      <rect x="10" y="198" width="680" height="64" rx="3" fill="#fff" stroke="#e0e0e0" stroke-width="0.75"/>
+      <rect x="10" y="198" width="4" height="64" rx="2" fill="#24a148"/>
+      <text x="24" y="216" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#161616">Exception rate</text>
+      <text x="24" y="231" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">% of applications needing</text>
+      <text x="24" y="243" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">human review</text>
+      <text x="166" y="216" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">AI decisions are reliable enough</text>
+      <text x="166" y="230" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">to trust, and edge cases still</text>
+      <text x="166" y="244" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">reach a human reviewer</text>
+      <rect x="340" y="208" width="60" height="28" rx="3" fill="#f4f4f4" stroke="#8d8d8d" stroke-width="0.75"/>
+      <text x="370" y="227" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#525252">n/a</text>
+      <text x="408" y="225" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="14" fill="#525252">→</text>
+      <rect x="426" y="208" width="60" height="28" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="456" y="227" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#1a6b32">&lt;10%</text>
+      <text x="500" y="223" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">AI system logs</text>
+      <text x="500" y="236" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">(built in)</text>
+      <text x="600" y="227" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Product owner</text>
+
+      <!-- Row 4: Tool adoption -->
+      <rect x="10" y="268" width="680" height="64" rx="3" fill="#f9f9f9" stroke="#e0e0e0" stroke-width="0.75"/>
+      <rect x="10" y="268" width="4" height="64" rx="2" fill="#009d9a"/>
+      <text x="24" y="286" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#161616">Tool adoption</text>
+      <text x="24" y="301" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">% of counselors using the</text>
+      <text x="24" y="313" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">tool for live work</text>
+      <text x="166" y="286" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">The solution is embedded in</text>
+      <text x="166" y="300" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">daily work, not just tried once</text>
+      <text x="166" y="314" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">and abandoned</text>
+      <rect x="340" y="278" width="60" height="28" rx="3" fill="#f4f4f4" stroke="#8d8d8d" stroke-width="0.75"/>
+      <text x="370" y="297" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#525252">0%</text>
+      <text x="408" y="295" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="14" fill="#525252">→</text>
+      <rect x="426" y="278" width="60" height="28" rx="3" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+      <text x="456" y="297" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#1a6b32">80%</text>
+      <text x="500" y="293" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Platform usage</text>
+      <text x="500" y="306" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">logs (watsonx)</text>
+      <text x="600" y="297" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Change owner</text>
+    </svg>
+    <div class="visual-caption">Each metric needs all five columns filled before the build starts. The Reasoning column is the most important: if you cannot state clearly why this metric matters for this workflow, it is not the right metric. Use the same source for baseline and post-launch measurement so the comparison holds.</div>
+  </div>
+
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Skipping the metrics conversation because it feels premature</div>
+    <div class="painpoint-body">Most teams put off the metrics conversation because the solution does not exist yet and it feels speculative. The result is that they arrive at the end of the build with no agreed baseline, no defined target, and a team that starts negotiating what success means after the fact. The metrics design session does not require a complete solution. It requires a clear enough understanding of the workflow to say what "better" looks like. That exists at Engage.</div>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">MCC Event Speaker Agent: defining metrics before building</span></div>
+    <p class="cs-prose">The MCC team ran their metrics conversation during Workflow Analysis before any design work started. They measured the current manual process with their event planning SMEs: average time to identify and confirm speakers was 5 days, the average number of back-and-forth emails per event was 12, and the speaker confirmation rate was 65%. They set targets before the build: 2 days, 3 emails, 85% confirmation rate. Finance confirmed the metrics tied to G&A reduction through event planning efficiency. They tracked weekly using a spreadsheet linked to their event management system. When the solution launched, the baseline was already there. No scrambling to reconstruct what things looked like before.</p>
+  </div>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifact</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-title">Business Case Template</div>
+        <div class="a-desc">Documents the value hypothesis, baseline, target, investment estimate, and Finance sign-off. Started in Engage with what you know, updated in Discovery when baselines are confirmed from source data.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">&#8599; Template</a></div>
       </div>
     </div>
   </div>
 
+  <div class="ready">
+    <span class="ready-icon">&#10003;</span>
+    <div class="ready-body">
+      <h4>Ready to move to Discovery</h4>
+      <p>You have a primary value category, 3 to 5 candidate metrics with rough baselines, a directional target, a Finance-endorsed measurement approach, and named metric owners. You are entering Discovery with a shared definition of what success means.</p>
+    </div>
+  </div>
 </div>
+
+<!-- ===== DISCOVERY ===== -->
+<div class="phase-section" id="vm-discovery">
+  <div class="phase-label">
+    <span class="phase-tag tag-discover">Discover</span>
+    <span class="challenge-pip">Value Measurement &amp; ROI</span>
+    <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
+  </div>
+
+  <h2>Lock the metrics. Build them into the solution from day one.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Capture baselines from the platform before anything changes, and write tracking into the requirements. Retrofitted measurement is unreliable and sometimes impossible.</span>
+  </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Finance / EBM partner</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">CIO/BPT architect (for instrumentation)</span>
+    </div>
+  </div>
+
+  <p class="prose">Discovery is where the candidate metrics from Engage get confirmed against real data and locked in. Workflow Analysis gives you the opportunity to go deeper on the current baseline, capturing actual numbers from source systems rather than estimates. Solution Design is where you make instrumentation a requirement in the MVP, so the data is collected automatically from Sprint 1, not retrofitted after launch.</p>
+
+  <div class="sub-phase" id="vm-step-3" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Workflow Analysis: confirm baselines from source data</h3>
+    </div>
+  </div>
+
+  <p class="prose">The Workflow Analysis gives you access to the actual numbers behind the process. Use this time to capture baselines from platform data rather than estimates. If the workflow lives inside a system, that system often already tracks the things you want to measure: time in step, transaction count, error flags, completion rates. Those numbers are the baseline.</p>
+
+  <p class="prose">For each metric, answer: what is the actual current value, where does that number come from, and can we capture it the same way after the solution launches? The before-and-after comparison is only credible if both halves come from the same source. A baseline from a survey compared to a post-launch number from platform telemetry is not a valid comparison.</p>
+
+  <!-- SVG: measurement approach hierarchy -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 640 242" xmlns="http://www.w3.org/2000/svg" style="min-width:400px;">
+      <text x="320" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">How to capture the baseline, in order of reliability</text>
+      <rect x="20" y="28" width="600" height="58" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+      <text x="32" y="47" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#1a6b32">1. Platform telemetry from the tool people already use</text>
+      <text x="32" y="63" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">System logs, step timing, and transaction counts already recorded in Salesforce, SAP,</text>
+      <text x="32" y="78" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">ServiceNow, Box, and similar tools. Same source before and after = credible comparison.</text>
+      <rect x="20" y="94" width="600" height="58" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="1"/>
+      <text x="32" y="113" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#633806">2. Instrumented tracking designed into the new solution</text>
+      <text x="32" y="129" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">Telemetry built into the AI solution from Sprint 1, tracking what you want to measure</text>
+      <text x="32" y="144" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">automatically. Requires the baseline to be captured first so the comparison is valid.</text>
+      <rect x="20" y="160" width="600" height="58" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="1"/>
+      <text x="32" y="179" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#a32d2d">3. Survey or self-report: only if instrumentation is not possible</text>
+      <text x="32" y="195" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">User perception of time saved or effort reduced. Subjective and harder to defend.</text>
+      <text x="32" y="210" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">Use as a supplement to quantitative data, not as the primary source.</text>
+    </svg>
+    <div class="visual-caption">The most defensible measurement is a before-and-after comparison on the same metric from the same source. If you track step-time in the current system, track step-time in the AI-enabled system. That is the evidence that survives scrutiny.</div>
+  </div>
+
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">The baseline does not exist when the build ends</div>
+    <div class="painpoint-body">The most consistent tracking failure across domains is launching a solution, seeing meaningful improvement, and then not being able to prove how much because no one captured what things looked like before. Sometimes the old tool is decommissioned. Sometimes the process has already changed. Sometimes no one thought to take a snapshot. Capture the baseline in Workflow Analysis, before anything changes. One hour of data collection now saves months of reconstruction later. In many cases, the reconstruction is not possible at all.</div>
+  </div>
+
+  <div class="sub-divider"></div>
+
+  <div class="sub-phase" id="vm-step-4">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 4</span>
+      <h3>Solution Design: make tracking a requirement, not an afterthought</h3>
+    </div>
+  </div>
+
+  <p class="prose">Tracking should be in the requirements document from the first version. For each metric you defined in Engage and confirmed in Workflow Analysis, the requirements specify what the solution must capture, how it captures it, and where that data goes. If the product owner and architect cannot tell you how Hours Saved will be measured in the MVP, that is a gap in the requirements, not a detail to figure out after launch.</p>
+
+  <p class="prose">The specific instrumentation needed depends on the workflow. Some solutions log usage and completion data automatically through the platform. Others need explicit telemetry: tracking which step was completed, by whom, and how long it took. Work with the CIO/BPT architect to confirm what is possible given the systems in scope. If EBM integration (such as Apptio) is planned for financial reporting, that data pipeline needs to be scoped in design, not wired up after the solution goes live.</p>
+
+  <p class="prose"><strong>Where EBM fits.</strong> For CIO-driven projects (via Path to Production / OnboardAI), EBM is partnering with the CIO AI Platform team on value measurement upfront, so the tracking is scoped here in Solution Design and runs throughout the 90-day sprint. For fully domain or business-unit-led AI projects, more is coming on EBM value measurement. In the meantime, the approach in this chapter (define the metrics, capture the baseline, build tracking into the solution) is what makes your data ready to plug into EBM reporting when that guidance lands.</p>
+
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Building the solution and then trying to add tracking</div>
+    <div class="painpoint-body">Instrumentation is far harder to add after the solution is built than to include from the start. A solution that did not collect usage data from Sprint 1 has a gap in its pilot evidence. A solution that does not log time-in-step has to rely on surveys to estimate productivity impact. Neither is as credible as data captured automatically throughout the build. Make telemetry a requirement in the MVP. If it cannot be built in, decide now whether you are comfortable with the measurement approach you will be left with.</div>
+  </div>
+
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">What to specify in Solution Design for each metric</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>What event triggers a data point?</strong> User completes a step, AI returns a result, a transaction closes. Be specific about what gets recorded and when.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Where is the data stored?</strong> The platform's native logs, a custom table, Apptio, EBM. Name the system. If it does not exist yet, name who will build it and when.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Who on the build team owns the instrumentation?</strong> Assign it like any other requirement. Instrumentation without an owner does not get built.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>When will you validate the data pipeline?</strong> Sprint 1 is the target. If the telemetry is not working by the end of Sprint 1, you are not capturing the pilot evidence you need.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>If MVP scope changes, update the metrics.</strong> A metric tied to a feature that was de-scoped is a metric you cannot report. Keep the metric list aligned with what is being built.</div></div>
+  </div>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-title">Business Case Template</div>
+        <div class="a-desc">Updated in Discovery with confirmed baselines from source data, Finance-validated targets, and a documented measurement approach for each metric.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">&#8599; Template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-title">Measurement Strategy</div>
+        <div class="a-desc">Documents each metric: name, current baseline, target, source system, data capture method, owner, and cadence. This becomes the measurement contract for the build.</div>
+        <div class="a-links"><span class="a-link off">Template (coming soon)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">Q2C Order Validation: tracking per sprint from day one</span></div>
+    <p class="cs-prose">The Q2C team built measurement into the solution design for every sprint. In the requirements, each use case had defined inputs, pass/fail criteria, exception taxonomies, and evidence requirements. The Apptio decision dashboard was scoped as part of the build, not added later. By the time Sprint 1 ended, they had live data on Effort Reduction, Cycle Time, MVP Coverage, False Pass Rate, and False Fail Rate. Sprint by sprint, effort reduction grew: 8.69% in Sprint 1, 7.65% in Sprint 2, 16.39% in Sprint 3, 22.88% in Sprint 4, 37.77% in Sprint 5. That trajectory was only possible because the tracking was in place from the first sprint, not reconstructed at the end.</p>
+  </div>
+
+  <div class="ready">
+    <span class="ready-icon">&#10003;</span>
+    <div class="ready-body">
+      <h4>Ready to move to Execute</h4>
+      <p>Baselines are confirmed from source data. Metrics are locked. Instrumentation is a named requirement in the MVP scope with an owner and a Sprint 1 validation date. Finance has seen and endorsed the business case. You are building with measurement built in.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===== EXECUTE ===== -->
+<div class="phase-section" id="vm-execute">
+  <div class="phase-label">
+    <span class="phase-tag tag-execute">Execute</span>
+    <span class="challenge-pip">Value Measurement &amp; ROI</span>
+    <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
+  </div>
+
+  <h2>Track sprint over sprint. Use the data to make the go/no-go decision and what comes next.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Measured actuals from real work, not projections, are what make the go/no-go credible. A flat metric in Sprint 2 is information to act on, not a failure to hide.</span>
+  </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">Finance / EBM partner</span>
+      <span class="who-role">Business owner (after Day 90)</span>
+      <span class="who-role">Executive sponsor</span>
+    </div>
+  </div>
+
+  <div class="sub-phase" id="vm-step-5" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation: track weekly, report at steering, use data to pivot</h3>
+    </div>
+  </div>
+
+  <p class="prose">Track your metrics every two weeks, aligned to sprint cycles. Bring the numbers to the steering committee, not as a status report but as the basis for decisions. If Effort Reduction is flat at 8% after two sprints and the target is 40%, that is not a failure. It is information. Either the approach needs to change, the feature set needs adjustment, or the target needs to be recalibrated with Finance. Catching that in Sprint 2 is very different from catching it at Day 90.</p>
+
+  <p class="prose">Have real users do real work with the imperfect MVP and measure the actual difference. Not a demo. Not a simulation. Actual tasks from actual work, with the time or effort captured through the tool. That evidence ("this step took 45 minutes before and takes 8 minutes now") is what makes the go/no-go recommendation credible. Projections and estimates do not survive leadership scrutiny the same way measured actuals do.</p>
+
+  <!-- Sprint tracking SVG -->
+  <div class="visual-wrap">
+    <svg viewBox="0 0 620 180" xmlns="http://www.w3.org/2000/svg" style="min-width:400px;">
+      <text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Metric tracking through sprints: Q2C effort reduction</text>
+      <line x1="40" y1="150" x2="590" y2="150" stroke="#e0e0e0" stroke-width="1"/>
+      <line x1="40" y1="30" x2="40" y2="150" stroke="#e0e0e0" stroke-width="1"/>
+      <!-- Target line -->
+      <line x1="40" y1="46" x2="590" y2="46" stroke="#24a148" stroke-width="1" stroke-dasharray="6 3"/>
+      <text x="594" y="50" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">Target</text>
+      <!-- Data points -->
+      <circle cx="142" cy="142" r="5" fill="#0f62fe"/>
+      <circle cx="251" cy="143" r="5" fill="#0f62fe"/>
+      <circle cx="360" cy="132" r="5" fill="#0f62fe"/>
+      <circle cx="469" cy="120" r="5" fill="#0f62fe"/>
+      <circle cx="556" cy="90" r="5" fill="#24a148"/>
+      <!-- Lines connecting -->
+      <polyline points="142,142 251,143 360,132 469,120 556,90" fill="none" stroke="#0f62fe" stroke-width="2"/>
+      <!-- Labels -->
+      <text x="142" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sprint 1</text>
+      <text x="142" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#0f62fe">8.69%</text>
+      <text x="251" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sprint 2</text>
+      <text x="251" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#0f62fe">7.65%</text>
+      <text x="360" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sprint 3</text>
+      <text x="360" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#0f62fe">16.39%</text>
+      <text x="469" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sprint 4</text>
+      <text x="469" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#0f62fe">22.88%</text>
+      <text x="556" y="162" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sprint 5</text>
+      <text x="556" y="172" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">37.77%</text>
+      <!-- Y axis labels -->
+      <text x="30" y="150" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#888">0%</text>
+      <text x="30" y="46" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#1a6b32">70%</text>
+    </svg>
+    <div class="visual-caption">Example: Q2C effort reduction sprint over sprint. The trajectory across five sprints (8% to 38%) made the case for the next phase of the program. This story only exists because the tracking was in place from Sprint 1.</div>
+  </div>
+
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Only measuring at Day 90 instead of sprint over sprint</div>
+    <div class="painpoint-body">Teams that only look at metrics at the Day 90 go/no-go meeting miss the most valuable use of data during the build: course correction. If effort reduction is not improving sprint over sprint, something in the approach needs to change. The earlier you see that, the more time you have to address it. Weekly or bi-weekly tracking during the build is not administrative overhead. It is the mechanism that keeps the build focused on the outcome rather than on feature delivery.</div>
+  </div>
+
+  <div class="sub-divider"></div>
+
+  <div class="sub-phase">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5 continued</span>
+      <h3>The Day 90 go/no-go decision</h3>
+    </div>
+  </div>
+
+  <p class="prose">The Day 90 decision is a business decision, not a technical one. The question is whether the MVP demonstrated enough value, at enough reliability, to justify scaling the investment. Bring the actual metrics from the pilot, compared to the baseline and target agreed in Engage, to the steering committee. Report the financial result in both forms: the projected value you scoped in Engage and the realized value measured from the pilot, clearly labeled. Let the numbers drive the recommendation.</p>
+
+  <p class="prose">A go decision at Day 90 does not mean all metrics hit their target. It means the trajectory is credible, the approach is working, and the investment in Wave 2 is justified. A no-go decision is not a failure. It is the measurement working as intended. It is far better to discover that an approach does not deliver the expected value at Day 90 than at month 18 when far more has been invested.</p>
+
+  <div class="sub-divider"></div>
+
+  <div class="sub-phase" id="vm-step-6">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 6</span>
+      <h3>Scale &amp; Adopt: sustain tracking after launch and use it to grow</h3>
+    </div>
+  </div>
+
+  <p class="prose">After a go decision, the tracking does not stop. It shifts from sprint cadence to monthly reporting. The business owner takes over the KPI dashboard. Finance validates the realized value. The data becomes the evidence base for scaling: it is what you use to justify the Wave 2 roadmap to leadership, to secure additional capacity, and to tell the story of what the transformation accomplished.</p>
+
+  <p class="prose"><strong>Keep your AI System record current.</strong> If your solution was built through IBM's <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production process</a>, it has an official AI System record with business value details attached. Update that record as realized value comes in. It is how your solution's impact stays visible to leadership after launch without you re-presenting it, and it is what keeps the solution supported and resourced.</p>
+
+  <p class="prose">The teams that have sustained measurement after launch are the ones who have been able to argue for more resources, expand the solution to new users or workflows, and build genuine organizational capability around AI-enabled work. The teams that stopped tracking after the go decision often found that executive support drifted because there was no ongoing evidence of impact.</p>
+
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">How to sustain value tracking after launch</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Hand off the KPI dashboard to the business owner</strong> before the build team steps back. Monthly reporting on the same metrics tracked during the pilot. No new framework, no new system.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Validate hard dollar savings with Finance</strong> quarterly. Not estimated: confirmed. This is what makes the business case defensible when someone asks how the investment performed.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Use the data to prioritize the backlog.</strong> If effort reduction plateaued at 38% and the target is 70%, what feature in Wave 2 closes the gap? Let the metric data drive sequencing, not gut feel about what is most interesting to build.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Build the ROI narrative for the next phase.</strong> The data from this workflow (the trajectory, the actuals against baseline, the Finance-validated savings) is the business case for Wave 2. Document it in the ROI Analysis before the team moves on.</div></div>
+  </div>
+
+  <div class="artifact-section">
+    <div class="artifact-section-label">Artifacts</div>
+    <div class="artifact-grid">
+      <div class="artifact-card">
+        <div class="a-title">KPI Dashboard (Key Performance Indicators)</div>
+        <div class="a-desc">Live view of your workflow metrics, updated every two weeks during the sprint and monthly after launch. The primary tool for steering committee reporting and go/no-go evidence.</div>
+        <div class="a-links"><span class="a-link off">Template (coming soon)</span></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-title">ROI Analysis</div>
+        <div class="a-desc">Compares pre-sprint assumptions against pilot evidence, sprint tracking data, and Finance-confirmed savings. The business case for what was built and the foundation for what comes next.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-title">Operational Health Dashboard</div>
+        <div class="a-desc">Post-launch reporting for realized value, adoption, quality, and operational performance. Tracks whether the transformation held after the build team moved on.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">&#8599; Example</a></div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="case-study">
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">MCC Speaker Agent: sustained tracking after launch</span></div>
+    <p class="cs-prose">After the Speaker Agent launched, the MCC team tracked adoption metrics weekly and found that while 85% of event planners had tried the agent, only 60% were using it regularly. Without that data, the team would have declared success based on the initial adoption number. With it, they diagnosed the gap: a specific set of edge cases was routing planners back to the manual process. They fixed it, ran targeted training, and within six weeks adoption was above 80%. The ongoing tracking, not the launch metric, is what drove sustained value.</p>
+    <p class="cs-prose">The ROI analysis at the six-month mark showed confirmed time savings of 2.8 days per event on speaker confirmation workflows, down from 5 days, with speaker confirmation rate up to 81%. Those numbers, validated by Finance, were the foundation for the business case that secured resources for the next phase of the MCC transformation.</p>
+  </div>
+</div>
+
+</div>
+<script>
+(function(){
+  var nav=document.querySelector('.phase-nav');
+  if(!nav||!('IntersectionObserver' in window))return;
+  var pills=Array.prototype.slice.call(nav.querySelectorAll('.pnav-pill'));
+  var map={};
+  pills.forEach(function(p){
+    var id=p.getAttribute('href').slice(1);
+    if(!map[id])map[id]=[];
+    map[id].push(p);
+  });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&map[e.target.id]){
+        pills.forEach(function(p){p.classList.remove('active');});
+        map[e.target.id].forEach(function(p){p.classList.add('active');});
+      }
+    });
+  },{rootMargin:'-10% 0px -75% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+})();
+</script>
 </body>
 </html>
