@@ -153,20 +153,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 .escalation-box{padding:1rem 1.25rem;background:var(--red-fill);border-left:3px solid var(--red);border-radius:0 4px 4px 0;margin:1.25rem 0;}
 .escalation-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red-dk);margin-bottom:.5rem;}
 .escalation-body{font-size:.875rem;line-height:1.65;color:var(--red-dk);}
-.def-list{margin:1.25rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-.def-row{display:grid;grid-template-columns:13rem 1fr;border-bottom:1px solid var(--border);}
-.def-row:last-child{border-bottom:none;}
-.def-term{padding:.75rem 1rem;font-size:.875rem;font-weight:600;color:var(--text);background:var(--layer);}
-.def-term a{color:var(--blue);text-decoration:none;}
-.def-term a:hover{text-decoration:underline;}
-.def-desc{padding:.75rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
-.help-list{margin:1.25rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
-.help-row{display:grid;grid-template-columns:13rem 1fr;border-bottom:1px solid var(--border);}
-.help-row:last-child{border-bottom:none;}
-.help-q{padding:.75rem 1rem;font-size:.875rem;font-weight:600;color:var(--text);background:var(--layer);}
-.help-a{padding:.75rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
-.help-a a{color:var(--blue);text-decoration:none;font-weight:500;}
-.help-a a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
@@ -204,6 +190,16 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 <div class="phase-section" id="gv-why" style="border-top:none;padding-top:0;">
   <h2>Governance across the transformation, not just the AI</h2>
 
+  <div class="key-takeaway" style="margin-bottom:1.5rem;">
+    <div class="key-takeaway-label" style="margin-bottom:.5rem;">Quick self-check</div>
+    <div class="key-takeaway-body">
+      <strong>Do I need to register?</strong> If your use case goes beyond your own personal productivity, likely yes. See the <a href="#gv-levels">four levels</a>.<br>
+      <strong>What tier is my data?</strong> Check it against the <a href="#gv-step-1">four data tiers</a> before you touch a tool.<br>
+      <strong>What review am I triggering?</strong> Check your use case against the <a href="https://w3.ibm.com/w3publisher/responsible-technology/use-case-review" target="_blank" rel="noopener">Risk Review Needed list</a>.<br>
+      Land here, get your answer, move on. The rest of this chapter is for when you need the reasoning behind it.
+    </div>
+  </div>
+
   <div class="key-takeaway">
     <span class="kt-icon">&#128204;</span>
     <span class="kt-text">Governance is not a separate job. It is a small set of habits attached to steps you are already doing, and one rule decides how much applies to you: the moment a use case goes beyond personal productivity, it must be registered.</span>
@@ -228,7 +224,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </tbody>
   </table>
 
-  <p class="prose"><strong>How much governance does your use case need?</strong> IBM's <a href="https://ibm.ent.box.com/file/2277597436626?s=2p17qytonhmgi7312kkjxjyk4fafqowm" target="_blank" rel="noopener">GenAI Practical Guidance</a> defines four levels, based on who relies on the output, not on how sophisticated the AI is. Be honest about which level you are at, and move up a level (and register) the moment your use case does too.</p>
+  <p class="prose" id="gv-levels"><strong>How much governance does your use case need?</strong> IBM's <a href="https://ibm.ent.box.com/file/2277597436626?s=2p17qytonhmgi7312kkjxjyk4fafqowm" target="_blank" rel="noopener">GenAI Practical Guidance</a> defines four levels, based on who relies on the output, not on how sophisticated the AI is. Be honest about which level you are at, and move up a level (and register) the moment your use case does too.</p>
   <div class="visual-wrap">
   <svg viewBox="0 0 700 250" role="img" aria-label="Four levels of AI use and what each requires">
     <text x="350" y="22" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Four levels, one rule: the more people rely on it, the more governance applies</text>
@@ -276,7 +272,17 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <line x1="525" y1="130" x2="535" y2="130" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#garrowlvl)"/>
     <defs><marker id="garrowlvl" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
   </svg>
-  <div class="visual-caption">The key rule from IBM's GenAI Practical Guidance: any AI use case beyond low-risk personal productivity must be registered in IGMS. High-risk use cases (per the <a href="https://w3.ibm.com/w3publisher/responsible-technology/use-case-review" target="_blank" rel="noopener">Risk Review Needed list</a>) require additional review regardless of level, including at the personal-productivity level.</div>
+  <div class="visual-caption">The key rule from IBM's GenAI Practical Guidance: any AI use case beyond low-risk personal productivity must be registered in IGMS. High-risk use cases (per the Risk Review Needed list) require additional review regardless of level, including at the personal-productivity level.</div>
+
+  <table class="impact-table">
+    <thead><tr><th>Level</th><th>What it looks like in practice</th><th>Example tools</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Personal</strong></td><td>Scheduling, drafting emails, data summarization, first-draft content, ideation</td><td>Copilot, Box AI</td></tr>
+      <tr><td><strong>Team</strong></td><td>Automating a specific team task, such as journal entry prep or a tax invoice workflow</td><td>Copilot, IBM Consulting Advantage, watsonx Orchestrate</td></tr>
+      <tr><td><strong>Workflow</strong></td><td>Transforming a process across systems and roles, such as Record to Analyze or Source to Pay</td><td>watsonx Orchestrate, Bob (for code-based builds)</td></tr>
+      <tr><td><strong>Enterprise</strong></td><td>Enterprise-wide intent routing and orchestration across multiple workflows</td><td>AskIBM and its suite of "Ask" assistants (AskHR, AskProcurement, and similar)</td></tr>
+    </tbody>
+  </table>
   </div>
 </div>
 
@@ -311,7 +317,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Use approved tools only, and get data approval.</strong> Check the <a href="https://w3.ibm.com/w3publisher/responsible-business-technology/responsible-technology/ai-tools" target="_blank" rel="noopener">approved AI tools list</a> before building on anything. For datasets, identify the data steward and owner in the <a href="https://knowledgeportal.cdo-edp-docs.wdc.app.cirrus.ibm.com/Governance/IBM_AI_Model_Data_Catalog/" target="_blank" rel="noopener">AI Model and Data Governance catalog</a> and get their approval before use.</div></div>
     <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Run the tier screen.</strong> If the use case goes beyond personal productivity, start registration in IGMS now. <a href="https://w3.ibm.com/ibm/askintegrity/" target="_blank" rel="noopener">AskIntegrity</a> can route you; builds going through <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production</a> or <a href="https://w3.ibm.com/#/support/article/apm?_lang=en" target="_blank" rel="noopener">APM</a> are registered as part of those processes.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Name the accountable owners.</strong> The Business Lead, Technical Lead, and Global Process Owner own the risk of the AI system, alongside every IBMer who implements it. Ownership named now is accountability that works later.</div></div>
-    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Check for heightened-risk triggers</strong> with your IGL, and bring the answer into the go/no-go. A use case that will need deep review is not a reason to stop, but it is a cost and timeline input leadership should see before committing. Keep your manager in the loop as the use case develops, especially if it is heightened risk.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Check for heightened-risk triggers</strong> with your IGL, and bring the answer into the go/no-go. A use case that will need deep review is not a reason to stop, but it is a cost and timeline input leadership should see before committing. Keep your manager in the loop as the use case develops, especially if it is heightened risk. For example: an HR employee using an approved tool to rank resumes as part of their own workflow still triggers additional governance, even though the use looks like personal productivity.</div></div>
   </div>
 
   <div class="sub-phase" id="gv-step-1" style="margin-top:0;">
@@ -333,8 +339,13 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </table>
 
     <p class="prose">One rule cuts across all four tiers: client data is not IBM data. If a use case needs client data, check the contract with Legal for what it permits before using AI on it at all.</p>
-    <p class="prose">Approved tools are easy to spot: they use SSO with your IBM w3 ID, and Copilot Chat shows a green shield when it is in an approved configuration. When unsure, check the <a href="https://w3.ibm.com/w3publisher/responsible-business-technology/responsible-technology/ai-tools" target="_blank" rel="noopener">Approved AI Tools Matrix</a> rather than guessing.</p>
+    <p class="prose">Approved tools are easy to spot: they use SSO with your IBM w3 ID, and Copilot Chat shows a green shield when it is in an approved configuration. When unsure, check the Approved AI Tools Matrix rather than guessing.</p>
+    <details class="deep-dive">
+    <summary>In depth: Global Privacy Assessments and data quality</summary>
+    <div class="deep-dive-body">
     <p class="prose">If your AI system is deployed internally and processes personal data, IBM may require a Global Privacy Assessment (GPA) alongside your IGMS registration; your Integrated Governance Lead can tell you if it applies. Data quality is part of governance too, not just engineering. A model trained or grounded on stale, incomplete, or wrong data produces confident, wrong answers at scale. The Chief Data Office offers data quality services you can use to check sources before you build on them, and the Tech &amp; Data Assessment you are already running in this step (see the Systems Integration chapter) is where those checks belong.</p>
+    </div>
+  </details>
 
     <div class="painpoint">
       <div class="painpoint-label">&#9888; Pain point</div>
@@ -349,26 +360,31 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       <h3>Register the use case and screen the risk</h3>
     </div></div>
 
-    <p class="prose">Registration is the habit teams most easily skip, because it feels like bureaucracy at the exact moment enthusiasm is highest. Reframe it: IGMS is the enterprise inventory of AI models, systems, and use cases, and it is where required risk reviews start. A registered use case is visible, counted in what the enterprise knows about its own AI, and supported when something goes wrong. An unregistered one is a control gap with your name on it. The assessments are routed automatically to the owners you named, and if your use case builds on an AI system that was already reviewed, a new review is only needed when the new use triggers heightened risk.</p>
-    <p class="prose">Screen the tier honestly with your IGL, check whether anything about the use case appears on the risk-review list, and put the answer in front of leadership as part of the go/no-go. Heightened risk does not mean no. It means the review will involve the PAID-COE and Privacy + AI Legal, with cost and timeline implications you want scoped before the build starts, not discovered in week eight.</p>
+    <details class="deep-dive">
+    <summary>In depth: why registration is worth the two minutes</summary>
+    <div class="deep-dive-body">
+    <p class="prose">Registration is the habit teams most easily skip, because it feels like bureaucracy at the exact moment enthusiasm is highest. Reframe it: IGMS is the enterprise inventory of AI models, systems, and use cases, and it is where required risk reviews start. A registered use case is visible, counted in what the enterprise knows about its own AI, and supported when something goes wrong. An unregistered one is invisible when you need that support most. The assessments are routed automatically to the owners you named, and if your use case builds on an AI system that was already reviewed, a new review is only needed when the new use triggers heightened risk.</p>
+    </div>
+  </details>
+    <p class="prose">Screen the tier honestly with your IGL, check whether anything about the use case appears on the risk-review list, and put the answer in front of leadership as part of the go/no-go. Heightened risk does not mean no. It means the review will involve the PAID-COE and Privacy + AI Legal, with cost and timeline implications worth scoping before the build starts, so they never become a week-eight surprise.</p>
   <div class="visual-wrap">
   <svg viewBox="0 0 700 240" role="img" aria-label="Three registration pathways converging on IGMS">
     <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Three doors, one inventory</text>
     <rect x="20" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
-    <text x="32" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">Path to Production</text>
-    <text x="32" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">CIO watsonx builds. The AI System</text>
-    <text x="32" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">record is created as part of</text>
-    <text x="32" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">the approval process.</text>
+    <text x="125" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">Path to Production</text>
+    <text x="125" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">CIO watsonx builds. The AI System</text>
+    <text x="125" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">record is created as part of</text>
+    <text x="125" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">the approval process.</text>
     <rect x="245" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
-    <text x="257" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">APM</text>
-    <text x="257" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Coded applications. Registration</text>
-    <text x="257" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">is carried through the IT</text>
-    <text x="257" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">security standard route.</text>
+    <text x="350" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">APM</text>
+    <text x="350" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Coded applications. Registration</text>
+    <text x="350" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">is carried through the IT</text>
+    <text x="350" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">security standard route.</text>
     <rect x="470" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
-    <text x="482" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">AskIntegrity</text>
-    <text x="482" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Everything else, or unsure.</text>
-    <text x="482" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Determines what your use case</text>
-    <text x="482" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">needs and routes it.</text>
+    <text x="575" y="66" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">AskIntegrity</text>
+    <text x="575" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Everything else, or unsure.</text>
+    <text x="575" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Determines what your use case</text>
+    <text x="575" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">needs and routes it.</text>
     <line x1="125" y1="118" x2="290" y2="172" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
     <line x1="350" y1="118" x2="350" y2="170" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
     <line x1="575" y1="118" x2="410" y2="172" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
@@ -377,7 +393,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <text x="350" y="213" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Registered, visible, counted, supported. Risk reviews start here.</text>
     <defs><marker id="garrow2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
   </svg>
-  <div class="visual-caption">All three paths register you in IGMS automatically. A handful of other systems (Asset Management, Clearing House, the AI Model &amp; Data Catalog) also feed IGMS directly, so registration may already be underway without you initiating it. Stuck on a review? The AI First Transformation team can help you navigate it.</div>
+  <div class="visual-caption">All three paths register you in IGMS automatically. A handful of other systems (Asset Management, Clearing House, the AI Model &amp; Data Catalog) also feed IGMS directly, so registration may already be underway without you initiating it.</div>
   </div>
 
 
@@ -429,7 +445,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="step-row title-row"><div class="step-title">What to design in Discover for Governance &amp; Risk</div></div>
     <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Design human oversight into the future-state workflow.</strong> Decide where people review, approve, and override, and make those moments real work steps with time budgeted, not checkboxes. Heightened-risk systems will likely require direct human approval on outputs.</div></div>
     <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Decide what gets logged.</strong> Inputs, outputs, overrides, and decisions, enough that six months from now you can answer "why did it do that?" for any output that mattered.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Pull in the right SMEs for the knowledge your use case touches.</strong> Legal content goes to your business unit legal contact, HR topics to AskHR, accounting treatment to your accounting focal, privacy and security to your security contact.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Pull in the right SMEs for the knowledge your use case touches.</strong> Legal content goes to your business unit legal contact, HR topics to AskHR, accounting treatment to your accounting focal.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Write the controls as requirements.</strong> Accuracy thresholds, safety and PII guardrails, and a user-facing notice wherever people interact directly with the AI (IBM's Carbon for AI icon is the standard way to show it). Be transparent about where AI is used in the process with colleagues too, not only end users. If it is not in the requirements, it will not be in the build.</div></div>
     <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Document the model choices.</strong> A Fact Sheet documenting why this model, the performance metrics you will capture, and a plain-language description of what the system is for and what its limits are (for third-party models, link the vendor's Model Card instead).</div></div>
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>If financial reporting is touched, design the controls with Finance.</strong> An AI solution that affects financial reporting needs controls addressing misstatement risk (the risk that a financial report contains a material error), and one that executes a key control without human intervention requires a designed, operating control around it.</div></div>
@@ -441,13 +457,20 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       <h3>Human oversight and logging are workflow design, not paperwork</h3>
     </div></div>
 
-    <p class="prose">AI systems at IBM are deployed with the expectation that humans oversee them meaningfully throughout their lifecycle, and "meaningfully" is the word that does the work. An approval step that a person has no time, context, or authority to actually perform is not oversight; it is a rubber stamp that creates false confidence and real accountability. As you analyze the workflow in Step 3, decide specifically: which outputs does a human review before they take effect, who has the authority to override, and what happens to the work when they do? Then give those people the time and the information to do it. The Adoption &amp; Change chapter's training guidance (what to do when the AI is wrong) is the other half of this design.</p>
+    <p class="prose">As you analyze the workflow in Step 3, decide specifically: which outputs does a human review before they take effect, who has the authority to override, and what happens to the work when they do? Give those people the time and the information to do it, not just the responsibility.</p>
+
+    <details class="deep-dive">
+      <summary>In depth: what "meaningful" oversight actually requires</summary>
+      <div class="deep-dive-body">
+      <p class="prose">AI systems at IBM are deployed with the expectation that humans oversee them meaningfully throughout their lifecycle, and "meaningfully" is the word that does the work. An approval step that a person has no time, context, or authority to actually perform is not oversight; it only looks like oversight, which hides the gap instead of closing it. The Adoption &amp; Change chapter's training guidance (what to do when the AI is wrong) is the other half of this design.</p>
+      </div>
+    </details>
     <p class="prose">Logging follows from the same question. Log what you would need to reconstruct a decision: what went in, what came out, who reviewed it, what they changed. For most workflow solutions this is a modest requirement that is nearly free to build in and nearly impossible to retrofit.</p>
 
     <div class="painpoint">
       <div class="painpoint-label">&#9888; Pain point</div>
       <div class="painpoint-title">Oversight on paper</div>
-      <div class="painpoint-body">The design says "human reviews all outputs." The human has 40 outputs an hour and 8 seconds each. Every review passes, because passing is the only thing there is time for. When something goes wrong, the review log shows a person approved it, and that person owns a failure the design guaranteed. If the volume makes genuine review impossible, say so in Discover and design differently: sample-based review, tiered confidence routing, or a narrower scope. Honest oversight design is a favor to the people who will do the overseeing.</div>
+      <div class="painpoint-body">The design says "human reviews all outputs." The human has 40 outputs an hour and 8 seconds each. Every review passes, because passing is the only thing there is time for. When something goes wrong, the review log shows a person approved it, but the design set them up to miss it, not the reviewer. If the volume makes genuine review impossible, say so in Discover and design differently: sample-based review, tiered confidence routing, or a narrower scope. Honest oversight design is a favor to the people who will do the overseeing.</div>
     </div>
   
 
@@ -458,14 +481,19 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div></div>
 
     <p class="prose">Everything decided in Step 3 goes into the build-ready requirements alongside the functional ones: the guardrails (what the system must refuse or filter), the thresholds (what accuracy is acceptable for this use, and what happens below it), the transparency notice, and the logging. Add the Fact Sheet from the checklist above. None of it is long. All of it is much easier to write now than to reconstruct later.</p>
-    <p class="prose">Two more design-time rules. First, internal builds follow the client zero standards (IBM uses its own products internally first, before selling them): IBM products and services, on strategic platforms, with IBM models first, and a documented exception process where a genuine gap exists (see the build, buy, or hybrid guidance in Systems Integration, Step 4). Second, where third-party AI components are in the solution anyway, request their model card or responsible-AI documentation and link it in your Fact Sheet, rather than treating the component as a black box.</p>
+    <details class="deep-dive">
+    <summary>In depth: two more design-time rules</summary>
+    <div class="deep-dive-body">
+    <p class="prose">First, internal builds follow the client zero standards (IBM uses its own products internally first, before selling them): IBM products and services, on strategic platforms, with IBM models first, and a documented exception process where a genuine gap exists (see the build, buy, or hybrid guidance in Systems Integration, Step 4). Second, where third-party AI components are in the solution anyway, request their model card or responsible-AI documentation and link it in your Fact Sheet, rather than treating the component as a black box.</p>
+    </div>
+  </details>
 
     <p class="prose"><strong>If you are building with low-code or agent tools:</strong> the same rules apply, and it is easy to miss them here. An agent built in an afternoon is still an AI system. The moment a team relies on it, it needs registration, an owner, and the oversight design above. Keep human review as the default for anything an agent does that others consume, and be deliberate about what data and tools the agent can reach, because an agent's risk surface is defined by its permissions, not its prompt. If the build uses Bob, the same governance applies plus a few tool-specific habits: never use auto-enable mode, disable telemetry collection, keep Sensitive Personal Information and similarly restricted data out of it entirely, and register anything beyond personal productivity through AskIntegrity just like any other AI system.</p>
 
     <div class="painpoint">
       <div class="painpoint-label">&#9888; Pain point</div>
       <div class="painpoint-title">A point-in-time review is not continuous assurance</div>
-      <div class="painpoint-body">Security and control reviews assess your use case at a moment in time, against its design. Passing them does not mean the solution is secure forever, and going through the governance process does not transfer your accountability to the reviewers. Treat reviews as a floor, not a ceiling: if the nature of your use case warrants deeper security attention, your security contact can tell you what more is needed. And when the solution changes, the reviews' conclusions age accordingly, which is why revalidation (Step 6) exists.</div>
+      <div class="painpoint-body">Security and control reviews assess your use case at a moment in time, against its design. Passing them does not mean the solution is secure forever, and going through the governance process does not transfer your accountability to the reviewers. Treat reviews as a floor, not a ceiling. When the solution changes, the reviews' conclusions age accordingly, which is why revalidation (Step 6) exists.</div>
     </div>
   
 
@@ -506,8 +534,8 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">What to do in Execute for Governance &amp; Risk</div></div>
     <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Test to the thresholds from Solution Design:</strong> accuracy against the bar you set, plus safety, hate/abuse/profanity, and PII handling at the system level. Fairness and bias testing applies where the risk review requires it.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Red-team the solution.</strong> Adversarial prompts, out-of-scope requests, prompt injection through any content the system reads, and permission boundaries for anything agentic. ARES (the AI Robustness Evaluation System) is IBM's automated tool for this, and the CISO team may engage on your security responses.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Validate that the guardrails block what testing found.</strong> A vulnerability discovered in testing and not turned into a runtime control is a finding you paid for and did not use. UAT (User Acceptance Testing) must include what users do when the AI is wrong.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Red-team the solution.</strong> Adversarial prompts, out-of-scope requests, prompt injection through any content the system reads, and permission boundaries for anything agentic. ARES (the AI Robustness Evaluation System) is IBM's automated tool for this.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Validate that the guardrails block what testing found.</strong> A vulnerability discovered in testing and not turned into a runtime control is effort spent that never pays off. Close the loop: turn every finding into a control. UAT (User Acceptance Testing) must include what users do when the AI is wrong.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Stand up monitoring beyond uptime:</strong> output quality trends, drift against the baseline, and override rates. A system can be 100% available and quietly wrong.</div></div>
     <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Wire the incident paths before launch.</strong> A feedback route users will actually use, vulnerability reporting through PSIRT (Product Security Incident Response Team), and incident reporting through CSIRT (Computer Security Incident Response Team). Everyone on the team should know which path is for what.</div></div>
     <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Revalidate the IGMS record at least annually, and any time the AI changes:</strong> a model swap, new AI functionality, a process change, or agents being turned on. Keep the system description and value details current.</div></div>
@@ -519,8 +547,15 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
       <h3>Experimentation: prove the controls, not just the features</h3>
     </div></div>
 
-    <p class="prose">The sprint validates that the solution works. This chapter's addition: the sprint also validates that the controls work, and the only way to know is to attack them. Feed the system inputs it should refuse. Put instructions inside documents it reads and see whether it follows them. Ask it to act outside its scope and check what the permission boundaries actually permit. Prompt injection through content the AI reads is a known, demonstrated failure mode for unhardened systems, so assume yours is vulnerable until testing shows otherwise. Every failure found here is cheap; the same failure found by a user, an auditor, or an attacker in production is not.</p>
-    <p class="prose">Treat overrides and refusals during UAT as governance data, the same way the Adoption &amp; Change chapter treats them as adoption data. If reviewers are overriding a third of outputs, either the threshold is wrong, the model is wrong, or the oversight design is carrying more load than it was built for. All three are fixable in the sprint and expensive after it.</p>
+    <p class="prose">The sprint validates that the solution works. This chapter's addition: the sprint also validates that the controls work, and the only way to know is to attack them. Feed the system inputs it should refuse. Put instructions inside documents it reads and see whether it follows them. Ask it to act outside its scope and check what the permission boundaries actually permit.</p>
+
+    <details class="deep-dive">
+      <summary>In depth: why this is the good place to find problems</summary>
+      <div class="deep-dive-body">
+      <p class="prose">Prompt injection through content the AI reads is a known, demonstrated failure mode for unhardened systems, so assume yours is vulnerable until testing shows otherwise. Every failure found here is cheap to fix. The same failure found in production, by a user or an auditor, costs a lot more, so this is the good place to find it.</p>
+      </div>
+    </details>
+    <p class="prose">Treat overrides and refusals during UAT as governance data, the same way the Adoption &amp; Change chapter treats them as adoption data. If reviewers are overriding a third of outputs, either the threshold is wrong, the model is wrong, or the oversight design is carrying more load than it was built for. All three are worth catching in the sprint, while they are still cheap to fix.</p>
 
     <div class="painpoint">
       <div class="painpoint-label">&#9888; Pain point</div>
@@ -537,29 +572,29 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
     <p class="prose">The habits in the checklist above only work if someone is actually watching. A dashboard nobody looks at is not monitoring, and an incident path nobody remembers is not a plan. Pick a real cadence for the monitoring review, name who owns it, and treat the first bad day as the test of whether the incident paths actually work, not the moment to invent them.</p>
   <div class="visual-wrap">
-  <svg viewBox="0 0 700 240" role="img" aria-label="Continuous governance loop after launch">
-    <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Governance after launch: a loop, not a gate</text>
-    <rect x="60" y="50" width="230" height="52" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
-    <text x="72" y="70" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043ce">1. Monitor</text>
-    <text x="72" y="87" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Quality trends, drift, override rates,</text>
-    <text x="72" y="98" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">watched by a named owner.</text>
-    <rect x="410" y="50" width="230" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
-    <text x="422" y="70" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">2. Change happens</text>
-    <text x="422" y="87" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Model swap, new tool, new data source,</text>
-    <text x="422" y="98" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">new AI functionality, agents turned on.</text>
-    <rect x="410" y="150" width="230" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
-    <text x="422" y="170" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">3. Re-test what applies</text>
-    <text x="422" y="187" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Thresholds and adversarial tests from</text>
-    <text x="422" y="198" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Step 5, because behavior changed.</text>
-    <rect x="60" y="150" width="230" height="52" rx="5" fill="#defbe6" stroke="#24a148"/>
-    <text x="72" y="170" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0e6027">4. Revalidate the record</text>
-    <text x="72" y="187" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">IGMS matches the system that is</text>
-    <text x="72" y="198" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">actually running. Then keep watching.</text>
-    <line x1="290" y1="76" x2="406" y2="76" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
-    <line x1="525" y1="102" x2="525" y2="146" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
-    <line x1="410" y1="176" x2="294" y2="176" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
-    <line x1="175" y1="150" x2="175" y2="106" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
-    <text x="350" y="130" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-style="italic" fill="#525252">At least annually, and on every AI change</text>
+  <svg viewBox="0 0 700 260" role="img" aria-label="Continuous governance loop after launch">
+    <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Governance after launch</text>
+    <rect x="60" y="50" width="236" height="72" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
+    <text x="76" y="74" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043ce">1. Monitor</text>
+    <text x="76" y="90" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Quality trends, drift, override rates,</text>
+    <text x="76" y="104" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">watched by a named owner.</text>
+    <rect x="410" y="50" width="236" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="426" y="74" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">2. Change happens</text>
+    <text x="426" y="90" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Model swap, new tool, new data source,</text>
+    <text x="426" y="104" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">new AI functionality, agents turned on.</text>
+    <rect x="410" y="170" width="236" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="426" y="194" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">3. Re-test what applies</text>
+    <text x="426" y="210" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Thresholds and adversarial tests from</text>
+    <text x="426" y="224" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Step 5, because behavior changed.</text>
+    <rect x="60" y="170" width="236" height="72" rx="5" fill="#defbe6" stroke="#24a148"/>
+    <text x="76" y="194" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0e6027">4. Revalidate the record</text>
+    <text x="76" y="210" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">IGMS matches the system that is</text>
+    <text x="76" y="224" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">actually running. Then keep watching.</text>
+    <line x1="296" y1="86" x2="406" y2="86" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="528" y1="122" x2="528" y2="166" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="410" y1="206" x2="300" y2="206" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="178" y1="170" x2="178" y2="126" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <text x="353" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-style="italic" fill="#525252">At least annually, and on every AI change</text>
     <defs><marker id="garrow4" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
   </svg>
   <div class="visual-caption">The revalidation loop is what keeps every approval the system carries describing a system that still exists.</div>
@@ -585,6 +620,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
 <!-- ═══════════════════════ THE IBM GOVERNANCE LANDSCAPE ═══════════════════════ -->
 <div class="phase-section" id="gv-landscape">
+  <p class="prose" style="font-style:italic;color:var(--text-3);"><em>See also: <a href="https://w3.ibm.com/w3publisher/responsible-business-technology/responsible-technology/responsible-tech-faq" target="_blank" rel="noopener">Responsible Tech FAQ</a> for related guidance. (Flagged for manual review: not yet confirmed this doesn't conflict with the chapter's wording.)</em></p>
 
   <h2>The IBM governance landscape: who owns what</h2>
 
@@ -593,34 +629,19 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="kt-text">You are never navigating this alone. Your Integrated Governance Lead is the named person for domain-specific guidance, AskIntegrity answers compliance questions, and registration and reviews run through IGMS. Start with the IGL.</span>
   </div>
 
-  <p class="prose">A short map of the bodies and tools this chapter references, so the names mean something when they contact you.</p>
-
-  <div class="def-list">
-    <div class="def-row">
-      <div class="def-term"><a href="https://w3.ibm.com/w3publisher/trust-compliance/integrated-governance-program" target="_blank" rel="noopener">Integrated Governance Program (IGP)</a></div>
-      <div class="def-desc">The umbrella program, overseen by the Privacy, Data, and AI Center of Excellence within Risk, Compliance and Integrity, that runs IGMS and routes assessments.</div>
-    </div>
-    <div class="def-row">
-      <div class="def-term"><a href="https://w3.ibm.com/ibm/privacy/tools-services/igms" target="_blank" rel="noopener">IGMS</a></div>
-      <div class="def-desc">The enterprise AI inventory. Where use cases are registered, risk reviews start, and named owners are recorded. Registration is what makes your work visible, counted, and supported.</div>
-    </div>
-    <div class="def-row">
-      <div class="def-term"><a href="https://w3.ibm.com/w3publisher/rci-resource-center/igp/igms-assessments#rta" target="_blank" rel="noopener">Responsible Technology Assessment (RTA)</a></div>
-      <div class="def-desc">How AI systems are assessed after registration. Ethical or regulatory triggers can route a use case to deeper review, and in some cases to the Responsible Technology Board.</div>
-    </div>
-    <div class="def-row">
-      <div class="def-term"><a href="PLACEHOLDER_RTB_LINK" target="_blank" rel="noopener">Responsible Technology Board</a></div>
-      <div class="def-desc">Owns IBM's AI governance principles and policies. Involved in heightened-risk cases escalated through the RTA.</div>
-    </div>
-    <div class="def-row">
-      <div class="def-term"><a href="https://www.ibm.com/docs/en/cpod?topic=internaldocs/4c_aibaseline/1_reqs.html" target="_blank" rel="noopener">Enterprise AI Baseline</a></div>
-      <div class="def-desc">Defines the minimum required actions for teams that develop, modify, deploy, or market AI. The source for the testing and documentation requirements in this chapter.</div>
-    </div>
-    <div class="def-row">
-      <div class="def-term"><a href="https://www.ibm.com/trust/responsible-ai" target="_blank" rel="noopener">Pillars of Trustworthy AI</a></div>
-      <div class="def-desc">IBM's five values that all governance work maps to: explainability, fairness, robustness, transparency, and privacy.</div>
-    </div>
-  </div>
+  <table class="impact-table">
+      <thead><tr><th>Who / what</th><th>What it means</th></tr></thead>
+      <tbody>
+        <tr><td><strong><a href="https://w3.ibm.com/ibm/privacy/contact/integrated-governance-lead-igl" target="_blank" rel="noopener">Integrated Governance Lead (IGL)</a></strong></td><td>Your named contact for domain-specific guidance: which registration path applies, whether a use case triggers heightened review. Start here.</td></tr>
+        <tr><td><strong><a href="https://w3.ibm.com/ibm/askintegrity/" target="_blank" rel="noopener">AskIntegrity</a></strong></td><td>Entry point into IBM's Integrated Governance Program. Answers compliance questions and can kick off IGMS registration directly.</td></tr>
+        <tr><td><strong><a href="https://w3.ibm.com/w3publisher/trust-compliance/integrated-governance-program" target="_blank" rel="noopener">Integrated Governance Program (IGP)</a></strong></td><td>Umbrella body, overseen by the Privacy, Data, and AI Center of Excellence, that runs IGMS and routes assessments.</td></tr>
+        <tr><td><strong><a href="https://w3.ibm.com/w3publisher/rci-resource-center/igp/igms-assessments#rta" target="_blank" rel="noopener">Responsible Technology Assessment (RTA)</a></strong></td><td>How AI systems are assessed. Ethical or regulatory triggers can route a use case to deeper review.</td></tr>
+        <tr><td><strong><a href="https://w3.ibm.com/w3publisher/responsible-technology/responsible-technology-board" target="_blank" rel="noopener">Responsible Technology Board</a></strong></td><td>Owns IBM's AI governance principles and policies; some RTA-triggered cases go here.</td></tr>
+        <tr><td><strong><a href="https://www.ibm.com/docs/en/cpod?topic=internaldocs/4c_aibaseline/1_reqs.html" target="_blank" rel="noopener">Enterprise AI Baseline</a></strong></td><td>Defines the minimum required actions for teams that develop, modify, deploy, or market AI.</td></tr>
+        <tr><td><strong><a href="https://w3.ibm.com/w3publisher/finance-operations/ai" target="_blank" rel="noopener">EverydAI</a></strong></td><td>IBM's enablement hub, for building your own fluency with the tools.</td></tr>
+      </tbody>
+    </table>
+    <p class="prose" style="font-size:.85rem;">All of it operationalizes IBM's <a href="https://www.ibm.com/trust/responsible-ai" target="_blank" rel="noopener">pillars of trustworthy AI</a>: explainability, fairness, robustness, transparency, and privacy.</p>
   <div class="visual-wrap">
   <svg viewBox="0 0 700 250" role="img" aria-label="Process flow: what happens after you register">
     <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">What happens after you register</text>
@@ -638,7 +659,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <text x="484" y="89" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Checks regulatory and ethical</text>
     <text x="484" y="100" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">risk triggers.</text>
     <line x1="520" y1="104" x2="260" y2="158" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
-    <text x="360" y="128" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">No triggers</text>
+    <text x="400" y="117" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">No triggers</text>
     <line x1="590" y1="104" x2="590" y2="156" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
     <text x="598" y="134" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Triggers</text>
     <rect x="60" y="160" width="330" height="62" rx="5" fill="#defbe6" stroke="#24a148"/>
@@ -655,19 +676,14 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   </div>
 
 
-  <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin:1.75rem 0 .5rem;">Where to go for help</div>
-  <div class="help-list">
-    <div class="help-row">
-      <div class="help-q">Domain-specific questions</div>
-      <div class="help-a">Which path applies, whether a use case triggers review: your <a href="https://w3.ibm.com/ibm/privacy/contact/integrated-governance-lead-igl" target="_blank" rel="noopener">Integrated Governance Lead (IGL)</a> — the named person for your business unit for privacy, data, AI, and ethics guidance.</div>
-    </div>
-    <div class="help-row">
-      <div class="help-q">Compliance questions</div>
-      <div class="help-a"><a href="https://w3.ibm.com/ibm/askintegrity/" target="_blank" rel="noopener">AskIntegrity</a> — entry point into IBM's Integrated Governance Program. Gives role-relevant guidance and can kick off IGMS registration directly.</div>
-    </div>
-    <div class="help-row">
-      <div class="help-q">Build your own fluency</div>
-      <div class="help-a"><a href="https://w3.ibm.com/w3publisher/finance-operations/ai" target="_blank" rel="noopener">EverydAI</a> — IBM's AI enablement hub.</div>
+
+
+
+  <div class="escalation-box">
+    <div class="escalation-label">&#9679; Where to go for help</div>
+    <div class="escalation-body">
+      <div style="margin-bottom:.5rem;"><strong>Domain-specific questions</strong> (which path applies, whether a use case triggers review): your Integrated Governance Lead.</div>
+      <div><strong>Compliance questions:</strong> AskIntegrity.</div>
     </div>
   </div>
 </div>
