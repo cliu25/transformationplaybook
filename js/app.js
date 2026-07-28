@@ -21,7 +21,8 @@ let currentRoute = '/overview';
 let openAccordions = {};
 let activeWorkflowTab = 'engage';
 let selectedModule = 'modules-overview';
-let selectedCaseStudyPhase = 0; // Track which phase is currently displayed
+let selectedCaseStudyPhase = -1; // -1 = overview, 0-5 = step index
+let selectedLibraryStep = 'assess'; // default to Step 1
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async () => {
@@ -85,248 +86,400 @@ function initializeApp() {
 // SEARCH FUNCTIONALITY
 // ============================================================================
 
+// Search state
+let searchKeyboardIndex = -1;
+let searchQueryHistory = [];
+
 function initializeSearch() {
     const searchInput = document.getElementById('search-input');
     const searchResults = document.getElementById('search-results');
-    
+
     if (!searchInput || !searchResults) return;
-    
+
+    // Load history from localStorage
+    try {
+        searchQueryHistory = JSON.parse(localStorage.getItem('aift-search-history') || '[]');
+    } catch(e) { searchQueryHistory = []; }
+
     let searchTimeout;
-    
+
     searchInput.addEventListener('input', (e) => {
         clearTimeout(searchTimeout);
         const query = e.target.value.trim();
-        
+
         if (query.length < 2) {
             searchResults.classList.remove('active');
+            searchKeyboardIndex = -1;
             return;
         }
-        
+
         searchTimeout = setTimeout(() => {
             performSearch(query);
         }, 300);
     });
-    
-    // Close search results when clicking outside
-    document.addEventListener('click', (e) => {
-        // Don't close if clicking on a search result item
-        if (e.target.closest('.search-result-item')) {
-            return;
-        }
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.classList.remove('active');
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', (e) => {
+        const list = document.getElementById('search-results-list');
+        const items = list ? list.querySelectorAll('.search-result-item') : [];
+
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                searchKeyboardIndex = Math.min(searchKeyboardIndex + 1, items.length - 1);
+                updateKeyboardSelection(items);
+                break;
+            case 'ArrowUp':
+                e.preventDefault();
+                searchKeyboardIndex = Math.max(searchKeyboardIndex - 1, 0);
+                updateKeyboardSelection(items);
+                break;
+            case 'Enter':
+                e.preventDefault();
+                if (searchKeyboardIndex >= 0 && window.searchResultsData && window.searchResultsData[searchKeyboardIndex]) {
+                    saveSearchQuery(searchInput.value.trim());
+                    window.searchResultsData[searchKeyboardIndex].action();
+                    searchResults.classList.remove('active');
+                    searchKeyboardIndex = -1;
+                }
+                break;
+            case 'Escape':
+                e.preventDefault();
+                searchResults.classList.remove('active');
+                searchKeyboardIndex = -1;
+                break;
         }
     });
-    
-    // Handle clicks on search results using event delegation
+
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            searchResults.classList.remove('active');
+            searchKeyboardIndex = -1;
+        }
+    });
+
+    // Clicks inside results panel — filters, result items, history items
     searchResults.addEventListener('click', (e) => {
+        // Filter button
+        const filterBtn = e.target.closest('.search-filter-btn');
+        if (filterBtn) {
+            const group = filterBtn.closest('.search-filter-group');
+            group.querySelectorAll('.search-filter-btn').forEach(b => b.classList.remove('active'));
+            filterBtn.classList.add('active');
+            const query = searchInput.value.trim();
+            if (query.length >= 2) performSearch(query);
+            return;
+        }
+
+        // Result item
         const resultItem = e.target.closest('.search-result-item');
         if (resultItem) {
             const index = parseInt(resultItem.dataset.resultIndex);
             if (window.searchResultsData && window.searchResultsData[index]) {
+                saveSearchQuery(searchInput.value.trim());
                 window.searchResultsData[index].action();
                 searchResults.classList.remove('active');
+                searchKeyboardIndex = -1;
             }
+            return;
+        }
+
+        // History item
+        const historyItem = e.target.closest('.search-history-item');
+        if (historyItem) {
+            const q = historyItem.dataset.query;
+            searchInput.value = q;
+            performSearch(q);
         }
     });
-    
-    // Reopen results when clicking on input if there's a query
+
+    // Show history on focus when input is empty
     searchInput.addEventListener('focus', () => {
-        if (searchInput.value.trim().length >= 2) {
-            performSearch(searchInput.value.trim());
+        const query = searchInput.value.trim();
+        if (query.length >= 2) {
+            performSearch(query);
+        } else if (query.length === 0 && searchQueryHistory.length > 0) {
+            showSearchHistory();
         }
     });
+}
+
+function getActiveFilters() {
+    const phaseBtn = document.querySelector('.search-filter-btn.active[data-filter-type="phase"]');
+    const contentBtn = document.querySelector('.search-filter-btn.active[data-filter-type="content"]');
+    return {
+        phase: phaseBtn ? phaseBtn.dataset.filterValue : 'all',
+        content: contentBtn ? contentBtn.dataset.filterValue : 'all'
+    };
 }
 
 function performSearch(query) {
     const results = [];
     const queryLower = query.toLowerCase();
-    
-    // Search in workflow steps (endToEndWorkflow structure)
-    if (content.endToEndWorkflow && content.endToEndWorkflow.phaseGroups) {
-        content.endToEndWorkflow.phaseGroups.forEach(phaseGroup => {
-            phaseGroup.steps.forEach(step => {
-                const matches = [];
-                
-                if (step.name && step.name.toLowerCase().includes(queryLower)) {
-                    matches.push({ field: 'title', text: step.name });
-                }
-                if (step.briefDescription && step.briefDescription.toLowerCase().includes(queryLower)) {
-                    matches.push({ field: 'description', text: step.briefDescription });
-                }
-                if (step.idealTimespan && step.idealTimespan.toLowerCase().includes(queryLower)) {
-                    matches.push({ field: 'timespan', text: step.idealTimespan });
-                }
-                
-                // Search in key activities
-                if (step.keyActivities) {
-                    step.keyActivities.forEach(activity => {
-                        if (activity.title && activity.title.toLowerCase().includes(queryLower)) {
-                            matches.push({ field: 'activity', text: activity.title });
-                        }
-                        if (activity.description && activity.description.toLowerCase().includes(queryLower)) {
-                            matches.push({ field: 'activity', text: activity.description });
-                        }
-                    });
-                }
-                
-                if (matches.length > 0) {
-                    results.push({
-                        type: 'workflow',
-                        title: step.name,
-                        path: `End-to-End Workflow > ${phaseGroup.name}`,
-                        matches: matches,
-                        action: () => {
-                            currentRoute = '/workflow';
-                            activeWorkflowTab = phaseGroup.id.toLowerCase();
-                            renderNavigation();
-                            renderWorkflowPage();
-                            document.getElementById('search-results').classList.remove('active');
-                        }
-                    });
-                }
-            });
-        });
-    }
-    
-    // Search in modules
+    const filters = getActiveFilters();
+
+    // Search in modules only (no End-to-End Workflow)
     const modulesArray = content.modules && content.modules.chapters ? content.modules.chapters : [];
     modulesArray.forEach(module => {
         module.phaseSections.forEach(section => {
+            // Real field names in v14 content: stepName, description, stepSubtext, phaseGroup, stepId
+            const title = section.stepName || null;
+            if (!title) return;
+
+            const phaseGroup = (section.phaseGroup || '').toLowerCase();
+            if (filters.phase !== 'all' && phaseGroup !== filters.phase) return;
+            if (filters.content !== 'all' && filters.content !== 'module') return;
+
             const matches = [];
-            
-            if (section.stepTitle && section.stepTitle.toLowerCase().includes(queryLower)) {
-                matches.push({ field: 'title', text: section.stepTitle });
-            }
-            if (section.stepSubtext && section.stepSubtext.toLowerCase().includes(queryLower)) {
-                matches.push({ field: 'subtext', text: section.stepSubtext });
-            }
-            if (section.briefDescription && section.briefDescription.toLowerCase().includes(queryLower)) {
-                matches.push({ field: 'description', text: section.briefDescription });
-            }
-            
-            // Search in actions
+
+            const searchableFields = [
+                { field: 'title',    text: section.stepName },
+                { field: 'subtext',  text: section.stepSubtext },
+                { field: 'description', text: section.description },
+                { field: 'relevance', text: section.relevance },
+            ];
+
+            searchableFields.forEach(({ field, text }) => {
+                if (text && text.toLowerCase().includes(queryLower)) {
+                    matches.push({ field, text });
+                }
+            });
+
+            // Search inside actions
             if (section.actions) {
                 section.actions.forEach(action => {
-                    if (typeof action === 'string') {
-                        if (action.toLowerCase().includes(queryLower)) {
-                            matches.push({ field: 'action', text: action });
-                        }
-                    } else if (action.description) {
-                        if (action.description.toLowerCase().includes(queryLower)) {
-                            matches.push({ field: 'action', text: action.description });
-                        }
+                    const actionText = typeof action === 'string' ? action : ((action.title ? action.title + ' ' : '') + (action.description || ''));
+                    if (actionText && actionText.toLowerCase().includes(queryLower)) {
+                        matches.push({ field: 'action', text: actionText });
                     }
                 });
             }
-            
+
+            // Search inside artifact titles and descriptions
+            if (section.artifacts) {
+                section.artifacts.forEach(artifact => {
+                    const artText = (artifact.title || '') + ' ' + (artifact.description || '');
+                    if (artText.toLowerCase().includes(queryLower)) {
+                        matches.push({ field: 'artifact', text: artifact.title });
+                    }
+                });
+            }
+
+            // Search inside checklist items
+            if (section.checklist) {
+                section.checklist.forEach(item => {
+                    if (typeof item === 'string' && item.toLowerCase().includes(queryLower)) {
+                        matches.push({ field: 'checklist', text: item });
+                    }
+                });
+            }
+
             if (matches.length > 0) {
                 results.push({
-                    type: 'module',
-                    title: section.stepTitle || section.phaseId,
-                    path: `Key Challenges > ${module.title}`,
+                    contentType: 'module',
+                    phase: phaseGroup || null,
+                    title: title,
+                    description: section.description || section.stepSubtext || matches[0].text,
+                    path: `Deep Dives › ${module.title}`,
                     matches: matches,
                     action: () => {
                         currentRoute = '/modules';
                         selectedModule = module.id;
                         renderNavigation();
-                        renderModulesPage();
                         document.getElementById('search-results').classList.remove('active');
-                        
-                        // Scroll to the section
-                        setTimeout(() => {
-                            const sectionElement = document.querySelector(`[data-phase-id="${section.phaseId}"]`);
-                            if (sectionElement) {
-                                sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                            }
-                        }, 100);
+                        renderModulesPage().then(() => {
+                            // renderModulesPage is async — wait for content to paint
+                            requestAnimationFrame(() => {
+                                const sectionEl = document.getElementById(`section-${section.stepId}`);
+                                if (sectionEl) {
+                                    sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                }
+                                highlightPageText(query);
+                            });
+                        });
                     }
                 });
             }
         });
     });
-    
+
     // Search in case study
     content.caseStudy.phases.forEach((phase, index) => {
+        if (!phase.phaseName) return;
+
+        if (filters.content !== 'all' && filters.content !== 'case-study') return;
+
+        const phaseGroup = (phase.phaseGroupId || phase.phaseGroup || '').toLowerCase();
+        if (filters.phase !== 'all' && phaseGroup !== filters.phase) return;
+
         const matches = [];
-        
-        if (phase.phaseName && phase.phaseName.toLowerCase().includes(queryLower)) {
-            matches.push({ field: 'title', text: phase.phaseName });
+
+        const searchableFields = [
+            { field: 'title',   text: phase.phaseName },
+            { field: 'summary', text: phase.summary },
+            { field: 'mindset', text: phase.mindset },
+        ];
+
+        searchableFields.forEach(({ field, text }) => {
+            if (text && text.toLowerCase().includes(queryLower)) {
+                matches.push({ field, text });
+            }
+        });
+
+        if (phase.keyActions) {
+            phase.keyActions.forEach(action => {
+                if (typeof action === 'string' && action.toLowerCase().includes(queryLower)) {
+                    matches.push({ field: 'keyAction', text: action });
+                }
+            });
         }
-        if (phase.summary && phase.summary.toLowerCase().includes(queryLower)) {
-            matches.push({ field: 'summary', text: phase.summary });
-        }
-        if (phase.mindset && phase.mindset.toLowerCase().includes(queryLower)) {
-            matches.push({ field: 'mindset', text: phase.mindset });
-        }
-        
+
         if (matches.length > 0) {
             results.push({
-                type: 'case-study',
+                contentType: 'case-study',
+                phase: phaseGroup || null,
                 title: phase.phaseName,
+                description: phase.summary || matches[0].text,
                 path: 'Case Study',
                 matches: matches,
                 action: () => {
                     currentRoute = '/case-study';
-                    selectedCaseStudyPhase = index;
+                    // Map case study phase index to new 6-step order (insert stub at index 1)
+                    selectedCaseStudyPhase = index >= 1 ? index + 1 : index;
                     renderNavigation();
                     renderCaseStudyPage();
                     document.getElementById('search-results').classList.remove('active');
+                    setTimeout(() => { highlightPageText(query); }, 150);
                 }
             });
         }
     });
-    
+
     displaySearchResults(results, query);
 }
 
 function displaySearchResults(results, query) {
+    const searchResultsList = document.getElementById('search-results-list');
     const searchResults = document.getElementById('search-results');
-    
+    const historyEl = document.getElementById('search-history');
+
+    if (!searchResultsList) return;
+    if (historyEl) historyEl.style.display = 'none';
+
     if (results.length === 0) {
-        searchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+        searchResultsList.innerHTML = '<div class="search-no-results">No results found</div>';
         searchResults.classList.add('active');
+        searchKeyboardIndex = -1;
+        window.searchResultsData = [];
         return;
     }
-    
-    const html = results.slice(0, 10).map((result, index) => {
-        const firstMatch = result.matches[0];
-        const contextText = highlightText(firstMatch.text, query);
-        
+
+    const shown = results.slice(0, 10);
+    const html = shown.map((result, index) => {
+        const desc = result.description || result.matches[0].text || '';
+        const contextText = highlightText(desc, query);
+        const typeLabels = { 'module': 'Deep Dive', 'case-study': 'Case Study' };
+        const typeLabel = typeLabels[result.contentType] || result.contentType;
+        const typeBadge = `<span class="search-badge type-${result.contentType}">${typeLabel}</span>`;
+        const phaseBadge = result.phase ? `<span class="search-badge phase-${result.phase}">${result.phase}</span>` : '';
+
         return `
             <div class="search-result-item" data-result-index="${index}">
-                <div class="search-result-title">${result.title}</div>
+                <div class="search-result-header">
+                    <div class="search-result-title">${result.title}</div>
+                </div>
                 <div class="search-result-context">${contextText}</div>
-                <div class="search-result-path">${result.path}</div>
+                <div class="search-result-path">${typeBadge}${phaseBadge} ${result.path}</div>
             </div>
         `;
     }).join('');
-    
-    searchResults.innerHTML = html;
+
+    searchResultsList.innerHTML = html;
     searchResults.classList.add('active');
-    
-    // Store results for click handling (event delegation is set up in initializeSearch)
-    window.searchResultsData = results;
+    searchKeyboardIndex = -1;
+    window.searchResultsData = shown;
 }
 
 function highlightText(text, query) {
+    if (!text) return '';
     const queryLower = query.toLowerCase();
     const textLower = text.toLowerCase();
-    const index = textLower.indexOf(queryLower);
-    
-    if (index === -1) return text;
-    
-    // Get context around the match (50 chars before and after)
-    const start = Math.max(0, index - 50);
-    const end = Math.min(text.length, index + query.length + 50);
-    
-    let contextText = text.substring(start, end);
-    if (start > 0) contextText = '...' + contextText;
-    if (end < text.length) contextText = contextText + '...';
-    
-    // Highlight the query
-    const regex = new RegExp(`(${query})`, 'gi');
-    return contextText.replace(regex, '<span class="search-highlight">$1</span>');
+    const idx = textLower.indexOf(queryLower);
+
+    if (idx === -1) {
+        return text.length > 120 ? text.substring(0, 120) + '...' : text;
+    }
+
+    const start = Math.max(0, idx - 50);
+    const end = Math.min(text.length, idx + query.length + 50);
+    let ctx = text.substring(start, end);
+    if (start > 0) ctx = '...' + ctx;
+    if (end < text.length) ctx += '...';
+
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return ctx.replace(regex, '<span class="search-highlight">$1</span>');
+}
+
+function highlightPageText(query) {
+    const mainContent = document.getElementById('main-content');
+    if (!mainContent || !query) return;
+
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+
+    function walkNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            if (regex.test(text)) {
+                regex.lastIndex = 0;
+                const wrapper = document.createElement('span');
+                wrapper.innerHTML = text.replace(regex, '<mark class="search-highlight">$1</mark>');
+                node.parentNode.replaceChild(wrapper, node);
+            }
+        } else if (node.nodeType === Node.ELEMENT_NODE && !['SCRIPT', 'STYLE', 'MARK'].includes(node.tagName)) {
+            Array.from(node.childNodes).forEach(walkNode);
+        }
+    }
+
+    walkNode(mainContent);
+
+    const firstMark = mainContent.querySelector('mark.search-highlight');
+    if (firstMark) {
+        firstMark.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+}
+
+function updateKeyboardSelection(items) {
+    items.forEach((item, i) => {
+        if (i === searchKeyboardIndex) {
+            item.classList.add('keyboard-selected');
+            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+            item.classList.remove('keyboard-selected');
+        }
+    });
+}
+
+function saveSearchQuery(query) {
+    if (!query || query.length < 2) return;
+    searchQueryHistory = [query, ...searchQueryHistory.filter(q => q !== query)].slice(0, 5);
+    try { localStorage.setItem('aift-search-history', JSON.stringify(searchQueryHistory)); } catch(e) {}
+}
+
+function showSearchHistory() {
+    const searchResults = document.getElementById('search-results');
+    const searchResultsList = document.getElementById('search-results-list');
+    const historyEl = document.getElementById('search-history');
+    const historyList = document.getElementById('search-history-list');
+
+    if (!historyEl || !historyList || searchQueryHistory.length === 0) return;
+
+    if (searchResultsList) searchResultsList.innerHTML = '';
+    historyList.innerHTML = searchQueryHistory
+        .map(q => `<div class="search-history-item" data-query="${q}">${q}</div>`)
+        .join('');
+    historyEl.style.display = 'block';
+    searchResults.classList.add('active');
 }
 
 function handleSearchResultClick(index) {
@@ -370,14 +523,15 @@ function navigateTo(route, pushState = true) {
         return;
     }
     
-    // Track page view
-    if (window.analytics) {
+    // Track page view (works with both old analytics.js shim and new tracking.js)
+    if (window.aiftTrack || window.analytics) {
         const pageTitle = route === '/overview' ? 'Overview' :
                          route === '/workflow' ? 'End-to-End Workflow' :
-                         route === '/modules' ? 'Challenges & Modules' :
+                         route === '/modules' ? 'How-to Deep Dives' :
                          route === '/library' ? 'Deliverables Library' :
                          route === '/case-study' ? 'Case Study' : route;
-        window.analytics.trackPageView(route, pageTitle);
+        const tracker = window.aiftTrack || window.analytics;
+        tracker.trackPageView(route, pageTitle);
     }
     
     // Render the appropriate page
@@ -700,12 +854,12 @@ function renderDeliverableCard(deliverable) {
     // Build link buttons — show both, with disabled state if no URL
     const links = [];
     if (hasExample) {
-        links.push(`<a class="deliverable-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Example ${linkIcon}</a>`);
+        links.push(`<a class="deliverable-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Example: ${deliverable.title.replace(/'/g,"\\'")}','${exampleUrl}','artifact_click')">Example ${linkIcon}</a>`);
     } else {
         links.push(`<span class="deliverable-link disabled" title="Example not yet available">Example ${disabledIcon}</span>`);
     }
     if (hasTemplate) {
-        links.push(`<a class="deliverable-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">Template ${linkIcon}</a>`);
+        links.push(`<a class="deliverable-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Template: ${deliverable.title.replace(/'/g,"\\'")}','${templateUrl}','artifact_click')">Template ${linkIcon}</a>`);
     } else {
         links.push(`<span class="deliverable-link disabled" title="Template not yet available">Template ${disabledIcon}</span>`);
     }
@@ -767,7 +921,7 @@ function renderCriticalMomentCard(moment) {
             
             ${moment.relatedModules && moment.relatedModules.length > 0 ? `
                 <div class="tag-row">
-                    <strong>Key Challenges:</strong>
+                    <strong>Deep Dives:</strong>
                     ${moment.relatedModules.map(module => `<span class="tag">${module}</span>`).join('')}
                 </div>
             ` : ''}
@@ -797,7 +951,7 @@ function scrollToAnchor(anchor) {
 
 async function renderModulesPage() {
     const main = document.getElementById('main-content');
-    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration', 'value-measurement-roi', 'adoption-change'];
+    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration', 'value-measurement-roi', 'adoption-change', 'governance-risk'];
     const hiddenChapterIds = content.modules.chapters
         .filter(chapter => !visibleChapterIds.includes(chapter.id))
         .map(chapter => chapter.id);
@@ -860,7 +1014,7 @@ async function renderModulesPage() {
             <div class="workflow-detail-panel">
                 <div class="workflow-detail-panel__header">
                     <p class="workflow-detail-panel__meta">${activeSection.meta}</p>
-                    <h2>${activeSection.title}${['systems-integration', 'value-measurement-roi', 'adoption-change'].includes(activeSection.id) ? ' <span style="color: #da1e28; font-weight: 600;">(UNDER CONSTRUCTION)</span>' : ''}</h2>
+                    <h2>${activeSection.title}</h2>
                     ${activeSection.description || ''}
                 </div>
                 <div class="workflow-detail-panel__body module-content" id="module-content">
@@ -885,7 +1039,7 @@ async function renderModulesPage() {
 async function renderModuleContent() {
     const container = document.getElementById('module-content');
     const module = content.modules.chapters.find(ch => ch.id === selectedModule);
-    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration', 'value-measurement-roi', 'adoption-change'];
+    const visibleChapterIds = ['prioritization-roadmap', 'systems-integration', 'value-measurement-roi', 'adoption-change', 'governance-risk'];
 
     if (!container || !module) return;
 
@@ -1035,7 +1189,7 @@ async function renderModuleDetail(module) {
     if (!module) return '';
 
     // Check if this is the Prioritization & Roadmap, Value Measurement & ROI, Systems Integration, or Adoption & Change module - load standalone HTML
-    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change') {
+    if (module.id === 'prioritization-roadmap' || module.id === 'value-measurement-roi' || module.id === 'systems-integration' || module.id === 'adoption-change' || module.id === 'governance-risk') {
         try {
             // Determine which HTML file to load
             const htmlFile = module.id === 'prioritization-roadmap'
@@ -1044,6 +1198,8 @@ async function renderModuleDetail(module) {
                 ? 'value-measurement-roi-narrative.html'
                 : module.id === 'systems-integration'
                 ? 'systems-integration-narrative.html'
+                : module.id === 'governance-risk'
+                ? 'governance-risk-narrative.html'
                 : 'adoption-change-narrative.html';
             const response = await fetch(htmlFile + '?v=' + Date.now());
             if (!response.ok) throw new Error(`Failed to load ${htmlFile}`);
@@ -1237,7 +1393,7 @@ async function renderModuleDetail(module) {
 
                                             return `
                                             <!-- Step Heading Panel -->
-                                            <div class="panel">
+                                            <div class="panel" id="section-${section.stepId}">
                                                 <h3>${section.stepName || section.title || ''}</h3>
                                                 ${section.stepSubtext ? `<p class="step-subtext">${section.stepSubtext}</p>` : ''}
                                                 ${section.description ? `<p class="step-description">${section.description}</p>` : ''}
@@ -1435,13 +1591,112 @@ function getModuleRelatedSteps(moduleId) {
 
 function renderLibraryPage() {
     const main = document.getElementById('main-content');
-    
+
+    // Canonical 6-step model
+    const steps = [
+        { id: 'assess',  num: 1, label: 'Tech & Data Foundations Assessment', phaseGroup: 'Engage',   color: '#0f62fe' },
+        { id: 'map',     num: 2, label: 'Business Process Mapping',            phaseGroup: 'Engage',   color: '#0f62fe' },
+        { id: 'design',  num: 3, label: 'Solution Design',                     phaseGroup: 'Discover', color: '#8a3ffc' },
+        { id: 'analyze', num: 4, label: 'Solution Design',                     phaseGroup: 'Discover', color: '#8a3ffc' },
+        { id: 'build',   num: 5, label: 'Build',                               phaseGroup: 'Execute',  color: '#24a148' },
+        { id: 'sustain', num: 6, label: 'Scale & Sustain',                     phaseGroup: 'Execute',  color: '#24a148' },
+    ];
+
+    // Artifact list from Deliverable Library(MASTER) CSV
+    const libraryArtifacts = {
+        assess: [
+            { title: 'Current State Processes',               description: 'Captures the domain\'s people (personas), process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa' },
+            { title: 'Technology & Data Readiness Checklist', description: 'Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a mechanism to determine foundational challenges to address before or during solution planning and execution.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699' },
+            { title: 'Opportunity Sizing',                    description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQD0dcK64H2TRLWnnkJ-mauPAZM_N3RX7ggd3h9W-O40gjg?e=dEu7nm' },
+        ],
+        map: [
+            { title: 'Business Process Map(s)',               description: 'Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.', exampleUrl: 'https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984', templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk' },
+            { title: 'RACI Matrix',                           description: 'Aligns who owns what throughout the scope of a project.', exampleUrl: '', templateUrl: 'https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u' },
+            { title: 'RAID Log',                              description: 'Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.', exampleUrl: '', templateUrl: '' },
+            { title: 'Project Plan',                          description: 'A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can\'t complete it, you\'re not ready to start.', exampleUrl: 'https://ibm.box.com/s/2ryvfmucrpobe9rd6hjvbklts39nxvfp', templateUrl: 'https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8' },
+            { title: 'Prioritization Matrix',                 description: 'Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.', exampleUrl: 'https://ibm.box.com/s/39ul2emcnloib0optj35z02ubgoldddj', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=552rrQ' },
+        ],
+        design: [
+            { title: 'Business Requirements Log',             description: 'The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.', exampleUrl: 'https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=rBkhCW' },
+            { title: 'Business Case Template',                description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Supports build vs. make decision.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv' },
+            { title: 'Future State Workflow Process Map',     description: 'A user-perspective future-state journey: how the person\'s work changes, where AI enters, and where the human stays in the loop.', exampleUrl: '', templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk' },
+        ],
+        analyze: [
+            { title: 'Strategic Roadmap',                     description: 'The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.', exampleUrl: 'https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8', templateUrl: 'https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej' },
+            { title: 'Build vs. Buy',                         description: 'Documents the decision framework and rationale for whether to build a custom solution or procure an existing product.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQA1wQK4UT2nRa8c4zqc_5ReAa-YQ5NS8XDaBFTeYhUIp00?e=HaSObe', templateUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQD23K6rqBsZRIrXdDZLRilHAZ-ZCREA8DlKaTrpTFNYFyY?e=eA88xg' },
+            { title: 'Change Management Plan',                description: 'Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end. Includes support and maintenance, scaling recs, and governance.', exampleUrl: 'https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0', templateUrl: '' },
+        ],
+        build: [
+            { title: 'SteerCo Charter',                       description: 'Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.', exampleUrl: '', templateUrl: 'https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8' },
+            { title: 'Defect Tracker',                        description: 'Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every steering meeting.', exampleUrl: 'https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman', templateUrl: '' },
+            { title: 'ROI Analysis',                          description: 'A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT' },
+            { title: 'KPI Dashboard',                         description: 'Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
+        ],
+        sustain: [
+            { title: 'Operational Health Dashboard',          description: 'A reference dashboard for adoption, usage, value realization, operational performance, and support health.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
+        ],
+    };
+
+    const activeStep = steps.find(s => s.id === selectedLibraryStep) || steps[0];
+    selectedLibraryStep = activeStep.id;
+    const items = libraryArtifacts[activeStep.id] || [];
+
+    // Build detail content for active step
+    const cardsHtml = items.length
+        ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;">
+            ${items.map(a => {
+                const exampleUrl = (a.exampleUrl || '').trim();
+                const templateUrl = (a.templateUrl || '').trim();
+                const exampleLink = exampleUrl
+                    ? `<a class="a-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
+                    : `<span class="a-link off">↗ Example</span>`;
+                const templateLink = templateUrl
+                    ? `<a class="a-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
+                    : `<span class="a-link off">↗ Template</span>`;
+                return `<div class="artifact-card" style="display:flex;flex-direction:column;">
+                    <div class="a-title">${a.title}</div>
+                    <div class="a-desc" style="flex:1;">${a.description || ''}</div>
+                    <div class="a-links">${exampleLink}${templateLink}</div>
+                </div>`;
+            }).join('')}
+           </div>`
+        : `<p style="color:var(--text-secondary);">No artifacts defined for this step yet.</p>`;
+
     main.innerHTML = `
-        <section class="hero">
-            <h1>${content.library.title}</h1>
-            <p>Coming soon</p>
+        <section class="workflow-layout workflow-layout--with-top-offset" aria-label="Deliverables library">
+            <nav class="workflow-side-nav" aria-label="Library step navigation">
+                <ul class="workflow-side-nav__list">
+                    ${steps.map(s => `
+                        <li class="workflow-side-nav__item">
+                            <button class="workflow-side-nav__button${s.id === activeStep.id ? ' is-active' : ''}"
+                                data-lib-step="${s.id}">
+                                <span style="font-size:0.7rem;font-weight:600;color:${s.color};display:block;margin-bottom:0.1rem;text-transform:uppercase;letter-spacing:.06em;">Step ${s.num} · ${s.phaseGroup}</span>
+                                ${s.label}
+                            </button>
+                        </li>
+                    `).join('')}
+                </ul>
+            </nav>
+            <div class="workflow-detail-panel">
+                <div class="workflow-detail-panel__header">
+                    <p class="workflow-detail-panel__meta">${activeStep.phaseGroup} · Step ${activeStep.num}</p>
+                    <h2>${activeStep.label}</h2>
+                    <p class="workflow-step-description">${items.length} artifact${items.length !== 1 ? 's' : ''}</p>
+                </div>
+                <div class="workflow-detail-panel__body">
+                    ${cardsHtml}
+                </div>
+            </div>
         </section>
     `;
+
+    document.querySelectorAll('[data-lib-step]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            selectedLibraryStep = btn.dataset.libStep;
+            renderLibraryPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
 }
 
 // ============================================================================
@@ -1451,23 +1706,235 @@ function renderLibraryPage() {
 function renderCaseStudyPage() {
     const main = document.getElementById('main-content');
     const caseStudy = content.caseStudy;
-    
+
     if (!caseStudy) {
-        main.innerHTML = `
-            <section class="hero">
-                <h1>Case Study Not Found</h1>
-                <p>The case study data is not available.</p>
-            </section>
-        `;
+        main.innerHTML = `<section class="hero"><h1>Case Study Not Found</h1></section>`;
         return;
     }
-    
+
+    // The 6 canonical workflow steps in order
+    const WORKFLOW_STEPS = [
+        { id: 'assess',  num: 1, label: 'Step 1: Tech & Data Assessment',    phaseGroup: 'Engage'   },
+        { id: 'map',     num: 2, label: 'Step 2: Business Process Mapping',  phaseGroup: 'Engage'   },
+        { id: 'analyze', num: 3, label: 'Step 3: Workflow Analysis',         phaseGroup: 'Discover' },
+        { id: 'design',  num: 4, label: 'Step 4: Solution Design',           phaseGroup: 'Discover' },
+        { id: 'build',   num: 5, label: 'Step 5: Experimentation',           phaseGroup: 'Execute'  },
+        { id: 'sustain', num: 6, label: 'Step 6: Scale & Adopt',             phaseGroup: 'Execute'  },
+    ];
+
+    // Map existing phases by phaseName (lower) to their data
+    const phaseByName = {};
+    caseStudy.phases.forEach(p => { phaseByName[p.phaseName.toLowerCase()] = p; });
+
+    // Build stub for missing step2 (Business Process Mapping)
+    const stub = {
+        number: 2,
+        phaseGroup: 'Engage',
+        phaseGroupId: 'engage',
+        phaseName: 'Business Process Mapping',
+        mindset: 'We need to understand the current process before we can improve it.',
+        summary: 'The team maps the current enrollment process end-to-end — documenting handoffs, pain points, and automation opportunities — to identify exactly where AI can add the most value.',
+        keyActions: [
+            'Document the current-state enrollment workflow from application to decision',
+            'Identify manual handoffs, bottlenecks, and data gaps',
+            'Map personas and system touchpoints',
+            'Validate the process map with domain stakeholders',
+        ],
+        _stub: true
+    };
+
+    // Build ordered 6-step phase list
+    const orderedPhases = WORKFLOW_STEPS.map(step => {
+        const match = Object.values(phaseByName).find(p => {
+            const n = p.phaseName.toLowerCase();
+            return n.includes(step.id) ||
+                   (step.id === 'assess'  && n.includes('assess')) ||
+                   (step.id === 'analyze' && n.includes('analyz')) ||
+                   (step.id === 'design'  && n.includes('design')) ||
+                   (step.id === 'build'   && n.includes('build')) ||
+                   (step.id === 'sustain' && n.includes('sustain'));
+        });
+        return match ? { ...match, _stepId: step.id, _label: step.label } : { ...stub, _stepId: step.id, _label: step.label };
+    });
+
+    // Nav sections: Overview + 6 steps
+    const COLORS = { engage: '#0f62fe', discover: '#8a3ffc', execute: '#24a148' };
+
+    const navSections = [
+        { id: 'cs-overview', label: 'Overview' },
+        ...WORKFLOW_STEPS.map(s => ({ id: `cs-${s.id}`, label: s.label }))
+    ];
+
+    // Resolve selected step id (0 = overview)
+    const activeSectionId = selectedCaseStudyPhase === -1
+        ? 'cs-overview'
+        : `cs-${WORKFLOW_STEPS[Math.min(selectedCaseStudyPhase, 5)].id}`;
+
+    const activePhase = selectedCaseStudyPhase >= 0
+        ? orderedPhases[selectedCaseStudyPhase]
+        : null;
+
+    // Build phase content HTML
+    let phaseContentHtml = '';
+    if (selectedCaseStudyPhase === -1) {
+        // Overview tab content
+        phaseContentHtml = `
+            <div class="cs-overview-panel">
+                <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
+                    <p class="workflow-detail-panel__meta">Case Study</p>
+                    <h2 style="margin:0 0 0.5rem;">${caseStudy.title}</h2>
+                </div>
+                <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:1.5rem;">${caseStudy.subtitle}</p>
+                <div class="intro-grid" style="margin-bottom:1.5rem;">
+                    <div class="panel">
+                        <h3>Overview</h3>
+                        <p>${caseStudy.overview}</p>
+                    </div>
+                    <div class="panel">
+                        <h3>Cast of Characters</h3>
+                        <div class="cast">${caseStudy.keyPlayers.map(n => `<span>${n}</span>`).join('')}</div>
+                    </div>
+                </div>
+                <div class="panel" style="background:#f0f7ff;border-color:#d6e6ff;margin-bottom:1.5rem;">
+                    <h3 style="color:#0f62fe">Starting Context</h3>
+                    <p style="color:var(--text-primary)">${caseStudy.startingContext}</p>
+                </div>
+                <div class="nav-instruction">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                    ${caseStudy.navInstruction || 'Select a step from the left to follow the team\'s journey from mandate to scaled MVP.'}
+                </div>
+            </div>
+        `;
+    } else if (activePhase) {
+        phaseContentHtml = `
+            <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
+                <p class="workflow-detail-panel__meta">${activePhase.phaseGroup} · ${activePhase._label || activePhase.phaseName}</p>
+                <h2 style="margin:0 0 0.5rem;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:400;">${activePhase.phaseName}</h2>
+            </div>
+            <section class="hero" style="margin: 0; max-width: none; padding: 0;">
+                <p style="margin: 0; text-align: left;">Coming soon</p>
+            </section>
+        `;
+    }
+
     main.innerHTML = `
-        <section class="hero">
-            <h1>${caseStudy.title}</h1>
-            <p>Coming soon</p>
+        <section class="workflow-layout workflow-layout--with-top-offset" aria-label="Case study content">
+            <nav class="workflow-side-nav" aria-label="Case study step navigation">
+                <ul class="workflow-side-nav__list">
+                    ${navSections.map(s => `
+                        <li class="workflow-side-nav__item">
+                            <button class="workflow-side-nav__button${s.id === activeSectionId ? ' is-active' : ''}"
+                                data-cs-section="${s.id}">
+                                ${s.label}
+                            </button>
+                        </li>
+                    `).join('')}
+                </ul>
+            </nav>
+            <div class="workflow-detail-panel">
+                <div id="cs-detail-content">
+                    ${phaseContentHtml}
+                </div>
+            </div>
         </section>
     `;
+
+    // Wire up nav buttons
+    document.querySelectorAll('[data-cs-section]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const id = btn.dataset.csSection;
+            if (id === 'cs-overview') {
+                selectedCaseStudyPhase = -1;
+            } else {
+                const stepId = id.replace('cs-', '');
+                selectedCaseStudyPhase = WORKFLOW_STEPS.findIndex(s => s.id === stepId);
+            }
+            renderCaseStudyPage();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+}
+
+function renderCaseStudyPhaseHtml(phase, COLORS) {
+    const c = COLORS[phase.phaseGroupId] || '#0f62fe';
+    const fileIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>';
+    const checkIcon = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>';
+
+    let html = `
+        <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
+            <p class="workflow-detail-panel__meta">${phase.phaseGroup} · ${phase._label || phase.phaseName}</p>
+            <h2 style="margin:0 0 0.5rem;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:400;">${phase.phaseName}</h2>
+            ${phase._stub ? `<p style="color:#da1e28;font-size:0.8125rem;font-weight:600;">⚠ Content placeholder — this step will be filled out as the case study is developed.</p>` : ''}
+            <p style="margin:0;font-size:0.9375rem;color:var(--text-secondary);line-height:1.6;font-style:italic;">"${phase.mindset}"</p>
+        </div>
+        <div class="panel" style="margin-bottom:1rem;">
+            <p>${phase.summary}</p>
+        </div>
+    `;
+
+    if (phase.keyActions && phase.keyActions.length) {
+        html += `
+            <div class="block">
+                <div class="sec-label">Key Actions</div>
+                <ol class="actions">${phase.keyActions.map(a => `<li>${a}</li>`).join('')}</ol>
+            </div>`;
+    }
+
+    if (phase.comparison) {
+        html += `<div class="block"><div class="sec-label">Comparing the candidates</div><div class="chips">`;
+        html += phase.comparison.map(w => `<span class="chip">${w.workflow} · ${w.pain}</span>`).join('');
+        html += `</div>`;
+        if (phase.mvpDecision) html += `<div style="margin-top:14px;padding:14px 16px;border:1px solid ${c};background:#faf7ff;border-radius:9px"><strong style="color:${c}">Decision:</strong> ${phase.mvpDecision}. <span style="color:var(--text-secondary)">${phase.mvpRationale}</span></div>`;
+        html += `</div>`;
+    }
+
+    if (phase.metrics) {
+        const keys = Object.keys(phase.metrics.baseline);
+        html += `<div class="block"><div class="sec-label">Baseline → Target</div><div class="metrics">
+            <div class="metric-row head"><div>Measure</div><div>Baseline</div><div>Target</div></div>
+            ${keys.map(k => `<div class="metric-row"><div>${k.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase())}</div><div class="b4">${phase.metrics.baseline[k]}</div><div class="af">${phase.metrics.target[k]}</div></div>`).join('')}
+        </div></div>`;
+    }
+
+    if (phase.documents && phase.documents.length) {
+        const linkIcon = '<svg width="13" height="13" viewBox="0 0 16 16" fill="#0f62fe"><path d="M13 3v6h-1V4.707L6.854 9.854l-.708-.708L11.293 4H7V3h6zM4 5v8h8v-3h1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3v1H4z"/></svg>';
+        html += `<div class="block"><div class="sec-label">Documents created this step</div><div class="docs">
+            ${phase.documents.map(d => {
+                const ex = (d.exampleUrl && d.exampleUrl.trim()) || '';
+                const tm = (d.templateUrl && d.templateUrl.trim()) || (d.file && d.file.trim()) || '';
+                const links = [];
+                if (ex) links.push(`<a class="doc-link" href="${ex}" target="_blank" rel="noopener">Example ${linkIcon}</a>`);
+                if (tm) links.push(`<a class="doc-link" href="${tm}" target="_blank" rel="noopener">Template ${linkIcon}</a>`);
+                return `<div class="doc"><span class="doc-ic">${fileIcon}</span><span class="doc-body"><span class="doc-name">${d.name}</span>${links.length ? `<span class="doc-links">${links.join('')}</span>` : ''}</span></div>`;
+            }).join('')}
+        </div></div>`;
+    }
+
+    if (phase.operatingRhythm) {
+        html += `<div class="block"><div class="sec-label">Operating rhythm</div><div class="rhythm">${phase.operatingRhythm.map(r => `<div class="r"><span class="dot"></span>${r}</div>`).join('')}</div></div>`;
+    }
+
+    if (phase.sideways && phase.sideways.length) {
+        html += `<div class="block"><div class="sec-label">What went sideways</div>`;
+        html += phase.sideways.map(s => `<div class="sideways">
+            <div class="sw-head"><span class="sw-ic">⚠️</span><span class="sw-t">Real friction the team hit</span></div>
+            <div class="sw-body">
+                <div class="sw-cell"><h5>What happened</h5><p>${s.issue}</p></div>
+                <div class="sw-cell"><h5>How they handled it</h5><p>${s.howHandled}</p></div>
+            </div>
+        </div>`).join('');
+        html += `</div>`;
+    }
+
+    if (phase.evidence && phase.evidence.length) {
+        html += `<div class="block"><div class="sec-label">Evidence it worked</div><div class="evidence">${phase.evidence.map(e => `<div class="ev">${checkIcon}<span>${e}</span></div>`).join('')}</div></div>`;
+    }
+
+    if (phase.takeaways && phase.takeaways.length) {
+        html += `<div class="block" style="margin-bottom:0"><div class="sec-label">What to take away</div><ul class="takeaways">${phase.takeaways.map(t => `<li>${t}</li>`).join('')}</ul></div>`;
+    }
+
+    return html;
 }
 
 async function renderCaseStudyPhaseContent() {

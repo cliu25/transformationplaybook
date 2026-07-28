@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Value Measurement &amp; ROI (Under construction): How-to Deep Dive</title>
+<title>Value Measurement &amp; ROI: How-to Deep Dive</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -703,5 +703,12 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
 })();
 </script>
+<script src="js/tracking-config.js"></script>
+    <script src="js/tracking-secrets.js"></script>
+<script src="js/tracking.js"></script>
+<script>
+if(window.aiftTrack)window.aiftTrack.pageView('value-measurement-roi-narrative','Value Measurement & ROI Deep Dive');
+</script>
+<script src="js/feedback.js"></script>
 </body>
 </html>

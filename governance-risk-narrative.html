@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Governance &amp; Risk: How-to Deep Dive</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
+  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
+  --orange:#ff832b; --orange-dk:#b35a00; --orange-fill:#fff2e8;
+  --amber:#ba7517; --amber-dk:#633806; --amber-fill:#fdf4e3;
+  --red:#da1e28; --red-dk:#a32d2d; --red-fill:#fff1f1;
+  --teal:#009d9a; --teal-dk:#005d5d; --teal-fill:#d9fbfb;
+  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
+  --border:#e0e0e0; --layer:#f4f4f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;font-size:16px;}
+.page{max-width:780px;margin:0 auto;padding:0 1.5rem 6rem;}
+.module-header{padding:3rem 0 2rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem;}
+.module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--orange);padding-left:1.25rem;}
+.where-strip{display:flex;align-items:center;gap:.5rem;padding:.875rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2rem;flex-wrap:wrap;}
+.where-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.phase-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--text-3);background:#fff;}
+.phase-pip.pip-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.phase-pip.pip-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.phase-pip.pip-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pip-sep{color:var(--border);font-size:.8rem;}
+.phase-section{padding:3rem 0;border-top:1px solid var(--border);}
+.phase-label{display:flex;align-items:center;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.phase-tag{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;}
+.tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
+.tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
+.tag-execute{background:var(--green-fill);color:var(--green-dk);}
+.phase-step-context{font-size:.8rem;color:var(--text-3);font-style:italic;}
+.challenge-pip{padding:.3rem .875rem;border-radius:3px;font-size:.8rem;font-weight:600;background:#fff;border:1.5px solid var(--orange);color:var(--orange-dk);}
+.sub-phase{margin:2.5rem 0 0;}
+.sub-phase-label{display:flex;align-items:center;gap:.625rem;margin-bottom:1.125rem;}
+.sub-phase-number{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);background:var(--layer);border:1px solid var(--border);padding:.2rem .5rem;border-radius:2px;}
+.sub-phase h3{font-size:1.125rem;font-weight:600;color:var(--text);margin:0;}
+.phase-section h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:1.25rem;}
+.prose{font-size:1rem;line-height:1.8;color:var(--text-2);margin-bottom:1.25rem;}
+.prose-list{margin:0 0 1.25rem 1.25rem;padding:0;color:var(--text-2);font-size:.9375rem;line-height:1.7;}
+.prose-list li{margin-bottom:.5rem;}
+.prose strong{color:var(--text);font-weight:600;}
+.who-block{padding:1rem 1.25rem;background:var(--blue-fill);border-left:4px solid var(--blue);border-radius:0 4px 4px 0;margin-bottom:1.75rem;}
+.who-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-dk);margin-bottom:.5rem;}
+.who-roles{display:flex;flex-wrap:wrap;gap:.375rem;}
+.who-role{font-size:.8rem;font-weight:500;padding:.25rem .625rem;background:#fff;border:1px solid var(--blue);border-radius:3px;color:var(--blue-dk);}
+.painpoint{margin:1.75rem 0;padding:1.125rem 1.375rem;border-left:3px solid var(--amber);background:var(--amber-fill);border-radius:0 4px 4px 0;}
+.painpoint-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-title{font-size:.9rem;font-weight:600;color:var(--amber-dk);margin-bottom:.375rem;}
+.painpoint-body{font-size:.875rem;line-height:1.65;color:#5a3e00;}
+.artifact-section{margin:1.75rem 0;}
+.artifact-section-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.75rem;}
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;}
+.artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
+.artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
+.artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;}
+.a-link{font-size:.78rem;color:var(--blue);text-decoration:none;font-weight:500;}
+.a-link:hover{text-decoration:underline;}
+.a-link.off{color:var(--text-3);opacity:.5;cursor:not-allowed;pointer-events:none;}
+.visual-wrap{margin:1.75rem 0;background:var(--layer);border-radius:6px;padding:1.375rem 1.5rem;overflow-x:auto;}
+.visual-caption{font-size:.8rem;color:var(--text-3);margin-top:.75rem;line-height:1.45;}
+.steps-summary{margin:1.75rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.step-row{display:grid;grid-template-columns:2.25rem 1fr;border-bottom:1px solid var(--border);}
+.step-row:last-child{border-bottom:none;}
+.step-row.title-row{grid-template-columns:1fr;background:var(--layer);}
+.step-row.title-row .step-title{padding:.625rem 1rem;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);}
+.step-num{display:flex;align-items:flex-start;justify-content:center;font-size:.75rem;font-weight:700;color:var(--orange);background:var(--orange-fill);padding:.875rem .25rem 0;}
+.step-text{padding:.875rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.step-text strong{color:var(--text);font-weight:600;}
+.case-study{margin:2rem 0;padding:1.375rem 1.5rem;background:var(--purple-fill);border-radius:6px;border:1px solid var(--purple);}
+.cs-eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;}
+.cs-badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--purple);color:#fff;padding:.2rem .5rem;border-radius:2px;}
+.cs-context{font-size:.8rem;font-weight:600;color:var(--purple-dk);}
+.cs-prose{font-size:.9rem;line-height:1.7;color:var(--text-2);margin-bottom:.875rem;}
+.cs-prose:last-child{margin-bottom:0;}
+.ready{display:flex;gap:1rem;align-items:flex-start;padding:1.25rem 1.5rem;background:var(--green-fill);border-left:4px solid var(--green);border-radius:0 4px 4px 0;margin-top:2.5rem;}
+.ready-icon{color:var(--green);flex-shrink:0;font-size:1.1rem;}
+.ready-body h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.3rem;}
+.ready-body p{font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.sub-divider{height:1px;background:var(--border);margin:2.5rem 0;}
+.phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
+.phase-section,.sub-phase{scroll-margin-top:4.75rem;}
+.phase-nav .pnav-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:all .12s;}
+.pnav-pill:hover{border-color:var(--text-3);color:var(--text);}
+.pnav-pill.active.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.active.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.active.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill.active.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
+.step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
+.step-glance .sg-row:first-child{border-top:none;}
+.step-glance .sg-chip{flex-shrink:0;font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:2px;margin-top:.1rem;white-space:nowrap;}
+.sg-engage{color:var(--blue-dk);background:var(--blue-fill);}
+.sg-discover{color:var(--purple-dk);background:var(--purple-fill);}
+.sg-execute{color:var(--green-dk);background:var(--green-fill);}
+.step-glance .sg-text{font-size:.85rem;color:var(--text-2);line-height:1.5;}
+.step-glance .sg-text strong{color:var(--text);}
+.tp-tag{display:block;font-size:.68rem;font-weight:600;color:var(--text-3,#8d8d8d);text-transform:uppercase;letter-spacing:.03em;margin-bottom:.2rem;}
+.key-takeaway{display:flex;gap:.75rem;align-items:flex-start;padding:1rem 1.25rem;background:#fff;border:1.5px solid var(--text);border-radius:4px;margin-bottom:1.5rem;}
+.key-takeaway .kt-icon{flex-shrink:0;font-size:1rem;line-height:1.4;}
+.key-takeaway .kt-text{font-size:.95rem;line-height:1.55;color:var(--text);font-weight:500;}
+.deep-dive{margin:1.5rem 0;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.deep-dive summary{cursor:pointer;padding:.875rem 1.25rem;background:var(--layer);font-size:.85rem;font-weight:600;color:var(--text-2);list-style:none;display:flex;align-items:center;gap:.5rem;user-select:none;}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"\25B8";display:inline-block;font-size:.7rem;color:var(--text-3);transition:transform .15s;}
+.deep-dive[open] summary::before{transform:rotate(90deg);}
+.deep-dive summary:hover{color:var(--text);}
+.deep-dive-body{padding:1.5rem 1.25rem .25rem;}
+.deep-dive-body .prose:last-of-type{margin-bottom:0;}
+.handoff{display:flex;gap:.625rem;align-items:flex-start;padding:.75rem 1rem;background:var(--teal-fill);border:1px solid var(--teal);border-radius:4px;margin:1.25rem 0;font-size:.85rem;line-height:1.5;color:var(--teal-dk);}
+.handoff .ho-tag{flex-shrink:0;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:var(--teal);color:#fff;padding:.2rem .5rem;border-radius:2px;margin-top:.1rem;}
+.handoff a{color:var(--teal-dk);font-weight:600;}
+/* Three-pillar grid */
+.pillar-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin:1.25rem 0;}
+.pillar{padding:1rem;border-radius:4px;border:1px solid var(--border);}
+.pillar-icon{font-size:1.25rem;margin-bottom:.5rem;}
+.pillar-title{font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:.375rem;}
+.pillar-body{font-size:.8rem;color:var(--text-2);line-height:1.6;}
+/* persona impact table */
+.impact-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:1.25rem 0;}
+.impact-table th{text-align:left;padding:.5rem .75rem;background:var(--orange-fill);border-bottom:2px solid var(--orange);font-weight:700;color:var(--orange-dk);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;}
+.impact-table td{padding:.625rem .75rem;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top;line-height:1.5;}
+.impact-table tr:last-child td{border-bottom:none;}
+.impact-table .metric-name{font-weight:600;color:var(--text);}
+/* Resistance type cards */
+.resistance-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:1.25rem 0;}
+.resistance-card{padding:.875rem;border-radius:4px;border:1px solid var(--border);}
+.rc-signal{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin-bottom:.375rem;}
+.rc-type{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.rc-response{font-size:.8rem;color:var(--text-2);line-height:1.55;}
+/* Comms timing strip */
+.comms-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1.25rem 0;}
+.comms-card{padding:.875rem;border-radius:4px;border:1px solid var(--border);background:#fff;}
+.cc-phase{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.375rem;}
+.cc-message{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.cc-channel{font-size:.78rem;color:var(--text-2);line-height:1.5;}
+/* Adoption tracking table */
+.adoption-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:1.25rem 0;}
+.adoption-table th{text-align:left;padding:.5rem .75rem;background:var(--green-fill);border-bottom:2px solid var(--green);font-weight:700;color:var(--green-dk);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;}
+.adoption-table td{padding:.625rem .75rem;border-bottom:1px solid var(--border);color:var(--text-2);line-height:1.5;vertical-align:top;}
+.adoption-table tr:last-child td{border-bottom:none;}
+
+.escalation-box{padding:1rem 1.25rem;background:var(--red-fill);border-left:3px solid var(--red);border-radius:0 4px 4px 0;margin:1.25rem 0;}
+.escalation-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--red-dk);margin-bottom:.5rem;}
+.escalation-body{font-size:.875rem;line-height:1.65;color:var(--red-dk);}
+.def-list{margin:1.25rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.def-row{display:grid;grid-template-columns:13rem 1fr;border-bottom:1px solid var(--border);}
+.def-row:last-child{border-bottom:none;}
+.def-term{padding:.75rem 1rem;font-size:.875rem;font-weight:600;color:var(--text);background:var(--layer);}
+.def-term a{color:var(--blue);text-decoration:none;}
+.def-term a:hover{text-decoration:underline;}
+.def-desc{padding:.75rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.help-list{margin:1.25rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.help-row{display:grid;grid-template-columns:13rem 1fr;border-bottom:1px solid var(--border);}
+.help-row:last-child{border-bottom:none;}
+.help-q{padding:.75rem 1rem;font-size:.875rem;font-weight:600;color:var(--text);background:var(--layer);}
+.help-a{padding:.75rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.help-a a{color:var(--blue);text-decoration:none;font-weight:500;}
+.help-a a:hover{text-decoration:underline;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="module-header">
+  <div class="eyebrow">How-to Deep Dive</div>
+  <h1>Governance &amp; Risk</h1>
+  <p class="def">Governance is not one thing that happens once. As you transform a workflow, several different kinds of governance touch it at different points: how you classify and handle the data, how the AI system itself is reviewed and registered, what security controls apply, whether financial reporting is affected, and how the change is documented and communicated. This chapter walks the six steps and tells you which governance touchpoint applies where, so you do not need to become a risk officer to cover them. One principle sits above everything else, and it is true for every touchpoint: you are accountable for what AI produces on your behalf. The AI is not.</p>
+
+</div>
+
+
+  <div class="where-strip">
+  <span class="where-label">Active across</span>
+  <span class="phase-pip pip-engage">Engage</span>
+  <span class="pip-sep">&#8594;</span>
+  <span class="phase-pip pip-discover">Discover</span>
+  <span class="pip-sep">&#8594;</span>
+  <span class="phase-pip pip-execute">Execute</span>
+</div>
+
+<div class="step-glance">
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><span class="tp-tag">Data governance</span> <strong>Tech &amp; Data Assessment.</strong> Get the data governance right before anything is built: classify the data, use approved tools only, and get data owner approval. Prevents privacy and confidentiality incidents.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><span class="tp-tag">AI system governance</span> <strong>Business Process Mapping.</strong> Risk-screen the use case and register it in <a href="https://w3.ibm.com/ibm/privacy/tools-services/igms" target="_blank" rel="noopener">IGMS</a> with named owners. Prevents shadow AI and surprise reviews late in the build.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 3</span><span class="sg-text"><span class="tp-tag">Accountability &amp; oversight</span> <strong>Workflow Analysis.</strong> Design human oversight into the future-state workflow and decide what gets logged. Prevents oversight that exists on paper but not in practice.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><span class="tp-tag">Policy, standards &amp; financial controls</span> <strong>Solution Design.</strong> Turn controls into requirements: guardrails, thresholds, transparency, and documented model choices. Prevents governance retrofitted after the build.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><span class="tp-tag">Risk management &amp; controls</span> <strong>Experimentation.</strong> Test to the thresholds you set, including adversarial testing. Prevents failure modes surfacing for the first time in production.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><span class="tp-tag">Transparency, records &amp; change</span> <strong>Scale &amp; Adopt.</strong> Monitor beyond uptime, wire the incident paths, and revalidate the record when anything changes. Prevents silent decay and stale inventories.</span></div>
+</div>
+
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#gv-step-1" title="Classify the data, use approved tools only, and get data owner approval before anything is built.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#gv-step-2" title="Risk-screen the use case and register it in IGMS with named owners.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#gv-step-3" title="Design human oversight into the future-state workflow and decide what gets logged.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#gv-step-4" title="Turn controls into requirements: guardrails, thresholds, transparency, and documented model choices.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#gv-step-5" title="Test to the thresholds you set, including adversarial testing.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#gv-step-6" title="Monitor beyond uptime, wire the incident paths, and revalidate the record when anything changes.">6 - Scale &amp; Adopt</a></nav>
+
+<!-- ═══════════════════════ WHY GOVERNANCE MATTERS ═══════════════════════ -->
+<div class="phase-section" id="gv-why" style="border-top:none;padding-top:0;">
+  <h2>Governance across the transformation, not just the AI</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Governance is not a separate job. It is a small set of habits attached to steps you are already doing, and one rule decides how much applies to you: the moment a use case goes beyond personal productivity, it must be registered.</span>
+  </div>
+
+  <p class="prose">Three governance gaps show up often enough to name: work that is registered nowhere, so it is invisible to the enterprise, uncounted, unsupported, and a control gap waiting to be found by an audit instead of a colleague; low-code and agent tools that proliferate without review, where an assistant someone built for themselves quietly becomes something a whole team relies on, with no registration, no testing, and no owner; and no clear place to get domain-specific risk answers, so teams either guess or stall. This chapter addresses all three, and the fix is smaller than most teams fear.</p>
+
+  <p class="prose"><strong>What can actually go wrong.</strong> The risks below are the ones that show up in practice. You do not need to memorize them; you need to recognize them when you see them, because the controls in this chapter map to them directly.</p>
+
+  <table class="impact-table">
+    <thead><tr><th>Risk</th><th>What it looks like in practice</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Data quality</strong></td><td>Poor input data, biased, incomplete, inaccurate, or missing context, produces poor AI results. The output is only as good as what went in.</td></tr>
+      <tr><td><strong>Bias</strong></td><td>AI can perpetuate or introduce bias from its training data, cultural context, or technical limitations, showing up as misclassifications, skewed results, or assumptions applied unevenly.</td></tr>
+      <tr><td><strong>Hallucination</strong></td><td>AI generates inaccurate or untruthful information that looks reasonable and true. If you did not verify it, you shipped it.</td></tr>
+      <tr><td><strong>Drift</strong></td><td>As real-world data evolves, model performance inherently degrades over time, producing less accurate or less reliable results if nobody is watching.</td></tr>
+      <tr><td><strong>Transparency and explainability</strong></td><td>Without visibility into a model's design, training data, and decision logic, an AI system can function as a black box, limiting auditability and validation of its outputs.</td></tr>
+      <tr><td><strong>Incomplete or inaccurate results</strong></td><td>AI may omit relevant data when generating a response, or produce a result that is plausible but factually wrong, nonsensical, or describes something that never happened.</td></tr>
+      <tr><td><strong>Prompt injection</strong></td><td>Malicious or misleading instructions embedded in content the AI reads can manipulate its behavior, resulting in data leakage, bypassed safeguards, or harmful outputs.</td></tr>
+      <tr><td><strong>Data privacy and confidentiality</strong></td><td>AI systems may ingest sensitive or personal data without proper controls and expose confidential information through their outputs. Inputs are a risk too: a file uploaded into an agent can persist there or elsewhere, and logging interactions with the AI in an unsecured location creates the same exposure as the original data.</td></tr>
+      <tr><td><strong>General unreliability</strong></td><td>All of the above add up to one rule: AI output is not guaranteed to be correct. Always verify.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="prose"><strong>How much governance does your use case need?</strong> IBM's <a href="https://ibm.ent.box.com/file/2277597436626?s=2p17qytonhmgi7312kkjxjyk4fafqowm" target="_blank" rel="noopener">GenAI Practical Guidance</a> defines four levels, based on who relies on the output, not on how sophisticated the AI is. Be honest about which level you are at, and move up a level (and register) the moment your use case does too.</p>
+  <div class="visual-wrap">
+  <svg viewBox="0 0 700 250" role="img" aria-label="Four levels of AI use and what each requires">
+    <text x="350" y="22" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Four levels, one rule: the more people rely on it, the more governance applies</text>
+    <rect x="10" y="42" width="165" height="176" rx="5" fill="#defbe6" stroke="#24a148"/>
+    <text x="22" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0e6027">Personal</text>
+    <text x="22" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">You use AI for your own</text>
+    <text x="22" y="94" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">work; you review every</text>
+    <text x="22" y="106" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">output before it goes</text>
+    <text x="22" y="118" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">anywhere.</text>
+    <text x="22" y="140" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#0e6027">No IGMS registration</text>
+    <text x="22" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">required. Check the Risk</text>
+    <text x="22" y="164" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Review Needed list; some</text>
+    <text x="22" y="176" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">personal use still needs</text>
+    <text x="22" y="188" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">extra review.</text>
+    <rect x="185" y="42" width="165" height="176" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
+    <text x="197" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0043ce">Team</text>
+    <text x="197" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Your team defines a use,</text>
+    <text x="197" y="94" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">with your manager, beyond</text>
+    <text x="197" y="106" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">individual productivity.</text>
+    <text x="197" y="140" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#0043ce">Register in IGMS.</text>
+    <text x="197" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Start with AskIntegrity,</text>
+    <text x="197" y="164" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">or Path-to-Production /</text>
+    <text x="197" y="176" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">APM if either applies;</text>
+    <text x="197" y="188" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">both register automatically.</text>
+    <rect x="360" y="42" width="165" height="176" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
+    <text x="372" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0043ce">Workflow</text>
+    <text x="372" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">A business unit leader</text>
+    <text x="372" y="94" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">makes a go/no-go call on</text>
+    <text x="372" y="106" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">strategic fit, ROI, and risk.</text>
+    <text x="372" y="140" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#0043ce">Same registration path</text>
+    <text x="372" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">as Team, plus confirm the</text>
+    <text x="372" y="164" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">use case is not duplicative</text>
+    <text x="372" y="176" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">and track ROI in Apptio.</text>
+    <rect x="535" y="42" width="155" height="176" rx="5" fill="#fcf4d6" stroke="#f1c21b"/>
+    <text x="547" y="64" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#684e00">Enterprise</text>
+    <text x="547" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">A solution technical</text>
+    <text x="547" y="94" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">teams design and run</text>
+    <text x="547" y="106" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">enterprise-wide.</text>
+    <text x="547" y="140" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#684e00">Full IGMS registration,</text>
+    <text x="547" y="152" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">all applicable risk</text>
+    <text x="547" y="164" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">reviews, and IT Security</text>
+    <text x="547" y="176" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Standards compliance.</text>
+    <line x1="175" y1="130" x2="185" y2="130" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#garrowlvl)"/>
+    <line x1="350" y1="130" x2="360" y2="130" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#garrowlvl)"/>
+    <line x1="525" y1="130" x2="535" y2="130" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#garrowlvl)"/>
+    <defs><marker id="garrowlvl" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
+  </svg>
+  <div class="visual-caption">The key rule from IBM's GenAI Practical Guidance: any AI use case beyond low-risk personal productivity must be registered in IGMS. High-risk use cases (per the <a href="https://w3.ibm.com/w3publisher/responsible-technology/use-case-review" target="_blank" rel="noopener">Risk Review Needed list</a>) require additional review regardless of level, including at the personal-productivity level.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ ENGAGE: STEPS 1 &amp; 2 ═══════════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-engage">Engage</span>
+    <span class="challenge-pip">Governance &amp; Risk</span>
+    <span class="phase-step-context">Steps 1 &amp; 2 · Assess &amp; Analyze</span>
+  </div>
+  <h2>Know your data, register your work.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Classify the data before it touches any model, use approved tools only, and register the use case the moment it goes beyond personal productivity. Registration is what makes your work visible, supported, and counted.</span>
+  </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Integrated Governance Lead</span>
+      <span class="who-role">Data steward or owner</span>
+      <span class="who-role">Executive sponsor</span>
+      <span class="who-role">Business process SMEs</span>
+    </div>
+  </div>
+
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">What to do in Engage for Governance &amp; Risk</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Classify the data your use case will touch.</strong> Public, internal, confidential, or restricted, using the table below. The classification determines what tools you may use and what approvals you need, and some categories must never be uploaded to AI tools at all.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Use approved tools only, and get data approval.</strong> Check the <a href="https://w3.ibm.com/w3publisher/responsible-business-technology/responsible-technology/ai-tools" target="_blank" rel="noopener">approved AI tools list</a> before building on anything. For datasets, identify the data steward and owner in the <a href="https://knowledgeportal.cdo-edp-docs.wdc.app.cirrus.ibm.com/Governance/IBM_AI_Model_Data_Catalog/" target="_blank" rel="noopener">AI Model and Data Governance catalog</a> and get their approval before use.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Run the tier screen.</strong> If the use case goes beyond personal productivity, start registration in IGMS now. <a href="https://w3.ibm.com/ibm/askintegrity/" target="_blank" rel="noopener">AskIntegrity</a> can route you; builds going through <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production</a> or <a href="https://w3.ibm.com/#/support/article/apm?_lang=en" target="_blank" rel="noopener">APM</a> are registered as part of those processes.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Name the accountable owners.</strong> The Business Lead, Technical Lead, and Global Process Owner own the risk of the AI system, alongside every IBMer who implements it. Ownership named now is accountability that works later.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Check for heightened-risk triggers</strong> with your IGL, and bring the answer into the go/no-go. A use case that will need deep review is not a reason to stop, but it is a cost and timeline input leadership should see before committing. Keep your manager in the loop as the use case develops, especially if it is heightened risk.</div></div>
+  </div>
+
+  <div class="sub-phase" id="gv-step-1" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 1</span>
+      <h3>Data governance: know your data before it touches a model</h3>
+    </div></div>
+
+    <p class="prose">Every governance conversation eventually comes back to the data, so start there. Most organizations, IBM included, classify data into four tiers, from freely shareable to tightly controlled. The tier determines what tools you may use, what approvals you need, and how much review the use case attracts.</p>
+
+    <table class="impact-table">
+      <thead><tr><th>Tier</th><th>What it means</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Public</strong></td><td>Freely shareable, no restrictions.</td><td>Content already published on ibm.com, press releases, public marketing material.</td></tr>
+        <tr><td><strong>Internal</strong></td><td>For IBM only. Use approved, SSO-authenticated tools.</td><td>Internal policies, non-public IBM data, general project plans.</td></tr>
+        <tr><td><strong>Confidential</strong></td><td>Needs extra care regardless of tool approval, due to legal, contractual, or reputational risk.</td><td>HR data, M&amp;A data, audit data, fraud and compliance data, cybersecurity and threat data, sensitive financial data.</td></tr>
+        <tr><td><strong>Restricted</strong></td><td>Must never go into an AI tool, or only under specific controls named in the tool's Terms of Use.</td><td>Protected Health Information, export-controlled data, Controlled Unclassified Information, proprietary source code, client data under NDA.</td></tr>
+      </tbody>
+    </table>
+
+    <p class="prose">One rule cuts across all four tiers: client data is not IBM data. If a use case needs client data, check the contract with Legal for what it permits before using AI on it at all.</p>
+    <p class="prose">Approved tools are easy to spot: they use SSO with your IBM w3 ID, and Copilot Chat shows a green shield when it is in an approved configuration. When unsure, check the <a href="https://w3.ibm.com/w3publisher/responsible-business-technology/responsible-technology/ai-tools" target="_blank" rel="noopener">Approved AI Tools Matrix</a> rather than guessing.</p>
+    <p class="prose">If your AI system is deployed internally and processes personal data, IBM may require a Global Privacy Assessment (GPA) alongside your IGMS registration; your Integrated Governance Lead can tell you if it applies. Data quality is part of governance too, not just engineering. A model trained or grounded on stale, incomplete, or wrong data produces confident, wrong answers at scale. The Chief Data Office offers data quality services you can use to check sources before you build on them, and the Tech &amp; Data Assessment you are already running in this step (see the Systems Integration chapter) is where those checks belong.</p>
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">Confidential data in the wrong tool</div>
+      <div class="painpoint-body">One of the more preventable AI incidents is not a sophisticated attack. It is a well-meaning person pasting confidential, personal, or client material into a tool that was not approved to hold it, usually to save time. Every tool's Terms of Use spells out what is off-limits: Copilot, for example, must never receive Protected Health Information, export-controlled data, client materials under NDA, proprietary IBM source code, or Controlled Unclassified Information. The two habits that prevent an incident: know the classification of what you are handling, and check the tool's Terms of Use before you paste anything you would not want made public. If your data type is not on the approved listing, or you are unsure, the Chief Data Office can run a data risk review.</div>
+    </div>
+  
+
+  <div class="sub-phase" id="gv-step-2">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 2</span>
+      <h3>Register the use case and screen the risk</h3>
+    </div></div>
+
+    <p class="prose">Registration is the habit teams most easily skip, because it feels like bureaucracy at the exact moment enthusiasm is highest. Reframe it: IGMS is the enterprise inventory of AI models, systems, and use cases, and it is where required risk reviews start. A registered use case is visible, counted in what the enterprise knows about its own AI, and supported when something goes wrong. An unregistered one is a control gap with your name on it. The assessments are routed automatically to the owners you named, and if your use case builds on an AI system that was already reviewed, a new review is only needed when the new use triggers heightened risk.</p>
+    <p class="prose">Screen the tier honestly with your IGL, check whether anything about the use case appears on the risk-review list, and put the answer in front of leadership as part of the go/no-go. Heightened risk does not mean no. It means the review will involve the PAID-COE and Privacy + AI Legal, with cost and timeline implications you want scoped before the build starts, not discovered in week eight.</p>
+  <div class="visual-wrap">
+  <svg viewBox="0 0 700 240" role="img" aria-label="Three registration pathways converging on IGMS">
+    <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Three doors, one inventory</text>
+    <rect x="20" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="32" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">Path to Production</text>
+    <text x="32" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">CIO watsonx builds. The AI System</text>
+    <text x="32" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">record is created as part of</text>
+    <text x="32" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">the approval process.</text>
+    <rect x="245" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="257" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">APM</text>
+    <text x="257" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Coded applications. Registration</text>
+    <text x="257" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">is carried through the IT</text>
+    <text x="257" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">security standard route.</text>
+    <rect x="470" y="46" width="210" height="72" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="482" y="66" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">AskIntegrity</text>
+    <text x="482" y="82" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Everything else, or unsure.</text>
+    <text x="482" y="95" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Determines what your use case</text>
+    <text x="482" y="108" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">needs and routes it.</text>
+    <line x1="125" y1="118" x2="290" y2="172" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
+    <line x1="350" y1="118" x2="350" y2="170" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
+    <line x1="575" y1="118" x2="410" y2="172" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow2)"/>
+    <rect x="150" y="176" width="400" height="48" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
+    <text x="350" y="196" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="700" fill="#0043ce">IGMS: the enterprise AI inventory</text>
+    <text x="350" y="213" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Registered, visible, counted, supported. Risk reviews start here.</text>
+    <defs><marker id="garrow2" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
+  </svg>
+  <div class="visual-caption">All three paths register you in IGMS automatically. A handful of other systems (Asset Management, Clearing House, the AI Model &amp; Data Catalog) also feed IGMS directly, so registration may already be underway without you initiating it. Stuck on a review? The AI First Transformation team can help you navigate it.</div>
+  </div>
+
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">The unregistered pilot that became infrastructure</div>
+      <div class="painpoint-body">A pilot gets built to prove a point. It works, the team starts relying on it, and six months later it is load-bearing infrastructure that exists in no inventory, passed no review, and has no named owner. This is a common path to shadow AI, and low-code tools have made it easier to walk. The fix costs minutes at the start: the moment others rely on the output, register it. Retroactive registration after an audit finding costs far more, in every sense.</div>
+    </div>
+
+    
+  
+
+  <div class="ready">
+    <span class="ready-icon">&#10003;</span>
+    <div class="ready-body">
+      <h4>Ready to move on when</h4>
+      <p>The data is classified with steward approval where needed, every tool in the plan is approved, the use case is registered in IGMS (or confirmed personal-productivity tier), owners are named, and the go/no-go included the risk screen.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ DISCOVER: STEPS 3 &amp; 4 ═══════════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-discover">Discover</span>
+    <span class="challenge-pip">Governance &amp; Risk</span>
+    <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
+  </div>
+  <h2>Design the controls in: oversight, logging, requirements.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Step 3 decides where humans stay in the loop and what gets logged. Step 4 turns those decisions into build requirements. Controls designed here cost a fraction of controls retrofitted after the build, and they are the difference between oversight that works and oversight that exists on paper.</span>
+    </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Domain transformation lead</span>
+      <span class="who-role">Project architect</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">Integrated Governance Lead</span>
+      <span class="who-role">Security contact (if needed)</span>
+      <span class="who-role">Topic SMEs (as needed)</span>
+    </div>
+  </div>
+
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">What to design in Discover for Governance &amp; Risk</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Design human oversight into the future-state workflow.</strong> Decide where people review, approve, and override, and make those moments real work steps with time budgeted, not checkboxes. Heightened-risk systems will likely require direct human approval on outputs.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Decide what gets logged.</strong> Inputs, outputs, overrides, and decisions, enough that six months from now you can answer "why did it do that?" for any output that mattered.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Pull in the right SMEs for the knowledge your use case touches.</strong> Legal content goes to your business unit legal contact, HR topics to AskHR, accounting treatment to your accounting focal, privacy and security to your security contact.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Write the controls as requirements.</strong> Accuracy thresholds, safety and PII guardrails, and a user-facing notice wherever people interact directly with the AI (IBM's Carbon for AI icon is the standard way to show it). Be transparent about where AI is used in the process with colleagues too, not only end users. If it is not in the requirements, it will not be in the build.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Document the model choices.</strong> A Fact Sheet documenting why this model, the performance metrics you will capture, and a plain-language description of what the system is for and what its limits are (for third-party models, link the vendor's Model Card instead).</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>If financial reporting is touched, design the controls with Finance.</strong> An AI solution that affects financial reporting needs controls addressing misstatement risk (the risk that a financial report contains a material error), and one that executes a key control without human intervention requires a designed, operating control around it.</div></div>
+  </div>
+
+  <div class="sub-phase" id="gv-step-3" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Human oversight and logging are workflow design, not paperwork</h3>
+    </div></div>
+
+    <p class="prose">AI systems at IBM are deployed with the expectation that humans oversee them meaningfully throughout their lifecycle, and "meaningfully" is the word that does the work. An approval step that a person has no time, context, or authority to actually perform is not oversight; it is a rubber stamp that creates false confidence and real accountability. As you analyze the workflow in Step 3, decide specifically: which outputs does a human review before they take effect, who has the authority to override, and what happens to the work when they do? Then give those people the time and the information to do it. The Adoption &amp; Change chapter's training guidance (what to do when the AI is wrong) is the other half of this design.</p>
+    <p class="prose">Logging follows from the same question. Log what you would need to reconstruct a decision: what went in, what came out, who reviewed it, what they changed. For most workflow solutions this is a modest requirement that is nearly free to build in and nearly impossible to retrofit.</p>
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">Oversight on paper</div>
+      <div class="painpoint-body">The design says "human reviews all outputs." The human has 40 outputs an hour and 8 seconds each. Every review passes, because passing is the only thing there is time for. When something goes wrong, the review log shows a person approved it, and that person owns a failure the design guaranteed. If the volume makes genuine review impossible, say so in Discover and design differently: sample-based review, tiered confidence routing, or a narrower scope. Honest oversight design is a favor to the people who will do the overseeing.</div>
+    </div>
+  
+
+  <div class="sub-phase" id="gv-step-4">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 4</span>
+      <h3>Controls become requirements</h3>
+    </div></div>
+
+    <p class="prose">Everything decided in Step 3 goes into the build-ready requirements alongside the functional ones: the guardrails (what the system must refuse or filter), the thresholds (what accuracy is acceptable for this use, and what happens below it), the transparency notice, and the logging. Add the Fact Sheet from the checklist above. None of it is long. All of it is much easier to write now than to reconstruct later.</p>
+    <p class="prose">Two more design-time rules. First, internal builds follow the client zero standards (IBM uses its own products internally first, before selling them): IBM products and services, on strategic platforms, with IBM models first, and a documented exception process where a genuine gap exists (see the build, buy, or hybrid guidance in Systems Integration, Step 4). Second, where third-party AI components are in the solution anyway, request their model card or responsible-AI documentation and link it in your Fact Sheet, rather than treating the component as a black box.</p>
+
+    <p class="prose"><strong>If you are building with low-code or agent tools:</strong> the same rules apply, and it is easy to miss them here. An agent built in an afternoon is still an AI system. The moment a team relies on it, it needs registration, an owner, and the oversight design above. Keep human review as the default for anything an agent does that others consume, and be deliberate about what data and tools the agent can reach, because an agent's risk surface is defined by its permissions, not its prompt. If the build uses Bob, the same governance applies plus a few tool-specific habits: never use auto-enable mode, disable telemetry collection, keep Sensitive Personal Information and similarly restricted data out of it entirely, and register anything beyond personal productivity through AskIntegrity just like any other AI system.</p>
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">A point-in-time review is not continuous assurance</div>
+      <div class="painpoint-body">Security and control reviews assess your use case at a moment in time, against its design. Passing them does not mean the solution is secure forever, and going through the governance process does not transfer your accountability to the reviewers. Treat reviews as a floor, not a ceiling: if the nature of your use case warrants deeper security attention, your security contact can tell you what more is needed. And when the solution changes, the reviews' conclusions age accordingly, which is why revalidation (Step 6) exists.</div>
+    </div>
+  
+
+  <div class="ready">
+    <span class="ready-icon">&#10003;</span>
+    <div class="ready-body">
+      <h4>Ready to move on when</h4>
+      <p>The oversight model names who reviews what and gives them time to do it, the logging plan can reconstruct any decision that matters, controls and thresholds are written into the build-ready requirements, a Fact Sheet documents the model choices, and any required SME and security conversations have happened.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ EXECUTE: STEPS 5 &amp; 6 ═══════════════════════ -->
+<div class="phase-section">
+  <div class="phase-label">
+    <span class="phase-tag tag-execute">Execute</span>
+    <span class="challenge-pip">Governance &amp; Risk</span>
+    <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
+  </div>
+  <h2>Prove the controls, then keep them alive.</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">Test to the thresholds you set, attack your own system before someone else does, and treat launch as the start of governance, not the end: monitoring beyond uptime, incident paths wired, and the record revalidated whenever anything changes.</span>
+  </div>
+
+  <div class="who-block">
+    <div class="who-label">Who to involve</div>
+    <div class="who-roles">
+      <span class="who-role">Developer lead</span>
+      <span class="who-role">Project architect</span>
+      <span class="who-role">Product owner</span>
+      <span class="who-role">Security contact (if engaged)</span>
+      <span class="who-role">Business and technical owners (post-launch)</span>
+    </div>
+  </div>
+
+  <div class="steps-summary">
+    <div class="step-row title-row"><div class="step-title">What to do in Execute for Governance &amp; Risk</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Test to the thresholds from Solution Design:</strong> accuracy against the bar you set, plus safety, hate/abuse/profanity, and PII handling at the system level. Fairness and bias testing applies where the risk review requires it.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Red-team the solution.</strong> Adversarial prompts, out-of-scope requests, prompt injection through any content the system reads, and permission boundaries for anything agentic. ARES (the AI Robustness Evaluation System) is IBM's automated tool for this, and the CISO team may engage on your security responses.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Validate that the guardrails block what testing found.</strong> A vulnerability discovered in testing and not turned into a runtime control is a finding you paid for and did not use. UAT (User Acceptance Testing) must include what users do when the AI is wrong.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Stand up monitoring beyond uptime:</strong> output quality trends, drift against the baseline, and override rates. A system can be 100% available and quietly wrong.</div></div>
+    <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Wire the incident paths before launch.</strong> A feedback route users will actually use, vulnerability reporting through PSIRT (Product Security Incident Response Team), and incident reporting through CSIRT (Computer Security Incident Response Team). Everyone on the team should know which path is for what.</div></div>
+    <div class="step-row"><div class="step-num">6</div><div class="step-text"><strong>Revalidate the IGMS record at least annually, and any time the AI changes:</strong> a model swap, new AI functionality, a process change, or agents being turned on. Keep the system description and value details current.</div></div>
+  </div>
+
+  <div class="sub-phase" id="gv-step-5" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation: prove the controls, not just the features</h3>
+    </div></div>
+
+    <p class="prose">The sprint validates that the solution works. This chapter's addition: the sprint also validates that the controls work, and the only way to know is to attack them. Feed the system inputs it should refuse. Put instructions inside documents it reads and see whether it follows them. Ask it to act outside its scope and check what the permission boundaries actually permit. Prompt injection through content the AI reads is a known, demonstrated failure mode for unhardened systems, so assume yours is vulnerable until testing shows otherwise. Every failure found here is cheap; the same failure found by a user, an auditor, or an attacker in production is not.</p>
+    <p class="prose">Treat overrides and refusals during UAT as governance data, the same way the Adoption &amp; Change chapter treats them as adoption data. If reviewers are overriding a third of outputs, either the threshold is wrong, the model is wrong, or the oversight design is carrying more load than it was built for. All three are fixable in the sprint and expensive after it.</p>
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">Testing only the happy path</div>
+      <div class="painpoint-body">The demo works because the demo was designed to work: clean inputs, expected questions, cooperative users. Production brings malformed inputs, adversarial content, and people probing what the system will do. If your test plan contains nothing designed to make the system fail, you have not tested it; you have rehearsed it. Budget real sprint time for adversarial testing, and re-run it when the model or the tools change, because behavior changes with them.</div>
+    </div>
+  
+
+  <div class="sub-phase" id="gv-step-6">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 6</span>
+      <h3>Scale &amp; Adopt: governance is continuous, not a launch gate</h3>
+    </div></div>
+
+    <p class="prose">The habits in the checklist above only work if someone is actually watching. A dashboard nobody looks at is not monitoring, and an incident path nobody remembers is not a plan. Pick a real cadence for the monitoring review, name who owns it, and treat the first bad day as the test of whether the incident paths actually work, not the moment to invent them.</p>
+  <div class="visual-wrap">
+  <svg viewBox="0 0 700 240" role="img" aria-label="Continuous governance loop after launch">
+    <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Governance after launch: a loop, not a gate</text>
+    <rect x="60" y="50" width="230" height="52" rx="5" fill="#edf5ff" stroke="#0f62fe"/>
+    <text x="72" y="70" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043ce">1. Monitor</text>
+    <text x="72" y="87" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Quality trends, drift, override rates,</text>
+    <text x="72" y="98" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">watched by a named owner.</text>
+    <rect x="410" y="50" width="230" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="422" y="70" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">2. Change happens</text>
+    <text x="422" y="87" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Model swap, new tool, new data source,</text>
+    <text x="422" y="98" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">new AI functionality, agents turned on.</text>
+    <rect x="410" y="150" width="230" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="422" y="170" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">3. Re-test what applies</text>
+    <text x="422" y="187" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Thresholds and adversarial tests from</text>
+    <text x="422" y="198" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Step 5, because behavior changed.</text>
+    <rect x="60" y="150" width="230" height="52" rx="5" fill="#defbe6" stroke="#24a148"/>
+    <text x="72" y="170" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0e6027">4. Revalidate the record</text>
+    <text x="72" y="187" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">IGMS matches the system that is</text>
+    <text x="72" y="198" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">actually running. Then keep watching.</text>
+    <line x1="290" y1="76" x2="406" y2="76" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="525" y1="102" x2="525" y2="146" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="410" y1="176" x2="294" y2="176" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <line x1="175" y1="150" x2="175" y2="106" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow4)"/>
+    <text x="350" y="130" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-style="italic" fill="#525252">At least annually, and on every AI change</text>
+    <defs><marker id="garrow4" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
+  </svg>
+  <div class="visual-caption">The revalidation loop is what keeps every approval the system carries describing a system that still exists.</div>
+  </div>
+
+    <p class="prose">Ownership carries this. The Business Lead, Technical Lead, and Global Process Owner named in Engage own the running system, and the transition to them (covered in Systems Integration's handoff guidance) includes the monitoring dashboards, the incident runbook, and the revalidation calendar. Governance that lives with named owners survives team changes. Governance that lived with the project team leaves with them.</p>
+
+    <div class="painpoint">
+      <div class="painpoint-label">&#9888; Pain point</div>
+      <div class="painpoint-title">The silent change</div>
+      <div class="painpoint-body">Six months in, someone swaps the model version, adds a tool to the agent, or points the system at a new data source. Behavior changes; nobody re-tests; the IGMS record still describes the system as it launched. Every review and approval the system carries now describes something that no longer exists. The rule that prevents it: any AI change re-triggers the Step 5 tests that apply and a revalidation of the record. Put it in the change process, not in people's memories.</div>
+    </div>
+  
+
+  <div class="ready">
+    <span class="ready-icon">&#10003;</span>
+    <div class="ready-body">
+      <h4>Governance is holding when</h4>
+      <p>Thresholds passed with adversarial testing done, guardrails proven against what testing found, monitoring is watched by a named owner, the team knows the incident paths, and the IGMS record matches the system that is actually running.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ THE IBM GOVERNANCE LANDSCAPE ═══════════════════════ -->
+<div class="phase-section" id="gv-landscape">
+
+  <h2>The IBM governance landscape: who owns what</h2>
+
+  <div class="key-takeaway">
+    <span class="kt-icon">&#128204;</span>
+    <span class="kt-text">You are never navigating this alone. Your Integrated Governance Lead is the named person for domain-specific guidance, AskIntegrity answers compliance questions, and registration and reviews run through IGMS. Start with the IGL.</span>
+  </div>
+
+  <p class="prose">A short map of the bodies and tools this chapter references, so the names mean something when they contact you.</p>
+
+  <div class="def-list">
+    <div class="def-row">
+      <div class="def-term"><a href="https://w3.ibm.com/w3publisher/trust-compliance/integrated-governance-program" target="_blank" rel="noopener">Integrated Governance Program (IGP)</a></div>
+      <div class="def-desc">The umbrella program, overseen by the Privacy, Data, and AI Center of Excellence within Risk, Compliance and Integrity, that runs IGMS and routes assessments.</div>
+    </div>
+    <div class="def-row">
+      <div class="def-term"><a href="https://w3.ibm.com/ibm/privacy/tools-services/igms" target="_blank" rel="noopener">IGMS</a></div>
+      <div class="def-desc">The enterprise AI inventory. Where use cases are registered, risk reviews start, and named owners are recorded. Registration is what makes your work visible, counted, and supported.</div>
+    </div>
+    <div class="def-row">
+      <div class="def-term"><a href="https://w3.ibm.com/w3publisher/rci-resource-center/igp/igms-assessments#rta" target="_blank" rel="noopener">Responsible Technology Assessment (RTA)</a></div>
+      <div class="def-desc">How AI systems are assessed after registration. Ethical or regulatory triggers can route a use case to deeper review, and in some cases to the Responsible Technology Board.</div>
+    </div>
+    <div class="def-row">
+      <div class="def-term"><a href="PLACEHOLDER_RTB_LINK" target="_blank" rel="noopener">Responsible Technology Board</a></div>
+      <div class="def-desc">Owns IBM's AI governance principles and policies. Involved in heightened-risk cases escalated through the RTA.</div>
+    </div>
+    <div class="def-row">
+      <div class="def-term"><a href="https://www.ibm.com/docs/en/cpod?topic=internaldocs/4c_aibaseline/1_reqs.html" target="_blank" rel="noopener">Enterprise AI Baseline</a></div>
+      <div class="def-desc">Defines the minimum required actions for teams that develop, modify, deploy, or market AI. The source for the testing and documentation requirements in this chapter.</div>
+    </div>
+    <div class="def-row">
+      <div class="def-term"><a href="https://www.ibm.com/trust/responsible-ai" target="_blank" rel="noopener">Pillars of Trustworthy AI</a></div>
+      <div class="def-desc">IBM's five values that all governance work maps to: explainability, fairness, robustness, transparency, and privacy.</div>
+    </div>
+  </div>
+  <div class="visual-wrap">
+  <svg viewBox="0 0 700 250" role="img" aria-label="Process flow: what happens after you register">
+    <text x="350" y="24" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">What happens after you register</text>
+    <rect x="20" y="52" width="196" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="32" y="72" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">IGMS record created</text>
+    <text x="32" y="89" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Your use case enters the inventory.</text>
+    <line x1="216" y1="78" x2="242" y2="78" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
+    <rect x="246" y="52" width="196" height="52" rx="5" fill="#fff" stroke="#e0e0e0"/>
+    <text x="258" y="72" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">Assessments routed</text>
+    <text x="258" y="89" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Sent automatically to your</text>
+    <text x="258" y="100" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">named owners.</text>
+    <line x1="442" y1="78" x2="468" y2="78" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
+    <rect x="472" y="52" width="208" height="52" rx="5" fill="#fff" stroke="#0f62fe"/>
+    <text x="484" y="72" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">RTA screens the system</text>
+    <text x="484" y="89" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Checks regulatory and ethical</text>
+    <text x="484" y="100" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">risk triggers.</text>
+    <line x1="520" y1="104" x2="260" y2="158" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
+    <text x="360" y="128" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">No triggers</text>
+    <line x1="590" y1="104" x2="590" y2="156" stroke="#8d8d8d" stroke-width="1.2" marker-end="url(#garrow3)"/>
+    <text x="598" y="134" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Triggers</text>
+    <rect x="60" y="160" width="330" height="62" rx="5" fill="#defbe6" stroke="#24a148"/>
+    <text x="72" y="180" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0e6027">Most cases: proceed</text>
+    <text x="72" y="197" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">Build to the AI Baseline requirements. A new use case on this</text>
+    <text x="72" y="210" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">system only needs new review if it adds heightened risk.</text>
+    <rect x="410" y="160" width="270" height="62" rx="5" fill="#fcf4d6" stroke="#f1c21b"/>
+    <text x="422" y="180" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#684e00">Heightened risk: deeper review</text>
+    <text x="422" y="197" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">PAID-COE and Privacy + AI Legal engage you on</text>
+    <text x="422" y="210" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#161616">requirements. Some cases go to the RTB.</text>
+    <defs><marker id="garrow3" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#8d8d8d"/></marker></defs>
+  </svg>
+  <div class="visual-caption">Registration is the start of a routed process, not a form into the void. Expedited processing is available on request for both assessments and RTAs.</div>
+  </div>
+
+
+  <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text-3);margin:1.75rem 0 .5rem;">Where to go for help</div>
+  <div class="help-list">
+    <div class="help-row">
+      <div class="help-q">Domain-specific questions</div>
+      <div class="help-a">Which path applies, whether a use case triggers review: your <a href="https://w3.ibm.com/ibm/privacy/contact/integrated-governance-lead-igl" target="_blank" rel="noopener">Integrated Governance Lead (IGL)</a> — the named person for your business unit for privacy, data, AI, and ethics guidance.</div>
+    </div>
+    <div class="help-row">
+      <div class="help-q">Compliance questions</div>
+      <div class="help-a"><a href="https://w3.ibm.com/ibm/askintegrity/" target="_blank" rel="noopener">AskIntegrity</a> — entry point into IBM's Integrated Governance Program. Gives role-relevant guidance and can kick off IGMS registration directly.</div>
+    </div>
+    <div class="help-row">
+      <div class="help-q">Build your own fluency</div>
+      <div class="help-a"><a href="https://w3.ibm.com/w3publisher/finance-operations/ai" target="_blank" rel="noopener">EverydAI</a> — IBM's AI enablement hub.</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var nav=document.querySelector('.phase-nav');
+  if(!nav||!('IntersectionObserver' in window))return;
+  var pills=Array.prototype.slice.call(nav.querySelectorAll('.pnav-pill'));
+  var map={};
+  pills.forEach(function(p){
+    var id=p.getAttribute('href').slice(1);
+    if(!map[id])map[id]=[];
+    map[id].push(p);
+  });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&map[e.target.id]){
+        pills.forEach(function(p){p.classList.remove('active');});
+        map[e.target.id].forEach(function(p){p.classList.add('active');});
+      }
+    });
+  },{rootMargin:'-10% 0px -75% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+})();
+</script>
+</body>
+</html>

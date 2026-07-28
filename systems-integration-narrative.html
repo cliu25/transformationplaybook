@@ -98,6 +98,17 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .step-text{padding:.875rem 1rem;font-size:.875rem;line-height:1.55;color:var(--text-2);}
 .step-text strong{color:var(--text);font-weight:600;}
 
+/* AT A GLANCE (step-glance) */
+.step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
+.step-glance .sg-row:first-child{border-top:none;}
+.step-glance .sg-chip{flex-shrink:0;font-size:.68rem;font-weight:700;padding:.2rem .55rem;border-radius:2px;margin-top:.1rem;white-space:nowrap;}
+.sg-engage{color:var(--blue-dk);background:var(--blue-fill);}
+.sg-discover{color:var(--purple-dk);background:var(--purple-fill);}
+.sg-execute{color:var(--green-dk);background:var(--green-fill);}
+.step-glance .sg-text{font-size:.85rem;color:var(--text-2);line-height:1.5;}
+.step-glance .sg-text strong{color:var(--text);}
+
 /* CASE STUDY */
 .case-study{margin:2rem 0;padding:1.375rem 1.5rem;background:var(--purple-fill);border-radius:6px;border:1px solid var(--purple);}
 .cs-eyebrow{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;}
@@ -199,52 +210,13 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <span class="phase-pip pip-execute">Execute</span>
 </div>
 
-<!-- AT A GLANCE TABLE -->
-<div style="margin:1.75rem 0;">
-  <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-bottom:.75rem;">At a glance: the six steps</div>
-  <table class="glance-table">
-    <thead>
-      <tr><th style="width:3.5rem;">Step</th><th>Name</th><th>What it is</th><th style="width:6rem;">Phase</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="g-step">1</td>
-        <td><span class="g-name">Tech &amp; Data Assessment</span></td>
-        <td>Inventory every system and profile data quality before committing to a solution</td>
-        <td><span class="g-phase g-phase-engage">Engage</span></td>
-      </tr>
-      <tr>
-        <td class="g-step">2</td>
-        <td><span class="g-name">Business Process Mapping</span></td>
-        <td>Document the current-state workflow: systems touched, handoffs, and data flow</td>
-        <td><span class="g-phase g-phase-engage">Engage</span></td>
-      </tr>
-      <tr>
-        <td class="g-step">3</td>
-        <td><span class="g-name">Workflow Analysis</span></td>
-        <td>Trace the technical baseline for the workflow you're transforming</td>
-        <td><span class="g-phase g-phase-discover">Discover</span></td>
-      </tr>
-      <tr>
-        <td class="g-step">4</td>
-        <td><span class="g-name">Solution Design</span></td>
-        <td>Make the build-vs-buy call and write requirements a developer can act on</td>
-        <td><span class="g-phase g-phase-discover">Discover</span></td>
-      </tr>
-      <tr>
-        <td class="g-step">5</td>
-        <td><span class="g-name">Experimentation</span></td>
-        <td>Build and validate the integration against real systems and real data</td>
-        <td><span class="g-phase g-phase-execute">Execute</span></td>
-      </tr>
-      <tr>
-        <td class="g-step">6</td>
-        <td><span class="g-name">Scale &amp; Adopt</span></td>
-        <td>Hand off a documented, owned, maintainable solution</td>
-        <td><span class="g-phase g-phase-execute">Execute</span></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="step-glance">
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><strong>Tech &amp; Data Assessment.</strong> Inventory every system and profile data quality before committing to a solution.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><strong>Business Process Mapping.</strong> Document the current-state workflow: systems touched, handoffs, and data flow.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 3</span><span class="sg-text"><strong>Workflow Analysis.</strong> Trace the technical baseline for the workflow you're transforming.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><strong>Solution Design.</strong> Make the build-vs-buy call and write requirements a developer can act on.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><strong>Experimentation.</strong> Build and validate the integration against real systems and real data.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Hand off a documented, owned, maintainable solution.</span></div>
 </div>
 
 
@@ -264,10 +236,10 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="key-takeaway-body">Before you design anything, get an honest picture of two things: what systems exist, and what condition the data is in. Document what's real; don't fix anything yet.</div>
   </div>
 
-  <!-- WHO TO INVOLVE / KEY POC TABLE -->
+  <!-- WHO TO INVOLVE / KEY STAKEHOLDER TABLE -->
   <table class="ref-table" style="margin-bottom:1.5rem;">
     <thead>
-      <tr><th>What to do</th><th>Key POC</th></tr>
+      <tr><th>What to do</th><th>Key Stakeholder</th></tr>
     </thead>
     <tbody>
       <tr><td>Map the current-state architecture: every system, integration point, and data flow this workflow touches</td><td><strong>System / platform owner</strong> (named, per system)</td></tr>
@@ -632,9 +604,11 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase">
     <div class="sub-phase-label">
       <span class="sub-phase-number step-discover">Step 4</span>
-      <h3>Solution Design: Write build-ready requirements</h3>
+      <h3>Solution Design: Make the build-vs-buy call, then write requirements</h3>
     </div>
   </div>
+
+  <p class="prose">Step 4 has two parts. The first is a strategic decision: for each capability your solution needs, should you build it on IBM's stack, buy an external tool, or combine both? This is not a technical question — it is a question about value, risk, IBM strategy, and what the enterprise is investing in. Get it right before a line of code is written. The second part turns that decision into build-ready requirements that a developer can act on without a clarification call.</p>
 
   <div class="key-takeaway">
     <div class="key-takeaway-label">Before you commit</div>
@@ -773,6 +747,14 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
       <tr><td><span class="bvb-option">Sequence: short-term / long-term</span></td><td>Run a third-party tool short-term (a year or until an IBM product exists). Plan the transition from day one.</td><td>Use vendor tool now; migrate to IBM stack when ready</td></tr>
     </tbody>
   </table>
+
+  <div class="info-callout" style="margin-bottom:1.25rem;">
+    <div class="info-callout-label">Experimenting with an external tool? Use Fast Track.</div>
+    <ul>
+      <li>If your team wants to pilot a third-party AI tool before committing to buy, <strong>Fast Track</strong> is IBM's process for it. It enables teams to quickly evaluate external AI tools for enterprise risk and value — with coordination from CIO, CISO, Responsible Tech, Legal, and Procurement — in a 90-day, up to 500-license pilot scoped to publicly available IBM data and no system integrations.</li>
+      <li>Learn more: <a href="https://w3.ibm.com/w3publisher/ai-first-transformation/key-initiatives/fast-track" target="_blank" rel="noopener noreferrer">Fast Track overview</a> · <a href="https://forms.monday.com/forms/b51e91524820fb0a0acb4c7636302f2f?r=use1" target="_blank" rel="noopener noreferrer">Submit a request</a></li>
+    </ul>
+  </div>
 
   <p class="prose">Once you've made the build-vs-buy decision, write the requirements. Test them by asking whether a developer can start work without a clarification call. Build-ready requirements include:</p>
 
