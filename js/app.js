@@ -1592,17 +1592,16 @@ function getModuleRelatedSteps(moduleId) {
 function renderLibraryPage() {
     const main = document.getElementById('main-content');
 
-    // Canonical 6-step model
+    // Canonical 6-step model — matches every deep dive chapter
     const steps = [
-        { id: 'assess',  num: 1, label: 'Tech & Data Foundations Assessment', phaseGroup: 'Engage',   color: '#0f62fe' },
-        { id: 'map',     num: 2, label: 'Business Process Mapping',            phaseGroup: 'Engage',   color: '#0f62fe' },
-        { id: 'design',  num: 3, label: 'Solution Design',                     phaseGroup: 'Discover', color: '#8a3ffc' },
-        { id: 'analyze', num: 4, label: 'Solution Design',                     phaseGroup: 'Discover', color: '#8a3ffc' },
-        { id: 'build',   num: 5, label: 'Build',                               phaseGroup: 'Execute',  color: '#24a148' },
-        { id: 'sustain', num: 6, label: 'Scale & Sustain',                     phaseGroup: 'Execute',  color: '#24a148' },
+        { id: 'assess',  num: 1, label: 'Tech & Data Assessment',  phase: 'Engage',   phaseClass: 'engage' },
+        { id: 'map',     num: 2, label: 'Business Process Mapping', phase: 'Engage',   phaseClass: 'engage' },
+        { id: 'design',  num: 3, label: 'Workflow Analysis',        phase: 'Discover', phaseClass: 'discover' },
+        { id: 'analyze', num: 4, label: 'Solution Design',          phase: 'Discover', phaseClass: 'discover' },
+        { id: 'build',   num: 5, label: 'Experimentation',          phase: 'Execute',  phaseClass: 'execute' },
+        { id: 'sustain', num: 6, label: 'Scale & Adopt',            phase: 'Execute',  phaseClass: 'execute' },
     ];
 
-    // Artifact list from Deliverable Library(MASTER) CSV
     const libraryArtifacts = {
         assess: [
             { title: 'Current State Processes',               description: 'Captures the domain\'s people (personas), process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa' },
@@ -1637,66 +1636,61 @@ function renderLibraryPage() {
         ],
     };
 
-    const activeStep = steps.find(s => s.id === selectedLibraryStep) || steps[0];
-    selectedLibraryStep = activeStep.id;
-    const items = libraryArtifacts[activeStep.id] || [];
+    // Phase color tokens — same as deep dive CSS variables
+    const phaseColors = {
+        engage:   { tag: '#edf5ff', tagText: '#0043a4', tagBorder: '#0f62fe' },
+        discover: { tag: '#f6f2ff', tagText: '#5c2eb8', tagBorder: '#8a3ffc' },
+        execute:  { tag: '#defbe6', tagText: '#1a6b32', tagBorder: '#24a148' },
+    };
 
-    // Build detail content for active step
-    const cardsHtml = items.length
-        ? `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;">
-            ${items.map(a => {
-                const exampleUrl = (a.exampleUrl || '').trim();
-                const templateUrl = (a.templateUrl || '').trim();
-                const exampleLink = exampleUrl
-                    ? `<a class="a-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
-                    : `<span class="a-link off">↗ Example</span>`;
-                const templateLink = templateUrl
-                    ? `<a class="a-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
-                    : `<span class="a-link off">↗ Template</span>`;
-                return `<div class="artifact-card" style="display:flex;flex-direction:column;">
-                    <div class="a-title">${a.title}</div>
-                    <div class="a-desc" style="flex:1;">${a.description || ''}</div>
-                    <div class="a-links">${exampleLink}${templateLink}</div>
-                </div>`;
-            }).join('')}
-           </div>`
-        : `<p style="color:var(--text-secondary);">No artifacts defined for this step yet.</p>`;
+    // Render one section per step — same structure as deep dive phase-section + artifact-grid
+    const sectionsHtml = steps.map(s => {
+        const items = libraryArtifacts[s.id] || [];
+        const pc = phaseColors[s.phaseClass];
+        const cardsHtml = items.map(a => {
+            const exUrl = (a.exampleUrl  || '').trim();
+            const tmUrl = (a.templateUrl || '').trim();
+            const exLink = exUrl
+                ? `<a class="lib-card-link" href="${exUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
+                : `<span class="lib-card-link lib-card-link--off">↗ Example</span>`;
+            const tmLink = tmUrl
+                ? `<a class="lib-card-link" href="${tmUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
+                : `<span class="lib-card-link lib-card-link--off">↗ Template</span>`;
+            return `<div class="lib-card">
+                <div class="lib-card__title">${a.title}</div>
+                <div class="lib-card__desc">${a.description || ''}</div>
+                <div class="lib-card__links">${exLink}${tmLink}</div>
+            </div>`;
+        }).join('');
+
+        return `<div class="lib-section" id="lib-step-${s.num}">
+            <div class="lib-section__header">
+                <span class="lib-phase-tag" style="background:${pc.tag};color:${pc.tagText};border:1.5px solid ${pc.tagBorder};">${s.phase}</span>
+                <span class="lib-step-num">Step ${s.num}</span>
+                <h2 class="lib-section__title">${s.label}</h2>
+            </div>
+            <div class="lib-grid">${cardsHtml}</div>
+        </div>`;
+    }).join('');
 
     main.innerHTML = `
-        <section class="workflow-layout workflow-layout--with-top-offset" aria-label="Deliverables library">
-            <nav class="workflow-side-nav" aria-label="Library step navigation">
-                <ul class="workflow-side-nav__list">
-                    ${steps.map(s => `
-                        <li class="workflow-side-nav__item">
-                            <button class="workflow-side-nav__button${s.id === activeStep.id ? ' is-active' : ''}"
-                                data-lib-step="${s.id}">
-                                <span style="font-size:0.7rem;font-weight:600;color:${s.color};display:block;margin-bottom:0.1rem;text-transform:uppercase;letter-spacing:.06em;">Step ${s.num} · ${s.phaseGroup}</span>
-                                ${s.label}
-                            </button>
-                        </li>
-                    `).join('')}
-                </ul>
-            </nav>
-            <div class="workflow-detail-panel">
-                <div class="workflow-detail-panel__header">
-                    <p class="workflow-detail-panel__meta">${activeStep.phaseGroup} · Step ${activeStep.num}</p>
-                    <h2>${activeStep.label}</h2>
-                    <p class="workflow-step-description">${items.length} artifact${items.length !== 1 ? 's' : ''}</p>
-                </div>
-                <div class="workflow-detail-panel__body">
-                    ${cardsHtml}
-                </div>
+        <div class="lib-page">
+            <div class="lib-page__header">
+                <p class="lib-eyebrow">AI-First Transformation Playbook</p>
+                <h1 class="lib-page__title">Deliverable Library</h1>
+                <p class="lib-page__desc">Every template and example tied to each step of the 6-step transformation framework.</p>
             </div>
-        </section>
+            <nav class="lib-nav" aria-label="Jump to step">
+                <a class="lib-nav__pill lib-nav__pill--engage" href="#lib-step-1">Step 1 · Tech &amp; Data Assessment</a>
+                <a class="lib-nav__pill lib-nav__pill--engage" href="#lib-step-2">Step 2 · Business Process Mapping</a>
+                <a class="lib-nav__pill lib-nav__pill--discover" href="#lib-step-3">Step 3 · Workflow Analysis</a>
+                <a class="lib-nav__pill lib-nav__pill--discover" href="#lib-step-4">Step 4 · Solution Design</a>
+                <a class="lib-nav__pill lib-nav__pill--execute" href="#lib-step-5">Step 5 · Experimentation</a>
+                <a class="lib-nav__pill lib-nav__pill--execute" href="#lib-step-6">Step 6 · Scale &amp; Adopt</a>
+            </nav>
+            ${sectionsHtml}
+        </div>
     `;
-
-    document.querySelectorAll('[data-lib-step]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            selectedLibraryStep = btn.dataset.libStep;
-            renderLibraryPage();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
 }
 
 // ============================================================================

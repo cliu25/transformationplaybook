@@ -45,12 +45,11 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .prose-list{margin:0 0 1.25rem 1.25rem;padding:0;color:var(--text-2);font-size:.9375rem;line-height:1.7;}
 .prose-list li{margin-bottom:.5rem;}
 .phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
-.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.35rem .875rem;border-radius:4px;border:1.5px solid;transition:all .12s;}
-.pnav-pill.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
-.pnav-pill.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
-.pnav-pill.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
-.pnav-pill:hover{filter:brightness(.94);}
-.pnav-pill.active{font-weight:700;box-shadow:0 0 0 2px currentColor;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:all .12s;}
+.pnav-pill:hover{border-color:var(--text-3);color:var(--text);}
+.pnav-pill.active.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.active.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.active.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
 .step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
 .step-glance .sg-row:first-child{border-top:none;}
@@ -132,8 +131,6 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 .pr-focus-text strong{font-weight:700;}
 
 .sub-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
-.phase-section{scroll-margin-top:5.5rem;}
-.sub-phase{scroll-margin-top:5.5rem;}
 
 /* Phase strip */
 .where-strip{display:flex;align-items:center;gap:.5rem;padding:.875rem 1.25rem;background:var(--layer);border-radius:4px;margin-bottom:2rem;flex-wrap:wrap;}
@@ -157,7 +154,6 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="eyebrow">How-to Deep Dive</div>
   <h1>Prioritization &amp; Roadmap</h1>
   <p class="def">Many AI transformations don't fail because of the technology. They fail because the wrong problem was chosen, too many things were attempted at once, or no one made a clear decision to stop when the evidence said to. This chapter covers how to identify the right workflows to pursue, evaluate them rigorously with both business and technical SMEs, build a plan that's actually deliverable, and keep the roadmap honest as you learn.</p>
-  <p class="def" style="margin-top:.75rem;">This chapter follows the same six-step transformation process used across every domain chapter (Engage through Execute) and shows what prioritization and roadmap work happens at each step.</p>
 </div>
 
 <!-- Phase color strip -->
@@ -179,13 +175,13 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Decide at Day 90 on evidence against pre-agreed criteria, then reprioritize the next wave from the post-MVP backlog.</span></div>
 </div>
 
-<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#pr-step-1" title="Build the baseline every prioritization decision depends on: the current-state picture and a quantified case for change. Without both, leadership is betting on a feeling rather than a number.">Step 1 · Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#pr-step-2" title="Build the full process inventory, score value and feasibility with process and tech SMEs, and pick one. The Prioritization Matrix is what makes the selection defensible.">Step 2 · Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#pr-step-3" title="A time-boxed, two-week investigation to validate the workflow is worth transforming. Output: proceed to Solution Design, or return to the list.">Step 3 · Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#pr-step-4" title="Define the end-state vision, lock MVP scope with an explicit out-of-scope list, and get sponsor sign-off before the build team takes over.">Step 4 · Solution Design</a><a class="pnav-pill pnav-execute" href="#pr-step-5" title="Hold the scope during the build. The signed roadmap is the shield against mid-sprint additions, and de-scopes are the mechanism that makes 90-day delivery work.">Step 5 · Experimentation</a><a class="pnav-pill pnav-execute" href="#pr-step-6" title="Decide at Day 90 on evidence against pre-agreed criteria, then reprioritize the next wave from the post-MVP backlog.">Step 6 · Scale &amp; Adopt</a></nav>
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#pr-step-1" title="Build the baseline every prioritization decision depends on: the current-state picture and a quantified case for change. Without both, leadership is betting on a feeling rather than a number.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#pr-step-2" title="Build the full process inventory, score value and feasibility with process and tech SMEs, and pick one. The Prioritization Matrix is what makes the selection defensible.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#pr-step-3" title="A time-boxed, two-week investigation to validate the workflow is worth transforming. Output: proceed to Solution Design, or return to the list.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#pr-step-4" title="Define the end-state vision, lock MVP scope with an explicit out-of-scope list, and get sponsor sign-off before the build team takes over.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#pr-step-5" title="Hold the scope during the build. The signed roadmap is the shield against mid-sprint additions, and de-scopes are the mechanism that makes 90-day delivery work.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#pr-step-6" title="Decide at Day 90 on evidence against pre-agreed criteria, then reprioritize the next wave from the post-MVP backlog.">6 - Scale &amp; Adopt</a></nav>
 
 <!-- ═══════════════ ENGAGE: STEP 1 ════════════════ -->
 <div class="phase-section" id="pr-step-1" style="border-top:none;padding-top:0;">
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
-    <span class="phase-step-context">Step 1 · Tech &amp; Data Assessment</span>
+    <span class="phase-step-context">Step 1 · Technology &amp; Data Foundations Assessment</span>
     <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
@@ -206,8 +202,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 
   <div class="sub-phase" style="margin-top:0;">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 1</span>
-      <h3>How to conduct the Current State Assessment</h3>
+      <span class="sub-phase-number">How to conduct the Current State Assessment</span>
     </div>
   </div>
 
@@ -342,7 +337,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 
   <div class="sub-phase" style="margin-top:0;">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 2</span>
+      <span class="sub-phase-number">How to score</span>
       <h3>Process inventory → assess value → assess feasibility → prioritize</h3>
     </div>
   </div>
@@ -481,26 +476,23 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
-  <div class="sub-phase" id="pr-step-3" style="margin-top:0;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 3</span>
-      <h3 style="font-size:1.375rem;font-weight:600;">Workflow Analysis</h3>
-    </div>
-  </div>
+  <h2>Prove the opportunity is real. Then define exactly what you're building.</h2>
 
-  <h2 style="margin-top:.75rem;">Prove the opportunity is real before committing to a build.</h2>
-
-  <p class="prose">The Workflow Analysis is a time-boxed investigation (typically two weeks) into the workflow you selected. You're not designing anything yet — you're gathering enough evidence to make a confident go/no-go recommendation to your steering committee.</p>
+  <p class="prose">Discover has two jobs.</p>
   <ul class="prose-list">
-    <li>You need process SMEs who know the current state in detail, and a tech SME who can assess data access and integration paths as you go.</li>
-    <li>You're gathering: how much the workflow costs to run today, what the key performance indicators are, what best-in-class looks like at peer organizations, and what's actually causing it to perform poorly.</li>
-    <li>Your output is a recommendation: proceed to Solution Design, or return to the prioritized list.</li>
+    <li>First, you validate that the workflow you chose is actually worth transforming: not because it scored well on paper, but because the evidence holds up when you look closely.</li>
+    <li>Second, if it does, you define precisely what you're going to build. Both are distinct. Don't skip the first because you're confident; don't rush the second because you're excited.</li>
   </ul>
 
-  <p class="prose">Your executive sponsor's commitment from Engage now has a concrete meaning: they are providing access to the process owners and SMEs you need. Without that access — real conversations with the people who do the work, not documentation reviews — the Workflow Analysis will not be grounded in reality.</p>
+  <p class="prose">Your executive sponsor's commitment from Engage now has a concrete meaning: they are providing access to the process owners and SMEs you need across both steps. Without that access (real conversations with the people who do the work, not documentation reviews) neither the Workflow Analysis nor the requirements will be grounded in reality.</p>
 
-  <!-- (retained sub-phase label removed — merged into section header above) -->
-  <div class="sub-phase" id="pr-step-3-detail" style="display:none;"></div>
+  <!-- SUB-PHASE 1: WORKFLOW ANALYSIS -->
+  <div class="sub-phase" id="pr-step-3">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Workflow Analysis: validate the opportunity</h3>
+    </div>
+  </div>
 
   <p class="prose">The Workflow Analysis is a time-boxed investigation (typically two weeks) into the workflow you selected.</p>
   <ul class="prose-list">
@@ -593,7 +585,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
         <div class="a-type">PPT / Mural · Medium priority</div>
         <div class="a-title">Business Process Map(s)</div>
         <div class="a-desc">Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities. Produced during the Workflow Analysis and forms the factual basis for the go/no-go recommendation.</div>
-        <div class="a-links"><a class="a-link" href="https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984" target="_blank" rel="noopener">↗ Example</a><a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">↗ Template</a></div>
+        <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">↗ Example</a><a class="a-link" href="https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984" target="_blank" rel="noopener">↗ Template</a></div>
       </div>
     </div>
   </div>
@@ -772,18 +764,16 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <span class="challenge-pip">Prioritization &amp; Roadmap</span>
   </div>
 
-  <div class="sub-phase" id="pr-step-5" style="margin-top:0;">
+  <h2>Hold the scope. Measure honestly. Decide at Day 90.</h2>
+
+  <p class="prose">The roadmap you built in Discover now runs against reality. The P&R work doesn't end when the build starts. It directly shapes two critical decisions: the Day 90 go/no-go, and what gets prioritized in the next wave. Both require the same discipline as the initial prioritization: evidence over enthusiasm, math over momentum.</p>
+
+  <div class="sub-phase" id="pr-step-5">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 5</span>
-      <h3 style="font-size:1.375rem;font-weight:600;">Experimentation</h3>
+      <h3>Experimentation: protect the scope, track against the plan</h3>
     </div>
   </div>
-
-  <h2 style="margin-top:.75rem;">Hold the scope. Measure honestly. Decide at Day 90.</h2>
-
-  <p class="prose">The roadmap you built in Discover now runs against reality. The P&amp;R work doesn't end when the build starts. It directly shapes two critical decisions: the Day 90 go/no-go, and what gets prioritized in the next wave. Both require the same discipline as the initial prioritization: evidence over enthusiasm, math over momentum.</p>
-
-  <div class="sub-phase" id="pr-step-5-detail" style="display:none;"></div>
 
   <p class="prose">During the sprint, prioritization pressure comes from a different direction: not "what should we build?" but "can we add this to the current sprint?" The answer, almost always, should be no, or at minimum, "what comes out to make room?" The roadmap signed off in Solution Design is the shield that makes that response defensible. Without it, scope creep is inevitable and the Day 90 decision becomes meaningless.</p>
 
@@ -904,12 +894,5 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
 })();
 </script>
-<script src="js/tracking-config.js"></script>
-    <script src="js/tracking-secrets.js"></script>
-<script src="js/tracking.js"></script>
-<script>
-if(window.aiftTrack)window.aiftTrack.pageView('prioritization-roadmap-narrative','Prioritization & Roadmap Deep Dive');
-</script>
-<script src="js/feedback.js"></script>
 </body>
 </html>

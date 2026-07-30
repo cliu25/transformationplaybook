@@ -1,0 +1,13 @@
+name = "aift-feedback"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Secrets — set these with:
+#   wrangler secret put GITHUB_TOKEN
+#   wrangler secret put GITHUB_OWNER
+#   wrangler secret put GITHUB_REPO
+# Optional (defaults to https://github.ibm.com/api/v3):
+#   wrangler secret put GITHUB_API_BASE
+
+[vars]
+# No non-secret vars needed

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deliverable Library — AI-First Transformation Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#0f62fe;--blue-dk:#0043a4;--blue-fill:#edf5ff;
+  --purple:#8a3ffc;--purple-dk:#5c2eb8;--purple-fill:#f6f2ff;
+  --green:#24a148;--green-dk:#1a6b32;--green-fill:#defbe6;
+  --teal:#009d9a;--teal-dk:#005d5d;--teal-fill:#d9fbfb;
+  --orange:#ff832b;--orange-dk:#8a3800;--orange-fill:#fff2e8;
+  --red:#da1e28;--red-dk:#a32d2d;--red-fill:#fff1f1;
+  --amber:#ba7517;--amber-fill:#fdf4e3;--amber-dk:#633806;
+  --text:#161616;--text-2:#525252;--text-3:#6f6f6f;
+  --border:#e0e0e0;--layer:#f4f4f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;font-size:16px;}
+.page{max-width:780px;margin:0 auto;padding:0 1.5rem 6rem;}
+
+.module-header{padding:3rem 0 2.5rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:.75rem;}
+.module-header h1{font-size:2rem;font-weight:300;line-height:1.1;margin-bottom:1.25rem;}
+.module-header .def{font-size:1.05rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--border);padding-left:1.25rem;}
+
+/* Phase nav */
+.phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:#fff;border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.35rem .875rem;border-radius:4px;border:1.5px solid;transition:all .12s;}
+.pnav-pill.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill:hover{filter:brightness(.94);}
+.pnav-pill.active{font-weight:700;box-shadow:0 0 0 2px currentColor;}
+.step-section,.step-header{scroll-margin-top:4.75rem;}
+
+/* Step sections */
+.step-section{padding:3rem 0;border-top:1px solid var(--border);}
+.step-header{margin-bottom:1.75rem;}
+.step-tag-row{display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem;flex-wrap:wrap;}
+.step-num{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.3rem .75rem;border-radius:2px;white-space:nowrap;}
+.tag-engage{background:var(--blue-fill);color:var(--blue-dk);}
+.tag-discover{background:var(--purple-fill);color:var(--purple-dk);}
+.tag-execute{background:var(--green-fill);color:var(--green-dk);}
+.step-timing{font-size:.78rem;color:var(--text-3);font-style:italic;}
+.step-header h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:.625rem;}
+.step-goal{font-size:.9rem;color:var(--text-2);line-height:1.65;border-left:3px solid var(--border);padding-left:1rem;}
+
+/* Artifact cards */
+.artifact-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.875rem;margin-top:1.5rem;}
+.artifact-card{border:1px solid var(--border);border-radius:4px;padding:1rem;background:#fff;}
+.artifact-card .a-type{font-size:.68rem;color:var(--text-3);margin-bottom:.3rem;}
+.artifact-card .a-title{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.375rem;}
+.artifact-card .a-desc{font-size:.8rem;color:var(--text-2);line-height:1.5;margin-bottom:.75rem;}
+.artifact-card .a-links{display:flex;gap:.625rem;flex-wrap:wrap;margin-top:auto;}
+.a-link{font-size:.78rem;color:var(--purple);text-decoration:none;font-weight:500;}
+.a-link:hover{text-decoration:underline;}
+.a-link.off{font-size:.78rem;color:var(--text-3);opacity:.4;cursor:not-allowed;pointer-events:none;}
+.priority-high::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#da1e28;margin-right:.375rem;vertical-align:middle;}
+.priority-med::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#ba7517;margin-right:.375rem;vertical-align:middle;}
+.priority-low::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#c6c6c6;margin-right:.375rem;vertical-align:middle;}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="module-header">
+    <div class="eyebrow">AI-First Transformation Playbook</div>
+    <h1>Deliverable Library</h1>
+    <p class="def">Every template and example tied to each step of the 6-step transformation framework — from initial assessment through scale and adoption.</p>
+  </div>
+
+  <nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#step1">Step 1 · Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#step2">Step 2 · Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#step3">Step 3 · Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#step4">Step 4 · Solution Design</a><a class="pnav-pill pnav-execute" href="#step5">Step 5 · Experimentation</a><a class="pnav-pill pnav-execute" href="#step6">Step 6 · Scale &amp; Adopt</a></nav>
+
+  <!-- ─── STEP 1 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step1">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-engage">Step 1 · Engage</span>
+        <span class="step-timing">Upfront · under 30 days</span>
+      </div>
+      <h2>Tech &amp; Data Assessment</h2>
+      <p class="step-goal">Establish an honest baseline of AI-readiness — infrastructure, data quality, governance, capability — before committing to workflow-level transformation.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Current State Processes</div>
+        <div class="a-desc">Captures the domain's people (personas), process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.</div>
+        <div class="a-links">
+          <span class="a-link off">Template coming soon</span>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Technology &amp; Data Readiness Checklist</div>
+        <div class="a-desc">Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a mechanism to determine foundational challenges to address before or during solution planning and execution.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Opportunity Sizing</div>
+        <div class="a-desc">Quantifies the value case tied to the balance sheet or G&amp;A: baseline, target, investment, and ROI.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STEP 2 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step2">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-engage">Step 2 · Engage</span>
+        <span class="step-timing">Upfront</span>
+      </div>
+      <h2>Business Process Mapping</h2>
+      <p class="step-goal">Build a comprehensive, quantified map of business processes to identify where AI investment will generate the highest return.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Business Process Map(s)</div>
+        <div class="a-desc">Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">RACI Matrix</div>
+        <div class="a-desc">Aligns who owns what throughout the scope of a project.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">RAID Log</div>
+        <div class="a-desc">Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.</div>
+        <div class="a-links">
+          <span class="a-link off">Template coming soon</span>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Project Plan</div>
+        <div class="a-desc">A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can't complete it, you're not ready to start.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/2ryvfmucrpobe9rd6hjvbklts39nxvfp" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Prioritization Matrix</div>
+        <div class="a-desc">Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/39ul2emcnloib0optj35z02ubgoldddj" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.box.com/s/3zpisz74ju6se7cboqoljtb1etpqc4sq" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STEP 3 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step3">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-discover">Step 3 · Discover</span>
+        <span class="step-timing">~2 weeks / workflow</span>
+      </div>
+      <h2>Workflow Analysis</h2>
+      <p class="step-goal">Validate that the selected workflow is worth transforming. Output: a go/no-go recommendation to proceed to Solution Design.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Business Requirements Log</div>
+        <div class="a-desc">The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=x18IKO" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Business Case Template</div>
+        <div class="a-desc">Quantifies the value case tied to the balance sheet or G&amp;A: baseline, target, investment, and ROI. Supports build vs. make decision.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Future State Workflow Process Map</div>
+        <div class="a-desc">A user-perspective future-state journey: how the person's work changes, where AI enters, and where the human stays in the loop.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STEP 4 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step4">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-discover">Step 4 · Discover</span>
+        <span class="step-timing">Design</span>
+      </div>
+      <h2>Solution Design</h2>
+      <p class="step-goal">Translate workflow analysis into a concrete, scalable solution vision and locked MVP scope with sponsor sign-off.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Strategic Roadmap</div>
+        <div class="a-desc">The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Build vs. Buy</div>
+        <div class="a-desc">Documents the decision framework and rationale for whether to build a custom solution or procure an existing product.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQA1wQK4UT2nRa8c4zqc_5ReAa-YQ5NS8XDaBFTeYhUIp00?e=HaSObe" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQD23K6rqBsZRIrXdDZLRilHAZ-ZCREA8DlKaTrpTFNYFyY?e=eA88xg" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Change Management Plan</div>
+        <div class="a-desc">Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end. Includes support and maintenance, scaling recs, and governance.</div>
+        <div class="a-links">
+          <span class="a-link off">Template coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STEP 5 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step5">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-execute">Step 5 · Execute</span>
+        <span class="step-timing">Build · 90 days</span>
+      </div>
+      <h2>Experimentation</h2>
+      <p class="step-goal">Rapidly deploy MVP solutions, generate empirical evidence, and make scaling decisions based on objective metrics.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">SteerCo Charter</div>
+        <div class="a-desc">Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.</div>
+        <div class="a-links">
+          <span class="a-link off">Template coming soon</span>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Defect Tracker</div>
+        <div class="a-desc">Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every steering meeting.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman" target="_blank" rel="noopener">↗ Example</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">ROI Analysis</div>
+        <div class="a-desc">A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">KPI Dashboard</div>
+        <div class="a-desc">Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.</div>
+        <div class="a-links">
+          <span class="a-link off">Template coming soon</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── STEP 6 ─────────────────────────────────────────────────────── -->
+  <section class="step-section" id="step6">
+    <div class="step-header">
+      <div class="step-tag-row">
+        <span class="step-num tag-execute">Step 6 · Execute</span>
+        <span class="step-timing">Beyond 90 days</span>
+      </div>
+      <h2>Scale &amp; Adopt</h2>
+      <p class="step-goal">Embed proven solutions into day-to-day operations and build organizational capability to sustain and grow them.</p>
+    </div>
+    <div class="artifact-grid">
+
+      <div class="artifact-card">
+        <div class="a-type"></div>
+        <div class="a-title">Operational Health Dashboard</div>
+        <div class="a-desc">A reference dashboard for adoption, usage, value realization, operational performance, and support health.</div>
+        <div class="a-links">
+          <a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">↗ Example</a>
+          <a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz" target="_blank" rel="noopener">↗ Template</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+<script>
+(function(){
+  var nav=document.querySelector('.phase-nav');
+  if(!nav||!('IntersectionObserver' in window))return;
+  var pills=Array.prototype.slice.call(nav.querySelectorAll('.pnav-pill'));
+  var map={};
+  pills.forEach(function(p){
+    var id=p.getAttribute('href').slice(1);
+    if(!map[id])map[id]=[];
+    map[id].push(p);
+  });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&map[e.target.id]){
+        pills.forEach(function(p){p.classList.remove('active');});
+        map[e.target.id].forEach(function(p){p.classList.add('active');});
+      }
+    });
+  },{rootMargin:'-10% 0px -75% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+})();
+</script>
+</body>
+</html>

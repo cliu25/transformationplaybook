@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8J6ML6D9EV"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-8J6ML6D9EV');
-    </script>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBM AI-First Transformation Playbook</title>
@@ -35,7 +25,28 @@
             </nav>
             <div class="search-container">
                 <input type="text" id="search-input" class="search-input" placeholder="Search playbook...">
-                <div id="search-results" class="search-results"></div>
+                <div id="search-results" class="search-results">
+                    <div class="search-filters">
+                        <div class="search-filter-group">
+                            <label class="search-filter-label">Phase:</label>
+                            <button class="search-filter-btn active" data-filter-type="phase" data-filter-value="all">All</button>
+                            <button class="search-filter-btn" data-filter-type="phase" data-filter-value="engage">Engage</button>
+                            <button class="search-filter-btn" data-filter-type="phase" data-filter-value="discover">Discover</button>
+                            <button class="search-filter-btn" data-filter-type="phase" data-filter-value="execute">Execute</button>
+                        </div>
+                        <div class="search-filter-group">
+                            <label class="search-filter-label">Type:</label>
+                            <button class="search-filter-btn active" data-filter-type="content" data-filter-value="all">All</button>
+                            <button class="search-filter-btn" data-filter-type="content" data-filter-value="module">Module</button>
+                            <button class="search-filter-btn" data-filter-type="content" data-filter-value="case-study">Case Study</button>
+                        </div>
+                    </div>
+                    <div id="search-results-list" class="search-results-list"></div>
+                    <div id="search-history" class="search-history" style="display:none;">
+                        <div class="search-history-header">Recent Searches</div>
+                        <div id="search-history-list" class="search-history-list"></div>
+                    </div>
+                </div>
             </div>
         </header>
 
@@ -52,8 +63,13 @@
     </div>
 
 
-    <script src="js/app.js?v=20260630202055"></script>
-    <script src="config.js"></script>
-    <script src="js/analytics.js"></script>
+    <!-- Fuse.js for fuzzy search - must load before app.js -->
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <!-- Tracking: config first, then tracker, then feedback widget -->
+    <script src="js/tracking-config.js"></script>
+    <script src="js/tracking-secrets.js"></script>
+    <script src="js/tracking.js"></script>
+    <script src="js/feedback.js"></script>
+    <script src="js/app.js?v=20260716001"></script>
 </body>
 </html>

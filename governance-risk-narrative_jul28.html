@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- v=20250728 -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -91,13 +90,12 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 .phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
 .phase-section,.sub-phase{scroll-margin-top:4.75rem;}
 .phase-nav .pnav-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
-.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.35rem .875rem;border-radius:4px;border:1.5px solid;transition:all .12s;}
-.pnav-pill.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
-.pnav-pill.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
-.pnav-pill.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
-.pnav-pill.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
-.pnav-pill:hover{filter:brightness(.94);}
-.pnav-pill.active{font-weight:700;box-shadow:0 0 0 2px currentColor;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:all .12s;}
+.pnav-pill:hover{border-color:var(--text-3);color:var(--text);}
+.pnav-pill.active.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.active.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.active.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill.active.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
 .step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
 .step-glance .sg-row:first-child{border-top:none;}
@@ -186,7 +184,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><span class="tp-tag">Transparency, records &amp; change</span> <strong>Scale &amp; Adopt.</strong> Monitor beyond uptime, wire the incident paths, and revalidate the record when anything changes. Prevents silent decay and stale inventories.</span></div>
 </div>
 
-<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#gv-step-1" title="Classify the data, use approved tools only, and get data owner approval before anything is built.">Step 1 · Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#gv-step-2" title="Risk-screen the use case and register it in IGMS with named owners.">Step 2 · Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#gv-step-3" title="Design human oversight into the future-state workflow and decide what gets logged.">Step 3 · Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#gv-step-4" title="Turn controls into requirements: guardrails, thresholds, transparency, and documented model choices.">Step 4 · Solution Design</a><a class="pnav-pill pnav-execute" href="#gv-step-5" title="Test to the thresholds you set, including adversarial testing.">Step 5 · Experimentation</a><a class="pnav-pill pnav-execute" href="#gv-step-6" title="Monitor beyond uptime, wire the incident paths, and revalidate the record when anything changes.">Step 6 · Scale &amp; Adopt</a></nav>
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#gv-step-1" title="Classify the data, use approved tools only, and get data owner approval before anything is built.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#gv-step-2" title="Risk-screen the use case and register it in IGMS with named owners.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#gv-step-3" title="Design human oversight into the future-state workflow and decide what gets logged.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#gv-step-4" title="Turn controls into requirements: guardrails, thresholds, transparency, and documented model choices.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#gv-step-5" title="Test to the thresholds you set, including adversarial testing.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#gv-step-6" title="Monitor beyond uptime, wire the incident paths, and revalidate the record when anything changes.">6 - Scale &amp; Adopt</a></nav>
 
 <!-- ═══════════════════════ WHY GOVERNANCE MATTERS ═══════════════════════ -->
 <div class="phase-section" id="gv-why" style="border-top:none;padding-top:0;">
@@ -293,7 +291,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
     <span class="challenge-pip">Governance &amp; Risk</span>
-    <span class="phase-step-context">Steps 1 &amp; 2 · Tech &amp; Data Assessment · Business Process Mapping</span>
+    <span class="phase-step-context">Steps 1 &amp; 2 · Assess &amp; Analyze</span>
   </div>
   <h2>Know your data, register your work.</h2>
 
@@ -325,6 +323,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-1" style="margin-top:0;">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 1</span>
+      <h3>Data governance: know your data before it touches a model</h3>
     </div></div>
 
     <p class="prose">Every governance conversation eventually comes back to the data, so start there. Most organizations, IBM included, classify data into four tiers, from freely shareable to tightly controlled. The tier determines what tools you may use, what approvals you need, and how much review the use case attracts.</p>
@@ -358,6 +357,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-2">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 2</span>
+      <h3>Register the use case and screen the risk</h3>
     </div></div>
 
     <details class="deep-dive">
@@ -422,12 +422,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="challenge-pip">Governance &amp; Risk</span>
     <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
   </div>
-  <div class="sub-phase" style="margin-top:0;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 3</span>
-      <h3>Workflow Analysis</h3>
-    </div>
-  </div>
   <h2>Design the controls in: oversight, logging, requirements.</h2>
 
   <div class="key-takeaway">
@@ -460,6 +454,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-3" style="margin-top:0;">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 3</span>
+      <h3>Human oversight and logging are workflow design, not paperwork</h3>
     </div></div>
 
     <p class="prose">As you analyze the workflow in Step 3, decide specifically: which outputs does a human review before they take effect, who has the authority to override, and what happens to the work when they do? Give those people the time and the information to do it, not just the responsibility.</p>
@@ -482,6 +477,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-4">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 4</span>
+      <h3>Controls become requirements</h3>
     </div></div>
 
     <p class="prose">Everything decided in Step 3 goes into the build-ready requirements alongside the functional ones: the guardrails (what the system must refuse or filter), the thresholds (what accuracy is acceptable for this use, and what happens below it), the transparency notice, and the logging. Add the Fact Sheet from the checklist above. None of it is long. All of it is much easier to write now than to reconstruct later.</p>
@@ -517,12 +513,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="challenge-pip">Governance &amp; Risk</span>
     <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
   </div>
-  <div class="sub-phase" style="margin-top:0;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 5</span>
-      <h3>Experimentation</h3>
-    </div>
-  </div>
   <h2>Prove the controls, then keep them alive.</h2>
 
   <div class="key-takeaway">
@@ -554,6 +544,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-5" style="margin-top:0;">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation: prove the controls, not just the features</h3>
     </div></div>
 
     <p class="prose">The sprint validates that the solution works. This chapter's addition: the sprint also validates that the controls work, and the only way to know is to attack them. Feed the system inputs it should refuse. Put instructions inside documents it reads and see whether it follows them. Ask it to act outside its scope and check what the permission boundaries actually permit.</p>
@@ -576,6 +567,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-phase" id="gv-step-6">
     <div class="sub-phase-label">
       <span class="sub-phase-number">Step 6</span>
+      <h3>Scale &amp; Adopt: governance is continuous, not a launch gate</h3>
     </div></div>
 
     <p class="prose">The habits in the checklist above only work if someone is actually watching. A dashboard nobody looks at is not monitoring, and an incident path nobody remembers is not a plan. Pick a real cadence for the monitoring review, name who owns it, and treat the first bad day as the test of whether the incident paths actually work, not the moment to invent them.</p>

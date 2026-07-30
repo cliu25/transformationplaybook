@@ -53,7 +53,7 @@
       "nodes": [
         {
           "id": "step1",
-          "label": "Technology & Data Foundations Assessment",
+          "label": "Tech & Data Assessment",
           "subtext": "Establish baseline of technology and data AI-readiness. Confirm sponsorship, team structure, and go/no-go before committing to workflow analysis.",
           "phaseGroup": "Engage",
           "color": "#0f62fe",
@@ -2386,11 +2386,11 @@
                 "id": "raci-matrix",
                 "title": "RACI Matrix",
                 "description": "Aligns who owns what throughout the scope of a project",
-                "fileType": "PPT",
+                "fileType": "Excel",
                 "priority": "Medium",
-                "exampleUrl": "",
-                "templateUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
-                "hasExample": false,
+                "exampleUrl": "https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u",
+                "templateUrl": "https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDC0t0srYOgQIhnwt_m_fkvAUX8QMx-qNknF3E77mLbkyo?e=HuULCT",
+                "hasExample": true,
                 "hasTemplate": true,
                 "opensInNewWindow": true
               },
@@ -2398,12 +2398,12 @@
                 "id": "raid-log",
                 "title": "RAID Log",
                 "description": "Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.",
-                "fileType": "Monday",
+                "fileType": "Excel",
                 "priority": "Medium",
-                "exampleUrl": "from michael",
-                "templateUrl": "",
-                "hasExample": true,
-                "hasTemplate": false,
+                "exampleUrl": "",
+                "templateUrl": "https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDn9i60m4nhTLW0R3b0Sf-nAS4HFwpukAQCTj6v9QtWCpc?e=v6MNVt",
+                "hasExample": false,
+                "hasTemplate": true,
                 "opensInNewWindow": true
               }
             ],
@@ -2429,20 +2429,7 @@
                 "description": "Get leaders excited about the vision and the change. Top-down air cover that reinforces the bottom-up change effort."
               }
             ],
-            "artifacts": [
-              {
-                "id": "change-management-plan",
-                "title": "Change Management Plan",
-                "description": "Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end.",
-                "fileType": "PPT",
-                "priority": "High",
-                "exampleUrl": "",
-                "templateUrl": "https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0",
-                "hasExample": false,
-                "hasTemplate": true,
-                "opensInNewWindow": true
-              }
-            ],
+            "artifacts": [],
             "commonPitfalls": [
               "Insufficient upfront process analysis — the R2A gap",
               "Designing the tech without redesigning the work around it"
@@ -2502,32 +2489,7 @@
                 "description": "Manage communications and leadership alignment, demoing real progress to build excitement. Sustained momentum and trust as the solution matures sprint over sprint."
               }
             ],
-            "artifacts": [
-              {
-                "id": "uat-feedback-tracker",
-                "title": "UAT Feedback Tracker",
-                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
-                "fileType": "Excel",
-                "priority": "Medium",
-                "exampleUrl": "",
-                "templateUrl": "",
-                "hasExample": false,
-                "hasTemplate": false,
-                "opensInNewWindow": true
-              },
-              {
-                "id": "usage-analytics",
-                "title": "Usage Analytics",
-                "description": "Reference analytics for active users, repeat users, workflow volume, deflection, and usage events.",
-                "fileType": "Excel",
-                "priority": "Low",
-                "exampleUrl": "",
-                "templateUrl": "",
-                "hasExample": false,
-                "hasTemplate": false,
-                "opensInNewWindow": true
-              }
-            ],
+            "artifacts": [],
             "commonPitfalls": [
               "Waiting for the solution to be perfect before anyone uses it",
               "Stopping at testing instead of real-work usage"
@@ -2550,32 +2512,7 @@
                 "description": "Monitor adoption and intervene where it plateaus (office hours, champions, edge-case examples). Adoption climbs past the plateau instead of eroding back to old habits."
               }
             ],
-            "artifacts": [
-              {
-                "id": "uat-feedback-tracker",
-                "title": "UAT Feedback Tracker",
-                "description": "Tracks real-user testing feedback, defects, severity, acceptance criteria, priority, ownership, and resolution.",
-                "fileType": "Excel",
-                "priority": "Medium",
-                "exampleUrl": "",
-                "templateUrl": "",
-                "hasExample": false,
-                "hasTemplate": false,
-                "opensInNewWindow": true
-              },
-              {
-                "id": "usage-analytics",
-                "title": "Usage Analytics",
-                "description": "Reference analytics for active users, repeat users, workflow volume, deflection, and usage events.",
-                "fileType": "Excel",
-                "priority": "Low",
-                "exampleUrl": "",
-                "templateUrl": "",
-                "hasExample": false,
-                "hasTemplate": false,
-                "opensInNewWindow": true
-              }
-            ],
+            "artifacts": [],
             "commonPitfalls": [
               "Adoption plateaus as users revert to old templates",
               "No domain owner for prompts/content",

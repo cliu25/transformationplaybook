@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Value Measurement &amp; ROI (Under construction): How-to Deep Dive</title>
+<title>Value Measurement &amp; ROI: How-to Deep Dive</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -88,17 +88,14 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 .ready-body h4{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.3rem;}
 .ready-body p{font-size:.875rem;line-height:1.55;color:var(--text-2);}
 .sub-divider{height:1px;background:var(--border);margin:2.5rem 0;}
-.phase-section{scroll-margin-top:5.5rem;}
-.sub-phase{scroll-margin-top:5.5rem;}
 .phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:var(--bg,#fff);border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
 .phase-nav .pnav-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
-.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.35rem .875rem;border-radius:4px;border:1.5px solid;transition:all .12s;}
-.pnav-pill.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
-.pnav-pill.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
-.pnav-pill.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
-.pnav-pill.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
-.pnav-pill:hover{filter:brightness(.94);}
-.pnav-pill.active{font-weight:700;box-shadow:0 0 0 2px currentColor;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.3rem .75rem;border-radius:999px;border:1px solid var(--border);color:var(--text-2);background:#fff;transition:all .12s;}
+.pnav-pill:hover{border-color:var(--text-3);color:var(--text);}
+.pnav-pill.active.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.active.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.active.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill.active.pnav-ref{background:var(--layer);border-color:var(--text-3);color:var(--text);}
 .step-glance{margin:0 0 1.5rem;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
 .step-glance .sg-row{display:flex;gap:.875rem;align-items:flex-start;padding:.75rem 1.25rem;border-top:1px solid var(--border);}
 .step-glance .sg-row:first-child{border-top:none;}
@@ -139,7 +136,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="eyebrow">How-to Deep Dive</div>
   <h1>Value Measurement &amp; ROI</h1>
   <p class="def">Good measurement is not about reporting up. It is about knowing whether what you built is working, having the evidence to prove it, and using that evidence to make the next decision. This chapter helps you define the right metrics for your workflow, track them in a way that is honest and lightweight, and build the proof needed to sustain and grow what you have built.</p>
-  <p class="def" style="margin-top:.75rem;">This chapter follows the same six-step transformation process used across every domain chapter (Engage through Execute) and shows what value measurement and ROI work happens at each step.</p>
 </div>
 
 <div class="where-strip">
@@ -156,35 +152,35 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 <!-- ===== FRAMING ===== -->
 
 <div class="step-glance">
-  <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><strong>Tech &amp; Data Assessment.</strong> In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like. Keep the approach lightweight and adaptable, leadership-blessed without the backflips: a convoluted measurement setup is harder to sustain than a simple one leadership actually trusts.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-engage">Step 1</span><span class="sg-text"><strong>Tech &amp; Data Assessment.</strong> In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like, with Finance sense-checking the numbers.</span></div>
   <div class="sg-row"><span class="sg-chip sg-engage">Step 2</span><span class="sg-text"><strong>Business Process Mapping.</strong> Capture what the workflow costs today (time, people, error rates) as your baselines, and name an owner for every metric.</span></div>
   <div class="sg-row"><span class="sg-chip sg-discover">Step 3</span><span class="sg-text"><strong>Workflow Analysis.</strong> Confirm baselines from source-system data, not estimates. A before-and-after comparison is only credible when both halves come from the same source.</span></div>
   <div class="sg-row"><span class="sg-chip sg-discover">Step 4</span><span class="sg-text"><strong>Solution Design.</strong> Make tracking a requirement in the MVP so data flows from Sprint 1 instead of being retrofitted after launch.</span></div>
-  <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><strong>Experimentation.</strong> Track sprint over sprint, report at steering, and bring measured actuals to the end-of-pilot go/no-go.</span></div>
+  <div class="sg-row"><span class="sg-chip sg-execute">Step 5</span><span class="sg-text"><strong>Experimentation.</strong> Track sprint over sprint, report at steering, and bring measured actuals to the Day 90 go/no-go.</span></div>
   <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Sustain tracking after launch and use the evidence to defend, grow, and decide what comes next.</span></div>
 </div>
 
-<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#vm-step-1" title="In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like. Keep the approach lightweight and leadership-blessed, not convoluted.">Step 1 · Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#vm-step-2" title="Capture what the workflow costs today (time, people, error rates) as your baselines, and name an owner for every metric.">Step 2 · Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#vm-step-3" title="Confirm baselines from source-system data, not estimates. A before-and-after comparison is only credible when both halves come from the same source.">Step 3 · Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#vm-step-4" title="Make tracking a requirement in the MVP so data flows from Sprint 1 instead of being retrofitted after launch.">Step 4 · Solution Design</a><a class="pnav-pill pnav-execute" href="#vm-step-5" title="Track sprint over sprint, report at steering, and bring measured actuals to the end-of-pilot go/no-go.">Step 5 · Experimentation</a><a class="pnav-pill pnav-execute" href="#vm-step-6" title="Sustain tracking after launch and use the evidence to defend, grow, and decide what comes next.">Step 6 · Scale &amp; Adopt</a></nav>
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#vm-engage" title="In the metrics design session, agree the primary value this transformation delivers and what a meaningful improvement looks like, with Finance sense-checking the numbers.">1 - Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#vm-engage" title="Capture what the workflow costs today (time, people, error rates) as your baselines, and name an owner for every metric.">2 - Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#vm-step-3" title="Confirm baselines from source-system data, not estimates. A before-and-after comparison is only credible when both halves come from the same source.">3 - Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#vm-step-4" title="Make tracking a requirement in the MVP so data flows from Sprint 1 instead of being retrofitted after launch.">4 - Solution Design</a><a class="pnav-pill pnav-execute" href="#vm-step-5" title="Track sprint over sprint, report at steering, and bring measured actuals to the Day 90 go/no-go.">5 - Experimentation</a><a class="pnav-pill pnav-execute" href="#vm-step-6" title="Sustain tracking after launch and use the evidence to defend, grow, and decide what comes next.">6 - Scale &amp; Adopt</a></nav>
 
 <div class="phase-section" id="vm-why" style="border-top:none;padding-top:0;">
   <h2>Why measurement matters</h2>
 
   <div class="key-takeaway">
     <span class="kt-icon">&#128204;</span>
-    <span class="kt-text">Metrics exist for your domain, not for the program. Pick the 3 to 5 workflow metrics you control and can defend. Organization-wide AI metrics are tracked by AIFT and IBM executive leaders and are not your job.</span>
+    <span class="kt-text">Metrics exist for your domain, not for the program. Pick the 3 to 5 workflow metrics you control and can defend. Organization-wide AI metrics are tracked at the program level and are not your job.</span>
   </div>
 
   <div class="framing-box">
-    <p>Across IBM domains, the most consistent friction around metrics is the concern that tracking will be used to judge rather than help. The reality is the opposite. The teams that skip measurement are the ones who cannot make the case to keep going, cannot get resources for Wave 2, and cannot prove to leadership that the investment was worth it. Good metrics exist for the domain, not for the program.</p>
+    <p>Across IBM domains, the most consistent friction around metrics is the fear that tracking will be used to judge rather than help. The reality is the opposite. The teams that skip measurement are the ones who cannot make the case to keep going, cannot get resources for Wave 2, and cannot prove to leadership that the investment was worth it. Good metrics exist for the domain, not for the program.</p>
   </div>
 
   <details class="deep-dive">
-    <summary>Q2C example: why tracking your own metrics pays off</summary>
+    <summary>Why this matters: whose metrics these are and why they pay off</summary>
     <div class="deep-dive-body">
 
   <p class="prose">Teams that define and track their own metrics have a structural advantage when it comes to defending their work, securing continued investment, and knowing when to pivot. For example, the Q2C (Quote-to-Cash) team tracks Effort Reduction and Cycle Time sprint over sprint not because they have to. When the data showed effort reduction climbing from 8% in Sprint 1 to 37% by Sprint 5, that story sold the next phase of the program. Measurement is the evidence you are building.</p>
 
-  <p class="prose">Two types of metrics exist here. <strong>Workflow metrics</strong> are the ones you define, track, and own: effort reduction, cycle time, cost per transaction, quality scores, adoption of your specific tool. <strong>Organization-wide metrics</strong> like overall AI usage rates or AI literacy completion are tracked by AIFT and IBM executive leaders. This chapter focuses on the metrics that serve your team.</p>
+  <p class="prose">Two types of metrics exist here. <strong>Workflow metrics</strong> are the ones you define, track, and own: effort reduction, cycle time, cost per transaction, quality scores, adoption of your specific tool. <strong>Organization-wide metrics</strong> like overall AI usage rates or AI literacy completion are tracked at the program level. This chapter focuses on the metrics that serve your team.</p>
 
     </div>
   </details>
@@ -225,7 +221,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="phase-label">
     <span class="phase-tag tag-engage">Engage</span>
     <span class="challenge-pip">Value Measurement &amp; ROI</span>
-    <span class="phase-step-context">Steps 1 &amp; 2 · Tech &amp; Data Assessment · Business Process Mapping</span>
+    <span class="phase-step-context">Steps 1 &amp; 2 · Assess &amp; Analyze</span>
   </div>
 
   <h2>Agree on what success looks like before you build anything.</h2>
@@ -240,52 +236,53 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="who-roles">
       <span class="who-role">Domain transformation lead</span>
       <span class="who-role">Process SMEs</span>
-      <span class="who-role">Leadership or EBM contact</span>
+      <span class="who-role">Finance / EBM partner</span>
       <span class="who-role">Executive sponsor</span>
     </div>
   </div>
 
-  <p class="prose">The single most valuable measurement activity you can do happens before any solution is designed: a short metrics design session with your process SMEs and business leadership. A focused conversation — not a workshop — to agree on three things: what success looks like, what the current process costs to run, and what a meaningful improvement would be. The output is a shared definition of success before a line of requirements is written.</p>
+  <p class="prose">The single most valuable measurement activity you can do happens before any solution is designed: running a short metrics design session with your process SMEs and Finance partner. In practice this is a focused conversation, not a workshop with deliverables, where you answer three questions together. What would make this transformation a clear success? What does the current process cost to run? And what is realistic to expect from an AI intervention of this scope?</p>
 
-  <div class="sub-phase" id="vm-step-1" style="margin-top:0;">
+  <p class="prose">The output is not a complex model. It is a shared definition of success that the team, the sponsor, and Finance all agree on before a line of requirements is written. This prevents the most common failure mode: defining metrics after the build to make the results look good.</p>
+
+  <div class="sub-phase" style="margin-top:0;">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 1</span>
-      <h3>Tech &amp; Data Assessment: agree on what to measure and what good looks like</h3>
+      <span class="sub-phase-number">Metrics design session</span>
+      <h3>Agree on what to measure and what good looks like</h3>
     </div>
   </div>
 
-  <p class="prose">3 to 5 people: the domain transformation lead, 1 to 2 process SMEs, and business leadership or your EBM contact. Walk away with a shared answer to each of the following:</p>
+  <p class="prose">Run this as a focused conversation with 3 to 5 people: the domain transformation lead, 1 to 2 process SMEs who know the current workflow well, and your Finance or EBM (Enterprise Business Management) partner. The goal is to walk away with a shared answer to each of the following:</p>
 
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">What to agree on in the metrics design session</div></div>
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>What is the primary value this transformation delivers?</strong> Identify the main category: productivity (time and effort), quality (accuracy and errors), cycle time (speed), or cost (spend). This shapes which metrics matter most. Most workflows have one primary and at most one secondary.</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>What is the primary value this transformation delivers?</strong> Pick one: productivity (time and effort), quality (accuracy and errors), cycle time (speed), or cost (spend). This shapes which metrics matter most. Most workflows have one primary and at most one secondary.</div></div>
     <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>What does the workflow cost to run today?</strong> Get specific with your process SMEs: how long does step A to step B take? How many people touch it? What is the error or rework rate? What is the cost per transaction? These are your baselines. Actual numbers from the platform are better than estimates.</div></div>
-    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>What would a meaningful improvement look like?</strong> Set a direction before the solution is designed, not after. "We expect 40% effort reduction in this step" is a hypothesis that shapes the build. Get business leadership, or your EBM contact where one exists, to sense-check whether the numbers make sense and whether they tie to something on the balance sheet.</div></div>
+    <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>What would a meaningful improvement look like?</strong> Set a direction before the solution is designed, not after. "We expect 40% effort reduction in this step" is a hypothesis that shapes the build. Get Finance or your EBM partner (the business unit's financial measurement lead) to sense-check whether the numbers make sense and whether they tie to something on the balance sheet.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>How will you capture the data?</strong> Platform telemetry is the best option. If your tool already tracks time-in-step, use it. Manual tracking (time logs, simple spreadsheets) is acceptable. Surveys are a weak fallback because they measure perception, not performance. The data source you choose now is the one you will be held to later.</div></div>
     <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>Who owns each metric?</strong> Name a person for each one. Metrics without owners do not get tracked.</div></div>
   </div>
 
-  <p class="prose"><strong>Frame the financial value in the terms leadership uses.</strong> Three habits do most of the work:</p>
+  <p class="prose"><strong>Frame the financial value in the terms leadership uses.</strong> When your results reach a VP or a finance review, they will be compared against every other investment in the portfolio. Presenting them in the shape leadership already thinks in makes your case stronger and saves you a round of translation later. Three habits do most of the work:</p>
 
   <ul class="prose-list">
-    <li><strong>Classify financial impact as revenue contribution, cost savings, or risk avoidance.</strong> Every financial metric you define should map to one of them.</li>
-    <li><strong>Keep a projected figure and a realized figure, separately labeled.</strong> Leadership treats these two numbers very differently, and blending them is how measurement credibility is lost.</li>
-    <li><strong>Anchor targets against reference points that hold up.</strong> Two useful markers: around two hours saved per person per week, and 60%+ of intended users adopting the tool within six months of launch.</li>
+    <li><strong>Classify financial impact as revenue enabled, cost savings, or risk avoidance.</strong> These are the three categories finance compares investments in. Every financial metric you define should map to one of them, and if your solution improves more than one enterprise workflow (Quote-to-Cash and Source-to-Pay, say), state the value it generates in each workflow it touches. The same capability can create distinct value in each.</li>
+    <li><strong>Keep a projected figure and a realized figure, separately labeled.</strong> The projected value is your estimate at design time, grounded in the baseline and stated assumptions. The realized value is what you later confirm from actual data after deployment. Leadership treats these two numbers very differently, and blending them is how measurement credibility is lost. Record the projected value now, in the metrics design session, and plan for how the realized value will be confirmed.</li>
+    <li><strong>Anchor targets against reference points that hold up.</strong> Across IBM transformations, two useful markers: around two hours saved per person per week, and 60% or more of intended users adopting the tool within six months of launch. If your targets sit far below these, it is worth asking whether the workflow was worth transforming.</li>
   </ul>
 
-  <p class="prose">The best baseline data comes from inside the platform people already use. Building your measurement approach around instrumentation that already exists is more reliable than setting up new tracking after the fact.</p>
-
-  <div class="sub-phase" id="vm-step-2" style="margin-top:1.5rem;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 2</span>
-      <h3>Business Process Mapping: document what the workflow costs today</h3>
-    </div>
+  <div class="painpoint">
+    <div class="painpoint-label">&#9888; Pain point</div>
+    <div class="painpoint-title">Numbers that do not survive finance scrutiny</div>
+    <div class="painpoint-body">Three habits protect your numbers. Count people once: if the same person benefits from two initiatives, do not sum them into one impact figure. Label volume honestly: training completions are not trained people, and task counts are not users; say which one you are reporting. And where the data cannot support a precise number yet, say "data collection in progress" rather than manufacturing a percentage. A smaller, defensible number builds more trust than a bigger one that falls apart under one follow-up question.</div>
   </div>
+
+  <p class="prose">The best baseline data comes from inside the platform people already use. If your team already has a system that tracks how long each step takes, that data is the baseline. Building your measurement approach around instrumentation that already exists is far more reliable than setting up new tracking after the fact.</p>
 
   <!-- Metric definition template SVG -->
   <div class="visual-wrap">
     <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="min-width:480px;">
-      <text x="350" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">What a metric definition looks like: illustrative example (document verification workflow)</text>
+      <text x="350" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">What a metric definition looks like: document verification example</text>
 
       <!-- Column headers -->
       <rect x="10" y="28" width="680" height="24" rx="3" fill="#edf5ff"/>
@@ -386,25 +383,15 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="case-study">
     <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">MCC Event Speaker Agent: defining metrics before building</span></div>
-    <p class="cs-prose">The MCC team ran their metrics conversation during Workflow Analysis before any design work started. They measured the current manual process with their event planning SMEs: average time to identify and confirm speakers was 5 days, the average number of back-and-forth emails per event was 12, and the speaker confirmation rate was 65%. They set targets before the build: 2 days, 3 emails, 85% confirmation rate. The EBM team confirmed the metrics tied to G&A reduction through event planning efficiency. They tracked weekly using a spreadsheet linked to their event management system. When the solution launched, the baseline was already there. No scrambling to reconstruct what things looked like before.</p>
+    <p class="cs-prose">The MCC team ran their metrics conversation during Workflow Analysis before any design work started. They measured the current manual process with their event planning SMEs: average time to identify and confirm speakers was 5 days, the average number of back-and-forth emails per event was 12, and the speaker confirmation rate was 65%. They set targets before the build: 2 days, 3 emails, 85% confirmation rate. Finance confirmed the metrics tied to G&A reduction through event planning efficiency. They tracked weekly using a spreadsheet linked to their event management system. When the solution launched, the baseline was already there. No scrambling to reconstruct what things looked like before.</p>
   </div>
 
   <div class="artifact-section">
-    <div class="artifact-section-label">Artifacts</div>
+    <div class="artifact-section-label">Artifact</div>
     <div class="artifact-grid">
       <div class="artifact-card">
-        <div class="a-title">Current State Assessment</div>
-        <div class="a-desc">Documents the current workflow: time, effort, error rates, and cost. The factual baseline that makes before-and-after comparison credible.</div>
-        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa" target="_blank" rel="noopener">&#8599; Template</a></div>
-      </div>
-      <div class="artifact-card">
-        <div class="a-title">Opportunity Sizing</div>
-        <div class="a-desc">Estimates the value potential of the transformation: time savings, cost reduction, efficiency gains, used to set targets and build the business case.</div>
-        <div class="a-links"><a class="a-link" href="https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/Shared%20Documents/02%20Enterprise%20AI%20Strategy%20%26%20Solutions/Transformation%20Dashboard/BCG%20Analysis/20251118%20-%20Lesseps_AI_EvalFrameworks_vS%20%20-%20%20Read-Only.pptx?d=w8f7b714382104620b8075d66b2b22ced&csf=1&web=1&e=Lb9y3F" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQD0dcK64H2TRLWnnkJ-mauPAVhQBJDJZxspIE5YLpI0sSY?e=5oVgdn" target="_blank" rel="noopener">&#8599; Template</a></div>
-      </div>
-      <div class="artifact-card">
         <div class="a-title">Business Case Template</div>
-        <div class="a-desc">Documents the value hypothesis, baseline, target, investment estimate, and leadership sign-off. Started in Engage with what you know, updated in Discovery when baselines are confirmed from source data.</div>
+        <div class="a-desc">Documents the value hypothesis, baseline, target, investment estimate, and Finance sign-off. Started in Engage with what you know, updated in Discovery when baselines are confirmed from source data.</div>
         <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">&#8599; Template</a></div>
       </div>
     </div>
@@ -414,7 +401,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
       <h4>Ready to move to Discovery</h4>
-      <p>You have a primary value category and, within it, 3 to 5 candidate metrics with rough baselines, a directional target, a leadership-endorsed measurement approach, and named metric owners. You are entering Discovery with a shared definition of what success means.</p>
+      <p>You have a primary value category, 3 to 5 candidate metrics with rough baselines, a directional target, a Finance-endorsed measurement approach, and named metric owners. You are entering Discovery with a shared definition of what success means.</p>
     </div>
   </div>
 </div>
@@ -425,13 +412,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="phase-tag tag-discover">Discover</span>
     <span class="challenge-pip">Value Measurement &amp; ROI</span>
     <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
-  </div>
-
-  <div class="sub-phase" style="margin-top:0;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 3</span>
-      <h3>Workflow Analysis</h3>
-    </div>
   </div>
 
   <h2>Lock the metrics. Build them into the solution from day one.</h2>
@@ -445,13 +425,13 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="who-label">Who to involve</div>
     <div class="who-roles">
       <span class="who-role">Domain transformation lead</span>
-      <span class="who-role">Leadership or EBM contact</span>
+      <span class="who-role">Finance / EBM partner</span>
       <span class="who-role">Product owner</span>
-      <span class="who-role">CIO/BPT platform team (for instrumentation)</span>
+      <span class="who-role">CIO/BPT architect (for instrumentation)</span>
     </div>
   </div>
 
-  <p class="prose">Discovery is where the candidate metrics from Engage get confirmed against real data and locked in. Workflow Analysis gives you the opportunity to go deeper on the current baseline, capturing actual numbers from source systems rather than estimates. Solution Design is where you make instrumentation a requirement in the MVP, so the data is collected automatically from Sprint 1 (the first two-week development cycle), not retrofitted after launch.</p>
+  <p class="prose">Discovery is where the candidate metrics from Engage get confirmed against real data and locked in. Workflow Analysis gives you the opportunity to go deeper on the current baseline, capturing actual numbers from source systems rather than estimates. Solution Design is where you make instrumentation a requirement in the MVP, so the data is collected automatically from Sprint 1, not retrofitted after launch.</p>
 
   <div class="sub-phase" id="vm-step-3" style="margin-top:0;">
     <div class="sub-phase-label">
@@ -460,7 +440,9 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">Use this time to capture baselines from platform data. For each metric: what is the actual current value, where does it come from, and can we capture it the same way after launch? The before-and-after comparison is only credible if both halves come from the same source.</p>
+  <p class="prose">The Workflow Analysis gives you access to the actual numbers behind the process. Use this time to capture baselines from platform data rather than estimates. If the workflow lives inside a system, that system often already tracks the things you want to measure: time in step, transaction count, error flags, completion rates. Those numbers are the baseline.</p>
+
+  <p class="prose">For each metric, answer: what is the actual current value, where does that number come from, and can we capture it the same way after the solution launches? The before-and-after comparison is only credible if both halves come from the same source. A baseline from a survey compared to a post-launch number from platform telemetry is not a valid comparison.</p>
 
   <!-- SVG: measurement approach hierarchy -->
   <div class="visual-wrap">
@@ -485,7 +467,7 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   <div class="painpoint">
     <div class="painpoint-label">&#9888; Pain point</div>
     <div class="painpoint-title">The baseline does not exist when the build ends</div>
-    <div class="painpoint-body">The most consistent tracking failure is launching a solution, seeing improvement, and not being able to prove how much because no one captured what things looked like before. Sometimes the old tool is decommissioned; sometimes the process has already changed. Capture the baseline in Workflow Analysis, before anything changes. One hour of data collection now saves months of reconstruction later — and often the reconstruction is not possible at all.</div>
+    <div class="painpoint-body">The most consistent tracking failure across domains is launching a solution, seeing meaningful improvement, and then not being able to prove how much because no one captured what things looked like before. Sometimes the old tool is decommissioned. Sometimes the process has already changed. Sometimes no one thought to take a snapshot. Capture the baseline in Workflow Analysis, before anything changes. One hour of data collection now saves months of reconstruction later. In many cases, the reconstruction is not possible at all.</div>
   </div>
 
   <div class="sub-divider"></div>
@@ -497,9 +479,11 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">For each metric from Engage and Workflow Analysis, the requirements specify what the solution must capture, how it captures it, and where that data goes. If the product owner and platform team cannot tell you how Hours Saved will be measured in the MVP, that is a gap in the requirements. Work with the CIO/BPT platform team to confirm what is possible. If EBM integration (such as Apptio) is planned, that data pipeline needs to be scoped in design, not wired up after launch.</p>
+  <p class="prose">Tracking should be in the requirements document from the first version. For each metric you defined in Engage and confirmed in Workflow Analysis, the requirements specify what the solution must capture, how it captures it, and where that data goes. If the product owner and architect cannot tell you how Hours Saved will be measured in the MVP, that is a gap in the requirements, not a detail to figure out after launch.</p>
 
-  <p class="prose"><strong>Where EBM fits.</strong> For CIO-driven projects (via Path to Production / OnboardAI), EBM is partnering with the CIO AI Platform team on value measurement upfront. For domain and business-unit-led AI projects, EBM is introducing a tiered measurement model, from lightweight EIW mapping for smaller initiatives to full cost-for-performance tracking for flagship investments, so every AI use case is measured at the right level of rigor. Stay tuned for more.</p>
+  <p class="prose">The specific instrumentation needed depends on the workflow. Some solutions log usage and completion data automatically through the platform. Others need explicit telemetry: tracking which step was completed, by whom, and how long it took. Work with the CIO/BPT architect to confirm what is possible given the systems in scope. If EBM integration (such as Apptio) is planned for financial reporting, that data pipeline needs to be scoped in design, not wired up after the solution goes live.</p>
+
+  <p class="prose"><strong>Where EBM fits.</strong> For CIO-driven projects (via Path to Production / OnboardAI), EBM is partnering with the CIO AI Platform team on value measurement upfront, so the tracking is scoped here in Solution Design and runs throughout the 90-day sprint. For fully domain or business-unit-led AI projects, more is coming on EBM value measurement. In the meantime, the approach in this chapter (define the metrics, capture the baseline, build tracking into the solution) is what makes your data ready to plug into EBM reporting when that guidance lands.</p>
 
   <div class="painpoint">
     <div class="painpoint-label">&#9888; Pain point</div>
@@ -507,15 +491,10 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="painpoint-body">Instrumentation is far harder to add after the solution is built than to include from the start. A solution that did not collect usage data from Sprint 1 has a gap in its pilot evidence. A solution that does not log time-in-step has to rely on surveys to estimate productivity impact. Neither is as credible as data captured automatically throughout the build. Make telemetry a requirement in the MVP. If it cannot be built in, decide now whether you are comfortable with the measurement approach you will be left with.</div>
   </div>
 
-  <div class="painpoint" style="border-left-color:#8a3ffc;background:#f6f2ff;">
-    <div class="painpoint-label" style="color:#6929c4;">&#128161; No dedicated technical support?</div>
-    <div class="painpoint-body">This checklist assumes someone technical is at the table, event triggers, data pipelines, and platform telemetry are not business-user work. If you don't have a technical partner assigned yet, that's your actual first step, not this checklist. Systems Integration's resourcing guidance covers how to get one: some domains partner with the CIO organization for build resources; if yours does, your domain transformation lead works with them on prioritization. If resources come from elsewhere, bring that group into planning the same way, before you're stuck answering questions like these alone.</div>
-  </div>
-
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">What to specify in Solution Design for each metric</div></div>
     <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>What event triggers a data point?</strong> User completes a step, AI returns a result, a transaction closes. Be specific about what gets recorded and when.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Where is the data stored?</strong> The platform's native logs, a custom table, EPM, or Apptio (the common front end for EBM value tracking). For EBM, the preferred path is data in EPM, which EBM can then read; csv or xls works for a POC and initial steps, but the long-term direction is an automated pipeline to EPM.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Where is the data stored?</strong> The platform's native logs, a custom table, Apptio, EBM. Name the system. If it does not exist yet, name who will build it and when.</div></div>
     <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Who on the build team owns the instrumentation?</strong> Assign it like any other requirement. Instrumentation without an owner does not get built.</div></div>
     <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>When will you validate the data pipeline?</strong> Sprint 1 is the target. If the telemetry is not working by the end of Sprint 1, you are not capturing the pilot evidence you need.</div></div>
     <div class="step-row"><div class="step-num">5</div><div class="step-text"><strong>If MVP scope changes, update the metrics.</strong> A metric tied to a feature that was de-scoped is a metric you cannot report. Keep the metric list aligned with what is being built.</div></div>
@@ -526,22 +505,27 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="artifact-grid">
       <div class="artifact-card">
         <div class="a-title">Business Case Template</div>
-        <div class="a-desc">Updated in Discovery with confirmed baselines from source data, leadership-validated targets, and a documented measurement approach for each metric.</div>
+        <div class="a-desc">Updated in Discovery with confirmed baselines from source data, Finance-validated targets, and a documented measurement approach for each metric.</div>
         <div class="a-links"><a class="a-link" href="https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv" target="_blank" rel="noopener">&#8599; Template</a></div>
+      </div>
+      <div class="artifact-card">
+        <div class="a-title">Measurement Strategy</div>
+        <div class="a-desc">Documents each metric: name, current baseline, target, source system, data capture method, owner, and cadence. This becomes the measurement contract for the build.</div>
+        <div class="a-links"><span class="a-link off">Template (coming soon)</span></div>
       </div>
     </div>
   </div>
 
   <div class="case-study">
-    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">R2A (Reva) Order Validation: tracking per sprint from day one</span></div>
-    <p class="cs-prose">The R2A team built measurement into the solution design for every sprint. The Apptio decision dashboard was scoped as part of the build, not added later. Sprint by sprint, effort reduction grew: 8.69% in Sprint 1, 7.65% in Sprint 2, 16.39% in Sprint 3, 22.88% in Sprint 4, 37.77% in Sprint 5. That trajectory was only possible because the tracking was in place from the first sprint.</p>
+    <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">Q2C Order Validation: tracking per sprint from day one</span></div>
+    <p class="cs-prose">The Q2C team built measurement into the solution design for every sprint. In the requirements, each use case had defined inputs, pass/fail criteria, exception taxonomies, and evidence requirements. The Apptio decision dashboard was scoped as part of the build, not added later. By the time Sprint 1 ended, they had live data on Effort Reduction, Cycle Time, MVP Coverage, False Pass Rate, and False Fail Rate. Sprint by sprint, effort reduction grew: 8.69% in Sprint 1, 7.65% in Sprint 2, 16.39% in Sprint 3, 22.88% in Sprint 4, 37.77% in Sprint 5. That trajectory was only possible because the tracking was in place from the first sprint, not reconstructed at the end.</p>
   </div>
 
   <div class="ready">
     <span class="ready-icon">&#10003;</span>
     <div class="ready-body">
       <h4>Ready to move to Execute</h4>
-      <p>Baselines are confirmed from source data. Metrics are locked. Instrumentation is a named requirement in the MVP scope with an owner and a Sprint 1 validation date. Business leadership has seen and endorsed the business case. You are building with measurement built in.</p>
+      <p>Baselines are confirmed from source data. Metrics are locked. Instrumentation is a named requirement in the MVP scope with an owner and a Sprint 1 validation date. Finance has seen and endorsed the business case. You are building with measurement built in.</p>
     </div>
   </div>
 </div>
@@ -552,13 +536,6 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <span class="phase-tag tag-execute">Execute</span>
     <span class="challenge-pip">Value Measurement &amp; ROI</span>
     <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
-  </div>
-
-  <div class="sub-phase" style="margin-top:0;">
-    <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 5</span>
-      <h3>Experimentation</h3>
-    </div>
   </div>
 
   <h2>Track sprint over sprint. Use the data to make the go/no-go decision and what comes next.</h2>
@@ -573,8 +550,8 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     <div class="who-roles">
       <span class="who-role">Domain transformation lead</span>
       <span class="who-role">Product owner</span>
-      <span class="who-role">Leadership or EBM contact</span>
-      <span class="who-role">Business owner (after the pilot)</span>
+      <span class="who-role">Finance / EBM partner</span>
+      <span class="who-role">Business owner (after Day 90)</span>
       <span class="who-role">Executive sponsor</span>
     </div>
   </div>
@@ -586,9 +563,9 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">Track every two weeks, aligned to sprint cycles. Bring the numbers to steering as the basis for decisions, not a status update. If Effort Reduction is flat at 8% after two sprints and the target is 40%, that is information — the approach, feature set, or target needs adjustment. Catching that in Sprint 2 is very different from catching it at the end of the pilot.</p>
+  <p class="prose">Track your metrics every two weeks, aligned to sprint cycles. Bring the numbers to the steering committee, not as a status report but as the basis for decisions. If Effort Reduction is flat at 8% after two sprints and the target is 40%, that is not a failure. It is information. Either the approach needs to change, the feature set needs adjustment, or the target needs to be recalibrated with Finance. Catching that in Sprint 2 is very different from catching it at Day 90.</p>
 
-  <p class="prose">Measure from real work. That evidence ("this step took 45 minutes before and takes 8 minutes now") is what makes the go/no-go credible. Projections do not survive leadership scrutiny the same way measured actuals do.</p>
+  <p class="prose">Have real users do real work with the imperfect MVP and measure the actual difference. Not a demo. Not a simulation. Actual tasks from actual work, with the time or effort captured through the tool. That evidence ("this step took 45 minutes before and takes 8 minutes now") is what makes the go/no-go recommendation credible. Projections and estimates do not survive leadership scrutiny the same way measured actuals do.</p>
 
   <!-- Sprint tracking SVG -->
   <div class="visual-wrap">
@@ -627,20 +604,22 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="painpoint">
     <div class="painpoint-label">&#9888; Pain point</div>
-    <div class="painpoint-title">Only measuring at the end of the pilot instead of sprint over sprint</div>
-    <div class="painpoint-body">Teams that only look at metrics at the end-of-pilot go/no-go meeting miss the most valuable use of data during the build: course correction. If effort reduction is not improving sprint over sprint, something in the approach needs to change. The earlier you see that, the more time you have to address it. Weekly or bi-weekly tracking during the build is not administrative overhead. It is the mechanism that keeps the build focused on the outcome rather than on feature delivery.</div>
+    <div class="painpoint-title">Only measuring at Day 90 instead of sprint over sprint</div>
+    <div class="painpoint-body">Teams that only look at metrics at the Day 90 go/no-go meeting miss the most valuable use of data during the build: course correction. If effort reduction is not improving sprint over sprint, something in the approach needs to change. The earlier you see that, the more time you have to address it. Weekly or bi-weekly tracking during the build is not administrative overhead. It is the mechanism that keeps the build focused on the outcome rather than on feature delivery.</div>
   </div>
 
   <div class="sub-divider"></div>
 
   <div class="sub-phase">
     <div class="sub-phase-label">
-      <span class="sub-phase-number">Step 5</span>
-      <h3>The end-of-pilot go/no-go decision (Day 90 for a standard AIFT sprint)</h3>
+      <span class="sub-phase-number">Step 5 continued</span>
+      <h3>The Day 90 go/no-go decision</h3>
     </div>
   </div>
 
-  <p class="prose">The end-of-pilot decision is a business decision. Bring the actual metrics versus the baseline and target agreed in Engage. Report projected value and realized value separately — never blended. A go decision does not mean all metrics hit target; it means the trajectory is credible and Wave 2 is justified. A no-go is the measurement working as intended.</p>
+  <p class="prose">The Day 90 decision is a business decision, not a technical one. The question is whether the MVP demonstrated enough value, at enough reliability, to justify scaling the investment. Bring the actual metrics from the pilot, compared to the baseline and target agreed in Engage, to the steering committee. Report the financial result in both forms: the projected value you scoped in Engage and the realized value measured from the pilot, clearly labeled. Let the numbers drive the recommendation.</p>
+
+  <p class="prose">A go decision at Day 90 does not mean all metrics hit their target. It means the trajectory is credible, the approach is working, and the investment in Wave 2 is justified. A no-go decision is not a failure. It is the measurement working as intended. It is far better to discover that an approach does not deliver the expected value at Day 90 than at month 18 when far more has been invested.</p>
 
   <div class="sub-divider"></div>
 
@@ -651,30 +630,37 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
     </div>
   </div>
 
-  <p class="prose">Tracking shifts from sprint cadence to monthly reporting. The business owner takes over the reporting tracker; business leadership validates realized value. The data is what you use to justify the Wave 2 roadmap, secure capacity, and tell the story of what the transformation accomplished. Teams that stop tracking after the go decision find that executive support drifts because there is no ongoing evidence of impact.</p>
+  <p class="prose">After a go decision, the tracking does not stop. It shifts from sprint cadence to monthly reporting. The business owner takes over the KPI dashboard. Finance validates the realized value. The data becomes the evidence base for scaling: it is what you use to justify the Wave 2 roadmap to leadership, to secure additional capacity, and to tell the story of what the transformation accomplished.</p>
 
-  <p class="prose"><strong>Keep your AI System record current.</strong> If built through <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production</a>, update the AI System record as realized value comes in — it keeps your solution visible to leadership without re-presenting it.</p>
+  <p class="prose"><strong>Keep your AI System record current.</strong> If your solution was built through IBM's <a href="https://w3.ibm.com/w3publisher/transformation-operations/ai-enablement/build-with-watsonx" target="_blank" rel="noopener">Path to Production process</a>, it has an official AI System record with business value details attached. Update that record as realized value comes in. It is how your solution's impact stays visible to leadership after launch without you re-presenting it, and it is what keeps the solution supported and resourced.</p>
+
+  <p class="prose">The teams that have sustained measurement after launch are the ones who have been able to argue for more resources, expand the solution to new users or workflows, and build genuine organizational capability around AI-enabled work. The teams that stopped tracking after the go decision often found that executive support drifted because there was no ongoing evidence of impact.</p>
 
   <div class="steps-summary">
     <div class="step-row title-row"><div class="step-title">How to sustain value tracking after launch</div></div>
-    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Hand off the KPI dashboard or equivalent reporting tracker to the business owner</strong> before the build team steps back (a shared spreadsheet works if a dashboard tool is not available). Monthly reporting on the same metrics tracked during the pilot. No new framework, no new system.</div></div>
-    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Validate hard dollar savings with business leadership</strong> quarterly. Not estimated: confirmed. This is what makes the business case defensible when someone asks how the investment performed.</div></div>
+    <div class="step-row"><div class="step-num">1</div><div class="step-text"><strong>Hand off the KPI dashboard to the business owner</strong> before the build team steps back. Monthly reporting on the same metrics tracked during the pilot. No new framework, no new system.</div></div>
+    <div class="step-row"><div class="step-num">2</div><div class="step-text"><strong>Validate hard dollar savings with Finance</strong> quarterly. Not estimated: confirmed. This is what makes the business case defensible when someone asks how the investment performed.</div></div>
     <div class="step-row"><div class="step-num">3</div><div class="step-text"><strong>Use the data to prioritize the backlog.</strong> If effort reduction plateaued at 38% and the target is 70%, what feature in Wave 2 closes the gap? Let the metric data drive sequencing, not gut feel about what is most interesting to build.</div></div>
-    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Build the ROI narrative for the next phase.</strong> The data from this workflow (the trajectory, the actuals against baseline, the leadership-validated savings) is the business case for Wave 2. Document it in the ROI Analysis before the team moves on.</div></div>
+    <div class="step-row"><div class="step-num">4</div><div class="step-text"><strong>Build the ROI narrative for the next phase.</strong> The data from this workflow (the trajectory, the actuals against baseline, the Finance-validated savings) is the business case for Wave 2. Document it in the ROI Analysis before the team moves on.</div></div>
   </div>
 
   <div class="artifact-section">
     <div class="artifact-section-label">Artifacts</div>
     <div class="artifact-grid">
       <div class="artifact-card">
+        <div class="a-title">KPI Dashboard (Key Performance Indicators)</div>
+        <div class="a-desc">Live view of your workflow metrics, updated every two weeks during the sprint and monthly after launch. The primary tool for steering committee reporting and go/no-go evidence.</div>
+        <div class="a-links"><span class="a-link off">Template (coming soon)</span></div>
+      </div>
+      <div class="artifact-card">
         <div class="a-title">ROI Analysis</div>
-        <div class="a-desc">Compares pre-sprint assumptions against pilot evidence, sprint tracking data, and leadership-confirmed savings. The business case for what was built and the foundation for what comes next.</div>
-        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT" target="_blank" rel="noopener">&#8599; Template</a></div>
+        <div class="a-desc">Compares pre-sprint assumptions against pilot evidence, sprint tracking data, and Finance-confirmed savings. The business case for what was built and the foundation for what comes next.</div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
       <div class="artifact-card">
         <div class="a-title">Operational Health Dashboard</div>
         <div class="a-desc">Post-launch reporting for realized value, adoption, quality, and operational performance. Tracks whether the transformation held after the build team moved on.</div>
-        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">&#8599; Example</a><a class="a-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz" target="_blank" rel="noopener">&#8599; Template</a></div>
+        <div class="a-links"><a class="a-link" href="https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr" target="_blank" rel="noopener">&#8599; Example</a></div>
       </div>
     </div>
   </div>
@@ -682,7 +668,8 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
 
   <div class="case-study">
     <div class="cs-eyebrow"><span class="cs-badge">Case Study</span><span class="cs-context">MCC Speaker Agent: sustained tracking after launch</span></div>
-    <p class="cs-prose">After launch, the MCC team found 85% of event planners had tried the agent but only 60% were using it regularly. They diagnosed the gap, fixed the edge cases routing planners back to the manual process, ran targeted training, and within six weeks adoption was above 80%. The six-month ROI analysis showed 2.8 days saved per event (down from 5) and speaker confirmation rate up to 81% — validated by the EBM team and used to secure resources for the next phase.</p>
+    <p class="cs-prose">After the Speaker Agent launched, the MCC team tracked adoption metrics weekly and found that while 85% of event planners had tried the agent, only 60% were using it regularly. Without that data, the team would have declared success based on the initial adoption number. With it, they diagnosed the gap: a specific set of edge cases was routing planners back to the manual process. They fixed it, ran targeted training, and within six weeks adoption was above 80%. The ongoing tracking, not the launch metric, is what drove sustained value.</p>
+    <p class="cs-prose">The ROI analysis at the six-month mark showed confirmed time savings of 2.8 days per event on speaker confirmation workflows, down from 5 days, with speaker confirmation rate up to 81%. Those numbers, validated by Finance, were the foundation for the business case that secured resources for the next phase of the MCC transformation.</p>
   </div>
 </div>
 
@@ -709,12 +696,5 @@ body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;fo
   Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
 })();
 </script>
-<script src="js/tracking-config.js"></script>
-    <script src="js/tracking-secrets.js"></script>
-<script src="js/tracking.js"></script>
-<script>
-if(window.aiftTrack)window.aiftTrack.pageView('value-measurement-roi-narrative','Value Measurement & ROI Deep Dive');
-</script>
-<script src="js/feedback.js"></script>
 </body>
 </html>

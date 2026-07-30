@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: A University Transforms Student Enrollment</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
+  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
+  --red:#da1e28; --red-dk:#a32d2d; --red-fill:#fff1f1;
+  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
+  --border:#e0e0e0; --layer:#f4f4f4;
+  --engage:#0f62fe; --discover:#8a3ffc; --execute:#24a148;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:"IBM Plex Sans",sans-serif;color:var(--text);background:#fff;font-size:15px;line-height:1.6;}
+
+/* Layout */
+.page{max-width:860px;margin:0 auto;padding:0 1.5rem 6rem;}
+
+/* Header */
+.cs-header{padding:3rem 0 2rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+.cs-header h1{font-size:1.75rem;font-weight:400;line-height:1.2;margin-bottom:1rem;}
+.cs-header .subtitle{font-size:1rem;color:var(--text-2);line-height:1.7;margin-bottom:1.5rem;}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.panel{border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;background:#fff;}
+.panel h3{font-size:.875rem;font-weight:600;margin-bottom:.75rem;color:var(--text);}
+.panel p{font-size:.875rem;color:var(--text-2);line-height:1.6;}
+.cast{display:flex;flex-wrap:wrap;gap:.4rem;}
+.cast span{font-size:.75rem;padding:.2rem .6rem;border-radius:2rem;background:var(--layer);color:var(--text-2);border:1px solid var(--border);}
+.context-panel{background:var(--blue-fill);border-color:#b8d4ff;margin-bottom:1.5rem;}
+.context-panel h3{color:var(--blue-dk);}
+.context-panel p{color:var(--text);}
+
+/* Phase tabs */
+.phase-tabs{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.phase-tab{padding:.5rem 1rem;border-radius:.375rem;font-size:.8125rem;font-weight:600;border:1.5px solid var(--border);background:#fff;color:var(--text-2);cursor:pointer;transition:all .15s;}
+.phase-tab:hover{border-color:#8d8d8d;}
+.phase-tab.active-engage{background:var(--blue-fill);border-color:var(--engage);color:var(--engage);}
+.phase-tab.active-discover{background:var(--purple-fill);border-color:var(--discover);color:var(--discover);}
+.phase-tab.active-execute{background:var(--green-fill);border-color:var(--execute);color:var(--execute);}
+
+/* Phase content */
+.phase-content{display:none;}
+.phase-content.active{display:block;}
+.phase-header{margin-bottom:1.5rem;}
+.phase-meta{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:.4rem;}
+.phase-meta.engage{color:var(--engage);}
+.phase-meta.discover{color:var(--discover);}
+.phase-meta.execute{color:var(--execute);}
+.phase-header h2{font-size:1.625rem;font-weight:400;line-height:1.2;margin-bottom:.75rem;}
+.mindset{font-size:1rem;color:var(--text-2);line-height:1.7;border-left:3px solid var(--border);padding-left:1rem;font-style:italic;margin-bottom:1rem;}
+.summary-panel{background:var(--layer);border-radius:.75rem;padding:1.25rem;margin-bottom:1.5rem;}
+.summary-panel p{font-size:.9375rem;color:var(--text);line-height:1.7;}
+
+/* Blocks */
+.block{margin-bottom:1.75rem;}
+.sec-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.875rem;}
+.actions{padding-left:1.25rem;}
+.actions li{font-size:.9rem;color:var(--text-2);margin-bottom:.5rem;line-height:1.6;}
+
+/* Blueprint */
+.blueprint-wrap{border:1px solid var(--border);border-radius:.75rem;overflow-x:auto;background:#fff;padding:1rem;margin-bottom:.5rem;}
+.blueprint-wrap svg{display:block;width:100%;min-width:680px;height:auto;font-family:"IBM Plex Sans",Arial,sans-serif;}
+
+/* Documents */
+.docs{display:flex;flex-direction:column;gap:.5rem;}
+.doc{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem 1rem;border:1px solid var(--border);border-radius:.5rem;background:#fff;}
+.doc-ic{flex-shrink:0;color:var(--text-3);margin-top:.1rem;}
+.doc-body{display:flex;flex-direction:column;gap:.2rem;}
+.doc-name{font-size:.875rem;font-weight:500;color:var(--text);}
+.doc-links{display:flex;gap:.5rem;flex-wrap:wrap;}
+.doc-link{font-size:.75rem;color:var(--blue);text-decoration:none;font-weight:500;}
+.doc-link:hover{text-decoration:underline;}
+
+/* Sideways */
+.sideways{border:1px solid #f1c21b;border-radius:.75rem;background:#fdf4e3;padding:1.25rem;margin-bottom:.75rem;}
+.sw-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.875rem;font-size:.8125rem;font-weight:600;color:#633806;}
+.sw-body{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.sw-cell h5{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#633806;margin-bottom:.4rem;}
+.sw-cell p{font-size:.875rem;color:#633806;line-height:1.6;}
+
+/* Takeaways */
+.takeaways{list-style:none;display:flex;flex-direction:column;gap:.5rem;}
+.takeaways li{font-size:.875rem;color:var(--text-2);padding:.625rem .875rem;background:var(--layer);border-radius:.375rem;line-height:1.5;}
+.takeaways li::before{content:"→ ";color:var(--text-3);font-weight:600;}
+
+@media(max-width:600px){
+  .intro-grid{grid-template-columns:1fr;}
+  .sw-body{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <div class="cs-header">
+    <div class="eyebrow">Case Study</div>
+    <h1>A University Transforms Student Enrollment</h1>
+    <p class="subtitle">How a generic university applies the AIFT workflow to an enrollment and document-processing transformation — from identifying the opportunity to a scaled, sustained solution.</p>
+    <div class="intro-grid">
+      <div class="panel">
+        <h3>Overview</h3>
+        <p>This worked example follows a mid-sized public university — State University — as it transforms its student enrollment and document-verification workflow. A university drowning in manual admissions paperwork and inconsistent outreach. The journey mirrors a real IBM-style engagement step by step.</p>
+      </div>
+      <div class="panel">
+        <h3>Cast of Characters</h3>
+        <div class="cast">
+          <span>Executive Sponsor (VP of Enrollment)</span>
+          <span>Project Lead (Enrollment Operations)</span>
+          <span>Product Owner</span>
+          <span>Technical Architect (IT)</span>
+          <span>Value Owner (Finance/IR)</span>
+          <span>Change Owner (Enrollment Staff Lead)</span>
+          <span>Workflow SMEs (Counselors)</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel context-panel">
+      <h3>Starting Context</h3>
+      <p>State University enrolls roughly 180,000 students. The enrollment team is overwhelmed: applications, transcripts, and required documents are processed by hand, creating bottlenecks that delay onboarding and frustrate prospective students. Outreach to prospects is scattershot — staff cannot tell which applicants are most likely to enroll. University leadership has issued a mandate to modernize enrollment, but no specific AI use case has been chosen yet.</p>
+    </div>
+  </div>
+
+  <!-- Step Tabs -->
+  <div class="phase-tabs">
+    <button class="phase-tab active-engage" onclick="showPhase('step1',this)">Step 1 · Tech &amp; Data Assessment</button>
+    <button class="phase-tab" onclick="showPhase('step2',this)">Step 2 · Business Process Mapping</button>
+    <button class="phase-tab" onclick="showPhase('step3',this)">Step 3 · Workflow Analysis</button>
+    <button class="phase-tab" onclick="showPhase('step4',this)">Step 4 · Solution Design</button>
+    <button class="phase-tab" onclick="showPhase('step5',this)">Step 5 · Experimentation</button>
+    <button class="phase-tab" onclick="showPhase('step6',this)">Step 6 · Scale &amp; Adopt</button>
+  </div>
+
+  <!-- ── STEP 1: TECH & DATA ASSESSMENT ── -->
+  <div class="phase-content active" id="phase-step1">
+    <div class="phase-header">
+      <div class="phase-meta engage">Engage · Step 1</div>
+      <h2>Tech &amp; Data Assessment</h2>
+      <div class="mindset">"Leadership wants us to modernize enrollment, but we don't yet know exactly what to build."</div>
+    </div>
+    <div class="summary-panel"><p>The team looks at the enrollment domain as a whole: confirms the mandate and sponsorship, stands up the team and governance, and takes an honest read on data and technology readiness before choosing a use case.</p></div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Confirm the executive sponsor (VP of Enrollment) and secure air cover for the work.</li>
+        <li>Name the project lead and stand up a cross-functional team (operations, IT, institutional research, enrollment staff).</li>
+        <li>Run a current-state assessment of the enrollment domain: people, process, systems, data, and pain points.</li>
+        <li>Assess data readiness — are application, transcript, and interaction records accessible, owned, and usable?</li>
+        <li>Gather the technology and architecture picture: systems of record, integrations, access constraints.</li>
+        <li>Draft an initial business case tied to a measurable benefit (faster onboarding, staff hours saved).</li>
+        <li>Open the RAID log and set up the steering committee and RACI before any build.</li>
+        <li>Make a go/no-go decision on whether to proceed to detailed analysis.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Current State Assessment</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Business Case Template</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Technology &amp; Data Readiness Checklist</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Project Charter</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Staffing / RACI Matrix</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">RAID Log</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>The sponsor wants to jump straight to 'build a chatbot for applicants.'</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The project lead reframes it: "We're choosing the workflow opportunity first, not the tool. Let's confirm where the biggest, most feasible win is before committing to a build." The sponsor agrees to a short Analyze phase with a decision gate.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Don't start a build until the sponsor, project lead, technical owner, value owner, and change owner are named.</li>
+        <li>Use data readiness as a go/no-go input, not an afterthought.</li>
+        <li>Open the RAID log and stand up governance on day one.</li>
+        <li>Resist jumping to a solution before you understand the problem space.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: BUSINESS PROCESS MAPPING ── -->
+  <div class="phase-content" id="phase-step2">
+    <div class="phase-header">
+      <div class="phase-meta engage">Engage · Step 2</div>
+      <h2>Business Process Mapping</h2>
+      <div class="mindset">"Which single enrollment workflow should we transform first — and why does that choice hold up when you score it honestly?"</div>
+    </div>
+    <div class="summary-panel"><p>The team interviews the people actually doing the work (not their managers), maps every candidate workflow against value and feasibility, and commits to one MVP target with a written rationale. The out-of-scope list is as important as what gets picked.</p></div>
+    <div class="block">
+      <div class="sec-label">Current State Process Map</div>
+      <div class="blueprint-wrap">
+        <svg viewBox="0 0 1120 610" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>State University enrollment current state process map</title>
+          <defs><marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <rect x="0" y="0" width="150" height="500" fill="#f4f4f4"/>
+          <line x1="150" y1="180" x2="1106" y2="180" stroke="#e0e0e0" stroke-width="0.5"/>
+          <line x1="150" y1="340" x2="1106" y2="340" stroke="#e0e0e0" stroke-width="0.5"/>
+          <text x="75" y="100" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+          <text x="75" y="262" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+          <text x="75" y="422" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">IT / systems</text>
+          <rect x="166" y="60" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text><text x="251" y="100" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+          <line x1="336" y1="88" x2="360" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="362" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="452" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text><text x="452" y="100" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+          <line x1="542" y1="88" x2="566" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="568" y="60" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="658" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Wait for review</text><text x="658" y="100" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ 2–4 weeks typical</text>
+          <line x1="748" y1="88" x2="772" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="774" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text><text x="864" y="100" text-anchor="middle" font-size="12" fill="#525252">Accept / decline / wait</text>
+          <path d="M658 116 Q658 150 452 150 Q300 150 251 120" fill="none" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+          <text x="455" y="165" text-anchor="middle" font-size="12" fill="#6f6f6f">Missing docs → manual email → resubmit</text>
+          <rect x="166" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="256" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Receive application</text><text x="256" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Email / spreadsheet</text>
+          <line x1="346" y1="244" x2="370" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="372" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="462" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Verify documents</text><text x="462" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Manual, one-by-one</text>
+          <line x1="552" y1="244" x2="576" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="578" y="216" width="190" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="673" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prioritize outreach</text><text x="673" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Gut feel, no data</text>
+          <line x1="768" y1="244" x2="792" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="794" y="216" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="879" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text><text x="879" y="256" text-anchor="middle" font-size="12" fill="#525252">Phone / email</text>
+          <rect x="166" y="372" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Admissions CRM</text><text x="251" y="412" text-anchor="middle" font-size="12" fill="#525252">Salesforce</text>
+          <rect x="362" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="452" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Document store</text><text x="452" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Box / email, siloed</text>
+          <rect x="568" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="658" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prospect data</text><text x="658" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">⚠ Incomplete, stale</text>
+          <rect x="774" y="372" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text><text x="864" y="412" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+          <line x1="251" y1="116" x2="256" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="452" y1="116" x2="462" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="256" y1="272" x2="251" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="462" y1="272" x2="452" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <rect x="166" y="450" width="14" height="14" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="186" y="461" font-size="12" fill="#525252">Pain point / bottleneck</text>
+          <rect x="350" y="450" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="370" y="461" font-size="12" fill="#525252">Existing step</text>
+          <text x="166" y="490" font-size="12" font-weight="600" fill="#161616">Baseline Metrics:</text>
+          <text x="166" y="508" font-size="12" fill="#525252">• Avg document review: 14 days</text>
+          <text x="166" y="524" font-size="12" fill="#525252">• Counselor capacity: ~120 apps/month</text>
+          <text x="420" y="508" font-size="12" fill="#525252">• Outreach conversion: 8%</text>
+          <text x="420" y="524" font-size="12" fill="#525252">• Staff time on manual tasks: 60%</text>
+          <text x="700" y="508" font-size="12" fill="#525252">• Student population: ~180,000</text>
+          <rect x="166" y="540" width="940" height="56" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="1.5"/>
+          <text x="636" y="560" text-anchor="middle" font-size="12" font-weight="600" fill="#0043a4">4 Candidate Workflows for AI Transformation:</text>
+          <text x="636" y="580" text-anchor="middle" font-size="12" fill="#0043a4">Document Verification  •  Outreach Prioritization  •  Transcript Evaluation  •  Application Processing</text>
+        </svg>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Identify candidate workflows: document verification, application processing, prospect outreach, and transcript evaluation.</li>
+        <li>Interview enrollment counselors and review applicant feedback to find the real friction (outside-in).</li>
+        <li>Benchmark against peer universities to define what best-in-class enrollment performance looks like.</li>
+        <li>Map the current (as-is) process for each candidate, capturing cycle time, volume, and manual effort.</li>
+        <li>Score candidates on value, feasibility, data readiness, and adoption risk.</li>
+        <li>Select the MVP target — prospect outreach prioritization plus automated document verification — and document why it beat the alternatives.</li>
+        <li>Define baseline metrics and write an idea brief to secure executive approval to proceed.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Workflow Analysis Worksheet</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Prioritization Matrix</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Measurement Strategy</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>The most exciting idea — a fully conversational applicant assistant — turns out to depend on data the university doesn't cleanly hold yet.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>Feasibility scoring surfaces the data gap early. The team moves the conversational assistant to the backlog and selects outreach prioritization + document verification, which use data that already exists.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Score opportunities by value AND feasibility, not excitement.</li>
+        <li>Validate pain with the frontline, not just leadership.</li>
+        <li>Pick the smallest useful MVP and write down why.</li>
+        <li>Define baseline metrics before you design anything.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: WORKFLOW ANALYSIS ── -->
+  <div class="phase-content" id="phase-step3">
+    <div class="phase-header">
+      <div class="phase-meta discover">Discover · Step 3</div>
+      <h2>Workflow Analysis</h2>
+      <div class="mindset">"Is the document verification workflow actually worth transforming? Let's gather the evidence and make a decision."</div>
+    </div>
+    <div class="summary-panel"><p>The team runs a two-week deep dive into the document verification workflow — the one selected in Step 2. The goal is a confident go/no-go recommendation to the steering committee backed by real evidence: spend data, user conversations, root cause, and confirmed baseline metrics. Both outcomes are valid; the only failure is a decision that drifts rather than gets made.</p></div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Book the go/no-go steering meeting for end of Week 2 before any analysis starts — the decision needs a hard date or it will drift.</li>
+        <li>Interview 4–6 enrollment counselors who actually do the document review daily. Ask what they did this morning, not how the process is supposed to work.</li>
+        <li>Quantify the workflow cost: how many hours per week, how many counselors, what the 14-day review cycle costs in staff time and delayed enrollment decisions.</li>
+        <li>Confirm data access with the technical architect: can Box documents be reliably extracted? Is the CRM data complete enough for a propensity model?</li>
+        <li>Identify the root cause — not just where the workflow is slow, but why it has stayed slow despite everyone knowing it.</li>
+        <li>Confirm baseline KPIs with finance: average document review time, counselor capacity, outreach conversion rate. Finance signs off on the numbers before the go/no-go.</li>
+        <li>Present the go/no-go recommendation to the steering committee with supporting evidence. Prepare to recommend no-go if the data doesn't support it.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Workflow Analysis Worksheet</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Measurement Strategy</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Go/No-Go Recommendation</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>The steering committee wants to skip the go/no-go meeting and "just start building" — the opportunity seems obvious.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The project lead holds the line: the meeting happens, the evidence is presented, and the baseline KPIs are confirmed with finance before the team moves to Solution Design. Two scope assumptions get corrected in that meeting that would have caused mid-sprint problems.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Book the go/no-go meeting before the analysis starts — a decision without a hard date drifts.</li>
+        <li>Talk to the people actually doing the work, not their managers.</li>
+        <li>Finance confirms the baseline metrics before the go/no-go. Numbers that move after the sprint starts undermine the decision.</li>
+        <li>A no-go is a valid outcome. Returning to the prioritized list with new information is better than building the wrong thing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── STEP 4: SOLUTION DESIGN ── -->
+  <div class="phase-content" id="phase-step4">
+    <div class="phase-header">
+      <div class="phase-meta discover">Discover · Step 4</div>
+      <h2>Solution Design</h2>
+      <div class="mindset">"We have a go decision. Now: what exactly are we building, and can we build it in 90 days?"</div>
+    </div>
+    <div class="summary-panel"><p>The team designs the AI-enabled future-state for enrollment: re-envisions the document verification workflow, writes build-ready requirements, locks the 90-day MVP scope with an explicit out-of-scope list, and gets executive sponsor sign-off before the build team takes over. The architecture review starts here — not after the sprint.</p></div>
+    <div class="block">
+      <div class="sec-label">Future State Process Map (MVP)</div>
+      <div class="blueprint-wrap">
+        <svg viewBox="0 0 1120 590" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>State University enrollment future state process map</title>
+          <defs><marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <rect x="0" y="0" width="150" height="480" fill="#f4f4f4"/>
+          <line x1="150" y1="170" x2="1106" y2="170" stroke="#e0e0e0" stroke-width="0.5"/>
+          <line x1="150" y1="320" x2="1106" y2="320" stroke="#e0e0e0" stroke-width="0.5"/>
+          <text x="75" y="95" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+          <text x="75" y="248" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+          <text x="75" y="402" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">AI / systems</text>
+          <rect x="166" y="56" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="246" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text><text x="246" y="96" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+          <line x1="326" y1="84" x2="350" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="352" y="56" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="437" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text><text x="437" y="96" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+          <line x1="522" y1="84" x2="546" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="548" y="56" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="643" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Auto-verification</text><text x="643" y="96" text-anchor="middle" font-size="12" fill="#0f6e56">AI checks docs &lt; 2 hrs</text>
+          <line x1="738" y1="84" x2="762" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="764" y="56" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="854" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text><text x="854" y="96" text-anchor="middle" font-size="12" fill="#525252">Faster, clearer status</text>
+          <path d="M643 112 Q643 144 437 144 Q300 144 246 116" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+          <text x="445" y="159" text-anchor="middle" font-size="12" fill="#0f6e56">Missing docs → auto-notification (same day)</text>
+          <rect x="166" y="206" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Review AI flags</text><text x="251" y="246" text-anchor="middle" font-size="12" fill="#525252">Exceptions only</text>
+          <line x1="336" y1="234" x2="360" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="362" y="206" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="457" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">AI prospect ranking</text><text x="457" y="246" text-anchor="middle" font-size="12" fill="#0f6e56">Conversion likelihood + reasoning</text>
+          <line x1="552" y1="234" x2="576" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="578" y="206" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="668" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Prioritized outreach</text><text x="668" y="246" text-anchor="middle" font-size="12" fill="#525252">High-value first</text>
+          <line x1="758" y1="234" x2="782" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="784" y="206" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text><text x="864" y="246" text-anchor="middle" font-size="12" fill="#525252">Data-driven</text>
+          <path d="M668 262 Q668 296 457 296 Q360 296 457 264" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+          <text x="520" y="311" text-anchor="middle" font-size="12" fill="#0f6e56">Counselor feedback → model improves</text>
+          <rect x="166" y="356" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="261" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Doc verification AI</text><text x="261" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">watsonx OCR + rules</text>
+          <rect x="382" y="356" width="200" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="482" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Conversion likelihood model</text><text x="482" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">ML on CRM + SIS data</text>
+          <rect x="608" y="356" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="693" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Salesforce CRM</text><text x="693" y="396" text-anchor="middle" font-size="12" fill="#525252">Unified data source</text>
+          <rect x="804" y="356" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="884" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text><text x="884" y="396" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+          <line x1="643" y1="112" x2="261" y2="356" stroke="#1d9e75" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <line x1="457" y1="262" x2="482" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <line x1="693" y1="262" x2="693" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <rect x="166" y="430" width="14" height="14" rx="3" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="186" y="441" font-size="12" fill="#525252">AI-enabled step (new)</text>
+          <rect x="370" y="430" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="390" y="441" font-size="12" fill="#525252">Existing step (unchanged)</text>
+          <text x="166" y="470" font-size="12" font-weight="600" fill="#161616">Target Metrics (After AI Implementation):</text>
+          <text x="166" y="488" font-size="12" fill="#525252">• Document review: &lt; 2 hours (vs. 14 days baseline)</text>
+          <text x="166" y="504" font-size="12" fill="#525252">• Counselor capacity: +40% increase</text>
+          <text x="480" y="488" font-size="12" fill="#525252">• Outreach conversion: 8% → 14%</text>
+          <text x="480" y="504" font-size="12" fill="#525252">• Manual task time: 60% → 20%</text>
+          <rect x="166" y="520" width="940" height="56" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+          <text x="636" y="540" text-anchor="middle" font-size="12" font-weight="600" fill="#1a6b32">MVP Scope (90-Day Build):</text>
+          <text x="636" y="560" text-anchor="middle" font-size="12" fill="#1a6b32">Document Verification + Outreach Prioritization  •  Out of Scope: Full conversational assistant (backlogged for Wave 2)</text>
+        </svg>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Re-envision the future-state workflow from scratch: AI verifies documents in under 2 hours, counselors review exceptions only, and outreach is ranked by enrollment likelihood.</li>
+        <li>Decide build vs. buy for the underlying capability (watsonx OCR + rules engine vs. vendor solution).</li>
+        <li>Write build-ready requirements: data objects, source systems, acceptance criteria, and fallback logic. If a developer can't write a user story from a requirement without asking a question, it's not ready.</li>
+        <li>Lock the 90-day MVP scope with two explicit lists — in-scope and out-of-scope. Both lists need executive sponsor sign-off.</li>
+        <li>Initiate the architecture review (ARB) in the first week of design — not after the sprint ends.</li>
+        <li>Force-rank the riskiest assumptions and plan to test them in Sprint 1.</li>
+        <li>Confirm metrics and baselines with the value owner so the build optimizes for the right outcome.</li>
+        <li>Stand up the operating cadence: standups, steering committee agenda, UAT user roster, change management plan.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Future State Workflow Process Map</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Business Requirements Log</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Strategic Roadmap</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>The first requirements draft is too high-level for IT to build from — "make outreach smarter" isn't actionable.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The product owner and architect rework it into a build-ready package: the propensity model's inputs, the data sources, acceptance criteria, a fallback for low-confidence predictions, and the telemetry to capture. IT signs off on the second pass.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Design from the future state, not from the existing process.</li>
+        <li>Build-ready requirements are specific enough that a developer can act without asking clarifying questions.</li>
+        <li>The out-of-scope list matters as much as the in-scope list.</li>
+        <li>Start the architecture review in Week 1. Discovering it late is one of the most common causes of delayed launches.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── STEP 5: EXPERIMENTATION ── -->
+  <div class="phase-content" id="phase-step5">
+    <div class="phase-header">
+      <div class="phase-meta execute">Execute · Step 5</div>
+      <h2>Experimentation</h2>
+      <div class="mindset">"Does it actually work — and can we prove it before we scale?"</div>
+    </div>
+    <div class="summary-panel"><p>The team builds the MVP in 90-day sprints, tests it with real counselors doing real work, and makes a data-driven go/no-go scaling decision. Run it like an experiment — measure honestly, surface problems early, and hold the scope.</p></div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Agree on the go/no-go criteria before Day 1 — the scaling decision needs pre-agreed thresholds, not post-sprint interpretation.</li>
+        <li>Run the first 30 days as a Riskiest Assumptions Test: can Box documents be reliably parsed? Is the CRM data clean enough for the propensity model?</li>
+        <li>Hold a 30-day debrief with the steering committee: pivot, continue, or stop based on evidence.</li>
+        <li>Build in 2-week sprints. Demo something working at every weekly steering meeting — working software beats polished mockups.</li>
+        <li>Run UAT with real enrollment counselors doing real work, not parallel-testing alongside the old process.</li>
+        <li>Track value against baseline continuously — verification time, outreach efficiency — not just at Day 90.</li>
+        <li>De-scope lower-value features if needed. Any de-scope gets a brief written note to the sponsor within 24 hours.</li>
+        <li>Prepare the go/no-go package with performance evidence against the pre-agreed criteria for the scaling decision.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>In Sprint 1, the enrollment-propensity model is barely better than guessing — data quality in the CRM is worse than the readiness check suggested.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The team assigns a data owner, documents the quality issues, and adds a data-cleaning step before the model runs. The fix is flagged in the Week 2 steering meeting before any code has been written against bad data. After the fix, the model performs well enough to continue.</p></div>
+        </div>
+      </div>
+      <div class="sideways" style="margin-top:.75rem;">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>Counselors doing UAT are hesitant to trust the model's rankings and keep working their old way alongside it.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The team adds explainability to each ranking — why a prospect is ranked high, with the supporting signals — plus a one-click feedback flag. Trust and usage climb in the next UAT round. Working software in front of real users surfaced this; a wireframe demo never would have.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Defect Tracker</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">ROI Analysis</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Go/No-Go Recommendation (scaling)</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Agree go/no-go criteria before Day 1. Post-sprint criteria are always defined to pass.</li>
+        <li>Test the riskiest assumption first — data quality here, not the model accuracy.</li>
+        <li>Real-user UAT with real work surfaces problems that wireframe demos never catch.</li>
+        <li>De-scoping to protect the core MVP is a success behavior, not a failure.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ── STEP 6: SCALE & ADOPT ── -->
+  <div class="phase-content" id="phase-step6">
+    <div class="phase-header">
+      <div class="phase-meta execute">Execute · Step 6</div>
+      <h2>Scale &amp; Adopt</h2>
+      <div class="mindset">"The solution is live. Now how do we make sure people actually use it — and that it keeps running when the project team steps back?"</div>
+    </div>
+    <div class="summary-panel"><p>With the experiment proven, the team drives real adoption, validates realized value with finance, names the ongoing owners, and hands off a solution that can run without the transformation team. The work does not end here — the business lead owns what comes next.</p></div>
+    <div class="block">
+      <div class="sec-label">Key Actions</div>
+      <ol class="actions">
+        <li>Start small: pilot with two counselors who were active in UAT, real work only — no fallback to the old manual process for that task.</li>
+        <li>Use their results as the adoption story for the next group. Colleagues trust colleagues more than project leads.</li>
+        <li>Name the <strong>business owner</strong> (accountable for adoption outcomes and the solution's ongoing value) and the <strong>technical lead</strong> (accountable for the infrastructure, model updates, and system issues). Both roles accept accountability before the transformation team steps back.</li>
+        <li>Complete the technical handoff: code repo with documentation, API keys and credentials, current architecture diagram, data source documentation, test cases.</li>
+        <li>Retire the old manual process for the transformed workflow — adoption plateaus when the old way remains available.</li>
+        <li>Validate realized value with finance against the original baseline metrics. Leadership needs evidence, not a demo.</li>
+        <li>Set the 30/90/180-day roadmap: stabilize first, then expand to additional counselors or document types, then move toward the full-vision future state.</li>
+        <li>Identify the next workflow from the prioritized list — return to Step 3 with everything learned in this cycle.</li>
+      </ol>
+    </div>
+    <div class="block">
+      <div class="sec-label">Documents Created This Step</div>
+      <div class="docs">
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Adoption &amp; Change Plan</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Technical Handoff Package</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Value Realization Report</span></span></div>
+        <div class="doc"><span class="doc-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span class="doc-body"><span class="doc-name">Strategic Roadmap (updated)</span></span></div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What Went Sideways</div>
+      <div class="sideways">
+        <div class="sw-head"><span>⚠️</span><span>Real friction the team hit</span></div>
+        <div class="sw-body">
+          <div class="sw-cell"><h5>What happened</h5><p>After launch, some counselors drift back to manual outreach because it's familiar. Adoption plateaus at about 40%.</p></div>
+          <div class="sw-cell"><h5>How they handled it</h5><p>The business owner — not the transformation team — routes all new prospect lists through the AI-prioritized workflow and makes it the default. The change owner runs office hours and names counselor champions. Adoption climbs when staff see the time savings firsthand and hear it from colleagues, not from project managers.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="block">
+      <div class="sec-label">What to Take Away</div>
+      <ul class="takeaways">
+        <li>Start with motivated users doing real work — not a pilot alongside the old process.</li>
+        <li>The business owner drives adoption from here. The transformation team's job is to equip them, not to run it for them.</li>
+        <li>Name the technical lead before handoff, not after a problem appears.</li>
+        <li>Validate realized value with finance. A working demo is not proof of impact.</li>
+        <li>Getting to MVP is not the end. The business lead owns the next wave.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const phaseMap = {
+  step1: 'engage',
+  step2: 'discover',
+  step3: 'discover',
+  step4: 'discover',
+  step5: 'execute',
+  step6: 'execute'
+};
+
+function showPhase(id, btn) {
+  document.querySelectorAll('.phase-content').forEach(el => el.classList.remove('active'));
+  document.getElementById('phase-' + id).classList.add('active');
+  document.querySelectorAll('.phase-tab').forEach(b => {
+    b.classList.remove('active-engage','active-discover','active-execute');
+  });
+  btn.classList.add('active-' + phaseMap[id]);
+}
+</script>
+</body>
+</html>

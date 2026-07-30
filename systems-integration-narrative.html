@@ -53,12 +53,17 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 
 .sub-phase{margin:2.5rem 0 0;}
 .sub-phase-label{display:flex;align-items:center;gap:.625rem;margin-bottom:1.125rem;}
-.sub-phase-number{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:.3rem .75rem;border-radius:3px;white-space:nowrap;}
-.sub-phase-number.step-engage{background:var(--blue-fill);color:var(--blue-dk);border:1.5px solid var(--blue);}
-.sub-phase-number.step-discover{background:var(--purple-fill);color:var(--purple-dk);border:1.5px solid var(--purple);}
-.sub-phase-number.step-execute{background:var(--green-fill);color:var(--green-dk);border:1.5px solid var(--green);}
-.sub-phase-number.step-neutral{background:var(--layer);color:var(--text-3);border:1px solid var(--border);}
+.sub-phase-number{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--text-3);background:var(--layer);border:1px solid var(--border);padding:.2rem .5rem;border-radius:2px;}
 .sub-phase h3{font-size:1.125rem;font-weight:600;color:var(--text);margin:0;}
+.phase-section,.sub-phase{scroll-margin-top:4.75rem;}
+.phase-nav{position:sticky;top:0;z-index:50;display:flex;gap:.5rem;align-items:center;padding:.625rem 0;background:#fff;border-bottom:1px solid var(--border);margin:0 0 2rem;flex-wrap:wrap;}
+.phase-nav .pnav-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);margin-right:.25rem;}
+.pnav-pill{font-size:.78rem;font-weight:600;text-decoration:none;padding:.35rem .875rem;border-radius:4px;border:1.5px solid;transition:all .12s;}
+.pnav-pill.pnav-engage{background:var(--blue-fill);border-color:var(--blue);color:var(--blue-dk);}
+.pnav-pill.pnav-discover{background:var(--purple-fill);border-color:var(--purple);color:var(--purple-dk);}
+.pnav-pill.pnav-execute{background:var(--green-fill);border-color:var(--green);color:var(--green-dk);}
+.pnav-pill:hover{filter:brightness(.94);}
+.pnav-pill.active{font-weight:700;box-shadow:0 0 0 2px currentColor;}
 
 /* PROSE */
 .phase-section h2{font-size:1.375rem;font-weight:600;line-height:1.2;margin-bottom:1.25rem;}
@@ -198,6 +203,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="eyebrow">How-to Deep Dive</div>
   <h1>Systems Integration</h1>
   <p class="def">For large-scale enterprises, a capable LLM is not enough. AI transformation requires deep integration into enterprise data and key platforms. Without it, solutions become brittle and hard to maintain. This chapter covers how to surface integration complexity early, write requirements developers can act on, navigate Path to Production, and hand off a solution that lasts.</p>
+  <p class="def" style="margin-top:.75rem;">This chapter follows the same six-step transformation process used across every domain chapter (Engage through Execute) and shows what systems integration work happens at each step.</p>
 </div>
 
 <!-- PHASE STRIP -->
@@ -219,6 +225,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sg-row"><span class="sg-chip sg-execute">Step 6</span><span class="sg-text"><strong>Scale &amp; Adopt.</strong> Hand off a documented, owned, maintainable solution.</span></div>
 </div>
 
+<nav class="phase-nav" aria-label="Chapter steps"><a class="pnav-pill pnav-engage" href="#si-step-1" title="Inventory every system and profile data quality before committing to a solution.">Step 1 · Tech &amp; Data Assessment</a><a class="pnav-pill pnav-engage" href="#si-step-2" title="Document the current-state workflow: systems touched, handoffs, and data flow.">Step 2 · Business Process Mapping</a><a class="pnav-pill pnav-discover" href="#si-step-3" title="Trace the technical baseline for the workflow you're transforming.">Step 3 · Workflow Analysis</a><a class="pnav-pill pnav-discover" href="#si-step-4" title="Make the build-vs-buy call and write requirements a developer can act on.">Step 4 · Solution Design</a><a class="pnav-pill pnav-execute" href="#si-step-5" title="Build and validate the integration against real systems and real data.">Step 5 · Experimentation</a><a class="pnav-pill pnav-execute" href="#si-step-6" title="Hand off a documented, owned, maintainable solution.">Step 6 · Scale &amp; Adopt</a></nav>
 
 <!-- ═══════════════════ ENGAGE ═══════════════════ -->
 <div class="phase-section section-engage">
@@ -249,6 +256,13 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
       <tr><td>Escalate a structural blocker (multi-month review, platform migration)</td><td><strong>Domain VP + CIO leadership</strong></td></tr>
     </tbody>
   </table>
+
+  <div class="sub-phase" id="si-step-1" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 1</span>
+      <h3>Tech &amp; Data Assessment: inventory every system, profile every data source</h3>
+    </div>
+  </div>
 
   <p class="prose">The Tech &amp; Data Assessment surfaces the constraints that shape every decision downstream. The goal is not to fix anything. It is to <strong>document what is real</strong> for every system your solution will touch.</p>
 
@@ -354,11 +368,18 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <div class="painpoint-body">When timelines are tight, teams skip the assessment and go straight to design. Integration complexity that surfaces mid-build stops the sprint while the team scrambles to understand systems they should have mapped weeks earlier. The assessment takes two weeks. Skipping it costs two months.</div>
   </div>
 
-  <!-- CDO / EPM -->
+  <!-- Step 2 / CDO / EPM -->
   <div class="sub-divider"></div>
-  <div class="sub-phase">
+  <div class="sub-phase" id="si-step-2">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-neutral">Cross-Org</span>
+      <span class="sub-phase-number">Step 2</span>
+      <h3>Business Process Mapping: document the workflow, its systems, and its handoffs</h3>
+    </div>
+  </div>
+
+  <div class="sub-phase" style="margin-top:1rem;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Cross-Org</span>
       <h3>Working with CDO: Enterprise Performance Management (EPM)</h3>
     </div>
   </div>
@@ -423,6 +444,13 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <span class="title-row-sep">·</span>
     <span class="challenge-pip">Systems Integration</span>
     <span class="phase-step-context">Steps 3 &amp; 4 · Workflow Analysis · Solution Design</span>
+  </div>
+
+  <div class="sub-phase" id="si-step-3" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 3</span>
+      <h3>Workflow Analysis</h3>
+    </div>
   </div>
 
   <h2>Map the technical baseline, make the right build decisions, and write requirements developers can act on.</h2>
@@ -503,7 +531,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <!-- SUB-PHASE 1: WORKFLOW ANALYSIS -->
   <div class="sub-phase">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-discover">Step 3</span>
+      <span class="sub-phase-number">Step 3</span>
       <h3>Workflow Analysis: Document the technical baseline</h3>
     </div>
   </div>
@@ -601,9 +629,9 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-divider"></div>
 
   <!-- SUB-PHASE 2: SOLUTION DESIGN -->
-  <div class="sub-phase">
+  <div class="sub-phase" id="si-step-4">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-discover">Step 4</span>
+      <span class="sub-phase-number">Step 4</span>
       <h3>Solution Design: Make the build-vs-buy call, then write requirements</h3>
     </div>
   </div>
@@ -784,7 +812,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-divider"></div>
   <div class="sub-phase">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-neutral">Best Practice</span>
+      <span class="sub-phase-number">Best Practice</span>
       <h3>Working with BPT-managed platforms</h3>
     </div>
   </div>
@@ -855,6 +883,13 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
     <span class="phase-step-context">Steps 5 &amp; 6 · Experimentation · Scale &amp; Adopt</span>
   </div>
 
+  <div class="sub-phase" id="si-step-5" style="margin-top:0;">
+    <div class="sub-phase-label">
+      <span class="sub-phase-number">Step 5</span>
+      <h3>Experimentation</h3>
+    </div>
+  </div>
+
   <h2>Build, integrate, instrument, and hand off cleanly.</h2>
 
   <div class="key-takeaway">
@@ -882,7 +917,7 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <!-- SUB-PHASE 1: EXPERIMENTATION -->
   <div class="sub-phase">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-execute">Step 5</span>
+      <span class="sub-phase-number">Step 5</span>
       <h3>Experimentation: Build and validate on real data</h3>
     </div>
   </div>
@@ -972,9 +1007,9 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
   <div class="sub-divider"></div>
 
   <!-- SUB-PHASE 2: SCALE & ADOPT -->
-  <div class="sub-phase">
+  <div class="sub-phase" id="si-step-6">
     <div class="sub-phase-label">
-      <span class="sub-phase-number step-execute">Step 6</span>
+      <span class="sub-phase-number">Step 6</span>
       <h3>Scale &amp; Adopt: Hand off a maintainable solution</h3>
     </div>
   </div>
@@ -1068,5 +1103,27 @@ body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;fo
 </div>
 
 </div>
+<script>
+(function(){
+  var nav=document.querySelector('.phase-nav');
+  if(!nav||!('IntersectionObserver' in window))return;
+  var pills=Array.prototype.slice.call(nav.querySelectorAll('.pnav-pill'));
+  var map={};
+  pills.forEach(function(p){
+    var id=p.getAttribute('href').slice(1);
+    if(!map[id])map[id]=[];
+    map[id].push(p);
+  });
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting&&map[e.target.id]){
+        pills.forEach(function(p){p.classList.remove('active');});
+        map[e.target.id].forEach(function(p){p.classList.add('active');});
+      }
+    });
+  },{rootMargin:'-10% 0px -75% 0px'});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+})();
+</script>
 </body>
 </html>

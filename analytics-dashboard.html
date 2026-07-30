@@ -3,394 +3,589 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics Dashboard - AIFT Playbook</title>
+    <title>Analytics — AIFT Playbook</title>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'IBM Plex Sans', sans-serif;
+            font-family: 'IBM Plex Sans', -apple-system, sans-serif;
             background: #f4f4f4;
             color: #161616;
-            padding: 2rem;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 0.5rem;
-            color: #0f62fe;
-        }
-
-        .subtitle {
-            color: #525252;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .actions {
+        /* ── Gate ── */
+        #gate {
+            min-height: 100vh;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #161616;
+        }
+        #gate-box {
+            background: #fff;
+            padding: 2.5rem;
+            width: min(380px, calc(100vw - 2rem));
+        }
+        #gate-box h1 { font-size: 1.25rem; font-weight: 400; margin-bottom: 0.25rem; }
+        #gate-box p { font-size: 0.8125rem; color: #525252; margin-bottom: 1.5rem; }
+        #gate-input {
+            width: 100%;
+            border: 1px solid #c6c6c6;
+            padding: 0.625rem 0.75rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+        #gate-input:focus { outline: 2px solid #0f62fe; border-color: #0f62fe; }
+        #gate-btn {
+            width: 100%;
+            background: #0f62fe;
+            color: #fff;
+            border: none;
+            padding: 0.75rem;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+        }
+        #gate-btn:hover { background: #0353e9; }
+        #gate-err { font-size: 0.8125rem; color: #da1e28; display: none; }
+        #gate-err.show { display: block; }
+
+        /* ── Dashboard ── */
+        #dashboard { display: none; }
+        #dashboard.show { display: block; }
+
+        .topbar {
+            background: #161616;
+            color: #fff;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        .topbar h1 { font-size: 1rem; font-weight: 400; }
+        .topbar-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .topbar a { color: #78a9ff; font-size: 0.8125rem; text-decoration: none; }
+        .topbar a:hover { text-decoration: underline; }
+
+        .container { max-width: 1320px; margin: 0 auto; padding: 2rem; }
+
+        /* Data source banner */
+        .source-banner {
+            background: #fff;
+            border-left: 4px solid #0f62fe;
+            padding: 0.875rem 1.25rem;
+            margin-bottom: 2rem;
+            font-size: 0.8125rem;
+        }
+        .source-banner strong { color: #0f62fe; }
+        .source-banner.local { border-color: #f1c21b; }
+        .source-banner.local strong { color: #b28600; }
+
+        /* Stats row */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 1rem;
             margin-bottom: 2rem;
-            flex-wrap: wrap;
         }
-
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border: none;
-            background: #0f62fe;
-            color: white;
-            font-family: 'IBM Plex Sans', sans-serif;
-            font-size: 0.875rem;
-            cursor: pointer;
-            border-radius: 0;
-            transition: background 0.2s;
+        .stat {
+            background: #fff;
+            padding: 1.25rem 1.5rem;
+            border-left: 3px solid #0f62fe;
         }
-
-        .btn:hover {
-            background: #0353e9;
-        }
-
-        .btn-secondary {
-            background: #393939;
-        }
-
-        .btn-secondary:hover {
-            background: #262626;
-        }
-
-        .btn-danger {
-            background: #da1e28;
-        }
-
-        .btn-danger:hover {
-            background: #ba1b23;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background: white;
-            padding: 1.5rem;
-            border-left: 4px solid #0f62fe;
-        }
-
-        .stat-card h3 {
-            font-size: 0.875rem;
-            font-weight: 400;
-            color: #525252;
-            margin-bottom: 0.5rem;
+        .stat label {
+            display: block;
+            font-size: 0.6875rem;
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.06em;
+            color: #525252;
+            margin-bottom: 0.375rem;
         }
-
-        .stat-card .value {
-            font-size: 2.5rem;
+        .stat .num {
+            font-size: 2rem;
             font-weight: 300;
             color: #161616;
+            line-height: 1;
         }
+        .stat .sub { font-size: 0.75rem; color: #525252; margin-top: 0.25rem; }
 
-        .stat-card .subvalue {
-            font-size: 0.875rem;
-            color: #525252;
-            margin-top: 0.25rem;
-        }
-
+        /* Sections */
         .section {
-            background: white;
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .section h2 {
-            font-size: 1.5rem;
-            font-weight: 400;
+            background: #fff;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
-            color: #161616;
+        }
+        .section h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #e0e0e0;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; }
         th {
             text-align: left;
-            padding: 1rem;
+            padding: 0.625rem 0.875rem;
             background: #f4f4f4;
-            font-weight: 500;
-            font-size: 0.875rem;
-            color: #161616;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #525252;
             border-bottom: 1px solid #e0e0e0;
         }
-
         td {
-            padding: 1rem;
+            padding: 0.625rem 0.875rem;
             border-bottom: 1px solid #e0e0e0;
+            font-size: 0.8125rem;
+            vertical-align: top;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f4f4f4; }
+
+        /* Bar viz */
+        .bar-wrap { display: flex; align-items: center; gap: 0.5rem; }
+        .bar { height: 14px; background: #0f62fe; min-width: 2px; }
+        .bar.artifact { background: #8a3ffc; }
+
+        /* Feedback stars */
+        .stars { color: #f1c21b; font-size: 1rem; letter-spacing: 0.05em; }
+        .rating-big { font-size: 2.5rem; font-weight: 300; line-height: 1; }
+        .rating-label { font-size: 0.8125rem; color: #525252; }
+
+        /* Feedback list */
+        .fb-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .fb-item:last-child { border-bottom: none; }
+        .fb-meta { font-size: 0.75rem; color: #525252; margin-bottom: 0.25rem; }
+        .fb-comment { font-size: 0.875rem; }
+        .fb-comment em { color: #8d8d8d; }
+
+        /* No data */
+        .no-data { text-align: center; padding: 2rem; color: #8d8d8d; font-style: italic; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0; border-bottom: 1px solid #e0e0e0; margin-bottom: 1.5rem; }
+        .tab-btn {
+            padding: 0.625rem 1.25rem;
+            background: none;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-family: inherit;
             font-size: 0.875rem;
+            cursor: pointer;
+            color: #525252;
         }
+        .tab-btn.active { border-bottom-color: #0f62fe; color: #0f62fe; font-weight: 500; }
 
-        tr:hover {
-            background: #f4f4f4;
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        /* Actions bar */
+        .actions-bar {
+            display: flex; gap: 0.75rem; margin-bottom: 1.5rem; flex-wrap: wrap; align-items: center;
         }
-
-        .page-bar {
-            height: 24px;
-            background: #0f62fe;
-            margin-right: 0.5rem;
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-        .time-badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            background: #e0e0e0;
-            font-size: 0.75rem;
+        .btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid #c6c6c6;
+            background: #fff;
+            font-family: inherit;
+            font-size: 0.8125rem;
+            cursor: pointer;
             color: #161616;
         }
+        .btn:hover { background: #f4f4f4; }
+        .btn-primary { background: #0f62fe; color: #fff; border-color: #0f62fe; }
+        .btn-primary:hover { background: #0353e9; border-color: #0353e9; }
+        .btn-danger { background: #fff; color: #da1e28; border-color: #da1e28; }
+        .btn-danger:hover { background: #fff1f1; }
 
-        .no-data {
-            text-align: center;
-            padding: 3rem;
-            color: #525252;
-            font-style: italic;
-        }
-
-        .recent-activity {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .activity-item {
-            padding: 0.75rem;
-            border-bottom: 1px solid #e0e0e0;
-            font-size: 0.875rem;
-        }
-
-        .activity-item:hover {
-            background: #f4f4f4;
-        }
-
-        .activity-time {
-            color: #525252;
-            font-size: 0.75rem;
-        }
-
-        .activity-page {
-            font-weight: 500;
-            color: #0f62fe;
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                padding: 1rem;
-            }
-
-            table {
-                font-size: 0.75rem;
-            }
-
-            th, td {
-                padding: 0.5rem;
-            }
+        @media (max-width: 640px) {
+            .container { padding: 1rem; }
+            .topbar { padding: 1rem; }
+            .stat-row { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>📊 Analytics Dashboard</h1>
-        <p class="subtitle">Track visitor engagement and page performance</p>
 
-        <div class="actions">
-            <button class="btn" onclick="refreshDashboard()">🔄 Refresh</button>
-            <button class="btn btn-secondary" onclick="exportData()">📥 Export Data</button>
-            <button class="btn btn-danger" onclick="clearData()">🗑️ Clear All Data</button>
-            <button class="btn btn-secondary" onclick="window.location.href='index.html'">← Back to Site</button>
-        </div>
+<!-- ── Gate ── -->
+<div id="gate">
+    <div id="gate-box">
+        <h1>AIFT Playbook Analytics</h1>
+        <p>Internal dashboard — authorised team only.</p>
+        <input type="password" id="gate-input" placeholder="Enter dashboard password" autocomplete="current-password">
+        <button id="gate-btn">Unlock</button>
+        <div id="gate-err">Incorrect password.</div>
+    </div>
+</div>
 
-        <div class="stats-grid" id="stats-grid">
-            <!-- Stats will be populated here -->
-        </div>
-
-        <div class="section">
-            <h2>Top Pages</h2>
-            <div id="top-pages">
-                <p class="no-data">No data available yet. Start browsing the site to collect analytics.</p>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Recent Activity</h2>
-            <div class="recent-activity" id="recent-activity">
-                <p class="no-data">No recent activity.</p>
-            </div>
+<!-- ── Dashboard ── -->
+<div id="dashboard">
+    <div class="topbar">
+        <h1>AIFT Playbook — Analytics &amp; Feedback</h1>
+        <div class="topbar-actions">
+            <a href="index.html">← Back to site</a>
         </div>
     </div>
 
-    <script src="js/analytics.js"></script>
-    <script>
-        const API_ENDPOINT = 'http://localhost:5000/api';
-        const USE_BACKEND = true; // Set to false to use local storage only
+    <div class="container">
+        <div id="source-banner" class="source-banner local">
+            <strong>Traffic analytics</strong> (page views, sessions, heatmaps, click maps, session recordings) are in
+            <a id="clarity-link" href="https://clarity.microsoft.com" target="_blank" rel="noopener" style="color:#0f62fe;">Microsoft Clarity →</a>
+            Sign in with your IBM Microsoft account. &nbsp;·&nbsp;
+            <strong>Feedback responses</strong> are shown below.
+        </div>
 
-        function formatTime(seconds) {
-            if (seconds < 60) return `${seconds}s`;
-            const minutes = Math.floor(seconds / 60);
-            const secs = seconds % 60;
-            return `${minutes}m ${secs}s`;
+        <div class="actions-bar">
+            <button class="btn btn-primary" id="btn-refresh">Refresh</button>
+            <button class="btn" id="btn-export">Export local data (JSON)</button>
+            <button class="btn btn-danger" id="btn-clear">Clear local data</button>
+        </div>
+
+        <!-- Summary stats -->
+        <div class="stat-row" id="stat-row">
+            <div class="stat"><label>Total page views</label><div class="num" id="s-pv">—</div></div>
+            <div class="stat"><label>Unique sessions</label><div class="num" id="s-sess">—</div></div>
+            <div class="stat"><label>Artifact / link clicks</label><div class="num" id="s-clicks">—</div></div>
+            <div class="stat"><label>Feedback responses</label><div class="num" id="s-fb">—</div></div>
+            <div class="stat" style="border-left-color:#f1c21b">
+                <label>Avg rating</label>
+                <div class="num" id="s-rating" style="color:#b28600">—</div>
+                <div class="sub">out of 5</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="feedback">Feedback</button>
+            <button class="tab-btn" data-tab="clicks">Links &amp; artifacts clicked</button>
+            <button class="tab-btn" data-tab="activity">Recent activity (this browser)</button>
+        </div>
+
+        <!-- Links & artifacts -->
+        <div class="tab-panel active" id="tab-clicks">
+            <div class="section">
+                <h2>External link &amp; artifact clicks</h2>
+                <div id="clicks-table"><p class="no-data">No clicks tracked yet.</p></div>
+            </div>
+        </div>
+
+        <!-- Feedback -->
+        <div class="tab-panel active" id="tab-feedback">
+            <div class="section">
+                <h2>Feedback responses</h2>
+                <div id="feedback-content"><p class="no-data">No feedback submitted yet.</p></div>
+            </div>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="tab-panel" id="tab-activity">
+            <div class="section">
+                <h2>Recent page views (latest 30)</h2>
+                <div id="activity-table"><p class="no-data">No activity yet.</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load config + tracking -->
+<script src="js/tracking-config.js"></script>
+    <script src="js/tracking-secrets.js"></script>
+<script src="js/tracking.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    const cfg = window.AIFT_CONFIG || {};
+
+    // ── Gate ──────────────────────────────────────────────────────────────────
+    const PASSWORD = cfg.dashboardPassword || 'orchestration';
+    const GATE_KEY = 'aift_dash_unlocked';
+
+    function tryUnlock(pw) {
+        if (pw === PASSWORD) { sessionStorage.setItem(GATE_KEY, '1'); showDashboard(); }
+        else document.getElementById('gate-err').classList.add('show');
+    }
+    document.getElementById('gate-btn').addEventListener('click', () => tryUnlock(document.getElementById('gate-input').value));
+    document.getElementById('gate-input').addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(e.target.value); });
+    if (sessionStorage.getItem(GATE_KEY) === '1') showDashboard();
+
+    // ── Tabs ──────────────────────────────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // ── Helpers ───────────────────────────────────────────────────────────────
+    function fmtTime(sec) {
+        if (!sec || sec < 1) return '—';
+        if (sec < 60) return sec + 's';
+        return Math.floor(sec / 60) + 'm ' + (sec % 60) + 's';
+    }
+    function fmtDate(iso) {
+        if (!iso) return '—';
+        const d = new Date(iso), now = new Date(), diff = now - d;
+        const mins = Math.floor(diff/60000), hrs = Math.floor(diff/3600000), days = Math.floor(diff/86400000);
+        if (mins < 1) return 'Just now';
+        if (mins < 60) return mins + 'm ago';
+        if (hrs < 24) return hrs + 'h ago';
+        if (days < 7) return days + 'd ago';
+        return d.toLocaleDateString();
+    }
+    function stars(r) { const n = Math.round(r||0); return '★'.repeat(n)+'☆'.repeat(5-n); }
+
+    // ── GitHub API helpers ────────────────────────────────────────────────────
+    function ghReady() {
+        return cfg.githubToken && cfg.githubToken !== 'PASTE_YOUR_PAT_HERE' &&
+               cfg.githubOwner !== 'PASTE_YOUR_IBM_GITHUB_USERNAME';
+    }
+    function ghApiUrl(path) {
+        const base = (cfg.githubApiBase || 'https://github.ibm.com/api/v3').replace(/\/$/, '');
+        return `${base}/repos/${cfg.githubOwner}/${cfg.githubRepo}${path}`;
+    }
+    async function ghFetch(path) {
+        const res = await fetch(ghApiUrl(path), {
+            headers: { 'Authorization': 'token ' + cfg.githubToken, 'Accept': 'application/vnd.github.v3+json' }
+        });
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+    }
+
+    // ── Parse embedded JSON from Issue body ───────────────────────────────────
+    function parseIssueData(body) {
+        const match = body && body.match(/<!-- AIFT_DATA\n([\s\S]*?)\n-->/);
+        if (!match) return null;
+        try { return JSON.parse(match[1]); } catch { return null; }
+    }
+
+    // ── Load from GitHub Issues and aggregate ─────────────────────────────────
+    async function loadFromGitHub() {
+        // Fetch up to 100 most recent issues per label (paginate if needed)
+        const [sessionIssues, feedbackIssues] = await Promise.all([
+            ghFetch('/issues?labels=aift-session&state=open&per_page=100'),
+            ghFetch('/issues?labels=aift-feedback&state=open&per_page=100')
+        ]);
+
+        // Aggregate sessions
+        const pageStats = {}, clickStats = {}, sessions = new Set();
+        for (const issue of sessionIssues) {
+            const data = parseIssueData(issue.body);
+            if (!data) continue;
+            sessions.add(data.session);
+            (data.pageViews || []).forEach(pv => {
+                if (!pageStats[pv.page]) pageStats[pv.page] = { page: pv.page, title: pv.pageTitle, views: 0, totalTime: 0 };
+                pageStats[pv.page].views++;
+            });
+            (data.timeEvents || []).forEach(t => {
+                if (pageStats[t.page]) pageStats[t.page].totalTime += (t.seconds || 0);
+            });
+            (data.clicks || []).forEach(c => {
+                const key = c.label || c.url;
+                if (!clickStats[key]) clickStats[key] = { label: c.label, url: c.url, category: c.category, count: 0 };
+                clickStats[key].count++;
+            });
         }
+        Object.values(pageStats).forEach(ps => { ps.avgTime = ps.views > 0 ? Math.round(ps.totalTime / ps.views) : 0; });
 
-        function formatDate(isoString) {
-            const date = new Date(isoString);
-            const now = new Date();
-            const diff = now - date;
-            const minutes = Math.floor(diff / 60000);
-            const hours = Math.floor(diff / 3600000);
-            const days = Math.floor(diff / 86400000);
+        // Aggregate feedback
+        const feedback = feedbackIssues.map(issue => {
+            const data = parseIssueData(issue.body);
+            if (data) return data;
+            // Fallback: parse rating + comment directly from issue body
+            const ratingMatch = issue.title.match(/\[feedback\] (★+)/);
+            const commentMatch = issue.body && issue.body.match(/### Comment\n([\s\S]*?)(?:\n\n|$)/);
+            const pageMatch = issue.body && issue.body.match(/\*\*Page:\*\* (.+)/);
+            return {
+                rating: ratingMatch ? ratingMatch[1].length : 0,
+                comment: commentMatch ? commentMatch[1].trim() : '',
+                page: pageMatch ? pageMatch[1].trim() : '—',
+                pageTitle: pageMatch ? pageMatch[1].trim() : '—',
+                ts: issue.created_at
+            };
+        }).filter(Boolean);
 
-            if (minutes < 1) return 'Just now';
-            if (minutes < 60) return `${minutes}m ago`;
-            if (hours < 24) return `${hours}h ago`;
-            if (days < 7) return `${days}d ago`;
-            return date.toLocaleDateString();
-        }
+        const avgRating = feedback.length
+            ? (feedback.reduce((s, f) => s + (f.rating || 0), 0) / feedback.length).toFixed(1)
+            : null;
 
-        async function refreshDashboard() {
-            let stats;
-            
-            if (USE_BACKEND) {
-                try {
-                    const response = await fetch(`${API_ENDPOINT}/stats`);
-                    if (response.ok) {
-                        stats = await response.json();
-                    } else {
-                        console.warn('Backend unavailable, using local data');
-                        stats = window.analytics.getStats();
-                    }
-                } catch (error) {
-                    console.warn('Backend unavailable, using local data');
-                    stats = window.analytics.getStats();
-                }
-            } else {
-                stats = window.analytics.getStats();
+        return {
+            totalPageViews:  Object.values(pageStats).reduce((s,p) => s + p.views, 0),
+            uniqueSessions:  sessions.size,
+            totalClicks:     Object.values(clickStats).reduce((s,c) => s + c.count, 0),
+            feedbackCount:   feedback.length,
+            avgRating,
+            pageStats:       Object.values(pageStats).sort((a,b) => b.views - a.views),
+            topClicks:       Object.values(clickStats).sort((a,b) => b.count - a.count).slice(0, 20),
+            recentFeedback:  feedback.slice(0, 30),
+            source:          'github'
+        };
+    }
+
+    // ── Render ────────────────────────────────────────────────────────────────
+    async function loadAndRender() {
+        setBannerLoading();
+        let stats, source = 'local';
+
+        if (ghReady()) {
+            try {
+                stats  = await loadFromGitHub();
+                source = 'github';
+            } catch (e) {
+                console.warn('GitHub Issues read failed, falling back to local:', e.message);
             }
-
-            // Update stats cards
-            const statsGrid = document.getElementById('stats-grid');
-            statsGrid.innerHTML = `
-                <div class="stat-card">
-                    <h3>Total Page Views</h3>
-                    <div class="value">${stats.total.pageViews.toLocaleString()}</div>
-                    <div class="subvalue">${stats.last7Days.pageViews} in last 7 days</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Sessions</h3>
-                    <div class="value">${stats.total.sessions.toLocaleString()}</div>
-                    <div class="subvalue">${stats.last7Days.sessions} in last 7 days</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Unique Visitors (7d)</h3>
-                    <div class="value">${stats.last7Days.uniqueVisitors}</div>
-                    <div class="subvalue">${stats.last30Days.uniqueVisitors} in last 30 days</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Total Events</h3>
-                    <div class="value">${stats.total.events.toLocaleString()}</div>
-                    <div class="subvalue">User interactions tracked</div>
-                </div>
-            `;
-
-            // Update top pages
-            const topPagesDiv = document.getElementById('top-pages');
-            if (stats.topPages.length === 0) {
-                topPagesDiv.innerHTML = '<p class="no-data">No page data available yet.</p>';
-            } else {
-                const maxViews = stats.topPages[0][1].views;
-                topPagesDiv.innerHTML = `
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Page</th>
-                                <th>Views</th>
-                                <th>Avg. Time</th>
-                                <th>Popularity</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${stats.topPages.map(([page, data]) => `
-                                <tr>
-                                    <td><strong>${page}</strong></td>
-                                    <td>${data.views.toLocaleString()}</td>
-                                    <td><span class="time-badge">${formatTime(data.avgTime)}</span></td>
-                                    <td>
-                                        <div class="page-bar" style="width: ${(data.views / maxViews) * 200}px"></div>
-                                        ${Math.round((data.views / maxViews) * 100)}%
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-            }
-
-            // Update recent activity
-            const recentActivityDiv = document.getElementById('recent-activity');
-            if (stats.recentPageViews.length === 0) {
-                recentActivityDiv.innerHTML = '<p class="no-data">No recent activity.</p>';
-            } else {
-                recentActivityDiv.innerHTML = stats.recentPageViews.map(pv => `
-                    <div class="activity-item">
-                        <div class="activity-page">${pv.page}</div>
-                        <div class="activity-time">
-                            ${formatDate(pv.timestamp)}
-                            ${pv.timeSpent ? ` • ${formatTime(pv.timeSpent)} on page` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            }
         }
 
-        function exportData() {
-            window.analytics.exportData();
+        if (!stats) {
+            stats = window.aiftTrack ? window.aiftTrack.localStats() :
+                { totalPageViews:0, uniqueSessions:0, totalClicks:0, feedbackCount:0, avgRating:null, pageStats:[], topClicks:[], recentFeedback:[], recentPageViews:[] };
         }
 
-        function clearData() {
-            if (window.analytics.clearData()) {
-                refreshDashboard();
-            }
+        updateBanner(source);
+        renderStats(stats);
+        renderPages(stats.pageStats);
+        renderClicks(stats.topClicks);
+        renderFeedback(stats.recentFeedback, stats.avgRating, stats.feedbackCount);
+        if (source === 'local') renderActivity(stats.recentPageViews);
+    }
+
+    function setBannerLoading() {
+        const b = document.getElementById('source-banner');
+        b.className = 'source-banner';
+        b.innerHTML = 'Loading data…';
+    }
+
+    function updateBanner(source) {
+        const b = document.getElementById('source-banner');
+        const clarityUrl = 'https://clarity.microsoft.com/projects/view/' + (cfg.clarityProjectId || 'xn0z79mkef') + '/dashboard';
+        if (source === 'github') {
+            b.className = 'source-banner';
+            b.innerHTML = `<strong>Data source: IBM GitHub Issues</strong> — aggregated across all visitors and devices. &nbsp;·&nbsp; <a href="${clarityUrl}" target="_blank" rel="noopener" style="color:#0f62fe;">Heatmaps &amp; recordings → Clarity</a>`;
+        } else {
+            b.className = 'source-banner local';
+            b.innerHTML = `<strong>Data source: this browser only.</strong> Add GitHub token to <code>js/tracking-config.js</code> to see all visitors. &nbsp;·&nbsp; <a href="${clarityUrl}" target="_blank" rel="noopener" style="color:#0f62fe;">Clarity →</a>`;
         }
+    }
 
-        // Initial load
-        refreshDashboard();
+    function renderStats(s) {
+        document.getElementById('s-pv').textContent     = (s.totalPageViews || 0).toLocaleString();
+        document.getElementById('s-sess').textContent   = (s.uniqueSessions  || 0).toLocaleString();
+        document.getElementById('s-clicks').textContent = (s.totalClicks     || 0).toLocaleString();
+        document.getElementById('s-fb').textContent     = (s.feedbackCount   || 0).toLocaleString();
+        document.getElementById('s-rating').textContent = s.avgRating || '—';
+    }
 
-        // Auto-refresh every 30 seconds
-        setInterval(refreshDashboard, 30000);
-    </script>
+    function renderPages(pageStats) {
+        const el = document.getElementById('pages-table');
+        if (!pageStats || !pageStats.length) { el.innerHTML = '<p class="no-data">No page data yet.</p>'; return; }
+        const max = Math.max(...pageStats.map(p => p.views));
+        el.innerHTML = `<table><thead><tr><th>Page</th><th>Views</th><th>Avg time</th><th>Popularity</th></tr></thead><tbody>
+            ${pageStats.map(p => `<tr>
+                <td><strong>${p.title||p.page}</strong><br><span style="color:#525252;font-size:0.75rem">${p.page}</span></td>
+                <td>${p.views}</td><td>${fmtTime(p.avgTime)}</td>
+                <td><div class="bar-wrap"><div class="bar" style="width:${Math.max(4,Math.round((p.views/max)*180))}px"></div><span>${Math.round((p.views/max)*100)}%</span></div></td>
+            </tr>`).join('')}
+        </tbody></table>`;
+    }
+
+    function renderClicks(clicks) {
+        const el = document.getElementById('clicks-table');
+        if (!clicks || !clicks.length) { el.innerHTML = '<p class="no-data">No clicks tracked yet.</p>'; return; }
+        const max = Math.max(...clicks.map(c => c.count));
+        el.innerHTML = `<table><thead><tr><th>Label</th><th>Type</th><th>Clicks</th><th>Relative</th></tr></thead><tbody>
+            ${clicks.map(c => `<tr>
+                <td>${c.url ? `<a href="${c.url}" target="_blank" rel="noopener" style="color:#0f62fe">${c.label||c.url}</a>` : (c.label||'—')}</td>
+                <td><span style="font-size:0.75rem;padding:0.2rem 0.5rem;background:${c.category==='artifact_click'?'#f6f2ff':'#edf5ff'};color:${c.category==='artifact_click'?'#6929c4':'#0043a4'}">${c.category==='artifact_click'?'Artifact':'Link'}</span></td>
+                <td>${c.count}</td>
+                <td><div class="bar-wrap"><div class="bar ${c.category==='artifact_click'?'artifact':''}" style="width:${Math.max(4,Math.round((c.count/max)*160))}px"></div><span>${Math.round((c.count/max)*100)}%</span></div></td>
+            </tr>`).join('')}
+        </tbody></table>`;
+    }
+
+    function renderFeedback(feedback, avgRating, count) {
+        const el = document.getElementById('feedback-content');
+        if (!feedback || !feedback.length) { el.innerHTML = '<p class="no-data">No feedback yet.</p>'; return; }
+        const dist = [0,0,0,0,0];
+        feedback.forEach(f => { if (f.rating>=1 && f.rating<=5) dist[f.rating-1]++; });
+        const maxD = Math.max(...dist, 1);
+        el.innerHTML = `
+            <div style="display:flex;gap:2rem;flex-wrap:wrap;margin-bottom:1.5rem;align-items:flex-start">
+                <div>
+                    <div class="rating-big" style="color:#b28600">${avgRating||'—'}</div>
+                    <div class="stars">${avgRating?stars(avgRating):'☆☆☆☆☆'}</div>
+                    <div class="rating-label">${count||0} response${count!==1?'s':''}</div>
+                </div>
+                <div style="flex:1;min-width:180px">
+                    ${[5,4,3,2,1].map(n=>`
+                        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.3rem;font-size:0.8125rem">
+                            <span style="width:1.5rem;text-align:right;color:#525252">${n}★</span>
+                            <div style="flex:1;background:#e0e0e0;height:10px"><div style="background:#f1c21b;height:10px;width:${Math.round((dist[n-1]/maxD)*100)}%"></div></div>
+                            <span style="width:2rem;color:#525252">${dist[n-1]}</span>
+                        </div>`).join('')}
+                </div>
+            </div>
+            <h3 style="font-size:0.875rem;font-weight:500;margin-bottom:0.75rem;color:#525252;text-transform:uppercase;letter-spacing:0.05em">Comments</h3>
+            ${feedback.map(f=>`
+                <div class="fb-item">
+                    <div class="fb-meta"><span class="stars" style="font-size:0.875rem">${stars(f.rating)}</span> &nbsp;·&nbsp; ${f.pageTitle||f.page||'—'} &nbsp;·&nbsp; ${fmtDate(f.ts)}</div>
+                    <div class="fb-comment">${f.comment||'<em>No comment</em>'}</div>
+                </div>`).join('')}`;
+    }
+
+    function renderActivity(pageViews) {
+        const el = document.getElementById('activity-table');
+        if (!pageViews || !pageViews.length) { el.innerHTML = '<p class="no-data">No activity yet.</p>'; return; }
+        el.innerHTML = `<table><thead><tr><th>Page</th><th>When</th><th>Screen</th></tr></thead><tbody>
+            ${pageViews.map(pv=>`<tr>
+                <td><strong>${pv.pageTitle||pv.page}</strong></td>
+                <td style="color:#525252">${fmtDate(pv.ts)}</td>
+                <td style="color:#525252">${pv.screen||'—'}</td>
+            </tr>`).join('')}
+        </tbody></table>`;
+    }
+
+    // ── Actions ───────────────────────────────────────────────────────────────
+    document.getElementById('btn-refresh').addEventListener('click', loadAndRender);
+    document.getElementById('btn-export').addEventListener('click', () => {
+        const data = JSON.parse(localStorage.getItem('aift_track_local') || '[]');
+        const a = Object.assign(document.createElement('a'), {
+            href: URL.createObjectURL(new Blob([JSON.stringify(data,null,2)], {type:'application/json'})),
+            download: 'aift-analytics-' + new Date().toISOString().split('T')[0] + '.json'
+        });
+        a.click();
+    });
+    document.getElementById('btn-clear').addEventListener('click', () => {
+        if (confirm('Clear all locally stored data from this browser?')) {
+            localStorage.removeItem('aift_track_local');
+            localStorage.removeItem('aift_track_queue');
+            loadAndRender();
+        }
+    });
+
+    // ── Boot ──────────────────────────────────────────────────────────────────
+    function showDashboard() {
+        document.getElementById('gate').style.display = 'none';
+        document.getElementById('dashboard').classList.add('show');
+        loadAndRender();
+        setInterval(loadAndRender, 60000);
+    }
+
+}());
+</script>
 </body>
 </html>
