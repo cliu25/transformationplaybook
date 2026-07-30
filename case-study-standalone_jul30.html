@@ -13,7 +13,8 @@
 .step-meta{font-size:.8rem;color:#6f6f6f;margin-bottom:.5rem;display:flex;gap:1rem;flex-wrap:wrap;}
 .step-description{font-size:.9375rem;line-height:1.65;color:#525252;}
 .deliverable-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.875rem;}
-.deliverable-card{border:1px solid #e0e0e0;border-radius:4px;padding:.875rem;background:#fff;}
+.deliverable-card{border:1px solid #e0e0e0;border-radius:4px;padding:.875rem;background:#fff;border-bottom:1px solid #e0e0e0;}
+.deliverable-grid .deliverable-card:last-child{border-bottom:1px solid #e0e0e0;}
 .deliverable-card h5{font-size:.875rem;font-weight:600;margin-bottom:.3rem;color:#161616;}
 .deliverable-card p{font-size:.78rem;color:#525252;line-height:1.45;margin-bottom:.625rem;}
 .d-links{display:flex;gap:.5rem;flex-wrap:wrap;}
@@ -69,6 +70,7 @@
 .method-steps li{display:flex;gap:.7rem;align-items:flex-start;font-size:.875rem;line-height:1.55;color:#525252;}
 .method-steps li::before{content:counter(ms);counter-increment:ms;flex-shrink:0;width:1.3rem;height:1.3rem;background:#8a3ffc;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:.1rem;}
 .method-tip{margin-top:.75rem;padding:.55rem .8rem;background:#f4f4f4;border-radius:3px;font-size:.78rem;color:#525252;line-height:1.5;font-style:italic;}
+.method-steps li:last-child{padding-top:.5rem;margin-top:.25rem;border-top:1px solid #e8e8e8;}
 .visual{margin:1.375rem 0;background:#f4f4f4;border-radius:4px;padding:1.125rem;overflow-x:auto;display:flex;flex-direction:column;align-items:center;}
 .visual svg{display:block;width:100%;height:auto;max-width:900px;}
 .visual-cap{font-size:.76rem;color:#6f6f6f;margin-top:.55rem;line-height:1.4;font-style:italic;}
@@ -250,7 +252,7 @@
 </div>
 <div class="handoff"><strong>Handing forward to Step 2:</strong> a committed sponsor, a named domain focal, a documented readiness picture, and a steering cadence on the calendar. Not a chosen workflow yet, the conditions that make the choice stick.</div>
 <div class="deliverable-section"><h4 class="deliverable-heading">Deliverables</h4><div class="deliverable-grid">
-<div class="deliverable-card"><h5>Technology &amp; Data Readiness Checklist</h5><p>Confirms data sources, platforms, access, governance, and in-flight conflicts before committing to a workflow.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Technology &amp; Data Readiness Checklist</h5><p>Confirms data sources, platforms, access, governance, and in-flight conflicts before committing to a workflow.</p><div class="d-links"><a class="d-link" href="https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699" target="_blank">Template ↗</a></div></div>
 <div class="deliverable-card"><h5>Project Plan</h5><p>One-page agreement: scope, sponsor, team, value target, and timeline. If you can't complete it, you're not ready to start.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8" target="_blank">Template ↗</a></div></div>
 <div class="deliverable-card"><h5>RACI Matrix</h5><p>Names the accountable owner for every major task. One person accountable per row, not a committee.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u" target="_blank">Template ↗</a></div></div>
 <div class="deliverable-card"><h5>RAID Log</h5><p>Risks, assumptions, issues, and dependencies. Start it Day 1. A RAID log opened after problems appear is a post-mortem, not a tool.</p><div class="d-links"><a class="d-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDn9i60m4nhTLW0R3b0Sf-nAS4HFwpukAQCTj6v9QtWCpc?e=UsywxC" target="_blank">Template ↗</a></div></div>
@@ -379,8 +381,6 @@
 <div class="handoff"><strong>Handing forward to Step 4:</strong> a validated opportunity, a go decision, confirmed baseline KPIs, and a technical architect who already understands the data and integration landscape. Solution Design starts with the question answered.</div>
 <div class="deliverable-section"><h4 class="deliverable-heading">Deliverables</h4><div class="deliverable-grid">
 <div class="deliverable-card"><h5>Business Process Map(s)</h5><p>Current-state workflow from conversations, handoffs, systems, users, bottlenecks. Built from what people actually do, not what the documentation says.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank">Template ↗</a></div></div>
-<div class="deliverable-card"><h5>EIW Assessment and Automation Level</h5><p>Analyzes the workflow's automation potential: bottlenecks, manual steps, decisions, user pain, volume, cycle time, dependencies, and AI opportunity.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
-<div class="deliverable-card"><h5>Measurement Strategy</h5><p>Baseline, target, source, owner, cadence, and validation method for each KPI. Confirm with finance now, not after the sprint.</p><div class="d-links"><span class="d-link off">Example (coming soon)</span></div></div>
 </div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 4</h4><p>Opportunity validated with evidence. Go approved. Baseline KPIs set and finance-confirmed. The architect knows the technical landscape. Now design the solution.</p></div></div>
 </div>
 </div>
@@ -510,7 +510,7 @@
 <div class="handoff"><strong>Handing forward to Step 5:</strong> future-state vision, two signed-off scope lists, build-ready requirements, and ARB in progress. The build team can start Day 1 without a kickoff meeting to re-explain what they're building.</div>
 <div class="deliverable-section"><h4 class="deliverable-heading">Deliverables</h4><div class="deliverable-grid">
 <div class="deliverable-card"><h5>Future State Workflow Process Map</h5><p>How the person's work changes, where AI enters, and where the human stays in the loop, designed from scratch, not adapted from the current state.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/j2dkniphppdogilesa8a17crykrcnj8d" target="_blank">Example ↗</a><a class="d-link" href="https://ibm.box.com/s/op5cjfjug7839atgarbd9dymwn6rmc72" target="_blank">Template ↗</a></div></div>
-<div class="deliverable-card"><h5>Business Requirements Log</h5><p>Build-ready package: persona, workflow, actions, systems, data objects, acceptance criteria, and technical specification. The source of truth for what gets built.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Business Requirements Log</h5><p>Build-ready package: persona, workflow, actions, systems, data objects, acceptance criteria, and technical specification. The source of truth for what gets built.</p><div class="d-links"><a class="d-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=XmaYr0" target="_blank">Template ↗</a></div></div>
 <div class="deliverable-card"><h5>Strategic Roadmap</h5><p>MVP scope, explicit backlog, dependencies, sprint cadence, and next releases. The build team's operating plan.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8" target="_blank">Example ↗</a><a class="d-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank">Template ↗</a></div></div>
 <div class="deliverable-card"><h5>Build vs. Buy Assessment</h5><p>Compares vendor solutions against custom build on the approved tech stack, cost, time, capability, maintainability. Documents the decision.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/1r9qlz63abf5fwzlabvvpniq5gh1dgpn" target="_blank">Example ↗</a></div></div>
 <div class="deliverable-card"><h5>Change Communications Plan</h5><p>Planned messages, channels, and timing for the whole project — started before the build, not after. Covers what counselors will hear, when, and from whom.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/qjrtcgj6no1zx74ej9329x0btscm53pi" target="_blank">Example ↗</a></div></div>
@@ -606,8 +606,8 @@
 <div class="deliverable-section"><h4 class="deliverable-heading">Deliverables</h4><div class="deliverable-grid">
 <div class="deliverable-card"><h5>Defect Tracker</h5><p>Tracks bugs, issues, and feedback throughout the sprint. Reviewed at every sprint review and steering meeting.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman" target="_blank">Example ↗</a></div></div>
 <div class="deliverable-card"><h5>SteerCo Charter</h5><p>Standing meeting rules: attendees, cadence, RAG norms, agenda structure, escalation path, and decision log. Set once at Sprint 1, not renegotiated every week.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/a8tgpseyqs4g5tajpzk4wsvgnvt3wzjv" target="_blank">Example ↗</a></div></div>
-<div class="deliverable-card"><h5>ROI Analysis</h5><p>Compares pre-sprint value assumptions against pilot evidence, usage data, and workflow impact. The data behind the go/no-go recommendation.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
-<div class="deliverable-card"><h5>KPI Dashboard</h5><p>Live tracking of adoption, usage, operational performance, and value realization against the baselines set in Step 3.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>ROI Analysis</h5><p>Compares pre-sprint value assumptions against pilot evidence, usage data, and workflow impact. The data behind the go/no-go recommendation.</p><div class="d-links"><a class="d-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=0AJIsf" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>KPI Dashboard</h5><p>Live tracking of adoption, usage, operational performance, and value realization against the baselines set in Step 3.</p><div class="d-links"><a class="d-link" href="https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=cs3fmw" target="_blank">Template ↗</a></div></div>
 </div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 6</h4><p>Go decision made and documented. Solution is live. Post-MVP backlog has an owner. Change management is ready to fully execute. Now make adoption systematic.</p></div></div>
 </div>
 </div>
@@ -720,8 +720,6 @@
 <div class="handoff"><strong>Returning to Step 3 for the next workflow:</strong> the prioritized list from Step 2 has a next candidate waiting. Everything learned in this cycle, data patterns, integration paths, team dynamics, what questions to ask, makes the next Workflow Analysis faster.</div>
 <div class="deliverable-section"><h4 class="deliverable-heading">Deliverables</h4><div class="deliverable-grid">
 <div class="deliverable-card"><h5>Operational Health Dashboard</h5><p>Post-launch tracking: realized value, Finance/EBM validation, KPI review, leadership updates. The ongoing proof that the investment was worth it.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/3td044hqlb49ya6nv8jls70fe66k0aik" target="_blank">Example ↗</a></div></div>
-<div class="deliverable-card"><h5>Change Management Plan</h5><p>User groups, impact levels, training content, communications cadence, feedback loops, and resistance handling. Active from Step 3, now fully executing.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
-<div class="deliverable-card"><h5>Strategic Roadmap (updated)</h5><p>Post-launch 30/90/180-day milestones, Wave 2 backlog, and the definition of "fully complete."</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank">Template ↗</a></div></div>
 </div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>One workflow transformed. Ready for the next.</h4><p>Solution owned, tracked, and adopted. Ownership transferred. Return to Step 3, Workflow Analysis, and apply everything learned in this cycle.</p></div></div>
 </div>
 </div>
