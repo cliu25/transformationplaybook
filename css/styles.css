@@ -618,11 +618,15 @@ a:hover {
   background: #fff;
   padding: 1rem;
   overflow-x: auto;
+  max-width: 1584px; /* Carbon max breakpoint — caps growth on large monitors */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .workflow-overview-blueprint svg {
   display: block;
   width: 100%;
+  max-width: 1584px;
   height: auto;
 }
 
