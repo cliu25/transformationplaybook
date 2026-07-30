@@ -1767,28 +1767,29 @@ async function renderCaseStudyPage() {
         const parser = new DOMParser();
         doc = parser.parseFromString(html, 'text/html');
 
-        // Inject the standalone file's styles once, scoped to #cs-detail-content
-        // so they cannot affect body, layout, or anything outside the case study panel
+        // Inject the standalone file's styles once.
+        // Strip only the rules that would break the outer layout (body, *, :root)
+        // and leave the component-level class rules as global — the class names are
+        // unique to the case study so there is no collision risk.
         const styleId = 'cs-standalone-styles';
         if (!document.getElementById(styleId)) {
             const rawCss = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
-            // Prefix every rule with #cs-detail-content so nothing leaks out
-            const scopedCss = rawCss.replace(
-                /([^{}]+)\{/g,
-                (match, selector) => {
-                    // Skip @-rules (media, keyframes, etc.) — leave them as-is
-                    const trimmed = selector.trim();
-                    if (trimmed.startsWith('@') || trimmed === '') return match;
-                    // Scope each comma-separated selector
-                    const scoped = trimmed.split(',')
-                        .map(s => `#cs-detail-content ${s.trim()}`)
-                        .join(', ');
-                    return `${scoped} {`;
+            // Remove rules whose selector is body, *, or :root (they break page layout).
+            // Uses a simple block-aware stripper: find "selector { ... }" and drop it
+            // if the selector matches the dangerous set.
+            const dangerousSelectors = /^(\*|body|:root)\s*$/;
+            // Split on top-level { } pairs to get individual rules
+            const safeCss = rawCss.replace(
+                /([^{}@][^{]*)\{([^{}]*)\}/g,
+                (match, selector, body) => {
+                    const sel = selector.trim();
+                    if (dangerousSelectors.test(sel)) return ''; // drop it
+                    return match; // keep everything else as-is
                 }
             );
             const styleEl = document.createElement('style');
             styleEl.id = styleId;
-            styleEl.textContent = scopedCss;
+            styleEl.textContent = safeCss;
             document.head.appendChild(styleEl);
         }
     } catch (e) {
