@@ -1703,120 +1703,29 @@ function renderLibraryPage() {
 // CASE STUDY PAGE
 // ============================================================================
 
-function renderCaseStudyPage() {
+async function renderCaseStudyPage() {
     const main = document.getElementById('main-content');
-    const caseStudy = content.caseStudy;
 
-    if (!caseStudy) {
-        main.innerHTML = `<section class="hero"><h1>Case Study Not Found</h1></section>`;
-        return;
-    }
-
-    // The 6 canonical workflow steps in order
+    // The 6 canonical workflow steps — labels match the nav and the new HTML file
     const WORKFLOW_STEPS = [
-        { id: 'assess',  num: 1, label: 'Step 1: Tech & Data Assessment',    phaseGroup: 'Engage'   },
-        { id: 'map',     num: 2, label: 'Step 2: Business Process Mapping',  phaseGroup: 'Engage'   },
-        { id: 'analyze', num: 3, label: 'Step 3: Workflow Analysis',         phaseGroup: 'Discover' },
-        { id: 'design',  num: 4, label: 'Step 4: Solution Design',           phaseGroup: 'Discover' },
-        { id: 'build',   num: 5, label: 'Step 5: Experimentation',           phaseGroup: 'Execute'  },
-        { id: 'sustain', num: 6, label: 'Step 6: Scale & Adopt',             phaseGroup: 'Execute'  },
+        { id: 'assess',  num: 1, label: 'Step 1 · Tech & Data Assessment',   phaseGroup: 'Engage',   phaseTag: 'tag-e', timing: 'Upfront · 1–2 weeks'         },
+        { id: 'map',     num: 2, label: 'Step 2 · Business Process Mapping', phaseGroup: 'Engage',   phaseTag: 'tag-e', timing: 'Upfront · 1–2 weeks'         },
+        { id: 'analyze', num: 3, label: 'Step 3 · Workflow Analysis',        phaseGroup: 'Discover', phaseTag: 'tag-d', timing: '~2 weeks per workflow'        },
+        { id: 'design',  num: 4, label: 'Step 4 · Solution Design',          phaseGroup: 'Discover', phaseTag: 'tag-d', timing: '~2 weeks per workflow'        },
+        { id: 'build',   num: 5, label: 'Step 5 · Experimentation',          phaseGroup: 'Execute',  phaseTag: 'tag-x', timing: '90 days'                      },
+        { id: 'sustain', num: 6, label: 'Step 6 · Scale & Adopt',            phaseGroup: 'Execute',  phaseTag: 'tag-x', timing: '30–180 days post-launch'      },
     ];
-
-    // Map existing phases by phaseName (lower) to their data
-    const phaseByName = {};
-    caseStudy.phases.forEach(p => { phaseByName[p.phaseName.toLowerCase()] = p; });
-
-    // Build stub for missing step2 (Business Process Mapping)
-    const stub = {
-        number: 2,
-        phaseGroup: 'Engage',
-        phaseGroupId: 'engage',
-        phaseName: 'Business Process Mapping',
-        mindset: 'We need to understand the current process before we can improve it.',
-        summary: 'The team maps the current enrollment process end-to-end — documenting handoffs, pain points, and automation opportunities — to identify exactly where AI can add the most value.',
-        keyActions: [
-            'Document the current-state enrollment workflow from application to decision',
-            'Identify manual handoffs, bottlenecks, and data gaps',
-            'Map personas and system touchpoints',
-            'Validate the process map with domain stakeholders',
-        ],
-        _stub: true
-    };
-
-    // Build ordered 6-step phase list
-    const orderedPhases = WORKFLOW_STEPS.map(step => {
-        const match = Object.values(phaseByName).find(p => {
-            const n = p.phaseName.toLowerCase();
-            return n.includes(step.id) ||
-                   (step.id === 'assess'  && n.includes('assess')) ||
-                   (step.id === 'analyze' && n.includes('analyz')) ||
-                   (step.id === 'design'  && n.includes('design')) ||
-                   (step.id === 'build'   && n.includes('build')) ||
-                   (step.id === 'sustain' && n.includes('sustain'));
-        });
-        return match ? { ...match, _stepId: step.id, _label: step.label } : { ...stub, _stepId: step.id, _label: step.label };
-    });
-
-    // Nav sections: Overview + 6 steps
-    const COLORS = { engage: '#0f62fe', discover: '#8a3ffc', execute: '#24a148' };
 
     const navSections = [
         { id: 'cs-overview', label: 'Overview' },
         ...WORKFLOW_STEPS.map(s => ({ id: `cs-${s.id}`, label: s.label }))
     ];
 
-    // Resolve selected step id (0 = overview)
     const activeSectionId = selectedCaseStudyPhase === -1
         ? 'cs-overview'
         : `cs-${WORKFLOW_STEPS[Math.min(selectedCaseStudyPhase, 5)].id}`;
 
-    const activePhase = selectedCaseStudyPhase >= 0
-        ? orderedPhases[selectedCaseStudyPhase]
-        : null;
-
-    // Build phase content HTML
-    let phaseContentHtml = '';
-    if (selectedCaseStudyPhase === -1) {
-        // Overview tab content
-        phaseContentHtml = `
-            <div class="cs-overview-panel">
-                <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
-                    <p class="workflow-detail-panel__meta">Case Study</p>
-                    <h2 style="margin:0 0 0.5rem;">${caseStudy.title}</h2>
-                </div>
-                <p style="font-size:1rem;line-height:1.7;color:var(--text-secondary);margin-bottom:1.5rem;">${caseStudy.subtitle}</p>
-                <div class="intro-grid" style="margin-bottom:1.5rem;">
-                    <div class="panel">
-                        <h3>Overview</h3>
-                        <p>${caseStudy.overview}</p>
-                    </div>
-                    <div class="panel">
-                        <h3>Cast of Characters</h3>
-                        <div class="cast">${caseStudy.keyPlayers.map(n => `<span>${n}</span>`).join('')}</div>
-                    </div>
-                </div>
-                <div class="panel" style="background:#f0f7ff;border-color:#d6e6ff;margin-bottom:1.5rem;">
-                    <h3 style="color:#0f62fe">Starting Context</h3>
-                    <p style="color:var(--text-primary)">${caseStudy.startingContext}</p>
-                </div>
-                <div class="nav-instruction">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-                    ${caseStudy.navInstruction || 'Select a step from the left to follow the team\'s journey from mandate to scaled MVP.'}
-                </div>
-            </div>
-        `;
-    } else if (activePhase) {
-        phaseContentHtml = `
-            <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
-                <p class="workflow-detail-panel__meta">${activePhase.phaseGroup} · ${activePhase._label || activePhase.phaseName}</p>
-                <h2 style="margin:0 0 0.5rem;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:400;">${activePhase.phaseName}</h2>
-            </div>
-            <section class="hero" style="margin: 0; max-width: none; padding: 0;">
-                <p style="margin: 0; text-align: left;">Coming soon</p>
-            </section>
-        `;
-    }
-
+    // Render the shell immediately so the sidebar is visible
     main.innerHTML = `
         <section class="workflow-layout workflow-layout--with-top-offset" aria-label="Case study content">
             <nav class="workflow-side-nav" aria-label="Case study step navigation">
@@ -1832,9 +1741,7 @@ function renderCaseStudyPage() {
                 </ul>
             </nav>
             <div class="workflow-detail-panel">
-                <div id="cs-detail-content">
-                    ${phaseContentHtml}
-                </div>
+                <div id="cs-detail-content" style="min-height:200px;"></div>
             </div>
         </section>
     `;
@@ -1843,16 +1750,57 @@ function renderCaseStudyPage() {
     document.querySelectorAll('[data-cs-section]').forEach(btn => {
         btn.addEventListener('click', () => {
             const id = btn.dataset.csSection;
-            if (id === 'cs-overview') {
-                selectedCaseStudyPhase = -1;
-            } else {
-                const stepId = id.replace('cs-', '');
-                selectedCaseStudyPhase = WORKFLOW_STEPS.findIndex(s => s.id === stepId);
-            }
+            selectedCaseStudyPhase = id === 'cs-overview'
+                ? -1
+                : WORKFLOW_STEPS.findIndex(s => `cs-${s.id}` === id);
             renderCaseStudyPage();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
+
+    // Fetch and parse the standalone HTML file
+    let doc;
+    try {
+        const res = await fetch('case-study-standalone_jul30.html?v=' + Date.now());
+        if (!res.ok) throw new Error('fetch failed');
+        const html = await res.text();
+        const parser = new DOMParser();
+        doc = parser.parseFromString(html, 'text/html');
+
+        // Inject the standalone file's styles once
+        const styleId = 'cs-standalone-styles';
+        if (!document.getElementById(styleId)) {
+            const styleEl = document.createElement('style');
+            styleEl.id = styleId;
+            styleEl.textContent = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
+            document.head.appendChild(styleEl);
+        }
+    } catch (e) {
+        document.getElementById('cs-detail-content').innerHTML =
+            `<p style="color:#da1e28;padding:2rem;">Could not load case study content.</p>`;
+        return;
+    }
+
+    const container = document.getElementById('cs-detail-content');
+
+    if (selectedCaseStudyPhase === -1) {
+        // Overview: render the cs-header section from the standalone file
+        const header = doc.querySelector('.cs-header');
+        container.innerHTML = header ? header.outerHTML : '<p>Overview not found.</p>';
+    } else {
+        const step = WORKFLOW_STEPS[selectedCaseStudyPhase];
+        const panel = doc.getElementById(`step${step.num}-panel`);
+        const panelContent = panel ? panel.innerHTML : '<p>Content not found.</p>';
+
+        container.innerHTML = `
+            <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
+                <p class="workflow-detail-panel__meta" style="margin:0 0 .25rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);">${step.phaseGroup}</p>
+                <h2 style="margin:0 0 .375rem;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:600;line-height:1.2;">${step.label}</h2>
+                <p style="margin:0;font-size:.875rem;color:var(--text-secondary);">${step.timing}</p>
+            </div>
+            ${panelContent}
+        `;
+    }
 }
 
 function renderCaseStudyPhaseHtml(phase, COLORS) {

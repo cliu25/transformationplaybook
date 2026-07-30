@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Case Study: A University Transforms Student Enrollment</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0f62fe;--blue-dk:#0043a4;--blue-fill:#edf5ff;
+  --purple:#8a3ffc;--purple-dk:#5c2eb8;--purple-fill:#f6f2ff;
+  --green:#24a148;--green-dk:#1a6b32;--green-fill:#defbe6;
+  --teal:#1d9e75;--teal-dk:#0f6e56;--teal-fill:#e1f5ee;
+  --amber:#ba7517;--amber-fill:#fdf4e3;--amber-dk:#633806;
+  --red:#da1e28;--red-fill:#fff1f1;--red-dk:#a32d2d;
+  --text:#161616;--text-2:#525252;--text-3:#6f6f6f;
+  --border:#e0e0e0;--layer:#f4f4f4;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'IBM Plex Sans',sans-serif;color:var(--text);background:#fff;max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+
+/* panels */
+.panel{padding:1.375rem 1.5rem;border:1px solid var(--border);margin-bottom:.875rem;background:#fff;}
+.panel h3{font-size:1.25rem;font-weight:600;margin-bottom:.375rem;}
+.panel h4{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--text-2);margin-bottom:.875rem;}
+.step-meta{font-size:.8rem;color:var(--text-3);margin-bottom:.5rem;display:flex;gap:1rem;flex-wrap:wrap;}
+.step-description{font-size:.9375rem;line-height:1.65;color:var(--text-2);}
+.deliverable-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:.875rem;}
+.deliverable-card{border:1px solid var(--border);padding:.875rem;}
+.deliverable-card h5{font-size:.875rem;font-weight:600;margin-bottom:.3rem;}
+.deliverable-card p{font-size:.78rem;color:var(--text-2);line-height:1.45;margin-bottom:.625rem;}
+.d-links{display:flex;gap:.5rem;flex-wrap:wrap;}
+.d-link{font-size:.76rem;color:var(--blue);text-decoration:none;font-weight:500;}
+.d-link:hover{text-decoration:underline;}
+.d-link.off{color:var(--text-3);opacity:.4;cursor:not-allowed;pointer-events:none;}
+.checklist{list-style:none;}
+.check-item{font-size:.875rem;color:var(--text-2);padding:.35rem 0;border-bottom:1px solid var(--border);line-height:1.5;}
+.check-item:last-child{border-bottom:none;}
+.ready-banner{display:flex;gap:1rem;padding:1.125rem 1.375rem;background:var(--green-fill);border-left:4px solid var(--green);margin-bottom:.875rem;align-items:flex-start;}
+.ready-icon{color:var(--green);font-size:1rem;flex-shrink:0;padding-top:.1rem;}
+.ready-content h4{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--green-dk);margin-bottom:.2rem;}
+.ready-content p{font-size:.875rem;color:var(--text-2);line-height:1.5;}
+
+/* accordion */
+.step-accordion{margin-bottom:1.5rem;border:1px solid var(--border);}
+.acc-trigger{width:100%;background:#fff;border:none;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;gap:1rem;}
+.acc-trigger:hover{background:var(--layer);}
+.acc-left{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.phase-tag{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:.28rem .7rem;border-radius:2px;}
+.tag-e{background:var(--blue-fill);color:var(--blue-dk);}
+.tag-d{background:var(--purple-fill);color:var(--purple-dk);}
+.tag-x{background:var(--green-fill);color:var(--green-dk);}
+.acc-step-name{font-size:1.1rem;font-weight:600;color:var(--text);}
+.acc-meta{font-size:.78rem;color:var(--text-3);}
+.acc-chevron{font-size:1rem;color:var(--text-3);transition:transform .2s;flex-shrink:0;}
+.acc-chevron.open{transform:rotate(180deg);}
+.acc-body{display:none;border-top:1px solid var(--border);}
+.acc-body.open{display:block;}
+
+/* narrative */
+.nar-who{display:flex;gap:1.25rem;padding:1rem 1.25rem;background:var(--blue-fill);border-left:3px solid var(--blue);margin-bottom:1.375rem;flex-wrap:wrap;}
+.nar-who-col{flex:1;min-width:150px;}
+.nar-who-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--blue-dk);margin-bottom:.45rem;}
+.pill{display:inline-flex;align-items:center;gap:.25rem;padding:.22rem .6rem;border-radius:3px;font-size:.75rem;font-weight:600;margin:.16rem .16rem .16rem 0;}
+.p-e{background:var(--blue-fill);border:1.5px solid var(--blue);color:var(--blue-dk);}
+.p-d{background:var(--purple-fill);border:1.5px solid var(--purple);color:var(--purple-dk);}
+.p-x{background:var(--green-fill);border:1.5px solid var(--green);color:var(--green-dk);}
+.p-n{background:var(--layer);border:1.5px solid #bdbdbd;color:var(--text-3);}
+.new-tag{font-size:.56rem;font-weight:700;text-transform:uppercase;background:var(--purple);color:#fff;padding:.07rem .28rem;border-radius:2px;margin-left:.18rem;vertical-align:middle;}
+.new-x{background:var(--green);}
+.legend-item{font-size:.72rem;display:flex;align-items:center;gap:.3rem;margin-bottom:.25rem;}
+.swatch{display:inline-block;width:.65rem;height:.65rem;border-radius:2px;flex-shrink:0;}
+.time-val{font-size:1rem;font-weight:600;color:var(--blue-dk);}
+.time-sub{font-size:.72rem;color:var(--text-2);margin-top:.15rem;line-height:1.4;}
+
+.inherit{padding:.7rem 1rem;background:var(--layer);border-radius:4px;font-size:.875rem;color:var(--text-2);line-height:1.55;margin-bottom:1.25rem;}
+.inherit strong{color:var(--text);font-weight:600;}
+.prose{font-size:.9375rem;line-height:1.8;color:var(--text-2);margin-bottom:1.05rem;}
+.prose strong{color:var(--text);font-weight:600;}
+.prose em{font-style:italic;}
+.nar-h{font-size:.76rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--text-2);margin:1.375rem 0 .7rem;}
+
+.pp{margin:1.375rem 0;padding:.875rem 1.125rem;border-left:3px solid var(--amber);background:var(--amber-fill);}
+.pp-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--amber-dk);margin-bottom:.25rem;}
+.pp-title{font-size:.875rem;font-weight:600;color:var(--amber-dk);margin-bottom:.3rem;}
+.pp-body{font-size:.85rem;line-height:1.65;color:#5a3e00;}
+
+.method{margin:1.375rem 0;border:1px solid var(--border);border-radius:4px;overflow:hidden;}
+.method-head{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1rem;background:var(--purple-fill);border-bottom:1px solid #d4c8ff;flex-wrap:wrap;gap:.5rem;}
+.method-title{font-size:.875rem;font-weight:700;color:var(--purple-dk);}
+.method-meta{display:flex;gap:.875rem;flex-wrap:wrap;}
+.method-meta span{font-size:.75rem;color:var(--purple-dk);}
+.method-body{padding:.875rem 1rem;}
+.method-what{font-size:.78rem;color:var(--text-2);margin-bottom:.7rem;line-height:1.5;}
+.method-steps{list-style:none;display:flex;flex-direction:column;gap:.55rem;counter-reset:ms;}
+.method-steps li{display:flex;gap:.7rem;align-items:flex-start;font-size:.875rem;line-height:1.55;color:var(--text-2);}
+.method-steps li::before{content:counter(ms);counter-increment:ms;flex-shrink:0;width:1.3rem;height:1.3rem;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;margin-top:.1rem;}
+.method-tip{margin-top:.75rem;padding:.55rem .8rem;background:var(--layer);border-radius:3px;font-size:.78rem;color:var(--text-2);line-height:1.5;font-style:italic;}
+
+.visual{margin:1.375rem 0;background:var(--layer);border-radius:4px;padding:1.125rem;overflow-x:auto;}
+.visual svg{display:block;width:100%;height:auto;}
+.visual-cap{font-size:.76rem;color:var(--text-3);margin-top:.55rem;line-height:1.4;font-style:italic;}
+
+.table-wrap{overflow-x:auto;margin:1.125rem 0;}
+.data-table{width:100%;border-collapse:collapse;font-size:.825rem;}
+.data-table th{text-align:left;padding:.5rem .875rem;background:var(--purple-fill);border-bottom:2px solid #d4c8ff;font-weight:700;color:var(--purple-dk);font-size:.75rem;}
+.data-table td{padding:.5rem .875rem;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top;line-height:1.45;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:nth-child(even) td{background:#fafafa;}
+.cell-r{background:#fff3cd!important;font-weight:600;text-align:center;}
+.cell-a{background:#d4edda!important;font-weight:600;text-align:center;}
+.cell-c{background:var(--blue-fill)!important;font-weight:600;text-align:center;}
+.cell-i{background:var(--layer)!important;font-weight:600;text-align:center;}
+
+.case{margin:1.5rem 0;padding:1.125rem 1.25rem;background:var(--purple-fill);border-left:3px solid var(--purple);}
+.case-head{display:flex;align-items:center;gap:.5rem;margin-bottom:.65rem;}
+.case-badge{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:var(--purple);color:#fff;padding:.18rem .45rem;}
+.case-ctx{font-size:.76rem;font-weight:600;color:var(--purple-dk);}
+.case-prose{font-size:.875rem;line-height:1.7;color:var(--text-2);margin-bottom:.7rem;}
+.case-prose:last-child{margin-bottom:0;}
+
+.handoff{padding:.8rem 1rem;background:var(--green-fill);border-radius:4px;font-size:.875rem;color:var(--text-2);line-height:1.55;margin-top:1.375rem;}
+.handoff strong{color:var(--green-dk);}
+
+.tip-box{padding:.875rem 1rem;background:var(--teal-fill);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;margin:1.25rem 0;font-size:.875rem;color:var(--teal-dk);line-height:1.55;}
+.tip-box strong{font-weight:700;}
+
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.125rem 0;}
+.compare-bad{border:1px solid var(--red);border-radius:4px;padding:.875rem;}
+.compare-good{border:1px solid var(--green);border-radius:4px;padding:.875rem;}
+.compare-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;}
+.compare-bad .compare-label{color:var(--red-dk);}
+.compare-good .compare-label{color:var(--green-dk);}
+.compare-item{font-size:.825rem;line-height:1.55;color:var(--text-2);padding:.25rem 0;border-bottom:1px solid var(--border);}
+.compare-item:last-child{border-bottom:none;}
+
+.ws-box{border:1px solid #d4c8ff;border-radius:6px;background:#fff;padding:1.25rem;margin:1.25rem 0;}
+.ws-box-head{display:flex;align-items:center;gap:.625rem;margin-bottom:.875rem;}
+.ws-icon{font-size:1.25rem;}
+.ws-title{font-size:.9rem;font-weight:700;color:var(--purple-dk);}
+.ws-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.75rem;}
+.ws-card{padding:.75rem;background:var(--purple-fill);border-radius:4px;}
+.ws-card-num{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--purple);margin-bottom:.3rem;}
+.ws-card-title{font-size:.825rem;font-weight:600;color:var(--purple-dk);margin-bottom:.25rem;}
+.ws-card-desc{font-size:.76rem;color:var(--text-2);line-height:1.4;}
+
+.cs-header{padding:0 0 1.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);}
+.eyebrow{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:.75rem;}
+.cs-header h1{font-size:1.875rem;font-weight:300;line-height:1.2;margin-bottom:1rem;}
+.cs-header .subtitle{font-size:.9375rem;color:var(--text-2);line-height:1.7;margin-bottom:1.5rem;max-width:720px;}
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.panel{border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;background:#fff;}
+.panel h3{font-size:.875rem;font-weight:600;margin-bottom:.75rem;color:var(--text);}
+.cast{display:flex;flex-wrap:wrap;gap:.4rem;}
+.cast span{font-size:.75rem;padding:.2rem .6rem;border-radius:2rem;background:var(--layer);color:var(--text-2);border:1px solid var(--border);}
+.context-panel{background:var(--blue-fill);border-color:#b8d4ff;margin-bottom:1.5rem;}
+@media (max-width:640px){.intro-grid{grid-template-columns:1fr;}}
+.tab-nav{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:0;border-bottom:2px solid var(--border);}
+.tab-btn{background:var(--layer);border:1px solid var(--border);border-bottom:none;border-radius:6px 6px 0 0;padding:.7rem 1rem;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;font-family:inherit;}
+.tab-btn:hover{background:#ececec;}
+.tab-btn.active{background:#fff;border-color:var(--border);box-shadow:0 -2px 0 var(--blue) inset;margin-bottom:-2px;}
+.tab-panel{display:none;border:1px solid var(--border);border-top:none;margin-bottom:1.5rem;}
+.tab-panel.active{display:block;}
+@media (max-width:700px){.tab-nav{overflow-x:auto;flex-wrap:nowrap;}.tab-btn{flex:0 0 auto;}}
+</style>
+</head>
+<body>
+<div class="cs-header">
+  <div class="eyebrow">Case Study</div>
+  <h1>A University Transforms Student Enrollment</h1>
+  <p class="subtitle">How a mid-sized public university applies the AIFT method, six steps, three phases, one repeatable approach, to an enrollment and document-verification transformation. Every step below is the real methodology: what to do, who's involved, what to watch for. State University's actual path through it is layered on top at each step, so you can see the method and a real example of it working together, not as two separate things.</p>
+  <div class="intro-grid">
+    <div class="panel">
+      <h3>Overview</h3>
+      <p>This worked example follows State University, a university drowning in manual admissions paperwork and inconsistent outreach, from choosing an opportunity through a scaled, sustained solution. It is illustrative, a composite built from patterns across real AIFT transformations, not a literal transcript of one project.</p>
+    </div>
+    <div class="panel context-panel">
+      <h3>Starting Context</h3>
+      <p>State University enrolls roughly 180,000 students. The enrollment team is overwhelmed: applications, transcripts, and required documents are processed by hand, creating bottlenecks that delay onboarding and frustrate prospective students. Outreach to prospects is scattershot, staff cannot tell which applicants are most likely to enroll. University leadership has issued a mandate to modernize enrollment, but no specific AI use case has been chosen yet.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <h3>Roles Referenced Throughout</h3>
+    <table class="data-table" style="width:100%;">
+      <thead><tr><th>Role</th><th>What they own</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Executive Sponsor</strong> (VP of Enrollment)</td><td>Commits real time, not just endorsement. Clears blockers, backs the work publicly, approves scope and go/no-go decisions.</td></tr>
+        <tr><td><strong>Domain Focal</strong> (Enrollment Operations)</td><td>Runs day-to-day work. One person, not a committee. Leads the readiness check, workflow analysis, and steering cadence.</td></tr>
+        <tr><td><strong>Business Owner</strong> (Director of Admissions)</td><td>Endorses the workflow choice; after handoff, owns adoption and ongoing business outcomes for good.</td></tr>
+        <tr><td><strong>Change Owner</strong> (Enrollment Staff Lead)</td><td>Owns the people side: change impact, communications, training, adoption tracking.</td></tr>
+        <tr><td><strong>Product Owner</strong></td><td>Writes and owns requirements, runs sprint planning, is the day-to-day bridge between business and build.</td></tr>
+        <tr><td><strong>Technical Architect</strong> (IT)</td><td>Confirms data and integration feasibility, initiates architecture review, owns the technical design.</td></tr>
+        <tr><td><strong>UAT Lead</strong></td><td>Recruits real end users for testing, runs UAT rounds, separate from formal QA.</td></tr>
+        <tr><td><strong>Technical Lead</strong> (incoming, IT)</td><td>Takes over infrastructure maintenance at handoff; the technical architect's counterpart after the transformation team steps back.</td></tr>
+        <tr><td><strong>Workflow SMEs</strong> (Counselors)</td><td>The frontline staff who do the work today, interviewed for the real (not documented) process, and recruited into UAT.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="tab-nav">
+<button class="tab-btn active" id="step1-tab" onclick="showStep(1)"><span class="phase-tag tag-e">Engage</span><span class="acc-step-name">Step 1 &middot; Tech &amp; Data Assessment</span><span class="acc-meta">Upfront &middot; 1&ndash;2 weeks</span></button>
+<button class="tab-btn" id="step2-tab" onclick="showStep(2)"><span class="phase-tag tag-e">Engage</span><span class="acc-step-name">Step 2 &middot; Business Process Mapping</span><span class="acc-meta">Upfront &middot; 1&ndash;2 weeks</span></button>
+<button class="tab-btn" id="step3-tab" onclick="showStep(3)"><span class="phase-tag tag-d">Discover</span><span class="acc-step-name">Step 3 &middot; Workflow Analysis</span><span class="acc-meta">~2 weeks per workflow</span></button>
+<button class="tab-btn" id="step4-tab" onclick="showStep(4)"><span class="phase-tag tag-d">Discover</span><span class="acc-step-name">Step 4 &middot; Solution Design</span><span class="acc-meta">~2 weeks per workflow</span></button>
+<button class="tab-btn" id="step5-tab" onclick="showStep(5)"><span class="phase-tag tag-x">Execute</span><span class="acc-step-name">Step 5 &middot; Experimentation</span><span class="acc-meta">90 days</span></button>
+<button class="tab-btn" id="step6-tab" onclick="showStep(6)"><span class="phase-tag tag-x">Execute</span><span class="acc-step-name">Step 6 &middot; Scale &amp; Adopt</span><span class="acc-meta">30&ndash;180 days post-launch</span></button>
+</div>
+<div class="tab-panel active" id="step1-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Before touching any workflow, secure a real executive sponsor and take an honest read on your domain's data and technology foundations.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor<span class="new-tag">new</span></span><span class="pill p-e">Domain focal<span class="new-tag">new</span></span><span class="pill p-n">Process SMEs</span><span class="pill p-n">Tech architect</span><span class="pill p-n">Build team</span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">1–2 weeks</div><div class="time-sub">One-time. You do this once for the whole domain.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>Starting point:</strong> The executive sponsor (VP of Enrollment) had a provost mandate to modernize enrollment and nothing chosen yet to build. Before anyone touched a workflow, two things had to be real: a sponsor who would actually show up, and an honest read on what the domain could build.</div>
+
+<p class="prose">The domain focal, who'd run enrollment operations for six years, didn't take the sponsor's enthusiasm at face value, and asked for the first weekly steering meeting to be blocked on the sponsor's own calendar before kickoff even happened. Not "sounds great." A recurring 45 minutes, that week.</p>
+
+<div class="visual"><svg viewBox="0 0 580 150" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Testing sponsor commitment versus enthusiasm</title>
+<defs><marker id="ard1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="290" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">The domain focal's test: commitment, not enthusiasm</text>
+<rect x="10" y="34" width="160" height="92" rx="4" fill="#f4f4f4" stroke="#8d8d8d" stroke-width="0.75"/>
+<text x="90" y="56" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#525252">20-min conversation</text>
+<text x="90" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">The sponsor agrees</text>
+<text x="90" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#525252">to sponsor</text>
+<text x="90" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-style="italic" fill="#a8a8a8">Endorsement</text>
+<line x1="170" y1="80" x2="206" y2="80" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#ard1)"/>
+<text x="188" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">the test:</text>
+<rect x="208" y="34" width="180" height="92" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="298" y="56" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#0043a4">Block the first steering</text>
+<text x="298" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">meeting on your own</text>
+<text x="298" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#0043a4">calendar, before kickoff</text>
+<line x1="388" y1="80" x2="424" y2="80" stroke="#24a148" stroke-width="1.5" marker-end="url(#ard1)"/>
+<rect x="426" y="34" width="146" height="92" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="499" y="56" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">The sponsor blocked it</text>
+<text x="499" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">that afternoon, before</text>
+<text x="499" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#1a6b32">kickoff happened</text>
+<text x="499" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" font-style="italic" fill="#1a6b32">Commitment</text>
+<text x="290" y="143" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">If the block doesn't happen within a day or two, that's the signal to keep looking for a real sponsor.</text>
+</svg><div class="visual-cap">Twenty minutes into the first real conversation, before a single meeting had happened, the sponsor had already done the thing that separates a sponsor from an enthusiast.</div></div>
+
+<div class="pp"><div class="pp-label">⚠ Pain point</div><div class="pp-title">Confusing enthusiasm with commitment</div><div class="pp-body">Endorsement says "I think this is a good idea." Commitment says "I will act when action is needed." the domain focal had watched a different domain's project stall two months earlier for exactly this reason: a sponsor who agreed enthusiastically, then went quiet for three weeks when a data-access request needed a signature. The calendar test exists specifically so it wouldn't happen twice.</div></div>
+
+<p class="prose">With the sponsor committed, the two of them set the mandate in one sitting: the opportunity area was enrollment and document processing, success in 90 days meant a working propensity model and faster document turnaround, and the domain focal was the domain focal, the one person running day-to-day work, not a committee. A 30-minute kickoff two days later, sponsor and domain focal only, locked the steering cadence.</p>
+
+<p class="prose">The domain focal then ran the domain's readiness check, not a full audit, just enough to know what to avoid building around first.</p>
+
+<div class="visual"><svg viewBox="0 0 620 152" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Readiness check: data, platforms, governance, and in-flight work</title><rect x="8" y="8" width="144" height="136" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="80" y="28" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#0043a4">Data</text><text x="80" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Prospect CRM: incomplete,</text><text x="80" y="61" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">stale for a third of inquiries</text><text x="80" y="100" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#a32d2d" font-style="italic">Rules out outreach</text><text x="80" y="113" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#a32d2d" font-style="italic">as the first bet.</text><rect x="162" y="8" width="144" height="136" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="234" y="28" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#0043a4">Platforms</text><text x="234" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Banner (SIS), Box (docs),</text><text x="234" y="61" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">BigQuery already ingesting</text><text x="234" y="100" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">Real infrastructure to</text><text x="234" y="113" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">plug a build into.</text><rect x="316" y="8" width="144" height="136" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="388" y="28" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#0043a4">Governance</text><text x="388" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Student data compliance,</text><text x="388" y="61" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">ARB not yet started</text><text x="388" y="100" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">The architect flags it for Step 4,</text><text x="388" y="113" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">not week 6.</text><rect x="470" y="8" width="144" height="136" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="542" y="28" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#0043a4">In-flight work</text><text x="542" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">None overlapping in</text><text x="542" y="61" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Admissions this quarter</text><text x="542" y="100" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">Clear runway,</text><text x="542" y="113" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#5a7ab8" font-style="italic">no coordination needed.</text></svg><div class="visual-cap">A directional check, not a full audit. The one real flag, incomplete CRM data, became sequencing information: avoid an outreach-dependent build as the first bet.</div></div>
+
+<p class="prose">That single finding shaped everything the domain focal looked at in Step 2: whatever workflow came first couldn't depend on the CRM's prospect data. Document verification, whatever it turned out to be, would need to lean on Banner and Box instead, both of which were already solid.</p>
+
+<div class="nar-h">Naming who owns what, before any of it starts</div>
+<p class="prose">The domain focal opened a RACI the same week, one name per row, not a department.</p>
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th>Task</th><th>Exec Sponsor</th><th>Domain Focal</th><th>Tech Architect</th><th>Product Owner</th><th>Build Team</th><th>Change Owner</th></tr></thead>
+<tbody>
+<tr><td>Secure sponsorship &amp; mandate</td><td class="cell-a">A</td><td class="cell-r">R</td><td class="cell-i">I</td><td class="cell-i">I</td><td class="cell-i">I</td><td class="cell-i">I</td></tr>
+<tr><td>Run readiness assessment</td><td class="cell-c">C</td><td class="cell-a">A/R</td><td class="cell-c">C</td><td></td><td></td><td></td></tr>
+<tr><td>Map &amp; prioritize workflows</td><td class="cell-c">C</td><td class="cell-a">A/R</td><td class="cell-c">C</td><td></td><td></td><td></td></tr>
+<tr><td>Validate &amp; go/no-go decision</td><td class="cell-a">A</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-c">C</td><td></td><td class="cell-c">C</td></tr>
+<tr><td>Design solution &amp; requirements</td><td class="cell-a">A</td><td class="cell-c">C</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-c">C</td><td class="cell-c">C</td></tr>
+<tr><td>Build &amp; sprint delivery</td><td class="cell-i">I</td><td class="cell-c">C</td><td class="cell-a">A</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-c">C</td></tr>
+<tr><td>Drive adoption &amp; change</td><td class="cell-c">C</td><td class="cell-c">C</td><td class="cell-i">I</td><td class="cell-c">C</td><td class="cell-i">I</td><td class="cell-a">A/R</td></tr>
+<tr><td>Go/no-go at Day 90</td><td class="cell-a">A</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-c">C</td><td class="cell-c">C</td></tr>
+<tr><td>Handoff &amp; sustainment</td><td class="cell-i">I</td><td class="cell-c">C</td><td class="cell-a">A</td><td class="cell-r">R</td><td class="cell-r">R</td><td class="cell-r">R</td></tr>
+</tbody>
+</table>
+<p style="font-size:.75rem;color:var(--text-3);margin-top:.5rem;"><strong style="color:var(--text-2)">A</strong> = Accountable (one per row) &nbsp;&middot;&nbsp; <strong style="color:var(--text-2)">R</strong> = Responsible &nbsp;&middot;&nbsp; <strong style="color:var(--text-2)">C</strong> = Consulted &nbsp;&middot;&nbsp; <strong style="color:var(--text-2)">I</strong> = Informed &nbsp;&middot;&nbsp; Blank = not involved at this stage</p>
+</div>
+
+<div class="nar-h">The steering meeting the domain focal actually ran</div>
+<p class="prose">The sponsor, the domain focal, and later the technical architect and the product owner met 45 minutes every week from that first kickoff through handoff. The domain focal set one rule at the first session: the meeting was for blockers and decisions, not status. "Red on a chart is good," the domain focal told the group. "It means we're measuring something real." A meeting that closed with everything green was a warning sign, not a success.</p>
+
+<div class="visual"><svg viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Weekly steering meeting: attendees, agenda, and norms</title><rect x="0" y="0" width="600" height="190" rx="4" fill="#f4f4f4" stroke="none" stroke-width="0"/><text x="300" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">The weekly steering meeting the domain focal set up</text><rect x="20" y="30" width="165" height="148" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="102" y="52" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#0043a4">Who attends</text><text x="102" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">The sponsor + the domain focal</text><text x="102" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">+ the architect + the product owner</text><text x="102" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">(others as needed)</text><rect x="220" y="30" width="165" height="148" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/><text x="302" y="52" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#5c2eb8">Agenda</text><text x="302" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">1. Demo: show something real</text><text x="302" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">2. Metrics: RAG status</text><text x="302" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">3. Blockers: action owners</text><text x="302" y="126" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">4. Decisions needed</text><rect x="420" y="30" width="165" height="148" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="502" y="52" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="700" fill="#1a6b32">The domain focal's norms</text><text x="502" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Red is good</text><text x="502" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">No status theatre</text><text x="502" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">45 min max</text><text x="502" y="126" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Decisions documented</text></svg><div class="visual-cap">Ran every week from Day 1 through handoff. A meeting that ends with "everything is green" was the warning sign the domain focal watched for.</div></div>
+
+<p class="prose">The domain focal opened the RAID log that same week, before any risk had materialized. Six months later, when the domain focal needed to explain a scope change to the sponsor, it took one line in an existing log instead of a reconstruction from memory.</p>
+
+<div class="table-wrap"><table class="data-table" style="font-size:.8rem;">
+<thead><tr><th style="width:8%;">Type</th><th>Entry</th><th style="width:14%;">Owner</th><th style="width:12%;">Status</th></tr></thead>
+<tbody>
+<tr><td><span style="color:#a32d2d;font-weight:600;">Risk</span></td><td>Box document permissions vary by type; could block OCR access for some document classes.</td><td>Technical Architect</td><td style="color:#ba7517;">Open</td></tr>
+<tr><td><span style="color:#0043a4;font-weight:600;">Assumption</span></td><td>Prospect CRM data quality issue does not affect Banner (SIS) or Box; both remain reliable for a document-verification build.</td><td>Domain Focal</td><td style="color:#1a6b32;">Validated</td></tr>
+<tr><td><span style="color:#8a3ffc;font-weight:600;">Issue</span></td><td>No standardized document checklist exists; three of six counselors keep personal tracking spreadsheets.</td><td>Domain Focal</td><td style="color:#1a6b32;">Closed, Step 2</td></tr>
+<tr><td><span style="color:#1a6b32;font-weight:600;">Dependency</span></td><td>Architecture review (ARB) must clear before build team can deploy to production.</td><td>Technical Architect</td><td style="color:#ba7517;">Open</td></tr>
+</tbody>
+</table>
+<p class="visual-cap" style="margin-top:.5rem;">A real RAID log stays this short and specific. Four entries, each with one owner, is more useful than twenty vague ones nobody updates.</p>
+</div>
+<div class="handoff"><strong>Handing forward to Step 2:</strong> a committed sponsor, a named domain focal, a documented readiness picture, and a steering cadence on the calendar. Not a chosen workflow yet, the conditions that make the choice stick.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Technology &amp; Data Readiness Checklist</h5><p>Confirms data sources, platforms, access, governance, and in-flight conflicts before committing to a workflow.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Project Plan</h5><p>One-page agreement: scope, sponsor, team, value target, and timeline. If you can't complete it, you're not ready to start.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>RACI Matrix</h5><p>Names the accountable owner for every major task. One person accountable per row, not a committee.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>RAID Log (open now)</h5><p>Risks, assumptions, issues, and dependencies. Start it Day 1. A RAID log opened after problems appear is a post-mortem, not a tool.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/b2gcmugr9l9rjnptbs8drjilxr04sxp9" target="_blank">Template ↗</a></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 2</h4><p>Sponsor committed, domain focal named, readiness flags documented, steering cadence set. Now find the right workflow to transform.</p></div></div>
+</div>
+</div>
+<div class="tab-panel" id="step2-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Map your domain's workflows, understand what people actually do and what it costs, and select the one workflow most worth transforming first.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor</span><span class="pill p-e">Domain focal</span><span class="pill p-e">Process SMEs<span class="new-tag">new</span></span><span class="pill p-n">Tech architect</span><span class="pill p-n">Build team</span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">1–2 weeks</div><div class="time-sub">One-time. Returns only when new workflows need prioritizing.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>You're arriving with:</strong> a committed sponsor, a domain focal, and a readiness picture that rules out an outreach-dependent build. Now the domain focal finds out where the real problems are, and which one is most worth solving.</div>
+
+<p class="prose">The domain focal brought in the people who actually did the work, not their managers, talking to six admissions counselors over three days, 45 to 60 minutes each, at their desks. The one question that produced almost everything: "Walk me through what you did with the first application you opened this morning." Not "how does the process work," which gets you the official version. The morning question gets you the real one.</p>
+
+<div class="method">
+<div class="method-head"><div class="method-title">What the domain focal actually asked</div><div class="method-meta"><span>&#128101; 6 counselors, 3 days</span><span>&#9201; 45&ndash;60 min each</span><span>&#128205; at their desks</span></div></div>
+<div class="method-body"><ol class="method-steps"><li>Asked what they did this morning, not how the process works.</li><li>Watched them navigate their actual screen, not a whiteboard version.</li><li>Noted the workarounds without prompting for them, personal spreadsheets, manual copy-paste, the things people build when the official system doesn't work.</li><li>Asked "what do you look at to do this, and where does that come from" at every step, building the data map the architect would need later.</li><li>Followed it when one of the counselors mentioned something outside the question guide, a manual cross-check nobody had asked about.</li></ol>
+<div class="method-what"><strong>What it surfaced:</strong> every counselor independently described the same routine, manually cross-referencing each document in Box against a mental checklist built from experience. Three of the six kept personal tracking spreadsheets. None used the official checklist.</div>
+<div class="method-tip">Convergent signal was the finding: when six people independently describe the same workaround, that's not an anecdote, that's the answer.</div></div></div>
+
+<div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Mapping the process without mapping the data underneath it</div><div class="pp-body">The domain focal asked one more question at every step: "what data would an AI need to do this automatically, and where does it actually live?" That question is what surfaced Box's document permissions varying by type, something a process map alone would have missed entirely, and something that would have been a nasty surprise mid-build instead of a known constraint going in.</div></div>
+
+<div class="nar-h">From six conversations to one ranked workflow</div>
+<p class="prose">The domain focal mapped the domain's real workflows, not the org chart version, the actual work that cost time and money: who did it, hours per week, error rate, what systems it touched, then scored each candidate on value, technical feasibility, data readiness, and strategic fit.</p>
+
+<div class="visual"><svg viewBox="0 0 580 266" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><g transform="rotate(-90 34 125)"><text x="34" y="125" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Value &#8594;</text></g><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><line x1="70" y1="230" x2="540" y2="230" stroke="#c6c6c6" stroke-width="1.5"/><line x1="70" y1="230" x2="70" y2="20" stroke="#c6c6c6" stroke-width="1.5"/><text x="305" y="260" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Feasibility &#8594;</text><rect x="70" y="20" width="232" height="106" rx="4" fill="#fff1f1" stroke="none" stroke-width="0"/><rect x="302" y="20" width="238" height="106" rx="4" fill="#defbe6" stroke="none" stroke-width="0"/><rect x="70" y="126" width="232" height="104" rx="4" fill="#f4f4f4" stroke="none" stroke-width="0"/><rect x="302" y="126" width="238" height="104" rx="4" fill="#fdf4e3" stroke="none" stroke-width="0"/><line x1="302" y1="20" x2="302" y2="230" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/><line x1="70" y1="126" x2="540" y2="126" stroke="#e0e0e0" stroke-width="1" stroke-dasharray="4 3"/><text x="186" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#a32d2d">Invest to unblock</text><text x="186" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#a32d2d">Outreach prioritization</text><text x="421" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#1a6b32">Build first &#9733;</text><text x="421" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">Document verification</text><text x="186" y="174" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#525252">Park or drop</text><text x="186" y="190" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Transcript evaluation</text><text x="421" y="174" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#633806">Quick win, lower return</text><text x="421" y="190" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#633806">Application processing</text><text x="75" y="242" text-anchor="start" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#888">Low</text><text x="530" y="242" text-anchor="end" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#888">High</text><text x="82" y="222" text-anchor="start" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#888">Low</text><text x="82" y="28" text-anchor="start" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#888">High</text><title>Prioritization matrix: value versus feasibility for four candidate workflows</title></svg><div class="visual-cap">Document verification landed in "Build first" on convergent evidence from six counselors, not a guess. Outreach prioritization scored second but was capped by the CRM gap the domain focal had already flagged in Step 1.</div></div>
+
+<div class="visual"><svg viewBox="0 0 1120 610" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>State University enrollment current state process map</title>
+          <defs><marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <rect x="0" y="0" width="150" height="500" fill="#f4f4f4"/>
+          <line x1="150" y1="180" x2="1106" y2="180" stroke="#e0e0e0" stroke-width="0.5"/>
+          <line x1="150" y1="340" x2="1106" y2="340" stroke="#e0e0e0" stroke-width="0.5"/>
+          <text x="75" y="100" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+          <text x="75" y="262" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+          <text x="75" y="422" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">IT / systems</text>
+          <rect x="166" y="60" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text><text x="251" y="100" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+          <line x1="336" y1="88" x2="360" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="362" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="452" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text><text x="452" y="100" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+          <line x1="542" y1="88" x2="566" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="568" y="60" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="658" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Wait for review</text><text x="658" y="100" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; 2&ndash;4 weeks typical</text>
+          <line x1="748" y1="88" x2="772" y2="88" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="774" y="60" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="82" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text><text x="864" y="100" text-anchor="middle" font-size="12" fill="#525252">Accept / decline / wait</text>
+          <path d="M658 116 Q658 150 452 150 Q300 150 251 120" fill="none" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar3)"/>
+          <text x="455" y="165" text-anchor="middle" font-size="12" fill="#6f6f6f">Missing docs &#8594; manual email &#8594; resubmit</text>
+          <rect x="166" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="256" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Receive application</text><text x="256" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; Email / spreadsheet</text>
+          <line x1="346" y1="244" x2="370" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="372" y="216" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="462" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Verify documents</text><text x="462" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; Manual, one-by-one</text>
+          <line x1="552" y1="244" x2="576" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="578" y="216" width="190" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="673" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prioritize outreach</text><text x="673" y="256" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; Gut feel, no data</text>
+          <line x1="768" y1="244" x2="792" y2="244" stroke="#888780" stroke-width="1" marker-end="url(#ar3)"/>
+          <rect x="794" y="216" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="879" y="238" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text><text x="879" y="256" text-anchor="middle" font-size="12" fill="#525252">Phone / email</text>
+          <rect x="166" y="372" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Admissions CRM</text><text x="251" y="412" text-anchor="middle" font-size="12" fill="#525252">Salesforce</text>
+          <rect x="362" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="452" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Document store</text><text x="452" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; Box / email, siloed</text>
+          <rect x="568" y="372" width="180" height="56" rx="5" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="658" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#a32d2d">Prospect data</text><text x="658" y="412" text-anchor="middle" font-size="12" fill="#a32d2d">&#9888; Incomplete, stale</text>
+          <rect x="774" y="372" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="394" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text><text x="864" y="412" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+          <line x1="251" y1="116" x2="256" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="452" y1="116" x2="462" y2="216" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="256" y1="272" x2="251" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <line x1="462" y1="272" x2="452" y2="372" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar3)"/>
+          <rect x="166" y="450" width="14" height="14" rx="3" fill="#fff1f1" stroke="#da1e28" stroke-width="0.5"/><text x="186" y="461" font-size="12" fill="#525252">Pain point / bottleneck</text>
+          <rect x="350" y="450" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="370" y="461" font-size="12" fill="#525252">Existing step</text>
+          <text x="166" y="490" font-size="12" font-weight="600" fill="#161616">Baseline, from the domain focal's conversations:</text>
+          <text x="166" y="508" font-size="12" fill="#525252">&#8226; Avg document review: 14 days</text>
+          <text x="166" y="524" font-size="12" fill="#525252">&#8226; Counselor capacity: ~120 apps/month</text>
+          <text x="420" y="508" font-size="12" fill="#525252">&#8226; Outreach conversion: 8%</text>
+          <text x="420" y="524" font-size="12" fill="#525252">&#8226; Staff time on manual tasks: 60%</text>
+          <text x="700" y="508" font-size="12" fill="#525252">&#8226; Enrollment: ~180,000 students</text>
+          <rect x="166" y="540" width="940" height="56" rx="5" fill="#e6f1fb" stroke="#0f62fe" stroke-width="1.5"/>
+          <text x="636" y="560" text-anchor="middle" font-size="12" font-weight="600" fill="#0043a4">The four candidates the domain focal scored:</text>
+          <text x="636" y="580" text-anchor="middle" font-size="12" fill="#0043a4">Document Verification  &#8226;  Outreach Prioritization  &#8226;  Transcript Evaluation  &#8226;  Application Processing</text>
+        </svg><div class="visual-cap">Built from what six counselors actually do, not the official documentation.</div></div>
+
+<p class="prose">The business owner (Director of Admissions) endorsed document verification as the choice. Outreach prioritization and its incomplete CRM data went into next year's plan. Transcript evaluation and application processing were parked outright, no committed sponsor, low data readiness.</p>
+<div class="handoff"><strong>Handing forward to Step 3:</strong> a scored, ranked list with one clear winner, selected on evidence, and the business owner's endorsement. The domain focal enters Workflow Analysis knowing which workflow to investigate and why.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Business Process Map(s)</h5><p>Current-state workflow, handoffs, systems, users, bottlenecks, automation opportunities. Built from conversations, not documentation.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>Prioritization Matrix</h5><p>Every candidate scored on value, feasibility, data readiness, and strategic fit. The ranked list that makes the selection defensible.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/7j0jwsm1lzqvcg47if8gdcza9145kad3" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>Current State Assessment</h5><p>People, processes, technology, data, and operating model, the honest 'where we are today' snapshot.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 3</h4><p>Ranked list complete, one selection made, sponsor endorsement in hand. Entering Discover with evidence, not assumptions.</p></div></div>
+</div>
+</div>
+<div class="tab-panel" id="step3-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Validate that the workflow you selected is actually worth transforming. End with a go/no-go decision your steering committee makes, not one that drifts by default.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor</span><span class="pill p-e">Domain focal</span><span class="pill p-e">Process SMEs</span><span class="pill p-d">Tech architect<span class="new-tag">new</span></span><span class="pill p-n">Build team</span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">~2 weeks</div><div class="time-sub">Per workflow. Repeats for each new workflow you select.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>You're arriving with:</strong> document verification, scored and endorsed. Now the domain focal validates the opportunity is real before committing to design. The technical architect joins for the first time.</div>
+
+<p class="prose">The domain focal treated this as a two-week investigation into one workflow, not a domain survey. Before it started, the domain focal booked the go/no-go meeting with the sponsor and the architect for Day 12, on their calendars immediately, not "sometime in week two." The sponsor needed to arrive knowing they might hear "stop."</p>
+
+<div class="visual"><svg viewBox="0 0 620 196" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Four-track investigation converging on a go/no-go recommendation</title><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><text x="80" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="700" fill="#525252">SPEND &amp; VOLUME</text><rect x="10" y="22" width="140" height="76" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/><text x="80" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">14-day review cycle</text><text x="80" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">60% counselor time</text><text x="80" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">Owner: Domain Focal</text><line x1="80" y1="98" x2="80" y2="128" stroke="#8a3ffc" stroke-width="1" stroke-dasharray="3 3"/><text x="235" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="700" fill="#525252">USER CONVERSATIONS</text><rect x="165" y="22" width="140" height="76" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/><text x="235" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">3&ndash;6 counselors</text><text x="235" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">at their desks</text><text x="235" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">Owner: Domain Focal</text><line x1="235" y1="98" x2="235" y2="128" stroke="#8a3ffc" stroke-width="1" stroke-dasharray="3 3"/><text x="390" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="700" fill="#525252">BENCHMARKS</text><rect x="320" y="22" width="140" height="76" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/><text x="390" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">Peer institutions:</text><text x="390" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">same-day verification</text><text x="390" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#5c2eb8">Owner: Domain Focal</text><line x1="390" y1="98" x2="390" y2="128" stroke="#8a3ffc" stroke-width="1" stroke-dasharray="3 3"/><text x="545" y="14" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" font-weight="700" fill="#525252">TECH FEASIBILITY</text><rect x="475" y="22" width="140" height="76" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/><text x="545" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Box API, OCR pipeline</text><text x="545" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">buildable now</text><text x="545" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#0043a4">Owner: Architect</text><line x1="545" y1="98" x2="545" y2="128" stroke="#0f62fe" stroke-width="1" stroke-dasharray="3 3"/><line x1="80" y1="128" x2="540" y2="128" stroke="#c6c6c6" stroke-width="1"/><line x1="305" y1="128" x2="305" y2="148" stroke="#8a3ffc" stroke-width="1.5" marker-end="url(#ar)"/><rect x="165" y="150" width="290" height="40" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="310" y="166" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Recommendation: proceed</text><text x="310" y="180" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">The sponsor approved staffing the same week</text></svg><div class="visual-cap">The domain focal led three tracks, the architect led the fourth. All four converged into the Day 12 go/no-go.</div></div>
+
+<p class="prose">The architect's finding on the technical track: documents already lived in Box and were reachable via API, an OCR pipeline was buildable on the existing stack, and the one real constraint, Box permissions varying by document type, was a two-week data-access conversation, not a blocker. The domain focal's three tracks confirmed what the counselor conversations had already suggested: 14-day average review cycle, 60% of counselor time on manual verification, no standardized checklist anywhere, and peer institutions already achieving same-day verification with AI document processing.</p>
+
+<p class="prose">The four-track investigation already answered two of the three lenses the AIFT team's build-vs-buy method calls for: business fit (spend, volume, and user conversations, above) and technical fit (Box API and OCR feasibility, above). Before committing, the architect ran the third: strategic fit. Would owning this capability internally still make sense in a year? A vendor OCR tool meant recurring licensing cost and being locked into whatever document types the vendor chose to support next; building it meant the team owned the logic and could extend it to transcript evaluation in Wave 2 without renegotiating a contract. Strategic fit favored build too, so all three lenses agreed.</p>
+
+<div class="table-wrap"><table class="data-table" style="font-size:.8rem;">
+<thead><tr><th>Option</th><th>Cost</th><th>Time to deploy</th><th>Fit</th></tr></thead>
+<tbody>
+<tr><td><strong>Buy: vendor OCR tool</strong></td><td>Licensing cost, plus integration work</td><td>Fast, but vendor lock-in on future changes</td><td>Generic templates; a poor match for the university's specific document types (transcripts, ID, personal statements)</td></tr>
+<tr><td style="background:#defbe6;"><strong>Build: OCR pipeline on existing stack</strong></td><td>Development time only, no new license</td><td>Fits inside the 90-day window</td><td style="background:#defbe6;">Purpose-built rules for the exact document types counselors handle; extensible for Wave 2</td></tr>
+</tbody>
+</table>
+<p class="visual-cap" style="margin-top:.5rem;">Build won on all three lenses for this specific decision, not because build is always right. A vendor tool would have been the better call for a more generic, off-the-shelf need with no strategic reason to own it.</p>
+</div>
+
+<div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Data without insight</div><div class="pp-body">The domain focal could have stopped at a technically thorough analysis, spend numbers, a process map, peer benchmarks, and still not known why the workflow failed. The numbers showed where the problem was; the counselor conversations told the domain focal why it persisted. The go/no-go meeting waited until both were answered.</div></div>
+
+<p class="prose">At the Day 12 meeting, the recommendation was proceed. The sponsor approved staffing that same week.</p>
+<div class="handoff"><strong>Handing forward to Step 4:</strong> a validated opportunity, a go decision, confirmed baseline KPIs, and a technical architect who already understands the data and integration landscape. Solution Design starts with the question answered.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Business Process Map(s)</h5><p>Current-state workflow from conversations, handoffs, systems, users, bottlenecks. Built from what people actually do, not what the documentation says.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>EIW Assessment and Automation Level</h5><p>Analyzes the workflow's automation potential: bottlenecks, manual steps, decisions, user pain, volume, cycle time, dependencies, and AI opportunity.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Measurement Strategy</h5><p>Baseline, target, source, owner, cadence, and validation method for each KPI. Confirm with finance now, not after the sprint.</p><div class="d-links"><span class="d-link off">Example (coming soon)</span></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 4</h4><p>Opportunity validated with evidence. Go approved. Baseline KPIs set and finance-confirmed. The architect knows the technical landscape. Now design the solution.</p></div></div>
+</div>
+</div>
+<div class="tab-panel" id="step4-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Define the future-state vision, scope exactly what ships in 90 days, and produce requirements specific enough that a developer can start building without asking you a clarifying question.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor</span><span class="pill p-e">Domain focal</span><span class="pill p-d">Tech architect</span><span class="pill p-d">Product owner<span class="new-tag">new</span></span><span class="pill p-d">Change owner<span class="new-tag">new</span></span><span class="pill p-n">Build team</span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">~2 weeks</div><div class="time-sub">Per workflow. Produces the blueprint the build team executes against.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>You're arriving with:</strong> a validated opportunity, a go decision, and the architect already fluent in the data and integration landscape. Now the team defines the destination and scopes exactly what ships.</div>
+
+<p class="prose">The product owner and the change owner joined here, not at the start of the sprint, because what got decided in Solution Design would directly shape both their jobs. The product owner would write and own the requirements; the change owner started planning who was affected and what they'd need to know.</p>
+
+<div class="table-wrap"><table class="data-table" style="font-size:.8rem;">
+<thead><tr><th>Phase</th><th>Message</th><th>Channel</th></tr></thead>
+<tbody>
+<tr><td style="color:#0043a4;font-weight:600;">Engage / Discovery</td><td>"We're looking at how document review works today, before anything is built." Why now, and what role counselors will have in shaping it.</td><td>Team meeting, sponsor message</td></tr>
+<tr><td style="color:#5c2eb8;font-weight:600;">Build (before launch)</td><td>"Starting [date], when an application fails validation, the system flags it and sends the applicant a reason code automatically. Here is what changes for you, and what does not."</td><td>Team briefing, job aid, FAQ</td></tr>
+<tr><td style="color:#1a6b32;font-weight:600;">Launch and after</td><td>Weekly: "Here's this week's exception volume and what the pattern tells us." Consistent numbers, no shifting counts.</td><td>Office hours, champion check-ins, dashboard link</td></tr>
+</tbody>
+</table>
+<p class="visual-cap" style="margin-top:.5rem;">The same specific message, repeated in multiple formats, from multiple voices, beats one broad announcement every time.</p>
+</div>
+
+<p class="prose">The team produced three things in strict order: a future-state vision, then MVP scope, then build-ready requirements. The domain focal had learned the hard way on an earlier project that skipping the sequence, writing requirements before agreeing on the destination, produces requirements that "move" once the build team notices they contradict each other.</p>
+
+<div class="nar-h">The future-state vision, and the whiteboard session that produced it</div>
+<p class="prose">The domain focal, the architect, and the product owner walked into a half-day session in Week 1 with three different mental models of what "automated verification" actually meant. They walked out with one: a unified AI layer that verifies documents in under two hours, notifies applicants automatically about missing items, and surfaces only exceptions to counselors, eliminating manual review entirely. That shared picture is what made the requirements conversation in Week 2 move three times faster than it would have otherwise.</p>
+
+<div class="nar-h">MVP scope: what shipped, what didn't</div>
+<p class="prose">In scope: document verification and the counselor exception queue. Out, named explicitly, not left implicit: the outreach propensity model, a conversational applicant interface, and transcript evaluation, all three moved to the Wave 2 backlog. The sponsor signed off on both lists before the product owner wrote a single requirement.</p>
+<div class="visual"><svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="min-width:480px;"><title>Strategic roadmap: four workstreams across 90 days</title>
+<text x="350" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Strategic Roadmap: the 90 days, signed off before Sprint 1</text>
+<text x="10" y="38" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Build</text>
+<rect x="90" y="28" width="560" height="16" rx="2" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="370" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#1a6b32">OCR pipeline &#8594; exception queue &#8594; notifications, Sprints 1&#8211;6</text>
+<text x="10" y="62" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">UAT</text>
+<rect x="370" y="52" width="280" height="16" rx="2" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="510" y="64" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#0043a4">Real counselors, Sprints 4&#8211;6</text>
+<text x="10" y="86" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">ARB review</text>
+<rect x="90" y="76" width="140" height="16" rx="2" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+<text x="160" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#8a5a00">Day 8&#8211;20</text>
+<text x="10" y="110" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Comms</text>
+<rect x="30" y="100" width="620" height="16" rx="2" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="340" y="112" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#5c2eb8">Running throughout, weekly cadence</text>
+<text x="10" y="134" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Training</text>
+<rect x="480" y="124" width="170" height="16" rx="2" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="565" y="136" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#5c2eb8">Before go-live, Sprints 5&#8211;6</text>
+<line x1="90" y1="150" x2="90" y2="170" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="2 2"/>
+<line x1="370" y1="150" x2="370" y2="170" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="2 2"/>
+<line x1="650" y1="150" x2="650" y2="170" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="2 2"/>
+<text x="90" y="182" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">Day 0</text>
+<text x="370" y="182" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">Day 45</text>
+<text x="650" y="182" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">Day 90</text>
+</svg><div class="visual-cap">Four workstreams, not one. Training and UAT are scheduled against the build, not squeezed in after it.</div></div>
+
+
+<div class="compare-grid">
+<div class="compare-bad"><div class="compare-label">✗ Not build-ready</div>
+<div class="compare-item">The system should verify documents automatically</div>
+<div class="compare-item">Make it easy for counselors to review exceptions</div>
+<div class="compare-item">Notifications should go out when documents are missing</div>
+<div class="compare-item">The AI should handle the main document types</div>
+</div>
+<div class="compare-good"><div class="compare-label">✓ Build-ready</div>
+<div class="compare-item">When a new application is submitted via the portal, the system checks Box for: transcript, government ID, and personal statement. If all three exist and pass format validation, status → "verified." If any are missing, status → "incomplete."</div>
+<div class="compare-item">Counselors see only applications with status "exception" (failed validation + flag from OCR). Queue sorted by submitted date. Each row shows: applicant name, missing items, and one-click to view documents.</div>
+<div class="compare-item">When status → "incomplete," the applicant receives an email within 15 minutes listing exactly which documents are missing, with upload instructions. Triggered automatically; no counselor action required.</div>
+</div>
+</div>
+<p class="prose" style="margin-top:1rem;">Get all three outputs signed off by the executive sponsor before the build team takes over. That sign-off is what gives the domain focal standing to hold the line when someone tries to add scope mid-sprint.</p>
+
+<div class="nar-h">Starting the architecture review on Day 8, not after the sprint</div>
+<p class="prose">The architect knew the university's architecture review process (ARB) takes real time and the solution can't launch without clearing it, so it was initiated on Day 8 of Solution Design, not after the sprint ended. It cleared before the build team's first day.</p>
+
+<div class="visual"><svg viewBox="0 0 1120 590" role="img" xmlns="http://www.w3.org/2000/svg">
+          <title>State University enrollment future state process map</title>
+          <defs><marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+          <rect x="0" y="0" width="150" height="480" fill="#f4f4f4"/>
+          <line x1="150" y1="170" x2="1106" y2="170" stroke="#e0e0e0" stroke-width="0.5"/>
+          <line x1="150" y1="320" x2="1106" y2="320" stroke="#e0e0e0" stroke-width="0.5"/>
+          <text x="75" y="95" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Applicant</text>
+          <text x="75" y="248" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">Counselor</text>
+          <text x="75" y="402" text-anchor="middle" font-size="12" font-weight="500" fill="#161616">AI / systems</text>
+          <rect x="166" y="56" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="246" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Apply online</text><text x="246" y="96" text-anchor="middle" font-size="12" fill="#525252">Portal submission</text>
+          <line x1="326" y1="84" x2="350" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="352" y="56" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="437" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Upload documents</text><text x="437" y="96" text-anchor="middle" font-size="12" fill="#525252">Transcripts, ID, essays</text>
+          <line x1="522" y1="84" x2="546" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="548" y="56" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="643" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Auto-verification</text><text x="643" y="96" text-anchor="middle" font-size="12" fill="#0f6e56">AI checks docs &lt; 2 hrs</text>
+          <line x1="738" y1="84" x2="762" y2="84" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="764" y="56" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="854" y="78" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Receive decision</text><text x="854" y="96" text-anchor="middle" font-size="12" fill="#525252">Faster, clearer status</text>
+          <path d="M643 112 Q643 144 437 144 Q300 144 246 116" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+          <text x="445" y="159" text-anchor="middle" font-size="12" fill="#0f6e56">Missing docs → auto-notification (same day)</text>
+          <rect x="166" y="206" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="251" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Review AI flags</text><text x="251" y="246" text-anchor="middle" font-size="12" fill="#525252">Exceptions only</text>
+          <line x1="336" y1="234" x2="360" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="362" y="206" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="457" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">AI prospect ranking</text><text x="457" y="246" text-anchor="middle" font-size="12" fill="#0f6e56">Conversion likelihood + reasoning</text>
+          <line x1="552" y1="234" x2="576" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="578" y="206" width="180" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="668" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Prioritized outreach</text><text x="668" y="246" text-anchor="middle" font-size="12" fill="#525252">High-value first</text>
+          <line x1="758" y1="234" x2="782" y2="234" stroke="#888780" stroke-width="1" marker-end="url(#ar4)"/>
+          <rect x="784" y="206" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="864" y="228" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Contact prospect</text><text x="864" y="246" text-anchor="middle" font-size="12" fill="#525252">Data-driven</text>
+          <path d="M668 262 Q668 296 457 296 Q360 296 457 264" fill="none" stroke="#1d9e75" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#ar4)"/>
+          <text x="520" y="311" text-anchor="middle" font-size="12" fill="#0f6e56">Counselor feedback → model improves</text>
+          <rect x="166" y="356" width="190" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="261" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Doc verification AI</text><text x="261" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">watsonx OCR + rules</text>
+          <rect x="382" y="356" width="200" height="56" rx="5" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="482" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#0f6e56">Conversion likelihood model</text><text x="482" y="396" text-anchor="middle" font-size="12" fill="#0f6e56">ML on CRM + SIS data</text>
+          <rect x="608" y="356" width="170" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="693" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">Salesforce CRM</text><text x="693" y="396" text-anchor="middle" font-size="12" fill="#525252">Unified data source</text>
+          <rect x="804" y="356" width="160" height="56" rx="5" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="884" y="378" text-anchor="middle" font-size="13" font-weight="500" fill="#161616">SIS (Banner)</text><text x="884" y="396" text-anchor="middle" font-size="12" fill="#525252">Enrollment of record</text>
+          <line x1="643" y1="112" x2="261" y2="356" stroke="#1d9e75" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <line x1="457" y1="262" x2="482" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <line x1="693" y1="262" x2="693" y2="356" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3" marker-end="url(#ar4)"/>
+          <rect x="166" y="430" width="14" height="14" rx="3" fill="#e1f5ee" stroke="#1d9e75" stroke-width="0.5"/><text x="186" y="441" font-size="12" fill="#525252">AI-enabled step (new)</text>
+          <rect x="370" y="430" width="14" height="14" rx="3" fill="#f1efe8" stroke="#888780" stroke-width="0.5"/><text x="390" y="441" font-size="12" fill="#525252">Existing step (unchanged)</text>
+          <text x="166" y="470" font-size="12" font-weight="600" fill="#161616">Target Metrics (After AI Implementation):</text>
+          <text x="166" y="488" font-size="12" fill="#525252">• Document review: &lt; 2 hours (vs. 14 days baseline)</text>
+          <text x="166" y="504" font-size="12" fill="#525252">• Counselor capacity: +40% increase</text>
+          <text x="480" y="488" font-size="12" fill="#525252">• Outreach conversion: 8% → 14%</text>
+          <text x="480" y="504" font-size="12" fill="#525252">• Manual task time: 60% → 20%</text>
+          <rect x="166" y="520" width="940" height="56" rx="5" fill="#defbe6" stroke="#24a148" stroke-width="1.5"/>
+          <text x="636" y="540" text-anchor="middle" font-size="12" font-weight="600" fill="#1a6b32">MVP Scope (90-Day Build):</text>
+          <text x="636" y="560" text-anchor="middle" font-size="12" fill="#1a6b32">Document Verification + Outreach Prioritization  •  Out of Scope: Full conversational assistant (backlogged for Phase 2)</text>
+        </svg><div class="visual-cap">The future-state process map from the Week 1 whiteboard session, the shared picture that made the requirements conversation move three times faster.</div></div>
+<div class="handoff"><strong>Handing forward to Step 5:</strong> future-state vision, two signed-off scope lists, build-ready requirements, and ARB in progress. The build team can start Day 1 without a kickoff meeting to re-explain what they're building.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Future State Workflow Process Map</h5><p>How the person's work changes, where AI enters, and where the human stays in the loop, designed from scratch, not adapted from the current state.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/op5cjfjug7839atgarbd9dymwn6rmc72" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>Business Requirements Log</h5><p>Build-ready package: persona, workflow, actions, systems, data objects, acceptance criteria, and technical specification. The source of truth for what gets built.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Strategic Roadmap</h5><p>MVP scope, explicit backlog, dependencies, sprint cadence, and next releases. The build team's operating plan.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8" target="_blank">Example ↗</a><a class="d-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank">Template ↗</a></div></div>
+<div class="deliverable-card"><h5>Build vs. Buy Assessment</h5><p>Compares vendor solutions against custom build on the approved tech stack, cost, time, capability, maintainability. Documents the decision.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 5</h4><p>Vision, scope, and requirements are complete and signed off. ARB is in motion. The build team can start Day 1 without a re-explanation meeting.</p></div></div>
+</div>
+</div>
+<div class="tab-panel" id="step5-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Build the MVP in 90-day sprints, test it with real users doing real work, and make a data-driven go/no-go decision. Run it like an experiment, not a delivery project.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor</span><span class="pill p-e">Domain focal</span><span class="pill p-d">Tech architect</span><span class="pill p-d">Product owner</span><span class="pill p-d">Change owner</span><span class="pill p-x">Developers<span class="new-tag new-x">new</span></span><span class="pill p-x">UAT users<span class="new-tag new-x">new</span></span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">90 days</div><div class="time-sub">Six two-week sprints. Weekly steering throughout.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>You're arriving with:</strong> future-state vision, two signed-off scope lists, build-ready requirements, and ARB in motion. The developers' first job, before any code, was reading those requirements and confirming the 90 days were achievable. That conversation happened in the first two days, not week six.</div>
+
+<p class="prose">The domain focal ran the 90 days as an experiment, not a delivery guarantee. The UAT lead came in at the start of the sprint, not folded in as an afterthought once testing began. The product owner put the riskiest assumption in Sprint 1: could the OCR pipeline actually parse Box documents reliably, while there was still time and budget to pivot if not.</p>
+
+<div class="visual"><svg viewBox="0 0 600 158" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Six-sprint plan: test riskiest assumption, core build and UAT, iterate and measure</title><rect x="10" y="28" width="184" height="56" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="102" y="48" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Sprint 1–2</text><text x="102" y="64" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">Test riskiest</text><text x="102" y="77" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">assumption first</text><rect x="206" y="28" width="184" height="56" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="298" y="48" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Sprint 3–4</text><text x="298" y="64" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">Core build</text><text x="298" y="77" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">+ UAT</text><rect x="402" y="28" width="184" height="56" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="494" y="48" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">Sprint 5–6</text><text x="494" y="64" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">Iterate +</text><text x="494" y="77" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#1a6b32">measure</text><line x1="10" y1="28" x2="10" y2="90" stroke="#c6c6c6" stroke-width="1" stroke-dasharray="3 3"/><line x1="10" y1="90" x2="590" y2="90" stroke="#c6c6c6" stroke-width="0.5"/><text x="10" y="102" text-anchor="start" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#888">Day 0</text><text x="204" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#888">Day 28</text><text x="400" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#888">Day 60</text><line x1="596" y1="20" x2="596" y2="104" stroke="#8a3ffc" stroke-width="2" stroke-dasharray="5 3"/><text x="596" y="112" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">Day 90</text><text x="596" y="124" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">Go / no-go</text><text x="10" y="144" text-anchor="start" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#525252">Weekly steering: demo + blockers (not status)  &middot;  User feedback every 2 weeks  &middot;  De-scope? 24-hr written note to sponsor</text></svg><div class="visual-cap">Six sprints, three checkpoints: prove the riskiest bet, build against real users, then measure before the Day 90 call.</div></div>
+
+<div class="nar-h">The SteerCo Charter the domain focal set up before Sprint 1</div>
+<p class="prose">Same 45-minute format every week, the sponsor, the domain focal, the architect, the product owner, the change owner. The domain focal ran it on the same "red is good" norm set back in Step 1, blockers and decisions, not status theater.</p>
+
+<div class="table-wrap"><table class="data-table" style="font-size:.8rem;">
+<thead><tr><th colspan="2" style="background:#161616;color:#fff;">SteerCo Charter</th></tr></thead>
+<tbody>
+<tr><td style="width:22%;"><strong>Attendance</strong></td><td>Sponsor, domain focal, architect, product owner, change owner. Standing, not optional; UAT lead joins from Sprint 4.</td></tr>
+<tr><td><strong>Cadence</strong></td><td>45 minutes, weekly, same day and time every sprint. No cancellations without a written reason to the sponsor.</td></tr>
+<tr><td><strong>RAG norms</strong></td><td>Red or amber against the Day 90 criteria is expected and welcome. A meeting that closes all-green is a warning sign, not a success.</td></tr>
+<tr><td><strong>Agenda structure</strong></td><td>Demo (15 min) &#8594; Metrics (10 min) &#8594; Blockers (15 min) &#8594; Decisions (5 min). Same order every week.</td></tr>
+<tr><td><strong>Escalation rule</strong></td><td>A blocker unresolved after one week goes to the sponsor by name, not back on next week's agenda unchanged.</td></tr>
+<tr><td><strong>Decision log</strong></td><td>Every decision gets one line: what, why, who approved, date. Kept in the RAID log, not in meeting notes no one reopens.</td></tr>
+</tbody>
+</table>
+<p class="visual-cap" style="margin-top:.5rem;">Set once, at the start, so the group isn't renegotiating how it operates every single week.</p>
+</div>
+
+<div class="table-wrap" style="margin-top:1rem;"><table class="data-table" style="font-size:.8rem;">
+<thead><tr><th colspan="2" style="background:#f4f4f4;">The charter in action: Week 4 decision log entry</th></tr></thead>
+<tbody>
+<tr><td style="width:22%;"><strong>Demo</strong></td><td>Exception queue running on real Sprint 3&#8211;4 data. Counselors saw flagged applications sorted by submission date for the first time.</td></tr>
+<tr><td><strong>Metrics</strong></td><td style="color:#ba7517;">Amber: OCR accuracy on transcripts, 91% vs. 95% target. Green: verification time, 1.6 hrs avg.</td></tr>
+<tr><td><strong>Blocker</strong></td><td>Transcript OCR needs a different extraction approach than IDs and personal statements. Architect flagged before writing more code for that document type.</td></tr>
+<tr><td><strong>Decision</strong></td><td>Approved: extend transcript OCR work by 3 days, absorbed inside Sprint 4, no schedule change. Owner: Architect.</td></tr>
+</tbody>
+</table>
+<p class="visual-cap" style="margin-top:.5rem;">A real decision log names the actual number, the actual document type, the actual decision, not "status update" and "open discussion."</p>
+</div>
+<div class="tip-box"><strong>What the domain focal covered every week (45 min max):</strong><br><br>
+<strong>1. Demo (15 min)</strong>, something working, even rough and partial.<br><br>
+<strong>2. Metrics (10 min)</strong>, honest red/amber/green against the Day 90 criteria.<br><br>
+<strong>3. Blockers (15 min)</strong>, what's slowing the team, and who in the room can unblock it.<br><br>
+<strong>4. Decisions (5 min)</strong>, anything that can't wait until next week, written down with an owner.
+</div>
+
+<div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Go/no-go criteria agreed after the fact</div><div class="pp-body">The sponsor and the domain focal wrote the Day 90 question down before Sprint 1 started: did the MVP demonstrate enough value, at enough reliability, to justify scaling it? They agreed the data source and got sign-off in advance. A metric without a pre-agreed threshold isn't a decision rule, it's a number anyone can interpret however the moment requires.</div></div>
+
+<div class="visual"><svg viewBox="0 0 600 170" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Sprint timeline: what each phase tested and caught</title>
+<text x="300" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">State University: what the sprint actually caught</text>
+<line x1="30" y1="42" x2="570" y2="42" stroke="#e0e0e0" stroke-width="1.5"/>
+<circle cx="30" cy="42" r="5" fill="#0f62fe"/>
+<text x="30" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#0043a4">Sprint 1&#8211;2</text>
+<circle cx="300" cy="42" r="5" fill="#8a3ffc"/>
+<text x="300" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#5c2eb8">Sprint 4</text>
+<circle cx="570" cy="42" r="5" fill="#24a148"/>
+<text x="570" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#1a6b32">Sprint 5&#8211;6</text>
+<rect x="10" y="70" width="220" height="88" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="120" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="600" fill="#0043a4">Riskiest assumption tested</text>
+<text x="120" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">OCR pipeline parses Box</text>
+<text x="120" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">docs reliably, with one</text>
+<text x="120" y="136" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">document type needing a</text>
+<text x="120" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">different extraction approach</text>
+<rect x="245" y="70" width="215" height="88" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="352" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="600" fill="#5c2eb8">Real UAT begins</text>
+<text x="352" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">Counselors test the working</text>
+<text x="352" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">exception queue. Feedback</text>
+<text x="352" y="136" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">surfaces 2 real interface</text>
+<text x="352" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">issues, not in requirements</text>
+<rect x="475" y="70" width="115" height="88" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="532" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="600" fill="#1a6b32">Adjusted, not derailed</text>
+<text x="532" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">1 fix pulled</text>
+<text x="532" y="122" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">into Sprint 5,</text>
+<text x="532" y="136" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">1 to backlog,</text>
+<text x="532" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">sponsor notified same day</text>
+</svg><div class="visual-cap">What the sprint tested and caught, sprint by sprint, not just the end result.</div></div>
+
+<p class="prose">The product owner's rule for de-scoping: any change got a written note to the sponsor within 24 hours, what was cut, why, and when it would return. The two interface fixes counselors surfaced during Sprint 4 UAT got exactly that treatment, one pulled into Sprint 5, one moved to a Wave 1.5 backlog, both explained the same day they were decided, not discovered later on demo day.</p>
+<div class="handoff"><strong>Handing forward to Step 6:</strong> a go/no-go decision based on real data against pre-agreed criteria. The solution is live and people are starting to use it.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Defect Tracker</h5><p>Tracks bugs, issues, and feedback throughout the sprint. Reviewed at every sprint review and steering meeting.</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman" target="_blank">Example ↗</a></div></div>
+<div class="deliverable-card"><h5>ROI Analysis</h5><p>Compares pre-sprint value assumptions against pilot evidence, usage data, and workflow impact. The data behind the go/no-go recommendation.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>KPI Dashboard</h5><p>Live tracking of adoption, usage, operational performance, and value realization against the baselines set in Step 3.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>Ready to advance to Step 6</h4><p>Go decision made and documented. Solution is live. Post-MVP backlog has an owner. Change management is ready to fully execute. Now make adoption systematic.</p></div></div>
+</div>
+</div>
+<div class="tab-panel" id="step6-panel">
+<div style="padding:1.375rem 0 1.5rem;">
+
+    <p class="step-description" style="margin-bottom:1.25rem;">Get people genuinely using the solution as part of their real work, prove the value against your baselines, and hand it off with enough structure that it doesn't degrade when the transformation team steps back.</p>
+    <div class="nar-who">
+<div class="nar-who-col"><div class="nar-who-label">Who's active</div><span class="pill p-e">Exec sponsor</span><span class="pill p-e">Domain focal</span><span class="pill p-d">Product owner</span><span class="pill p-d">Change owner</span><span class="pill p-x">Business owner<span class="new-tag new-x">new</span></span><span class="pill p-x">Technical lead<span class="new-tag new-x">new</span></span></div>
+<div class="nar-who-col" style="flex:0;min-width:120px;"><div class="nar-who-label">Time</div><div class="time-val">30–180 days</div><div class="time-sub">30 days: stabilize. 90 days: expand. 180 days: full vision.</div></div>
+<div class="nar-who-col" style="flex:0;min-width:130px;"><div class="nar-who-label">Legend</div><div class="legend-item"><span class="swatch" style="background:var(--blue-fill);border:1.5px solid var(--blue);"></span> <span style="color:var(--blue-dk);">Joins at Engage</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--purple-fill);border:1.5px solid var(--purple);"></span> <span style="color:var(--purple-dk);">Joins at Discover</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--green-fill);border:1.5px solid var(--green);"></span> <span style="color:var(--green-dk);">Joins at Execute</span></div>
+<div class="legend-item"><span class="swatch" style="background:var(--layer);border:1.5px solid #bdbdbd;"></span> <span style="color:var(--text-3);">Not yet</span></div></div>
+</div>
+<div class="inherit"><strong>You're arriving with:</strong> a live MVP, a go decision, a post-MVP backlog, and a change management plan the change owner had been building since Step 4. Two roles formally take on ongoing accountability here: the business owner, who'd endorsed the workflow back in Step 2, now owns adoption and business outcomes for good. A member of university IT becomes the incoming technical lead who'll maintain the infrastructure after the domain focal's team steps back.</div>
+
+<p class="prose">Deployment isn't adoption. The change owner's actual job in this step was closing the gap between "the tool is live" and "counselors use it as part of how they work," because that gap is where most of the value gets left on the table.</p>
+
+<div class="nar-h">The change owner started with two counselors, not twenty-four</div>
+<p class="prose">Rather than launch to all 24 admissions counselors at once, the change owner picked two who'd been active in UAT and already curious. Real applications, no fallback to the old process for that task, the exception queue replaced their manual review entirely for two weeks. Their feedback led to one more interface fix.</p>
+
+<div class="visual"><svg viewBox="0 0 620 168" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;">
+<title>State University rollout: from 2 counselors in UAT to all 24</title>
+<defs><marker id="ard3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<text x="310" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">State University: 2 counselors to all 24</text>
+<rect x="10" y="34" width="130" height="90" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="75" y="56" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="20" font-weight="700" fill="#1a6b32">2</text>
+<text x="75" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#1a6b32">counselors, both</text>
+<text x="75" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#1a6b32">active in UAT</text>
+<text x="75" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#1a6b32">Real work, no fallback</text>
+<line x1="140" y1="79" x2="220" y2="79" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#ard3)"/>
+<text x="180" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">the proof point:</text>
+<rect x="222" y="34" width="220" height="90" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="332" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="600" fill="#0043a4">"I'm clearing twice as many</text>
+<text x="332" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10.5" font-weight="600" fill="#0043a4">applications in the same time"</text>
+<text x="332" y="94" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-style="italic" fill="#0043a4">said to colleagues, not to leadership</text>
+<text x="332" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#161616">One interface fix from their feedback</text>
+<line x1="442" y1="79" x2="478" y2="79" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#ard3)"/>
+<rect x="480" y="34" width="130" height="90" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="545" y="56" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="20" font-weight="700" fill="#5c2eb8">24</text>
+<text x="545" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#5c2eb8">all admissions</text>
+<text x="545" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#5c2eb8">counselors</text>
+<text x="545" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#5c2eb8">shorter conversations</text>
+<text x="310" y="150" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">A colleague's specific result convinces a hesitant peer faster than any leadership message can.</text>
+</svg><div class="visual-cap">Starting small and letting a real result do the persuading, rather than a launch announcement.</div>
+</div>
+
+<div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Waiting for the tool to be perfect before starting adoption</div><div class="pp-body">Accuracy was 89%, not the 95% everyone wanted. The change owner didn't wait. The bar was "good enough that a motivated counselor can do their real job with it," not perfect. An imperfect tool two people were actually using was worth more than a polished one sitting unused while the team chased the last few points of accuracy.</div></div>
+
+<div class="nar-h">Who was affected, and what they needed</div>
+<p class="prose">The change owner had been building this since Step 4, tied to the same personas the domain focal mapped back in Step 2.</p>
+
+<div class="table-wrap"><table class="data-table">
+<thead><tr><th>Who</th><th>What changes for them</th><th>Impact level</th><th>What they need</th></tr></thead>
+<tbody>
+<tr><td><strong>Admissions counselors</strong></td><td>Stop manually verifying documents. Now review AI-flagged exceptions only.</td><td style="color:#a32d2d;font-weight:600;">High</td><td>Training on the exception queue. Clear guidance on what AI flags vs. what they decide. Early success stories from colleagues.</td></tr>
+<tr><td><strong>Counselor managers</strong></td><td>Visibility into backlog changes. New metrics to track (verification time, exception rate).</td><td style="color:#ba7517;font-weight:600;">Medium</td><td>Dashboard walkthrough. Understanding of what the new KPIs mean and how to act on them.</td></tr>
+<tr><td><strong>IT / support team</strong></td><td>Own the ongoing system maintenance, data pipeline, and user access management.</td><td style="color:#1a6b32;font-weight:600;">Low</td><td>Technical handoff documentation. Clear escalation path for user issues.</td></tr>
+<tr><td><strong>Applicants</strong></td><td>Receive faster notification of missing documents, same day instead of 2 weeks.</td><td style="color:#1a6b32;font-weight:600;">Low</td><td>Updated email templates explaining the new automated notification. No training needed.</td></tr>
+</tbody>
+</table>
+<p style="font-size:.75rem;color:var(--text-3);margin-top:.5rem;">Replace the rows with your actual user groups. The format stays the same. High-impact users need the most investment, training, champions, and feedback loops.</p>
+</div>
+
+<div class="visual"><svg viewBox="0 0 610 162" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Post-launch milestone timeline: 30, 90, and 180 days</title><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs><line x1="28" y1="46" x2="572" y2="46" stroke="#e0e0e0" stroke-width="1"/><circle cx="28" cy="46" r="5" fill="#24a148" stroke="none"/><text x="28" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#24a148">Go-live</text><circle cx="200" cy="46" r="5" fill="#24a148" stroke="none"/><text x="200" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#24a148">Day 120</text><circle cx="390" cy="46" r="5" fill="#24a148" stroke="none"/><text x="390" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#24a148">Day 180</text><circle cx="572" cy="46" r="5" fill="#8a3ffc" stroke="none"/><text x="572" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#8a3ffc">Full vision</text><rect x="28" y="58" width="168" height="58" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="112" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">30-day: Stabilize</text><text x="112" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Pilot with 1–2 teams.</text><text x="112" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Fix fast. KPIs weekly.</text><rect x="200" y="58" width="186" height="58" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/><text x="293" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#1a6b32">90-day: Expand</text><text x="293" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Broaden user base.</text><text x="293" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Wave 2 features. ROI validated.</text><rect x="390" y="58" width="182" height="58" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/><text x="481" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#5c2eb8">180-day: Full vision</text><text x="481" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">All users. Full feature set.</text><text x="481" y="106" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="normal" fill="#525252">Old process retired.</text><rect x="28" y="128" width="544" height="30" rx="4" fill="#f4f4f4" stroke="#e0e0e0" stroke-width="0.75"/><text x="300" y="140" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#161616">Definition of 'fully complete'</text><text x="300" y="154" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="normal" fill="#525252">All intended users onboarded · Full feature set live · Adoption KPI met · Old process retired · Next workflow in Discover</text></svg><div class="visual-cap">Define 'fully complete' before handoff, not after. The business owner needs a concrete target to manage toward, and leadership needs to know when the transformation is actually done.</div>
+</div>
+
+<div class="nar-h">The technical handoff the architect ran with the technical lead</div>
+<p class="prose">Half a day. The architect handed over the code repository with real documentation, not "ask me if you're stuck." Every API key and credential transferred with its rotation process written down. The architecture diagram got updated to reflect what was actually built, not the Step 4 design. Data queries, source dependencies, test cases, all documented and walked through. The architect's test for whether the handoff was actually complete: could the technical lead make a small update, test it, and deploy it without calling the architect back. Two weeks later, the technical lead did exactly that, independently.</p>
+
+<p class="prose">The business owner and the sponsor agreed on "fully complete" before the handoff, not after: all 24 counselors onboarded, the full feature set live, the adoption KPI met, the old manual checklist retired. That gave the business owner something concrete to manage toward instead of a project that stayed "in progress" indefinitely.</p>
+<div class="visual"><svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" style="min-width:480px;"><title>Operational health dashboard: adoption, usage, and workaround metrics</title>
+<text x="350" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="600" fill="#161616">Operational Health Dashboard, Week 8 post-launch</text>
+
+<rect x="10" y="30" width="160" height="90" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="90" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">DOCUMENT REVIEW</text>
+<text x="90" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="22" font-weight="700" fill="#1a6b32">1.8 hrs</text>
+<text x="90" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">vs. 14-day baseline</text>
+<text x="90" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#1a6b32">Target: &lt;2 hrs &#10003;</text>
+
+<rect x="180" y="30" width="160" height="90" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="260" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">ACTIVE USAGE</text>
+<text x="260" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="22" font-weight="700" fill="#1a6b32">91%</text>
+<text x="260" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">of 24 counselors, weekly</text>
+<text x="260" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#1a6b32">Holding steady, wk 6&#8211;8</text>
+
+<rect x="350" y="30" width="160" height="90" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+<text x="430" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#8a5a00">WORKAROUND RATE</text>
+<text x="430" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="22" font-weight="700" fill="#8a5a00">9%</text>
+<text x="430" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">still using old checklist</text>
+<text x="430" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#8a5a00">Below 10% action line</text>
+
+<rect x="520" y="30" width="170" height="90" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="605" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#0043a4">MANUAL TASK TIME</text>
+<text x="605" y="78" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="22" font-weight="700" fill="#0043a4">22%</text>
+<text x="605" y="95" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">vs. 60% baseline</text>
+<text x="605" y="110" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#0043a4">Target: 20%, trending down</text>
+
+<line x1="10" y1="140" x2="690" y2="140" stroke="#e0e0e0" stroke-width="1"/>
+<text x="10" y="160" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#525252">Weekly active usage, since go-live</text>
+<polyline points="10,220 110,190 210,172 310,178 410,182 510,180 610,181" fill="none" stroke="#0f62fe" stroke-width="2"/>
+<circle cx="210" cy="172" r="3" fill="#ba7517"/>
+<text x="210" y="160" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#8a5a00">wk3 dip, investigated</text>
+<text x="10" y="235" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#888">Wk1: 65%</text>
+<text x="330" y="235" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#888">Wk4: 85%</text>
+<text x="650" y="235" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" fill="#888">Wk8: 91%</text>
+</svg><div class="visual-cap">The metrics that matter, on one screen. The Week 3 dip is exactly the kind of thing weekly tracking catches early, monthly tracking would have missed it for another three weeks.</div></div>
+
+<div class="handoff"><strong>Returning to Step 3 for the next workflow:</strong> the prioritized list from Step 2 has a next candidate waiting. Everything learned in this cycle, data patterns, integration paths, team dynamics, what questions to ask, makes the next Workflow Analysis faster.</div>
+<div class="panel"><h4>Deliverables</h4><div class="deliverable-grid">
+<div class="deliverable-card"><h5>Operational Health Dashboard</h5><p>Post-launch tracking: realized value, Finance/EBM validation, KPI review, leadership updates. The ongoing proof that the investment was worth it.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Change Management Plan</h5><p>User groups, impact levels, training content, communications cadence, feedback loops, and resistance handling. Active from Step 3, now fully executing.</p><div class="d-links"><span class="d-link off">Template (coming soon)</span></div></div>
+<div class="deliverable-card"><h5>Strategic Roadmap (updated)</h5><p>Post-launch 30/90/180-day milestones, Wave 2 backlog, and the definition of "fully complete."</p><div class="d-links"><a class="d-link" href="https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej" target="_blank">Template ↗</a></div></div>
+</div></div><div class="ready-banner"><div class="ready-icon">✓</div><div class="ready-content"><h4>One workflow transformed. Ready for the next.</h4><p>Solution owned, tracked, and adopted. Ownership transferred. Return to Step 3, Workflow Analysis, and apply everything learned in this cycle.</p></div></div>
+</div>
+</div>
+<script>
+function showStep(n){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('step'+n+'-panel').classList.add('active');
+  document.getElementById('step'+n+'-tab').classList.add('active');
+  window.scrollTo({top: document.querySelector('.tab-nav').offsetTop - 20, behavior:'smooth'});
+}
+</script>
+</body>
+</html>
