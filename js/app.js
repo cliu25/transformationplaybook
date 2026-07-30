@@ -1774,22 +1774,28 @@ async function renderCaseStudyPage() {
         const styleId = 'cs-standalone-styles';
         if (!document.getElementById(styleId)) {
             const rawCss = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
-            // Remove rules whose selector is body, *, or :root (they break page layout).
-            // Uses a simple block-aware stripper: find "selector { ... }" and drop it
-            // if the selector matches the dangerous set.
-            const dangerousSelectors = /^(\*|body|:root)\s*$/;
-            // Split on top-level { } pairs to get individual rules
-            const safeCss = rawCss.replace(
-                /([^{}@][^{]*)\{([^{}]*)\}/g,
-                (match, selector, body) => {
-                    const sel = selector.trim();
-                    if (dangerousSelectors.test(sel)) return ''; // drop it
-                    return match; // keep everything else as-is
-                }
-            );
+            // Remove rules whose selector is body, * (they break page layout).
+            // Keep :root stripped out too — we inject the variables explicitly below
+            // scoped to #cs-detail-content so they don't pollute the main page.
+            const safeCss = rawCss.replace(/(?:^|\n)\s*(?:\*|body)\s*\{[^}]*\}/g, '');
+
+            // The standalone file uses its own CSS custom properties (--blue, --border, etc.)
+            // that are NOT defined on the main site's :root. Inject them scoped to the
+            // case study container so they resolve correctly without touching the main page.
+            const csVars = `
+#cs-detail-content {
+  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
+  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
+  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
+  --teal:#1d9e75; --teal-dk:#0f6e56; --teal-fill:#e1f5ee;
+  --amber:#ba7517; --amber-fill:#fdf4e3; --amber-dk:#633806;
+  --red:#da1e28; --red-fill:#fff1f1; --red-dk:#a32d2d;
+  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
+  --border:#e0e0e0; --layer:#f4f4f4;
+}`;
             const styleEl = document.createElement('style');
             styleEl.id = styleId;
-            styleEl.textContent = safeCss;
+            styleEl.textContent = csVars + '\n' + safeCss;
             document.head.appendChild(styleEl);
         }
     } catch (e) {
