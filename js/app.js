@@ -1767,12 +1767,28 @@ async function renderCaseStudyPage() {
         const parser = new DOMParser();
         doc = parser.parseFromString(html, 'text/html');
 
-        // Inject the standalone file's styles once
+        // Inject the standalone file's styles once, scoped to #cs-detail-content
+        // so they cannot affect body, layout, or anything outside the case study panel
         const styleId = 'cs-standalone-styles';
         if (!document.getElementById(styleId)) {
+            const rawCss = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
+            // Prefix every rule with #cs-detail-content so nothing leaks out
+            const scopedCss = rawCss.replace(
+                /([^{}]+)\{/g,
+                (match, selector) => {
+                    // Skip @-rules (media, keyframes, etc.) — leave them as-is
+                    const trimmed = selector.trim();
+                    if (trimmed.startsWith('@') || trimmed === '') return match;
+                    // Scope each comma-separated selector
+                    const scoped = trimmed.split(',')
+                        .map(s => `#cs-detail-content ${s.trim()}`)
+                        .join(', ');
+                    return `${scoped} {`;
+                }
+            );
             const styleEl = document.createElement('style');
             styleEl.id = styleId;
-            styleEl.textContent = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
+            styleEl.textContent = scopedCss;
             document.head.appendChild(styleEl);
         }
     } catch (e) {
