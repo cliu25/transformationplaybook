@@ -1768,34 +1768,13 @@ async function renderCaseStudyPage() {
         doc = parser.parseFromString(html, 'text/html');
 
         // Inject the standalone file's styles once.
-        // Strip only the rules that would break the outer layout (body, *, :root)
-        // and leave the component-level class rules as global — the class names are
-        // unique to the case study so there is no collision risk.
+        // The standalone CSS uses only literal hex values — no :root/:body/* rules —
+        // so it is safe to inject directly with no transformation needed.
         const styleId = 'cs-standalone-styles';
         if (!document.getElementById(styleId)) {
-            const rawCss = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
-            // Remove rules whose selector is body, * (they break page layout).
-            // Keep :root stripped out too — we inject the variables explicitly below
-            // scoped to #cs-detail-content so they don't pollute the main page.
-            const safeCss = rawCss.replace(/(?:^|\n)\s*(?:\*|body)\s*\{[^}]*\}/g, '');
-
-            // The standalone file uses its own CSS custom properties (--blue, --border, etc.)
-            // that are NOT defined on the main site's :root. Inject them scoped to the
-            // case study container so they resolve correctly without touching the main page.
-            const csVars = `
-#cs-detail-content {
-  --blue:#0f62fe; --blue-dk:#0043a4; --blue-fill:#edf5ff;
-  --purple:#8a3ffc; --purple-dk:#5c2eb8; --purple-fill:#f6f2ff;
-  --green:#24a148; --green-dk:#1a6b32; --green-fill:#defbe6;
-  --teal:#1d9e75; --teal-dk:#0f6e56; --teal-fill:#e1f5ee;
-  --amber:#ba7517; --amber-fill:#fdf4e3; --amber-dk:#633806;
-  --red:#da1e28; --red-fill:#fff1f1; --red-dk:#a32d2d;
-  --text:#161616; --text-2:#525252; --text-3:#6f6f6f;
-  --border:#e0e0e0; --layer:#f4f4f4;
-}`;
             const styleEl = document.createElement('style');
             styleEl.id = styleId;
-            styleEl.textContent = csVars + '\n' + safeCss;
+            styleEl.textContent = Array.from(doc.querySelectorAll('style')).map(s => s.textContent).join('\n');
             document.head.appendChild(styleEl);
         }
     } catch (e) {
