@@ -1596,211 +1596,101 @@ function renderLibraryPage() {
     const steps = [
         { id: 'assess',  num: 1, label: 'Tech & Data Assessment',  phase: 'Engage',   phaseClass: 'engage' },
         { id: 'map',     num: 2, label: 'Business Process Mapping', phase: 'Engage',   phaseClass: 'engage' },
-        { id: 'analyze', num: 3, label: 'Workflow Analysis',        phase: 'Discover', phaseClass: 'discover' },
-        { id: 'design',  num: 4, label: 'Solution Design',          phase: 'Discover', phaseClass: 'discover' },
+        { id: 'design',  num: 3, label: 'Workflow Analysis',        phase: 'Discover', phaseClass: 'discover' },
+        { id: 'analyze', num: 4, label: 'Solution Design',          phase: 'Discover', phaseClass: 'discover' },
         { id: 'build',   num: 5, label: 'Experimentation',          phase: 'Execute',  phaseClass: 'execute' },
         { id: 'sustain', num: 6, label: 'Scale & Adopt',            phase: 'Execute',  phaseClass: 'execute' },
     ];
 
-    // Audited artifact data — links cross-checked against all deep dive chapters and case study
     const libraryArtifacts = {
         assess: [
-            {
-                title: 'Current State Assessment',
-                description: 'Captures the domain\'s people (personas), processes/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc',
-                templateUrl: 'https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa',
-            },
-            {
-                title: 'Technology & Data Readiness Checklist',
-                description: 'Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Determines foundational challenges to address before or during solution planning.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc',
-                templateUrl: 'https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699',
-            },
-            {
-                title: 'Opportunity Sizing',
-                description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.',
-                exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQD0dcK64H2TRLWnnkJ-mauPAZM_N3RX7ggd3h9W-O40gjg?e=dEu7nm',
-            },
+            { title: 'Current State Processes',               description: 'Captures the domain\'s people (personas), process/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa' },
+            { title: 'Technology & Data Readiness Checklist', description: 'Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Functions as a mechanism to determine foundational challenges to address before or during solution planning and execution.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699' },
+            { title: 'Opportunity Sizing',                    description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQD0dcK64H2TRLWnnkJ-mauPAZM_N3RX7ggd3h9W-O40gjg?e=dEu7nm' },
         ],
         map: [
-            {
-                title: 'Business Process Map(s)',
-                description: 'Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities. Built from conversations, not documentation.',
-                exampleUrl: 'https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984',
-                templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk',
-            },
-            {
-                title: 'RACI Matrix',
-                description: 'Aligns who owns what throughout the scope of a project. One person accountable per row — not a committee.',
-                exampleUrl: '',
-                templateUrl: 'https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u',
-            },
-            {
-                title: 'RAID Log',
-                description: 'Tracks risks, assumptions, issues, and dependencies throughout the transformation. Start it Day 1 and review at every steering committee.',
-                exampleUrl: '',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDn9i60m4nhTLW0R3b0Sf-nAS4HFwpukAQCTj6v9QtWCpc?e=UsywxC',
-            },
-            {
-                title: 'Project Plan',
-                description: 'A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can\'t complete it, you\'re not ready to start.',
-                exampleUrl: 'https://ibm.box.com/s/2ryvfmucrpobe9rd6hjvbklts39nxvfp',
-                templateUrl: 'https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8',
-            },
-            {
-                title: 'Prioritization Matrix',
-                description: 'Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.',
-                exampleUrl: 'https://ibm.box.com/s/39ul2emcnloib0optj35z02ubgoldddj',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=552rrQ',
-            },
-        ],
-        analyze: [
-            {
-                title: 'Business Requirements Log',
-                description: 'The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture. The source of truth for what gets built.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=rBkhCW',
-            },
-            {
-                title: 'Business Case Template',
-                description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Supports the build vs. buy decision.',
-                exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO',
-                templateUrl: 'https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv',
-            },
+            { title: 'Business Process Map(s)',               description: 'Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities.', exampleUrl: 'https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984', templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk' },
+            { title: 'RACI Matrix',                           description: 'Aligns who owns what throughout the scope of a project.', exampleUrl: '', templateUrl: 'https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u' },
+            { title: 'RAID Log',                              description: 'Tracks risks, assumptions, issues, and dependencies throughout the transformation. Reviewed at every steering committee.', exampleUrl: '', templateUrl: '' },
+            { title: 'Project Plan',                          description: 'A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can\'t complete it, you\'re not ready to start.', exampleUrl: 'https://ibm.box.com/s/2ryvfmucrpobe9rd6hjvbklts39nxvfp', templateUrl: 'https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8' },
+            { title: 'Prioritization Matrix',                 description: 'Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.', exampleUrl: 'https://ibm.box.com/s/39ul2emcnloib0optj35z02ubgoldddj', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=552rrQ' },
         ],
         design: [
-            {
-                title: 'Strategic Roadmap',
-                description: 'The roadmap for MVP, pilot, production, and scale: backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.',
-                exampleUrl: 'https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8',
-                templateUrl: 'https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej',
-            },
-            {
-                title: 'Build vs. Buy Assessment',
-                description: 'Compares vendor solutions against custom build on the approved tech stack — cost, time, capability, maintainability. Documents the decision and rationale.',
-                exampleUrl: 'https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/_layouts/15/Doc.aspx?sourcedoc=%7BB802C135-3D51-45A7-AF1C-E33A9CFF945E%7D&file=Build%20vs%20Buy%20Example.pptx&action=edit&mobileredirect=true',
-                templateUrl: 'https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/_layouts/15/Doc.aspx?sourcedoc=%7BABAEDCF6-1BA8-4419-8AD7-74364B462947%7D&file=Build_vs_Buy_Comparison_Template.pptx&action=edit&mobileredirect=true',
-            },
-            {
-                title: 'Change Communications Plan',
-                description: 'Planned messages, channels, and timing for the whole project — started before the build, not after. Covers what stakeholders will hear, when, and from whom.',
-                exampleUrl: 'https://ibm.box.com/s/qjrtcgj6no1zx74ej9329x0btscm53pi',
-                templateUrl: '',
-            },
+            { title: 'Business Requirements Log',             description: 'The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture.', exampleUrl: 'https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=rBkhCW' },
+            { title: 'Business Case Template',                description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Supports build vs. make decision.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv' },
+            { title: 'Future State Workflow Process Map',     description: 'A user-perspective future-state journey: how the person\'s work changes, where AI enters, and where the human stays in the loop.', exampleUrl: '', templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk' },
+        ],
+        analyze: [
+            { title: 'Strategic Roadmap',                     description: 'The roadmap for MVP, pilot, production, scale, backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.', exampleUrl: 'https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8', templateUrl: 'https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej' },
+            { title: 'Build vs. Buy',                         description: 'Documents the decision framework and rationale for whether to build a custom solution or procure an existing product.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQA1wQK4UT2nRa8c4zqc_5ReAa-YQ5NS8XDaBFTeYhUIp00?e=HaSObe', templateUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQD23K6rqBsZRIrXdDZLRilHAZ-ZCREA8DlKaTrpTFNYFyY?e=eA88xg' },
+            { title: 'Change Management Plan',                description: 'Plans users, UAT, communications, training, feedback loops, and resistance handling — started early, not at the end. Includes support and maintenance, scaling recs, and governance.', exampleUrl: 'https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/13%20-%20(Apr%2028,%202026)/S2P%20-%20Change%20Management%20Update%20v3%20(1).pptx?d=w99c87ece3bfe48a5a88f099c6f4cb5f2&csf=1&web=1&e=3jUkH0', templateUrl: '' },
         ],
         build: [
-            {
-                title: 'SteerCo Charter',
-                description: 'Agenda, attendance, RAG norms, decision log, escalation rules, and governance structure for running the steering committee. Set once at Sprint 1.',
-                exampleUrl: 'https://ibm.box.com/s/a8tgpseyqs4g5tajpzk4wsvgnvt3wzjv',
-                templateUrl: '',
-            },
-            {
-                title: 'Defect Tracker',
-                description: 'Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every sprint review and steering meeting.',
-                exampleUrl: 'https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman',
-                templateUrl: '',
-            },
-            {
-                title: 'ROI Analysis',
-                description: 'Compares ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value. The data behind the go/no-go recommendation.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT',
-            },
-            {
-                title: 'KPI Dashboard',
-                description: 'Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz',
-            },
+            { title: 'SteerCo Charter',                       description: 'Agenda, attendance, red/yellow/green norms, decision log, escalation rules, and governance structure for running the steering committee.', exampleUrl: '', templateUrl: 'https://ibm-my.sharepoint.com/:p:/r/personal/claireliu_ibm_com/Documents/Documents/AIFT/03%20Enterprise%20Transformation%20%26%20AI%20Value%20Creation/03%20Domain%20Transformation/04%20Procurement%20Domain/02%20Lesseps%202.0%20S2P%20and%20AP%20Transformation/Key%20Documents%20-%20S2P%20Sprint/SteerCo/4%20-%20(Feb%2025,%202026)%20SteerCo/Archive/S2P%20SteerCo%203%20(Feb%2024,%202026).pptx?d=w6d708fe51bb441fe9d062635d26de1ce&csf=1&web=1&e=8345u8' },
+            { title: 'Defect Tracker',                        description: 'Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every steering meeting.', exampleUrl: 'https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman', templateUrl: '' },
+            { title: 'ROI Analysis',                          description: 'A reference comparing ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT' },
+            { title: 'KPI Dashboard',                         description: 'Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
         ],
         sustain: [
-            {
-                title: 'Operational Health Dashboard',
-                description: 'Post-launch tracking: realized value, Finance/EBM validation, KPI review, leadership updates, and the ongoing proof that the investment was worth it.',
-                exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr',
-                templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz',
-            },
+            { title: 'Operational Health Dashboard',          description: 'A reference dashboard for adoption, usage, value realization, operational performance, and support health.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
         ],
     };
 
-    // Phase color tokens
+    // Phase color tokens — same as deep dive CSS variables
     const phaseColors = {
         engage:   { tag: '#edf5ff', tagText: '#0043a4', tagBorder: '#0f62fe' },
         discover: { tag: '#f6f2ff', tagText: '#5c2eb8', tagBorder: '#8a3ffc' },
         execute:  { tag: '#defbe6', tagText: '#1a6b32', tagBorder: '#24a148' },
     };
 
-    // Active step state (index into steps array)
-    if (typeof selectedLibraryStep !== 'string' || !steps.find(s => s.id === selectedLibraryStep)) {
-        selectedLibraryStep = 'assess';
-    }
-    const activeStep = steps.find(s => s.id === selectedLibraryStep) || steps[0];
+    // Render one section per step — same structure as deep dive phase-section + artifact-grid
+    const sectionsHtml = steps.map(s => {
+        const items = libraryArtifacts[s.id] || [];
+        const pc = phaseColors[s.phaseClass];
+        const cardsHtml = items.map(a => {
+            const exUrl = (a.exampleUrl  || '').trim();
+            const tmUrl = (a.templateUrl || '').trim();
+            const exLink = exUrl
+                ? `<a class="lib-card-link" href="${exUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
+                : `<span class="lib-card-link lib-card-link--off">↗ Example</span>`;
+            const tmLink = tmUrl
+                ? `<a class="lib-card-link" href="${tmUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
+                : `<span class="lib-card-link lib-card-link--off">↗ Template</span>`;
+            return `<div class="lib-card">
+                <div class="lib-card__title">${a.title}</div>
+                <div class="lib-card__desc">${a.description || ''}</div>
+                <div class="lib-card__links">${exLink}${tmLink}</div>
+            </div>`;
+        }).join('');
 
-    // Build nav items
-    const navItemsHtml = steps.map(s => {
-        const isActive = s.id === activeStep.id;
-        return `<li class="workflow-side-nav__item">
-            <button class="workflow-side-nav__button${isActive ? ' is-active' : ''}"
-                    data-lib-step="${s.id}">
-                Step ${s.num} · ${s.label}
-            </button>
-        </li>`;
-    }).join('');
-
-    // Build cards for the active step
-    const items = libraryArtifacts[activeStep.id] || [];
-    const pc = phaseColors[activeStep.phaseClass];
-    const cardsHtml = items.map(a => {
-        const exUrl = (a.exampleUrl  || '').trim();
-        const tmUrl = (a.templateUrl || '').trim();
-        const exLink = exUrl
-            ? `<a class="lib-card-link" href="${exUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
-            : `<span class="lib-card-link lib-card-link--off">↗ Example</span>`;
-        const tmLink = tmUrl
-            ? `<a class="lib-card-link" href="${tmUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
-            : `<span class="lib-card-link lib-card-link--off">↗ Template</span>`;
-        return `<div class="lib-card">
-            <div class="lib-card__title">${a.title}</div>
-            <div class="lib-card__desc">${a.description || ''}</div>
-            <div class="lib-card__links">${exLink}${tmLink}</div>
+        return `<div class="lib-section" id="lib-step-${s.num}">
+            <div class="lib-section__header">
+                <span class="lib-phase-tag" style="background:${pc.tag};color:${pc.tagText};border:1.5px solid ${pc.tagBorder};">${s.phase}</span>
+                <span class="lib-step-num">Step ${s.num}</span>
+                <h2 class="lib-section__title">${s.label}</h2>
+            </div>
+            <div class="lib-grid">${cardsHtml}</div>
         </div>`;
     }).join('');
 
-    const panelHtml = `
-        <div class="lib-panel-header">
-            <span class="lib-phase-tag" style="background:${pc.tag};color:${pc.tagText};border:1.5px solid ${pc.tagBorder};">${activeStep.phase}</span>
-            <h2 class="lib-panel-title">Step ${activeStep.num} · ${activeStep.label}</h2>
-        </div>
-        <div class="lib-grid">${cardsHtml || '<p style="color:#525252;font-size:.9rem;">No deliverables listed for this step yet.</p>'}</div>
-    `;
-
     main.innerHTML = `
-        <section class="workflow-layout workflow-layout--with-top-offset" aria-label="Deliverable library">
-            <nav class="workflow-side-nav" aria-label="Library step navigation">
-                <div class="lib-side-header">Deliverable Library</div>
-                <ul class="workflow-side-nav__list">
-                    ${navItemsHtml}
-                </ul>
-            </nav>
-            <div class="workflow-detail-panel">
-                <div id="lib-detail-content">
-                    ${panelHtml}
-                </div>
+        <div class="lib-page">
+            <div class="lib-page__header">
+                <p class="lib-eyebrow">AI-First Transformation Playbook</p>
+                <h1 class="lib-page__title">Deliverable Library</h1>
+                <p class="lib-page__desc">Every template and example tied to each step of the 6-step transformation framework.</p>
             </div>
-        </section>
+            <nav class="lib-nav" aria-label="Jump to step">
+                <a class="lib-nav__pill lib-nav__pill--engage" href="#lib-step-1">Step 1 · Tech &amp; Data Assessment</a>
+                <a class="lib-nav__pill lib-nav__pill--engage" href="#lib-step-2">Step 2 · Business Process Mapping</a>
+                <a class="lib-nav__pill lib-nav__pill--discover" href="#lib-step-3">Step 3 · Workflow Analysis</a>
+                <a class="lib-nav__pill lib-nav__pill--discover" href="#lib-step-4">Step 4 · Solution Design</a>
+                <a class="lib-nav__pill lib-nav__pill--execute" href="#lib-step-5">Step 5 · Experimentation</a>
+                <a class="lib-nav__pill lib-nav__pill--execute" href="#lib-step-6">Step 6 · Scale &amp; Adopt</a>
+            </nav>
+            ${sectionsHtml}
+        </div>
     `;
-
-    // Wire up nav buttons — re-render on click
-    document.querySelectorAll('[data-lib-step]').forEach(btn => {
-        btn.addEventListener('click', () => {
-            selectedLibraryStep = btn.dataset.libStep;
-            renderLibraryPage();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    });
 }
 
 // ============================================================================
@@ -1898,11 +1788,19 @@ async function renderCaseStudyPage() {
         const panel = doc.getElementById(`step${step.num}-panel`);
         const panelContent = panel ? panel.innerHTML : '<p>Content not found.</p>';
 
+        const phaseColors = { Engage: '#0f62fe', Discover: '#8a3ffc', Execute: '#24a148' };
+        const phaseBg    = { Engage: '#edf5ff',  Discover: '#f6f2ff',  Execute: '#defbe6' };
+        const phaseColor = phaseColors[step.phaseGroup] || '#0f62fe';
+        const phaseFill  = phaseBg[step.phaseGroup]    || '#edf5ff';
+
         container.innerHTML = `
-            <div class="workflow-detail-panel__header" style="margin-bottom:1.5rem;">
-                <p class="workflow-detail-panel__meta" style="margin:0 0 .25rem;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text-secondary);">${step.phaseGroup}</p>
-                <h2 style="margin:0 0 .375rem;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:600;line-height:1.2;">${step.label}</h2>
-                <p style="margin:0;font-size:.875rem;color:var(--text-secondary);">${step.timing}</p>
+            <div style="margin-bottom:1rem;">
+                <p style="margin:0 0 4px;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:#6f6f6f;">${step.phaseGroup}</p>
+                <h2 style="margin:0 0 16px;font-size:clamp(1.25rem,2.5vw,1.75rem);font-weight:600;line-height:1.2;color:#161616;">${step.label}</h2>
+                <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.375rem .875rem;background:${phaseFill};border:1.5px solid ${phaseColor};border-radius:4px;">
+                    <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:${phaseColor};">Timing</span>
+                    <span style="font-size:.825rem;font-weight:500;color:${phaseColor};">${step.timing}</span>
+                </div>
             </div>
             ${panelContent}
         `;
