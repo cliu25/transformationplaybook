@@ -626,6 +626,7 @@ a:hover {
 .workflow-overview-blueprint svg {
   display: block;
   width: 100%;
+  min-width: 800px;
   max-width: 1584px;
   height: auto;
 }

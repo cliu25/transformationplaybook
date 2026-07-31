@@ -850,16 +850,17 @@ function renderDeliverableCard(deliverable) {
     // Small IBM-blue external-link icon
     const linkIcon = '<svg class="external-link-icon" width="14" height="14" viewBox="0 0 16 16" fill="#0f62fe" aria-hidden="true"><path d="M13 3v6h-1V4.707L6.854 9.854l-.708-.708L11.293 4H7V3h6zM4 5v8h8v-3h1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3v1H4z"/></svg>';
     const disabledIcon = '<svg class="external-link-icon" width="14" height="14" viewBox="0 0 16 16" fill="#8d8d8d" aria-hidden="true"><path d="M13 3v6h-1V4.707L6.854 9.854l-.708-.708L11.293 4H7V3h6zM4 5v8h8v-3h1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V5a1 1 0 011-1h3v1H4z"/></svg>';
+    const isLocal = url => url.startsWith('assets/');
 
     // Build link buttons — show both, with disabled state if no URL
     const links = [];
     if (hasExample) {
-        links.push(`<a class="deliverable-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Example: ${deliverable.title.replace(/'/g,"\\'")}','${exampleUrl}','artifact_click')">Example ${linkIcon}</a>`);
+        links.push(`<a class="deliverable-link" href="${exampleUrl}"${isLocal(exampleUrl) ? ' download' : ' target="_blank" rel="noopener noreferrer"'} onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Example: ${deliverable.title.replace(/'/g,"\\'")}','${exampleUrl}','artifact_click')">Example ${linkIcon}</a>`);
     } else {
         links.push(`<span class="deliverable-link disabled" title="Example not yet available">Example ${disabledIcon}</span>`);
     }
     if (hasTemplate) {
-        links.push(`<a class="deliverable-link" href="${templateUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Template: ${deliverable.title.replace(/'/g,"\\'")}','${templateUrl}','artifact_click')">Template ${linkIcon}</a>`);
+        links.push(`<a class="deliverable-link" href="${templateUrl}"${isLocal(templateUrl) ? ' download' : ' target="_blank" rel="noopener noreferrer"'} onclick="event.stopPropagation();if(window.aiftTrack)window.aiftTrack.click('Template: ${deliverable.title.replace(/'/g,"\\'")}','${templateUrl}','artifact_click')">Template ${linkIcon}</a>`);
     } else {
         links.push(`<span class="deliverable-link disabled" title="Template not yet available">Template ${disabledIcon}</span>`);
     }
@@ -1476,7 +1477,7 @@ async function renderModuleDetail(module) {
                                                             <div style="margin-bottom: 1rem;">
                                                                 <h5 style="margin: 0 0 0.5rem 0;">${example.title || 'Example'}</h5>
                                                                 <p style="margin: 0 0 0.5rem 0;">${example.description || ''}</p>
-                                                                ${exampleUrl ? `<a class="deliverable-link" href="${exampleUrl}" target="_blank" rel="noopener noreferrer">View Example ${linkIcon}</a>` : ''}
+                                                                ${exampleUrl ? `<a class="deliverable-link" href="${exampleUrl}"${exampleUrl.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener noreferrer"'}>View Example ${linkIcon}</a>` : ''}
                                                             </div>
                                                         `;
                                                     }).join('')}
@@ -1605,34 +1606,34 @@ function renderLibraryPage() {
     // Audited artifact data — links cross-checked against all deep dive chapters and case study
     const libraryArtifacts = {
         assess: [
-            { title: 'Current State Assessment',           description: 'Captures the domain\'s people (personas), processes/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/template/5ec28fbf-bf8a-45d2-ba44-2deece7f57aa' },
-            { title: 'Technology & Data Readiness Checklist', description: 'Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Determines foundational challenges to address before or during solution planning.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://app.mural.co/t/ibm14/m/ibm14/1775762796754/5e602df33f7af263fd214eeac33feb07e743b699' },
-            { title: 'Opportunity Sizing',                 description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQD0dcK64H2TRLWnnkJ-mauPAZM_N3RX7ggd3h9W-O40gjg?e=dEu7nm' },
+            { title: 'Current State Assessment',           description: 'Captures the domain\'s people (personas), processes/workflows, technology (current tools), data, operating model, and readiness baseline. The honest "where we are today" snapshot.', exampleUrl: 'assets/examples/current-state-assessment-example.pptx', templateUrl: 'assets/templates/Project Charter template.pptx' },
+            { title: 'Technology & Data Readiness Checklist', description: 'Confirms systems, data sources, owners, quality, access, architecture, and security constraints. Determines foundational challenges to address before or during solution planning.', exampleUrl: 'assets/examples/current-state-assessment-example.pptx', templateUrl: 'assets/templates/Project Charter - Bob.pptx' },
+            { title: 'Opportunity Sizing',                 description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI.', exampleUrl: 'assets/examples/Business Case (1).pptx', templateUrl: 'assets/templates/Opportunity-Sizing-Template.xlsx' },
         ],
         map: [
-            { title: 'Business Process Map(s)',            description: 'Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities. Built from conversations, not documentation.', exampleUrl: 'https://app.mural.co/template/a3fd5e2a-cfdf-4ad6-9887-066521fc6ab1/abc1ccf2-0482-4aa0-8a6c-0cede7949984', templateUrl: 'https://ibm.box.com/s/5c43ream7jq8ezi0boiobmhslhpachwk' },
-            { title: 'RACI Matrix',                       description: 'Aligns who owns what throughout the scope of a project. One person accountable per row — not a committee.', exampleUrl: 'https://ibm.box.com/s/tlmaok691csupb2w7543u44rdv5gg42u', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDC0t0srYOgQIhnwt_m_fkvAUX8QMx-qNknF3E77mLbkyo?e=UBhWnF' },
-            { title: 'RAID Log',                          description: 'Tracks risks, assumptions, issues, and dependencies throughout the transformation. Start it Day 1 and review at every steering committee.', exampleUrl: 'https://ibm.box.com/s/l63ejrajmjqw942746wir79qmxupl2u0', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDn9i60m4nhTLW0R3b0Sf-nAS4HFwpukAQCTj6v9QtWCpc?e=UsywxC' },
-            { title: 'Project Plan',                      description: 'A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can\'t complete it, you\'re not ready to start.', exampleUrl: 'https://ibm.box.com/s/2ryvfmucrpobe9rd6hjvbklts39nxvfp', templateUrl: 'https://ibm.box.com/s/0saqdnp1643lu8eb9ko73kqdzj4xaxr8' },
-            { title: 'Prioritization Matrix',             description: 'Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.', exampleUrl: 'https://ibm.box.com/s/39ul2emcnloib0optj35z02ubgoldddj', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=552rrQ' },
+            { title: 'Business Process Map(s)',            description: 'Documents the current-state workflow: handoffs, systems, users, bottlenecks, and automation opportunities. Built from conversations, not documentation.', exampleUrl: 'assets/examples/business-process-map-example.pptx', templateUrl: 'assets/templates/RACI_Matrix_Template_Blank.xlsx' },
+            { title: 'RACI Matrix',                       description: 'Aligns who owns what throughout the scope of a project. One person accountable per row — not a committee.', exampleUrl: 'assets/examples/raci-matrix-example.pptx', templateUrl: 'assets/templates/RACI_Matrix_Template_Blank.xlsx' },
+            { title: 'RAID Log',                          description: 'Tracks risks, assumptions, issues, and dependencies throughout the transformation. Start it Day 1 and review at every steering committee.', exampleUrl: 'assets/examples/raid-log-example.pdf', templateUrl: 'assets/templates/RAID_Log_Template_Blank.xlsx' },
+            { title: 'Project Plan',                      description: 'A one-page agreement that scopes the transformation before kickoff: the mandate, value target, sponsor, team, timeline, and sign-off. If you can\'t complete it, you\'re not ready to start.', exampleUrl: 'assets/examples/Package Session Epics and MVP Scopevf0203.pdf', templateUrl: 'assets/templates/Project Charter template.pptx' },
+            { title: 'Prioritization Matrix',             description: 'Ranks opportunities by value, feasibility, data readiness, urgency, user impact, and scale to select the MVP.', exampleUrl: 'assets/examples/prioritization-example.pptx', templateUrl: 'assets/templates/Requirements_Gathering_Template_Blank.xlsx' },
         ],
         analyze: [
-            { title: 'Business Requirements Log',         description: 'The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture. The source of truth for what gets built.', exampleUrl: 'https://ibm.ent.box.com/file/2147631391114?s=307v7h8kgdvk2x34wlltbhnoy3md8r5g', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQDADuvng2XWRJoCXBNsY7GJATPoUKpijjuaCWjNzqNXIts?e=rBkhCW' },
-            { title: 'Business Case Template',            description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Supports the build vs. buy decision.', exampleUrl: 'https://ibm.sharepoint.com/:p:/s/AI-FirstTransformation_DEPT/IQBDcXuPEIIgRrgHXWaysiztASt6kB0eXgGOrx21FImrQ3s?e=6op8fO', templateUrl: 'https://ibm.box.com/s/l95797tw7rhiudkipa261ofa2yw2v6tv' },
+            { title: 'Business Requirements Log',         description: 'The build-ready package covering persona, workflow, actions, systems, data, acceptance criteria, technical specification, and solution architecture. The source of truth for what gets built.', exampleUrl: 'assets/examples/Package Session Epics and MVP Scopevf0203.pdf', templateUrl: 'assets/templates/Requirements_Gathering_Template_Blank.xlsx' },
+            { title: 'Business Case Template',            description: 'Quantifies the value case tied to the balance sheet or G&A: baseline, target, investment, and ROI. Supports the build vs. buy decision.', exampleUrl: 'assets/examples/Business Case (1).pptx', templateUrl: 'assets/templates/KPI_Gathering_Template_Blank.xlsx' },
         ],
         design: [
-            { title: 'Strategic Roadmap',                 description: 'The roadmap for MVP, pilot, production, and scale: backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.', exampleUrl: 'https://ibm.box.com/s/gs5ep0mshvtic6nl4k8wljdcy7d6bqm8', templateUrl: 'https://ibm.box.com/s/z3lzjel4frfrhyi6bnmroci062gotuej' },
-            { title: 'Build vs. Buy Assessment',          description: 'Compares vendor solutions against custom build on the approved tech stack — cost, time, capability, maintainability. Documents the decision and rationale.', exampleUrl: 'https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/_layouts/15/Doc.aspx?sourcedoc=%7BB802C135-3D51-45A7-AF1C-E33A9CFF945E%7D&file=Build%20vs%20Buy%20Example.pptx&action=edit&mobileredirect=true', templateUrl: 'https://ibm.sharepoint.com/:p:/r/sites/AI-FirstTransformation_DEPT/_layouts/15/Doc.aspx?sourcedoc=%7BABAEDCF6-1BA8-4419-8AD7-74364B462947%7D&file=Build_vs_Buy_Comparison_Template.pptx&action=edit&mobileredirect=true' },
-            { title: 'Change Communications Plan',        description: 'Planned messages, channels, and timing for the whole project — started before the build, not after. Covers what stakeholders will hear, when, and from whom.', exampleUrl: 'https://ibm.box.com/s/qjrtcgj6no1zx74ej9329x0btscm53pi', templateUrl: 'https://ibm.box.com/s/d2z5qg8of8mn8igi3979jcex7589cylh' },
+            { title: 'Strategic Roadmap',                 description: 'The roadmap for MVP, pilot, production, and scale: backlog, dependencies, cadence, and next releases. Includes UAT strategy and planning.', exampleUrl: 'assets/examples/Roadmap (1).pptx', templateUrl: 'assets/templates/RAID_Log_Template_Blank.xlsx' },
+            { title: 'Build vs. Buy Assessment',          description: 'Compares vendor solutions against custom build on the approved tech stack — cost, time, capability, maintainability. Documents the decision and rationale.', exampleUrl: 'assets/examples/Build vs Buy Example.pptx', templateUrl: 'assets/templates/Build_vs_Buy_Comparison_Template.pptx' },
+            { title: 'Change Communications Plan',        description: 'Planned messages, channels, and timing for the whole project — started before the build, not after. Covers what stakeholders will hear, when, and from whom.', exampleUrl: 'assets/examples/07-Change-Management-Communications (1).pdf', templateUrl: 'assets/templates/07b-Change-Management-Communications-Template (1).pdf' },
         ],
         build: [
-            { title: 'SteerCo Charter',                   description: 'Agenda, attendance, RAG norms, decision log, escalation rules, and governance structure for running the steering committee. Set once at Sprint 1.', exampleUrl: 'https://ibm.box.com/s/a8tgpseyqs4g5tajpzk4wsvgnvt3wzjv', templateUrl: 'https://ibm.box.com/s/ik709d1zud9n6kljkqmyz05wmc799ho4' },
-            { title: 'Defect Tracker',                    description: 'Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every sprint review and steering meeting.', exampleUrl: 'https://ibm.box.com/s/4u01cvbmd8ymve7yuq6n5gkaubowpman', templateUrl: 'https://ibm.box.com/s/12o8imsbvzfqck6r97osxyoxz4sxtmed' },
-            { title: 'ROI Analysis',                      description: 'Compares ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value. The data behind the go/no-go recommendation.', exampleUrl: 'https://ibm.ent.box.com/file/2181697907530?s=p0abbfft3jumintcy8aw5hewshs2y7fc', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQB58b_27SAtT4nGAUm8FzZUAYvipHEopduep5tAqT3z6rQ?e=hFAHLT' },
-            { title: 'KPI Dashboard',                     description: 'Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
+            { title: 'SteerCo Charter',                   description: 'Agenda, attendance, RAG norms, decision log, escalation rules, and governance structure for running the steering committee. Set once at Sprint 1.', exampleUrl: 'assets/examples/10-SteerCo-Charter (1).pdf', templateUrl: 'assets/templates/10b-SteerCo-Charter-Template (1).pdf' },
+            { title: 'Defect Tracker',                    description: 'Tracks defects by sprint, severity, owner, status, and resolution. Reviewed at every sprint review and steering meeting.', exampleUrl: 'assets/examples/defect_tracker.xlsx', templateUrl: 'assets/templates/12-Defect-Tracker-Template (1).pdf' },
+            { title: 'ROI Analysis',                      description: 'Compares ROI assumptions against pilot evidence, usage analytics, workflow impact, and validated value. The data behind the go/no-go recommendation.', exampleUrl: 'assets/examples/current-state-assessment-example.pptx', templateUrl: 'assets/templates/ROI_Analysis_Template_Blank.xlsx' },
+            { title: 'KPI Dashboard',                     description: 'Post-launch reporting for realized value, Finance/EBM validation, KPI review, and leadership updates. Created during MVP.', exampleUrl: 'assets/examples/KPI-example.pptx', templateUrl: 'assets/templates/KPI_Gathering_Template_Blank.xlsx' },
         ],
         sustain: [
-            { title: 'Operational Health Dashboard',      description: 'Post-launch tracking: realized value, Finance/EBM validation, KPI review, leadership updates, and the ongoing proof that the investment was worth it.', exampleUrl: 'https://ibm.ent.box.com/file/2146417828092?s=66k01mp14dwbukj073me2rzmjpjfbgfr', templateUrl: 'https://ibm.sharepoint.com/:x:/s/AI-FirstTransformation_DEPT/IQCQ3Rmw9q_jRLQMZ6IdmN6NAZQTz9-DN2B362yrpREMLD4?e=UZJJbz' },
+            { title: 'Operational Health Dashboard',      description: 'Post-launch tracking: realized value, Finance/EBM validation, KPI review, leadership updates, and the ongoing proof that the investment was worth it.', exampleUrl: 'assets/examples/KPI-example.pptx', templateUrl: 'assets/templates/KPI_Gathering_Template_Blank.xlsx' },
         ],
     };
 
@@ -1667,10 +1668,10 @@ function renderLibraryPage() {
         const exUrl = (a.exampleUrl  || '').trim();
         const tmUrl = (a.templateUrl || '').trim();
         const exLink = exUrl
-            ? `<a class="lib-card-link" href="${exUrl}" target="_blank" rel="noopener noreferrer">↗ Example</a>`
+            ? `<a class="lib-card-link" href="${exUrl}"${exUrl.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener noreferrer"'}>↗ Example</a>`
             : `<span class="lib-card-link lib-card-link--off">↗ Example</span>`;
         const tmLink = tmUrl
-            ? `<a class="lib-card-link" href="${tmUrl}" target="_blank" rel="noopener noreferrer">↗ Template</a>`
+            ? `<a class="lib-card-link" href="${tmUrl}"${tmUrl.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener noreferrer"'}>↗ Template</a>`
             : `<span class="lib-card-link lib-card-link--off">↗ Template</span>`;
         return `<div class="lib-card">
             <div class="lib-card__title">${a.title}</div>
@@ -1875,8 +1876,8 @@ function renderCaseStudyPhaseHtml(phase, COLORS) {
                 const ex = (d.exampleUrl && d.exampleUrl.trim()) || '';
                 const tm = (d.templateUrl && d.templateUrl.trim()) || (d.file && d.file.trim()) || '';
                 const links = [];
-                if (ex) links.push(`<a class="doc-link" href="${ex}" target="_blank" rel="noopener">Example ${linkIcon}</a>`);
-                if (tm) links.push(`<a class="doc-link" href="${tm}" target="_blank" rel="noopener">Template ${linkIcon}</a>`);
+                if (ex) links.push(`<a class="doc-link" href="${ex}"${ex.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener"'}>Example ${linkIcon}</a>`);
+                if (tm) links.push(`<a class="doc-link" href="${tm}"${tm.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener"'}>Template ${linkIcon}</a>`);
                 return `<div class="doc"><span class="doc-ic">${fileIcon}</span><span class="doc-body"><span class="doc-name">${d.name}</span>${links.length ? `<span class="doc-links">${links.join('')}</span>` : ''}</span></div>`;
             }).join('')}
         </div></div>`;
@@ -1995,8 +1996,8 @@ async function renderCaseStudyPhaseContent() {
                 const ex = (d.exampleUrl && d.exampleUrl.trim()) || '';
                 const tm = (d.templateUrl && d.templateUrl.trim()) || (d.file && d.file.trim()) || '';
                 const links = [];
-                if (ex) links.push(`<a class="doc-link" href="${ex}" target="_blank" rel="noopener noreferrer">Example ${linkIcon}</a>`);
-                if (tm) links.push(`<a class="doc-link" href="${tm}" target="_blank" rel="noopener noreferrer">Template ${linkIcon}</a>`);
+                if (ex) links.push(`<a class="doc-link" href="${ex}"${ex.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener noreferrer"'}>Example ${linkIcon}</a>`);
+                if (tm) links.push(`<a class="doc-link" href="${tm}"${tm.startsWith('assets/') ? ' download' : ' target="_blank" rel="noopener noreferrer"'}>Template ${linkIcon}</a>`);
                 return `<div class="doc">
                     <span class="doc-ic">${fileIcon}</span>
                     <span class="doc-body"><span class="doc-name">${d.name}</span>${links.length ? `<span class="doc-links">${links.join('')}</span>` : ''}</span>
