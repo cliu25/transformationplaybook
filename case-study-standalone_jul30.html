@@ -467,14 +467,100 @@
 <div class="nar-h">2. Run the three spend &amp; volume tracks</div>
 <p class="prose">The domain focal ran three parallel tracks: spend and volume (14-day review cycle, 60% of counselor time on manual verification, ~120 applications per counselor per month), user conversations (three of six counselors keeping personal spreadsheets because no standardized checklist existed — the same workaround, independently, six times), and peer benchmarks (other institutions with similar document volumes had already moved to same-day verification using AI document processing). Each track alone would have been insufficient; all three together made the recommendation undeniable.</p>
 
+<div class="visual"><svg viewBox="0 0 620 130" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Three investigation tracks and what each produced for document verification</title>
+<rect x="0" y="0" width="620" height="130" rx="4" fill="#f4f4f4"/>
+<text x="310" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Three tracks, one recommendation</text>
+<rect x="10" y="28" width="188" height="90" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="104" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">SPEND &amp; VOLUME</text>
+<text x="104" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">14-day review cycle</text>
+<text x="104" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">60% counselor time manual</text>
+<text x="104" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">~120 apps/counselor/month</text>
+<text x="104" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#8a3ffc">What it costs</text>
+<rect x="214" y="28" width="188" height="90" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="308" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">USER CONVERSATIONS</text>
+<text x="308" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">6/6 counselors same workaround</text>
+<text x="308" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">3/6 built personal spreadsheets</text>
+<text x="308" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">No standard checklist anywhere</text>
+<text x="308" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#8a3ffc">Why it fails</text>
+<rect x="418" y="28" width="192" height="90" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="514" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#0043a4">PEER BENCHMARKS</text>
+<text x="514" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Peer institutions: same-day</text>
+<text x="514" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">verification already live</text>
+<text x="514" y="90" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">with AI document processing</text>
+<text x="514" y="108" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#0043a4">What's achievable</text>
+</svg><div class="visual-cap">Each track answered a different question. All three converged on the same answer: this is the right workflow to build first.</div></div>
+
 <div class="nar-h">3. Map the as-is flow and root causes</div>
 <p class="prose">The current-state map produced from the counselor conversations showed the root cause clearly: every counselor was running their own mental checklist, built from experience, against documents stored in Box with no standardization. The bottleneck wasn't volume — it was the absence of a shared standard that could be automated. That insight is what shaped the future-state design: the AI needed to enforce a consistent checklist, not just speed up the counselors' existing process.</p>
+
+<div class="visual"><svg viewBox="0 0 620 110" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Root cause analysis: from symptom to structural gap</title>
+<defs><marker id="arc1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#8d8d8d" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+<rect x="8" y="14" width="148" height="82" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+<text x="82" y="32" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#a32d2d">SYMPTOM</text>
+<text x="82" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">14-day review cycle</text>
+<text x="82" y="65" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Counselors overwhelmed</text>
+<text x="82" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Inconsistent outcomes</text>
+<line x1="156" y1="55" x2="192" y2="55" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#arc1)"/>
+<rect x="194" y="14" width="168" height="82" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+<text x="278" y="32" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#8a5a00">ROOT CAUSE</text>
+<text x="278" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">No shared checklist standard</text>
+<text x="278" y="65" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Each counselor runs a</text>
+<text x="278" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">different mental model</text>
+<line x1="362" y1="55" x2="398" y2="55" stroke="#8d8d8d" stroke-width="1.5" marker-end="url(#arc1)"/>
+<rect x="400" y="14" width="212" height="82" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="506" y="32" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#1a6b32">WHAT AI MUST DO</text>
+<text x="506" y="50" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Enforce a consistent checklist</text>
+<text x="506" y="65" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Not speed up the individual —</text>
+<text x="506" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">standardize the process itself</text>
+</svg><div class="visual-cap">The root cause is structural, not personal. Six counselors doing it six different ways isn't a training problem — it's a missing standard that AI can enforce consistently.</div></div>
 
 <div class="nar-h">4. Validate the technical path</div>
 <p class="prose">The architect's findings: documents already lived in Box and were reachable via API, an OCR pipeline was buildable on the existing stack, and the one real constraint — Box permissions varying by document type — was a two-week data-access conversation, not a blocker. The architect also flagged the university's ARB process as needing to start in Step 4, not at the end of the sprint. That flag was the difference between launching on Day 90 and discovering a six-week approval gate at Day 80.</p>
 
+<div class="visual"><svg viewBox="0 0 620 106" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Technical path validation: four findings from the architect's feasibility check</title>
+<rect x="0" y="0" width="620" height="106" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Architect's feasibility check: four findings that shaped the build decision</text>
+<rect x="10" y="26" width="138" height="68" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="79" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Box API</text>
+<text x="79" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Documents reachable</text>
+<text x="79" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">via existing API</text>
+<text x="79" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#1a6b32">Green &#10003;</text>
+<rect x="158" y="26" width="138" height="68" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="227" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">OCR pipeline</text>
+<text x="227" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Buildable on existing</text>
+<text x="227" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">BigQuery stack</text>
+<text x="227" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#1a6b32">Green &#10003;</text>
+<rect x="306" y="26" width="138" height="68" rx="4" fill="#fdf4e3" stroke="#ba7517" stroke-width="0.75"/>
+<text x="375" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#8a5a00">Box permissions</text>
+<text x="375" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Vary by doc type</text>
+<text x="375" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">2-wk access convo</text>
+<text x="375" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#8a5a00">Amber, not blocker</text>
+<rect x="454" y="26" width="158" height="68" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+<text x="533" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#a32d2d">ARB / approval</text>
+<text x="533" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">6-week gate — must</text>
+<text x="533" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">start at Step 4, not Day 80</text>
+<text x="533" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#a32d2d">Flag for Step 4 &#9888;</text>
+</svg><div class="visual-cap">Three greens and one flag — and the flag was the most important finding. Knowing about the ARB gate in Step 3 meant starting it on Day 8 of Step 4, not discovering it on Day 80 of the sprint.</div></div>
+
 <div class="nar-h">5. Lock confirmed baselines and make the go/no-go call</div>
 <p class="prose">The domain focal locked three baselines confirmed directly from Banner and Box data: 14-day average document review cycle, 60% of counselor time on manual tasks, and 8% outreach conversion rate. These became the KPIs the go/no-go at Day 90 would be judged against — not estimates, not remembered figures, numbers pulled from the actual systems the AI would eventually touch.</p>
+
+<div class="visual"><svg viewBox="0 0 620 90" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Confirmed baselines locked before Sprint 1: three metrics with data sources</title>
+<rect x="0" y="0" width="620" height="90" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#161616">Baselines locked at Day 12 — confirmed from platform data, not estimates</text>
+<rect x="8" y="24" width="192" height="58" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="104" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#0043a4">14 days</text>
+<text x="104" y="57" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">avg document review cycle</text>
+<text x="104" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: Banner SIS</text>
+<rect x="212" y="24" width="196" height="58" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="310" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#0043a4">60%</text>
+<text x="310" y="57" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">counselor time on manual tasks</text>
+<text x="310" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: time-tracking + interviews</text>
+<rect x="420" y="24" width="192" height="58" rx="3" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="516" y="42" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="13" font-weight="700" fill="#0043a4">8%</text>
+<text x="516" y="57" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">outreach conversion rate</text>
+<text x="516" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: Salesforce CRM</text>
+</svg><div class="visual-cap">Three numbers, three named sources. The Day 90 go/no-go will be judged against these exact figures — not against a range, not against an estimate.</div></div>
 
 <div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Data without insight</div><div class="pp-body">The domain focal could have stopped at a technically thorough analysis — spend numbers, a process map, peer benchmarks — and still not known why the workflow failed. The numbers showed where the problem was; the counselor conversations told the domain focal why it persisted. The go/no-go meeting waited until both were answered.</div></div>
 
@@ -519,6 +605,32 @@
 <div class="nar-h">1. Align on a shared future-state vision</div>
 <p class="prose">Before anyone wrote a requirement, the domain focal, the architect, and the product owner spent a half-day in the same room with one goal: leave with one mental model of the destination. They walked in with three different versions of what "automated document verification" meant. They walked out with one: a unified AI layer that verifies documents in under two hours, notifies applicants automatically about missing items, and surfaces only exceptions to counselors — eliminating manual review entirely. That shared picture is what made the requirements conversation in Week 2 move three times faster.</p>
 
+<div class="visual"><svg viewBox="0 0 620 116" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Vision session: three participants, one destination model</title>
+<rect x="0" y="0" width="620" height="116" rx="4" fill="#f4f4f4"/>
+<text x="310" y="18" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Half-day vision session: what each person walked in with vs. what they agreed on</text>
+<rect x="10" y="28" width="170" height="72" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+<text x="95" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#a32d2d">Domain focal</text>
+<text x="95" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">"Fast-track high-scoring</text>
+<text x="95" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">applicants automatically"</text>
+<text x="95" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#888">≠ the others' version</text>
+<rect x="190" y="28" width="170" height="72" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+<text x="275" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#a32d2d">Architect</text>
+<text x="275" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">"OCR pipeline that flags</text>
+<text x="275" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">incomplete document sets"</text>
+<text x="275" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#888">≠ the others' version</text>
+<rect x="370" y="28" width="120" height="72" rx="4" fill="#fff1f1" stroke="#da1e28" stroke-width="0.75"/>
+<text x="430" y="46" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#a32d2d">Product owner</text>
+<text x="430" y="62" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">"Counselor dashboard</text>
+<text x="430" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">for exception review"</text>
+<text x="430" y="92" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#888">≠ the others' version</text>
+<rect x="500" y="28" width="112" height="72" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="556" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Agreed model</text>
+<text x="556" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">AI verifies docs</text>
+<text x="556" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">&lt;2 hrs · auto-notify</text>
+<text x="556" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32">exceptions only</text>
+<text x="556" y="94" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-weight="600" fill="#1a6b32">One model ✓</text>
+</svg><div class="visual-cap">Three people, three versions walking in. One shared model walking out. That alignment is what let the requirements conversation in Week 2 move in hours, not weeks.</div></div>
+
 <div class="nar-h">2. Run the build vs. buy assessment</div>
 <p class="prose">The four-track investigation in Step 3 had already answered two of the three lenses: business fit (spend, volume, and user conversations) and technical fit (Box API and OCR feasibility on the existing stack). In Solution Design, the architect ran the third: strategic fit. Would owning this capability internally still make sense in a year? A vendor OCR tool meant recurring licensing cost and lock-in to whatever document types the vendor chose to support next; building meant the team owned the logic and could extend it to transcript evaluation in Wave 2 without renegotiating a contract. All three lenses agreed on build.</p>
 
@@ -532,7 +644,25 @@
 <p class="visual-cap" style="margin-top:.5rem;">Build won on all three lenses for this specific decision, not because build is always right. A vendor tool would have been the better call for a more generic, off-the-shelf need with no strategic reason to own it internally.</p>
 </div>
 
+<div class="nar-h">3. Lock MVP scope with an explicit out-of-scope list</div>
 <p class="prose">In scope: document verification and the counselor exception queue. Out of scope, named explicitly — not left implicit: the outreach propensity model, a conversational applicant interface, and transcript evaluation, all three moved to the Wave 2 backlog. The sponsor signed off on both lists before the product owner wrote a single requirement.</p>
+
+<div class="visual"><svg viewBox="0 0 620 118" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>MVP scope: in-scope and out-of-scope items for the 90-day document verification build</title>
+<rect x="0" y="0" width="620" height="118" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#161616">MVP scope — signed off by exec sponsor before Sprint 1</text>
+<rect x="8" y="24" width="296" height="86" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="156" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#1a6b32">✓  IN SCOPE (90 days)</text>
+<text x="156" y="57" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Document verification (3 types)</text>
+<text x="156" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Counselor exception queue</text>
+<text x="156" y="87" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Automated applicant notification</text>
+<text x="156" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Monitoring + alerting from Day 1</text>
+<rect x="316" y="24" width="296" height="86" rx="4" fill="#f4f4f4" stroke="#8d8d8d" stroke-width="0.75"/>
+<text x="464" y="40" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#525252">✗  OUT OF SCOPE (named, not implied)</text>
+<text x="464" y="57" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Outreach propensity model → Wave 2</text>
+<text x="464" y="72" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Conversational applicant interface → Wave 2</text>
+<text x="464" y="87" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Transcript evaluation → Wave 2</text>
+<text x="464" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Full CRM integration → after data quality fix</text>
+</svg><div class="visual-cap">The out-of-scope list is signed. Not implied, not "we'll see" — signed. That's what gives the domain focal standing to hold scope when additions arrive in Sprint 3.</div></div>
 
 <div class="nar-h">4. Write the communications plan and define training</div>
 <p class="prose">The change owner built the communications plan in Week 1 of Solution Design — not after the build, when the message is an announcement rather than a partnership. The plan defined what each user group would hear, when, and from whom: counselors, counselor managers, IT, and prospective students. The training design followed immediately: what would counselors need to do differently, what scenarios would the training cover, what would count as ready-to-go.</p>
@@ -678,6 +808,26 @@
 <div class="nar-h">1. Lock go/no-go criteria before writing any code</div>
 <p class="prose">Before Sprint 1 started, the domain focal and the sponsor wrote down the Day 90 question: did the MVP demonstrate enough value, at enough reliability, to justify scaling? They agreed on three specific criteria with pre-set thresholds: OCR accuracy ≥ 95% on real documents, verification time ≤ 2 hours (baseline: 14 days), and counselor adoption ≥ 80% of active users by Week 6 post-launch. The data source for each was named. No threshold could be renegotiated once the sprint started.</p>
 
+<div class="visual"><svg viewBox="0 0 620 98" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Day 90 go/no-go criteria: three metrics with thresholds and data sources pre-agreed</title>
+<rect x="0" y="0" width="620" height="98" rx="4" fill="#f4f4f4"/>
+<text x="310" y="15" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="600" fill="#161616">Day 90 go/no-go criteria — pre-agreed, not negotiable mid-sprint</text>
+<rect x="8" y="22" width="192" height="68" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="104" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">OCR ACCURACY</text>
+<text x="104" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="700" fill="#161616">≥ 95%</text>
+<text x="104" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">on real documents</text>
+<text x="104" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: production OCR logs</text>
+<rect x="212" y="22" width="196" height="68" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="310" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">VERIFICATION TIME</text>
+<text x="310" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="700" fill="#161616">≤ 2 hrs</text>
+<text x="310" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">baseline: 14 days</text>
+<text x="310" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: Banner SIS timestamps</text>
+<rect x="420" y="22" width="192" height="68" rx="3" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="516" y="38" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="700" fill="#5c2eb8">COUNSELOR ADOPTION</text>
+<text x="516" y="54" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="12" font-weight="700" fill="#161616">≥ 80%</text>
+<text x="516" y="70" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">active users by Week 6</text>
+<text x="516" y="82" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8" fill="#6f6f6f">Source: exception queue login data</text>
+</svg><div class="visual-cap">A threshold without a named data source is just an opinion. These three are locked — source agreed, threshold signed, no renegotiating in Sprint 5.</div></div>
+
 <div class="nar-h">2. Test the riskiest assumption in Sprint 1</div>
 <p class="prose">The domain focal ran the 90 days as an experiment, not a delivery guarantee. The UAT lead came in at the start of the sprint, not folded in as an afterthought once testing began. The product owner put the riskiest assumption in Sprint 1: could the OCR pipeline actually parse Box documents reliably, while there was still time and budget to pivot if not.</p>
 
@@ -685,6 +835,28 @@
 
 <div class="nar-h">3. Bring the UAT lead in at Sprint 1</div>
 <p class="prose">The UAT lead started recruiting before the Sprint 1 kickoff — five admissions counselors, chosen for variety: two senior, two junior, one from a satellite campus. Each got context before their first test session: what the AI does, what it doesn't do, and what the UAT lead needed from them (not "find bugs," but "tell us when something doesn't work the way your real job requires"). When the counselors surfaced two interface issues in Sprint 4, the UAT lead triaged them the same day, and the product owner made the pull/push decision before that week's steering meeting.</p>
+
+<div class="visual"><svg viewBox="0 0 620 104" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>UAT participant composition: five counselors chosen for variety</title>
+<rect x="0" y="0" width="620" height="104" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">UAT cohort: five counselors chosen for variety, not convenience</text>
+<rect x="10" y="26" width="112" height="66" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="66" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">Senior ×2</text>
+<text x="66" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">High-volume users</text>
+<text x="66" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Edge case knowledge</text>
+<rect x="132" y="26" width="112" height="66" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="188" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">Junior ×2</text>
+<text x="188" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Less workaround habit</text>
+<text x="188" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Fresh UX perspective</text>
+<rect x="254" y="26" width="112" height="66" rx="4" fill="#f6f2ff" stroke="#8a3ffc" stroke-width="0.75"/>
+<text x="310" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#5c2eb8">Satellite ×1</text>
+<text x="310" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Remote workflow diffs</text>
+<text x="310" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Surface access issues</text>
+<rect x="380" y="26" width="232" height="66" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="496" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Brief before each session</text>
+<text x="496" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">What AI does · What it doesn't</text>
+<text x="496" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">"Tell us when your real job breaks"</text>
+<text x="496" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#1a6b32">Not "find bugs"</text>
+</svg><div class="visual-cap">Recruiting for variety, not convenience. The satellite counselor was the one who surfaced the access issue that would have blocked 15% of the full team on go-live day.</div></div>
 
 <div class="nar-h">4. Run weekly steering with demos and real metrics</div>
 <p class="prose">Same 45-minute format every week, the sponsor, the domain focal, the architect, the product owner, the change owner. The domain focal ran it on the same "red is good" norm set back in Step 1, blockers and decisions, not status theater.</p>
@@ -723,6 +895,44 @@
 
 <div class="nar-h">5. Track metrics every two weeks and use them to pivot</div>
 <p class="prose">The product owner presented the three Day 90 metrics at every steering meeting — not as a narrative, as numbers. Week 4: verification time hit 1.6 hours (target met). Week 6: OCR accuracy on transcripts was 91% (amber against the 95% target). The amber triggered a decision, not a conversation: extend transcript OCR work by three days, absorbed inside Sprint 4. That's what biweekly tracking is for — catching an amber early enough that it doesn't become a red on Day 90.</p>
+
+<div class="visual"><svg viewBox="0 0 620 112" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Biweekly metric tracking: three metrics across six sprints with amber trigger at sprint 3</title>
+<rect x="0" y="0" width="620" height="112" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Biweekly metric review: what the numbers actually showed</text>
+<text x="10" y="36" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Metric</text>
+<text x="130" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 1</text>
+<text x="215" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 2</text>
+<text x="300" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 3</text>
+<text x="385" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 4</text>
+<text x="470" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 5</text>
+<text x="555" y="36" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" font-weight="600" fill="#525252">Sprint 6</text>
+<line x1="0" y1="42" x2="620" y2="42" stroke="#e0e0e0" stroke-width="1"/>
+<text x="10" y="58" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Verification time</text>
+<text x="130" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">not yet</text>
+<text x="215" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">8.2 hrs</text>
+<text x="300" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">3.1 hrs</text>
+<text x="385" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32" font-weight="600">1.6 hrs ✓</text>
+<text x="470" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32" font-weight="600">1.7 hrs ✓</text>
+<text x="555" y="58" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32" font-weight="600">1.8 hrs ✓</text>
+<line x1="0" y1="64" x2="620" y2="64" stroke="#e0e0e0" stroke-width="0.5"/>
+<text x="10" y="80" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">OCR accuracy</text>
+<text x="130" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">not yet</text>
+<text x="215" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">87%</text>
+<text x="300" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#ba7517" font-weight="600">91% ⚠</text>
+<text x="385" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#ba7517" font-weight="600">91% ⚠</text>
+<text x="470" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32" font-weight="600">96% ✓</text>
+<text x="555" y="80" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#1a6b32" font-weight="600">97% ✓</text>
+<line x1="0" y1="86" x2="620" y2="86" stroke="#e0e0e0" stroke-width="0.5"/>
+<text x="10" y="102" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Counselor task time</text>
+<text x="130" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">60%</text>
+<text x="215" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">55%</text>
+<text x="300" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">44%</text>
+<text x="385" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">35%</text>
+<text x="470" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#888">28%</text>
+<text x="555" y="102" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#ba7517" font-weight="600">22% →</text>
+<rect x="265" y="43" width="74" height="44" rx="2" fill="none" stroke="#ba7517" stroke-width="1.2" stroke-dasharray="3 2"/>
+<text x="302" y="93" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="7.5" font-style="italic" fill="#8a5a00">3-day fix approved</text>
+</svg><div class="visual-cap">The Sprint 3 OCR amber is highlighted — it was caught because the team was looking at numbers every two weeks, not at a narrative. The decision to extend transcript OCR work by three days was made in that same steering meeting.</div></div>
 
 <div class="nar-h">6. Make the Day 90 go/no-go a formal decision</div>
 <div class="pp"><div class="pp-label">&#9888; Pain point</div><div class="pp-title">Go/no-go criteria agreed after the fact</div><div class="pp-body">The sponsor and the domain focal wrote the Day 90 question down before Sprint 1 started: did the MVP demonstrate enough value, at enough reliability, to justify scaling it? They agreed the data source and got sign-off in advance. A metric without a pre-agreed threshold isn't a decision rule, it's a number anyone can interpret however the moment requires.</div></div>
@@ -803,6 +1013,31 @@
 <p class="prose">The change owner ran four training sessions in the two weeks before go-live — one for each cohort of six counselors. Training covered not just how to use the exception queue, but what the AI is actually doing (checking three document types against a validation rule), what it doesn't do (make the admission decision), what to do when a flag looks wrong (escalation path to the change owner), and how to submit feedback. By launch day, every counselor had completed the training and could demonstrate their workflow in the new system. The old manual checklist was retired for the pilot group on Day 1 — not "available if you prefer it," gone.</p>
 
 <div class="tip-box"><strong>What happens when people run both processes in parallel:</strong> The workaround rate never drops because the old process is always available as the comfort fallback. Retiring the old process explicitly — even for just the first two counselors — is what makes "adoption" mean something. The change owner communicated this clearly: "For your document verification work, the exception queue is the only path as of Monday."</div>
+
+<div class="visual"><svg viewBox="0 0 620 108" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>Training completion gate: four criteria required before launch clearance</title>
+<rect x="0" y="0" width="620" height="108" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Training completion gate — all four required before launch clearance</text>
+<rect x="10" y="26" width="138" height="70" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="79" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Session complete</text>
+<text x="79" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">All 24 counselors</text>
+<text x="79" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">attended a cohort</text>
+<text x="79" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">&#10003; Done</text>
+<rect x="158" y="26" width="138" height="70" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="227" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Workflow demo</text>
+<text x="227" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Each counselor demos</text>
+<text x="227" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">their new workflow</text>
+<text x="227" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">&#10003; Done</text>
+<rect x="306" y="26" width="138" height="70" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="375" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Escalation path known</text>
+<text x="375" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Who to call when a</text>
+<text x="375" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">flag looks wrong</text>
+<text x="375" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">&#10003; Done</text>
+<rect x="454" y="26" width="158" height="70" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="533" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Old process retired</text>
+<text x="533" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">Manual checklist removed</text>
+<text x="533" y="74" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" fill="#525252">from shared drive: Day 1</text>
+<text x="533" y="88" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9" font-weight="600" fill="#1a6b32">&#10003; Done</text>
+</svg><div class="visual-cap">The change owner treated training as a launch gate, not a launch activity. All four checks had to be green before go-live was confirmed. The old checklist removal was on the same checklist.</div></div>
 
 <div class="nar-h">2. Start small: pilot with UAT alumni first</div>
 <p class="prose">Rather than launch to all 24 admissions counselors at once, the change owner started with the two who'd been active in UAT — already familiar with the tool, already curious. Real applications, no fallback. Two weeks of their real work, with the change owner checking in every other day. Their feedback led to one more interface fix before the broader rollout. More importantly, their result — "I'm clearing twice as many applications in the same time" — traveled through the team on its own, said to colleagues, not published by leadership. That's the proof point that moves hesitant peers.</p>
@@ -955,6 +1190,21 @@
 </table>
 <p class="visual-cap" style="margin-top:.4rem;">Projected vs. realized, separately. The credibility of the next wave's funding case depends on showing leadership that the methodology's estimates were honest, not padded.</p>
 </div>
+
+<div class="visual"><svg viewBox="0 0 620 118" xmlns="http://www.w3.org/2000/svg" style="min-width:420px;"><title>ROI narrative: projected versus realized values for Wave 2 funding conversation</title>
+<rect x="0" y="0" width="620" height="118" rx="4" fill="#f4f4f4"/>
+<text x="310" y="16" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" font-weight="600" fill="#161616">Projected vs. realized: keeping them separate for the Wave 2 funding case</text>
+<rect x="10" y="26" width="290" height="80" rx="4" fill="#edf5ff" stroke="#0f62fe" stroke-width="0.75"/>
+<text x="155" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#0043a4">Step 3 projection</text>
+<text x="155" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">Review time: &lt;2 hrs  ·  Task time: 60%→20%</text>
+<text x="155" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">Adoption: ≥80% Week 6  ·  Savings: ~$420K/yr</text>
+<text x="155" y="94" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#0043a4">Estimated before any code was written</text>
+<rect x="320" y="26" width="290" height="80" rx="4" fill="#defbe6" stroke="#24a148" stroke-width="0.75"/>
+<text x="465" y="44" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" font-weight="700" fill="#1a6b32">Week 8 realized</text>
+<text x="465" y="60" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">Review time: 1.8 hrs ✓  ·  Task time: 60%→22% →</text>
+<text x="465" y="76" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#525252">Adoption: 91% Week 8 ✓  ·  Savings: pending Q1</text>
+<text x="465" y="94" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="8.5" font-style="italic" fill="#1a6b32">Measured from the same baselines, same sources</text>
+</svg><div class="visual-cap">Projected and realized side-by-side, not blended. Leadership can see how accurate the methodology was — which is what builds the credibility for Wave 2 funding, not a single impressive number.</div></div>
 
 <div class="nar-h">8. Return to Step 3 for the next workflow</div>
 <div class="handoff"><strong>Returning to Step 3 for the next workflow:</strong> The outreach prioritization workflow is the top candidate on the updated Prioritization Matrix. The CRM data constraint that blocked it in Step 2 has been partially resolved. The architect already knows the Salesforce integration landscape from the Step 1 readiness check. The counselors who were UAT participants know what to look for in a demo. The domain focal knows which questions to ask. The Workflow Analysis for Wave 2 starts from evidence, not from zero.</div>
